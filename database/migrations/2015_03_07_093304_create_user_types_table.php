@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateListingCategoriesTable extends Migration {
+class CreateUserTypesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,10 @@ class CreateListingCategoriesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('listing_categories',function($table){
+		Schema::create('user_types',function($table){
 			$table->increments('id');
 			$table->string('name')->nullable()->default(null);
-			$table->enum('type',[ 'Classified' , 'Deal' ])->nullable()->default(null);
-			$table->softDeletes();			
-			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
@@ -28,7 +26,7 @@ class CreateListingCategoriesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('listing_categories');
+		Schema::drop('user_types');
 	}
 
 }
