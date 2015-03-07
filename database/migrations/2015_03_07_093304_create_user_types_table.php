@@ -16,6 +16,7 @@ class CreateUserTypesTable extends Migration {
 			$table->increments('id');
 			$table->string('name')->nullable()->default(null);
 			$table->softDeletes();
+			$table->timestamps();
 		});
 	}
 
