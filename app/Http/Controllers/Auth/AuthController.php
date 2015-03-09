@@ -1,12 +1,12 @@
 <?php namespace App\Http\Controllers\Auth;
-
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-
+use Config;
 class AuthController extends Controller {
-
+	protected $redirectPath;
 	/*
 	|--------------------------------------------------------------------------
 	| Registration & Login Controller
@@ -31,7 +31,35 @@ class AuthController extends Controller {
 	{
 		$this->auth = $auth;
 		$this->registrar = $registrar;
-				
+			
 		$this->middleware('guest', ['except' => 'getLogout']);
 	}	
+	public function postLogin(Request $request)
+	{
+		$this->validate($request, [
+			'email' => 'required|email', 'password' => 'required',
+		]);
+
+		$credentials = $request->only('email', 'password');
+
+		if ($this->auth->attempt($credentials, $request->has('remember')))
+		{
+			$oUser = $this->auth->user()->UserTypes()->first();										
+			if( $oUser->name )
+			{								
+				if( $oUser->name == "SuperAdmin" )
+				{		
+					$aCats = Config::get('categories');
+					$name = reset( $aCats );
+					$this->redirectPath = route('category.sub-category.index' , [ $name ] );								
+				}				
+			}	
+			return redirect()->intended($this->redirectPath());		
+		}
+		return redirect($this->loginPath())
+					->withInput($request->only('email', 'remember'))
+					->withErrors([
+						'email' => $this->getFailedLoginMessage(),
+					]);
+	}
 }

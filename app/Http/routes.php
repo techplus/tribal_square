@@ -12,7 +12,11 @@
 */
 
 Route::get( '/' , 'HomeController@index' );
-Route::controllers([
+Route::controllers([	
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
+Route::group( [ 'middleware' => [ 'admin' ] ] , function() {	
+	Route::resource( 'category.sub-category' , 'Admin\SubCategoryController' );
+	Route::get('cat-type','Admin\SubCategoryController@getCatType');
+});
