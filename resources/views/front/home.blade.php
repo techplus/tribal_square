@@ -5,8 +5,8 @@
           <div class="container">
             <div class="col-xs-12">
               <div class="logo">
-                <a href="#">
-                  <img src="images/logo.png" alt="" class="img-responsive">
+                <a href="{{url('/')}}">
+                  <img src="{{asset('/images/logo.png')}}" alt="" class="img-responsive">
                 </a>
               </div>
               <div class="header_btns_wrap">
@@ -23,19 +23,19 @@
               <form>
                 <div class="radio col-sm-4">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                    <input type="radio" class="fancy-radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
                     Tribal Deals
                   </label>
                 </div>
                 <div class="radio col-sm-4">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                    <input type="radio" class="fancy-radio" name="optionsRadios" id="optionsRadios2" value="option2">
                     Baby Sitters
                   </label>
                 </div>
                 <div class="radio col-sm-4">
                   <label>
-                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                    <input type="radio" class="fancy-radio" name="optionsRadios" id="optionsRadios2" value="option2">
                     Tribal Classifieds
                   </label>
                 </div>

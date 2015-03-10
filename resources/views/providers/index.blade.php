@@ -4,53 +4,13 @@
     <div id="wrapper" class="active">
 
         <!-- Sidebar -->
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul id="sidebar_menu" class="sidebar-nav menu_sidebar_title">
-                <li class="sidebar-brand"><a id="menu-toggle" href="#">Menu<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
-            </ul>
-            <ul class="sidebar-nav" id="sidebar">
-                <li><a href="#">Postings<span class="sub_icon glyphicon glyphicon-check" data-toggle="tooltip" data-placement="right" title="Postings"></span></a></li>
-                <li><a href="#">Drafts<span class="sub_icon glyphicon glyphicon-folder-open" data-toggle="tooltip" data-placement="right" title="Drafts"></span></a></li>
-                <li><a href="#">Saved Searches<span class="sub_icon glyphicon glyphicon-saved" data-toggle="tooltip" data-placement="right" title="Saved Searches"></span></a></li>
-                <li><a href="#">Settings<span class="sub_icon glyphicon glyphicon-cog" data-toggle="tooltip" data-placement="right" title="Settings"></span></a></li>
-                <li><a href="#">Billing<span class="sub_icon glyphicon glyphicon-file" data-toggle="tooltip" data-placement="right" title="Billing"></span></a></li>
-                <li><a href="#">Posted Deals<span class="sub_icon glyphicon glyphicon-tag" data-toggle="tooltip" data-placement="right" title="Posted Deals"></span></a></li>
-                <li><a href="#">Orders<span class="sub_icon glyphicon glyphicon-gift" data-toggle="tooltip" data-placement="right" title="Orders"></span></a></li>
-            </ul>
-        </div>
+        @include('layouts.sidebar')
 
         <!-- Page content -->
 
         <div class="page-wrap">
             <div id="page-content-wrapper">
-                <div class="row header_wrap">
-                    <div class="col-xs-12">
-                        <div class="logo"> <a href="#"> <img src="images/logo.png" alt="" class="img-responsive"> </a> </div>
-                        <div class="inner_top_useroption">
-                            <a href="#" class="useroption_ative">My Profile</a> |
-                            <a href="#">Hemali</a> |
-                            <a href="#">Logout</a>
-                        </div>
-                        <div class="header_search">
-                            <form action="#">
-                                <input type="text" class="form-control header_item_search" placeholder="What are you looking for ?">
-                                <input type="text" class="form-control header_location_search" placeholder="Enter your Location">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="row login_subnav_wrap">
-                    <div class="login_subnav">
-                        <a href="#">View All Deals</a>
-                        <a href="#">Tribal Classifieds</a>
-                        <a href="#">View Baby Sitters </a>
-                    </div>
-                    <div class="publish_deal_topbtn">
-                        <a href="#" class="btn btn-success btn-md">Publish Your Deal</a>
-                    </div>
-                </div>
-
+                @include('layouts.user_navbar')
                 <!-- Keep all page content within the page-content inset div! -->
                 <div class="page-content">
                     <div class="row">
