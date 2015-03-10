@@ -35,10 +35,49 @@ class SubCategoryController extends Controller {
 	 */
 	public function store()
 	{
-		if( Request::has('name') )
-		{
-
+		$aResp['success'] = false;
+		$aResp['msg'] = "Something went wrong , please try again";
+		if( Request::has('name') AND Request::has('type') )
+		{			
+			$sType = Request::get('type');
+			$sName = Request::get('name');
+			if( $sType == "Both" )
+			{							
+				$bExist = $this->isExist( $sType , $sName );
+				$aResp[ 'msg' ] = $sName . " is already exist";
+				if( !$bExist )
+				{
+					$aCats = Config::get('categories');
+					foreach( $aCats as $cat )
+					{
+						$aData = array();
+						$aData[ 'type' ] = $cat;
+						$aData[ 'name' ] = Request::input('name');
+						$oCat = ListingCategory::create( $aData );
+						if( $oCat )
+						{
+							$aResp['success'] = true;
+						}
+					}
+					$aResp[ 'msg' ] = "";
+				}
+			}
+			else
+			{
+				$bExist = $this->isExist( $sType , $sName );
+				$aResp[ 'msg' ] = $sName . " is already exist";
+				if( !$bExist )
+				{
+					$aData = Request::only( 'type' , 'name' );
+					$oCat = ListingCategory::create( $aData );
+					if( $oCat )
+					{
+						$aResp['success'] = true;
+					}
+				}
+			}
 		}
+		return response()->json( $aResp );
 	}
 
 	/**
@@ -75,7 +114,8 @@ class SubCategoryController extends Controller {
 		{
 			//$aData = Request::input( array( 'only' => [ 'name' ] ) );
 		}
-		return redirect()->back();
+		return response()->json(Request::all());
+		//return redirect()->back();
 	}
 
 	/**
@@ -108,5 +148,27 @@ class SubCategoryController extends Controller {
 			}			
 		}
 		return response()->json($aResp);
+	}
+	private function isExist( $sType , $sName , $iCatId  = 0 )
+	{
+		$aCat = ListingCategory::where( 'name' , '=' , $sName );
+		if( $aCat->count() > 0 )
+		{			
+			if( $sType == "Both" )
+			{
+				return false;
+			}
+			else
+			{
+				if( $aCat->count() > 1 )
+					return false;
+				else if( $aCat[0]->type == $sType )
+					return false;
+				else 
+					return true;
+			}
+		}
+		else 
+			return true;
 	}
 }

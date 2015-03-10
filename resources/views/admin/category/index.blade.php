@@ -116,25 +116,48 @@
 			})
 			$('#frmCategory').validate({
 				rules:{},
-				SubmitHandler:function()
+				submitHandler:function()
 				{
-					$.ajax({
-						url : "{{ route('category.sub-category.store',[ $cat ]) }}",
-						type : "post",
-						data : $('#frmCategory').serialize(),
-						dataType : "json",
-						success : function  (resp) {
-								if( resp.success )
-								{
-									//window.location.reload();
-								}
-								else
-								{
-									$('#modal-category').find('alert-danger').html('resp.msg');
-									$('#modal-category').find('alert-danger').show();
-								}
-						}
-					});
+					if( $('#modal-category').find('.cat-id').val().length > 0 )
+					{
+						$.ajax({
+							url : "{{ route('category.sub-category.update',[ $cat ]) }}",
+							type : "put",
+							data : $('#frmCategory').serialize(),
+							dataType : "json",
+							success : function  (resp) {
+									if( resp.success )
+									{
+										//window.location.reload();
+									}
+									else
+									{
+										$('#modal-category').find('alert-danger').html('resp.msg');
+										$('#modal-category').find('alert-danger').show();
+									}
+							}
+						});
+					}
+					else
+					{
+						$.ajax({
+							url : "{{ route('category.sub-category.store',[ $cat ]) }}",
+							type : "post",
+							data : $('#frmCategory').serialize(),
+							dataType : "json",
+							success : function  (resp) {
+									if( resp.success )
+									{
+										//window.location.reload();
+									}
+									else
+									{
+										$('#modal-category').find('alert-danger').html('resp.msg');
+										$('#modal-category').find('alert-danger').show();
+									}
+							}
+						});
+					}
 					return false;
 				}
 			});
