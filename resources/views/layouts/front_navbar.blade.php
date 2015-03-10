@@ -9,7 +9,7 @@
         <div class="header_btns_wrap">
             @if( Request::url() == action('Auth\AuthController@getIndex' ) )
                 <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg custome_blue_btn">Signup</a>
-            @else
+            @elseif( ! Auth::check() )
                 <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg custome_blue_btn">Login</a>
             @endif
         </div>

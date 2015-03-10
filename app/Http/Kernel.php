@@ -30,6 +30,9 @@ class Kernel extends HttpKernel {
 		'guest' => 'App\Http\Middleware\RedirectIfAuthenticated',
 		'auth.admin'	=>	'App\Http\Middleware\AdminAccess',
 		'auth.providers'	=>	'App\Http\Middleware\ProvidersMiddleware',
+		'payment'	=>	'App\Http\Middleware\PaymentMiddleware',
+		'auth.babysitters'	=>	'App\Http\Middleware\BabySittersMiddleware',
+		'auth.salesagnet'	=>	'App\Http\Middleware\SalesAgentMiddleware',
 	];
 
 }

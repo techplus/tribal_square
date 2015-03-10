@@ -33,4 +33,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	{
 		return $this->belongsToMany('App\Models\UserType','user_usertypes','user_id','user_type_id')->withPivot(['user_type_id','subscription_plan_id','amount','has_paid']);
 	}
+
+	public function Payments()
+	{
+		return $this->hasMany('App\Models\Payment','user_id');
+	}
 }

@@ -38,6 +38,9 @@ class RedirectIfAuthenticated {
 		{
 			$path = "/";
 			$oUser = $this->auth->user()->UserTypes()->first();
+
+			if( ! $oUser )
+				return response()->redirectToAction('Auth\AuthController@getSelectUserType');
 			if( $oUser->name )
 			{
 				if( $oUser->name == "SuperAdmin" )
@@ -52,11 +55,11 @@ class RedirectIfAuthenticated {
 				}
 				else if( $oUser->name == 'BabySitters' )
 				{
-
+					$path = route('baby-sitters.index');
 				}
 				else if( $oUser->name == 'SalesAgent')
 				{
-
+					$path = route('sales-agents.index');
 				}
 			}
 			return new RedirectResponse($path);

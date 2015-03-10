@@ -22,8 +22,16 @@ Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 	Route::get('cat-type','Admin\SubCategoryController@getCatType');
 });
 
-Route::group(['middleware'=>['auth.providers']],function(){
+Route::group(['middleware'=>['auth.providers','payment']],function(){
 	Route::resource('providers','Users\ProvidersController',['only'=>['index']]);
+});
+
+Route::group(['middleware'=>['auth.babysitters','payment']],function(){
+	Route::resource('baby-sitters','Users\BabySittersController',['only'=>['index']]);
+});
+
+Route::group(['middleware'=>['auth.salesagnet','payment']],function(){
+	Route::resource('sales-agents','Users\SalesAgentController',['only'=>['index']]);
 });
 
 Route::group( ['middleware' => ['guest'] ], function() {

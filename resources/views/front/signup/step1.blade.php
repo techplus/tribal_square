@@ -11,7 +11,7 @@
                             <h4>Sign up with your Facebook account </h4>
                             <p>Connect your Facebook account to sign up
                                 to Tribal Square</p>
-                            <a href="#">
+                            <a href="{{$fb_helper->getLoginUrl(array('email'))}}">
                                 <img src="{{asset('/images/signup_fb_btn.png')}}" alt="" class="img-responsive">
                             </a>
                         </div>

@@ -5,6 +5,14 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Config;
+use App\Models\User;
+use Mail;
+use Hash;
+use Facebook\FacebookSession;
+use Facebook\FacebookRedirectLoginHelper;
+use Facebook\FacebookRequest;
+use Facebook\FacebookRequestException;
+use Facebook\GraphUser;
 class AuthController extends Controller {
 	protected $redirectPath;
 	/*
@@ -32,11 +40,63 @@ class AuthController extends Controller {
 		$this->auth = $auth;
 		$this->registrar = $registrar;
 			
-		$this->middleware('guest', ['except' => 'getLogout']);
+		$this->middleware('guest', ['except' => ['getLogout','getSelectUserType','postSelectUserType']]);
+
+		session_start ();
+
+		// init app with app id (APPID) and secret (SECRET)
+		FacebookSession::setDefaultApplication ( env('FACEBOOK_APP_ID') , env('FACEBOOK_CLIENT_SECRET') );
 	}
 	public function getIndex()
 	{
 		$this->data['body_class'] = 'signin_body';
+		$this->data['fb_helper'] = new FacebookRedirectLoginHelper( action('Auth\AuthController@getIndex') );
+
+		try {
+			$session = $this->data['fb_helper']->getSessionFromRedirect ();
+		} catch ( FacebookRequestException $ex ) {
+			// When Facebook returns an error
+		} catch ( Exception $ex ) {
+			// When validation fails or other local issues
+		}
+		if ( isset( $session ) ) {
+			// graph api request for user data
+			$request = new FacebookRequest( $session , 'GET' , '/me' );
+			$response = $request->execute ();
+			// get response
+			$graph = $response->getGraphObject ( GraphUser::className () )->asArray ();
+
+			/** here you should add the logic of inserting data into our db */
+			/* first check if user already exists */
+			$oUser = User::where ( 'email' , '=' , $graph[ 'email' ] )->first ();
+
+			if ( $oUser ) {
+				/* found user */
+				$this->auth->login ( $oUser );
+				return response()->redirectTo('/');
+			}
+
+			/* not found user */
+			$aUserData = array ();
+
+			$aUserData[ 'email' ] = $graph[ 'email' ];
+			$aUserData[ 'firstname' ] = $graph[ 'first_name' ];
+			$aUserData['lastname'] = $graph['middle_name']."  ".$graph['last_name'];
+
+			$plainPassword = str_random ( 8 );
+			$aUserData[ 'password' ] = Hash::make ( $plainPassword );
+
+			$oUser = User::create ( $aUserData );
+
+			/* login the user */
+			$this->auth->login ( $oUser );
+
+			/** user should get mail about sign up success */
+			Mail::send ( 'emails.signup' , array ( 'user' => $oUser , 'password' => $plainPassword ) , function ( $oMessage ) use ( $oUser ) {
+				$oMessage->to ( $oUser->email , $oUser->firstname )->subject ( "Registration Completed!" );
+			} );
+			return response()->redirectTo('/');
+		}
 		return $this->renderView('auth.login');
 	}
 
@@ -79,5 +139,16 @@ class AuthController extends Controller {
 					->withErrors([
 						'email' => $this->getFailedLoginMessage(),
 					]);
+	}
+
+	public function getSelectUserType()
+	{
+		return $this->renderView('auth.select_user_type');
+	}
+
+	public function postSelectUserType(Request $request)
+	{
+		Auth::user()->UserTypes()->attach($request->input('user_type'));
+		return redirect()->to(url('/'));
 	}
 }
