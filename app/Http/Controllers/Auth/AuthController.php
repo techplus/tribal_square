@@ -148,7 +148,7 @@ class AuthController extends Controller {
 
 	public function postSelectUserType(Request $request)
 	{
-		Auth::user()->UserTypes()->attach($request->input('user_type'));
+		$this->auth->user()->UserTypes()->attach($request->input('user_type'));
 		return redirect()->to(url('/'));
 	}
 }

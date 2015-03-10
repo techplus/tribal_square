@@ -11,6 +11,8 @@
                 <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg custome_blue_btn">Signup</a>
             @elseif( ! Auth::check() )
                 <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg custome_blue_btn">Login</a>
+            @else
+                <a href="{{action('Auth\AuthController@getLogout')}}" class="btn btn-lg custome_blue_btn">Logout</a>
             @endif
         </div>
         <div class="header_search">
