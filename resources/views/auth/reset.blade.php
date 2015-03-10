@@ -1,9 +1,33 @@
-@extends('layouts/app')
+@extends('layouts.front')
 
 @section('content')
-<div class="container-fluid">
+
+        <div class="row header_wrap">
+            <div class="container">
+                <div class="col-xs-12">
+                    <div class="logo">
+                        <a href="#">
+                            <img src="{{asset('/images/logo.png')}}" alt="" class="img-responsive">
+                        </a>
+                    </div>
+
+                    <div class="header_btns_wrap">
+                        <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg custome_blue_btn">Login</a>
+                        <!-- <a href="#" class="btn btn-lg custome_blue_btn">Login</a> -->
+                    </div>
+                    <div class="header_search">
+                        <form action="#">
+                            <input type="text" class="form-control header_item_search" placeholder="What are you looking for ?">
+                            <input type="text" class="form-control header_location_search" placeholder="Enter your Location">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-8 col-md-offset-2" style="margin-top: 20px;">
 			<div class="panel panel-default">
 				<div class="panel-heading">Reset Password</div>
 				<div class="panel-body">
