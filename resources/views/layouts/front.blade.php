@@ -15,7 +15,7 @@
 
     <script type="text/javascript">
     $(function(){
-      $('input:radio').screwDefaultButtons({
+      $('.fancy-radio').screwDefaultButtons({
         image: 'url("{{asset('/images/radio.png')}}")',
         width: 38,
         height: 42
