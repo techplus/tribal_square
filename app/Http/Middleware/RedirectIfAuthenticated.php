@@ -3,6 +3,7 @@
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\RedirectResponse;
+use Config;
 
 class RedirectIfAuthenticated {
 
@@ -35,7 +36,30 @@ class RedirectIfAuthenticated {
 	{
 		if ($this->auth->check())
 		{
-			return new RedirectResponse(url('/home'));
+			$path = "/";
+			$oUser = $this->auth->user()->UserTypes()->first();
+			if( $oUser->name )
+			{
+				if( $oUser->name == "SuperAdmin" )
+				{
+					$aCats = Config::get('categories');
+					$name = reset( $aCats );
+					$path = route('category.sub-category.index' , [ $name ] );
+				}
+				else if( $oUser->name == 'Providers' )
+				{
+					$path = route('providers.index');
+				}
+				else if( $oUser->name == 'BabySitters' )
+				{
+
+				}
+				else if( $oUser->name == 'SalesAgent')
+				{
+
+				}
+			}
+			return new RedirectResponse($path);
 		}
 
 		return $next($request);

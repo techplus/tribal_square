@@ -10,13 +10,18 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+//
 
-Route::get( '/' , 'HomeController@index' );
-Route::controllers([	
-	'auth' => 'Auth\AuthController',
+Route::controllers([
+	'login' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
 ]);
 Route::group( [ 'middleware' => [ 'admin' ] ] , function() {	
 	Route::resource( 'category.sub-category' , 'Admin\SubCategoryController' );
 	Route::get('cat-type','Admin\SubCategoryController@getCatType');
+});
+
+Route::group( ['middleware' => ['guest'] ], function() {
+	Route::controller('/','HomeController');
+	Route::resource('providers','Users\ProvidersController',['only'=>['index']]);
 });
