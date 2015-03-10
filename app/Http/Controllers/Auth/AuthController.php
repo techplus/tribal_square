@@ -61,7 +61,7 @@ class AuthController extends Controller {
 				}
 				else if( $oUser->name == 'Providers' )
 				{
-
+					$redirectPath = route('providers.index');
 				}
 				else if( $oUser->name == 'BabySitters' )
 				{
