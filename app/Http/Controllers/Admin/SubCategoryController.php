@@ -3,6 +3,7 @@ use App\Http\Controllers\Controller;
 use Config;
 use Request;
 use App\Models\ListingCategory;
+use Session;
 
 class SubCategoryController extends Controller {
 
@@ -13,7 +14,7 @@ class SubCategoryController extends Controller {
 	 */
 	public function index($sName)
 	{		
-		$this->data[ 'cat' ] = $sName;
+		$this->data[ 'catnm' ] = $sName;
 		$this->data[ 'aSubCategories' ] = ListingCategory::where( 'type' , '=' , $sName )->get();
 		return $this->renderView('admin.category.index');
 	}
@@ -57,6 +58,7 @@ class SubCategoryController extends Controller {
 						if( $oCat )
 						{
 							$aResp['success'] = true;
+							Session::put('success','Category added successfully');
 						}
 					}
 					$aResp[ 'msg' ] = "";
@@ -73,6 +75,7 @@ class SubCategoryController extends Controller {
 					if( $oCat )
 					{
 						$aResp['success'] = true;
+						Session::put('success','Category added successfully');
 					}
 				}
 			}
@@ -110,12 +113,31 @@ class SubCategoryController extends Controller {
 	 */
 	public function update( $id )
 	{
-		if( $id )
-		{
-			//$aData = Request::input( array( 'only' => [ 'name' ] ) );
+		$aResp[ 'success' ] = false;
+		$aResp[ 'msg' ]  = "Something went wrong , Please try again";		
+		if( Request::has('name') AND Request::has('type') )
+		{			
+			$sType = Request::get('type');
+			$sName = Request::get('name');	
+			$id = Request::get('id');
+			$bExist = $this->isExist( $sType , $sName , $id );
+			$aResp[ 'msg' ] = $sName . " is already exist";
+			if( !$bExist )
+			{
+				$aData = Request::only( array( 'name' ) );
+				$oCat = ListingCategory::find( $id );
+				if( $oCat )
+				{
+					$oCat->type = $sType;
+					$oCat->name = $sName;
+					$oCat->save();
+					$aResp[ 'success' ] = true;
+					Session::put('success','Category saved successfully');
+					unset( $aResp[ 'msg' ] );
+				}				
+			}
 		}
-		return response()->json(Request::all());
-		//return redirect()->back();
+		return response()->json( $aResp );		
 	}
 
 	/**
@@ -124,9 +146,25 @@ class SubCategoryController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
-		//
+	public function destroy( $id )
+	{		
+		if( Request::has('id') )
+		{
+			$id  = Request::input('id');
+			$oCat = ListingCategory::find($id);
+			if( $oCat )
+			{
+				$oCat->delete();				
+				Session::put('success','Category removed successfully');				
+			}
+			else
+			{
+				Session::put('error','Something went wrong , Please try again');
+			}
+		}
+		else
+			Session::put('error','Something went wrong , Please try again');
+		return response()->json( [] );
 	}
 
 	public function getCatType()
@@ -151,24 +189,27 @@ class SubCategoryController extends Controller {
 	}
 	private function isExist( $sType , $sName , $iCatId  = 0 )
 	{
-		$aCat = ListingCategory::where( 'name' , '=' , $sName );
+		if( $iCatId != 0 )
+			$aCat = ListingCategory::where( 'name' , '=' , $sName )->where( 'id' , '!=' , $iCatId )->get();	
+		else
+			$aCat = ListingCategory::where( 'name' , '=' , $sName )->get();
 		if( $aCat->count() > 0 )
 		{			
 			if( $sType == "Both" )
 			{
-				return false;
+				return true;
 			}
 			else
 			{
 				if( $aCat->count() > 1 )
-					return false;
-				else if( $aCat[0]->type == $sType )
-					return false;
-				else 
 					return true;
+				else if( $aCat[0]->type == $sType )
+					return true;
+				else 
+					return false;
 			}
 		}
 		else 
-			return true;
+			return false;
 	}
 }

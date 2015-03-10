@@ -18,6 +18,19 @@
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+	<style>
+		.sub-menu >li > a{
+			padding-left:15%;
+		}
+		.sub-menu > li.active a{
+			background:#00b3ee;
+			color:#ffffff;
+		}
+		.sub-menu > li.active a:hover{
+			background:#2babcf;
+			color:#ffffff;
+		}	
+	</style>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -51,23 +64,19 @@
 		</nav>
 <div class="row">
 	<div class="col-sm-2">
-		<nav class="navbar navbar-default navbar-stacked">
-			<div class="container-fluid">			
-				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		<nav class="navbar navbar-default navbar-stacked">			
 					<nav>
 						<ul class="nav">
 							<li data-toggle="collapse" data-target="#submenu1" aria-expanded="true">
 								<a href="#">Categories</a>							
-								<ul class="nav collapse in" id="submenu1" role="menu" aria-labelledby="btn-1" aria-expanded="true">
+								<ul class="nav collapse in sub-menu" id="submenu1" role="menu" aria-labelledby="btn-1" aria-expanded="true">
 								@foreach( $categories AS $cat )
-									<li><a href="{{ route('category.sub-category.index',[$cat]) }}">{{$cat}}</a></li>
+									<li class="{{ ( $catnm ) ? ( ( $cat == $catnm ) ? 'active' : '' ) : '' }}"><a href="{{ route('category.sub-category.index',[$cat]) }}">{{$cat}}</a></li>
 								@endforeach
 								</ul>
 							</li>
 						</ul>
-					</nav>
-				</div>
-			</div>
+					</nav>				
 		</nav>
 	</div>
 	<div class="col-sm-10">
