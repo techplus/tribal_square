@@ -10,7 +10,7 @@
                 </a>
               </div>
               <div class="header_btns_wrap">
-                <a href="#" class="btn btn-lg custome_blue_btn">Signup</a>
+                <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg custome_blue_btn">Signup</a>
                 <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg custome_blue_btn">Login</a>
               </div>
             </div>

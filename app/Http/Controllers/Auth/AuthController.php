@@ -40,11 +40,6 @@ class AuthController extends Controller {
 		return $this->renderView('auth.login');
 	}
 
-	public function getRegister()
-	{
-		return $this->renderView('front.signup.step1');
-	}
-
 	public function postLogin(Request $request)
 	{
 		$this->validate($request, [

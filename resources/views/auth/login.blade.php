@@ -41,13 +41,13 @@ to Tribal Square</p>
                     <input type="checkbox" name="remember"> Check me out
                   </label>
                 </div>
-                <a href="#">Forgot Password?</a>
+                <a href="{{action('Auth\PasswordController@getIndex')}}">Forgot Password?</a>
               </div>
               <div class="form-group col-sm-11 col-xs-12">
                 <input type="submit" class="btn btn-lg btn-block custome_blue_btn" value="Sign In">
               </div>
               <div class="col-sm-11 col-xs-12">
-                <a href="#" class="signup_link text-center">Not a Member yet ?</a>
+                <a href="{{action('Auth\RegisterController@getIndex')}}" class="signup_link text-center">Not a Member yet ?</a>
               </div>
             </form>
           </div>

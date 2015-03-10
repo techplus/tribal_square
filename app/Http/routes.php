@@ -14,6 +14,7 @@
 
 Route::controllers([
 	'login' => 'Auth\AuthController',
+	'register'	=>	'Auth\RegisterController',
 	'password' => 'Auth\PasswordController',
 ]);
 Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {

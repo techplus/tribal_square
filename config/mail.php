@@ -15,7 +15,7 @@ return [
 	|
 	*/
 
-	'driver' => env('MAIL_DRIVER', 'smtp'),
+	'driver' => 'mail',//env('MAIL_DRIVER', 'mail'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => 'null', 'name' => null],
+	'from' => ['address' => 'info@tpstracker.com', 'name' => 'Tpstracker Password'],
 
 	/*
 	|--------------------------------------------------------------------------

@@ -35,4 +35,9 @@ class PasswordController extends Controller {
 		$this->middleware('guest');
 	}
 
+	public function getIndex()
+	{
+		return $this->getEmail();
+	}
+
 }
