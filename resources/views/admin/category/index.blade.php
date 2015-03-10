@@ -11,7 +11,7 @@
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Manage Categories for {{ $cat }}
+			Manage Categories for {{ $catnm }}
 			<div class="pull-right" style="margin-top:-7px;">
 				<button class="btn btn-success btn-add-cat"><span class="glyphicon glyphicon-plus"></span> Add New</button>
 			</div>
@@ -41,7 +41,7 @@
 				</div>
 			</div>
 		</div>
-		<input type="hidden" class="cat-type" value="{{ $cat }}">
+		<input type="hidden" class="cat-type" value="{{ $catnm }}">
 	</div>
 	<div class="modal fade" id="modal-category">
 		  <div class="modal-dialog">
@@ -104,7 +104,7 @@
 			if( $('#modal-delete-category').find('.cat-id').val().length )
 			{
 				$.ajax({
-						url : "{{ route('category.sub-category.destroy',[ $cat ]) }}/" + $('#modal-delete-category').find('.cat-id').val(),
+						url : "{{ route('category.sub-category.destroy',[ $catnm ]) }}/" + $('#modal-delete-category').find('.cat-id').val(),
 						data : { id : $('#modal-delete-category').find('.cat-id').val() },
 						type : 'delete',						
 						success : function(resp)
@@ -177,7 +177,7 @@
 					if( $('#modal-category').find('.cat-id').val().length > 0 )
 					{
 						$.ajax({
-							url : "{{ route('category.sub-category.update',[ $cat ]) }}/" + $('#modal-category').find('.cat-id').val(),
+							url : "{{ route('category.sub-category.update',[ $catnm ]) }}/" + $('#modal-category').find('.cat-id').val(),
 							type : "put",
 							data : $('#frmCategory').serialize(),
 							dataType : "json",
@@ -200,7 +200,7 @@
 					else
 					{
 						$.ajax({
-							url : "{{ route('category.sub-category.store',[ $cat ]) }}",
+							url : "{{ route('category.sub-category.store',[ $catnm ]) }}",
 							type : "post",
 							data : $('#frmCategory').serialize(),
 							dataType : "json",

@@ -14,7 +14,7 @@ class SubCategoryController extends Controller {
 	 */
 	public function index($sName)
 	{		
-		$this->data[ 'cat' ] = $sName;
+		$this->data[ 'catnm' ] = $sName;
 		$this->data[ 'aSubCategories' ] = ListingCategory::where( 'type' , '=' , $sName )->get();
 		return $this->renderView('admin.category.index');
 	}
