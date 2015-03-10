@@ -25,6 +25,7 @@ class SignUpRequest extends Request {
 			'lastname'	=>	'required',
 			'email'		=>	'required|email|unique:users,email',
 			'password'	=>	'required|confirmed',
+			'agreement'	=>	'required',
 			'g-recaptcha-response' => 'required|captcha'
 		];
 	}

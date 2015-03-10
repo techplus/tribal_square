@@ -27,7 +27,7 @@ class RegisterController extends Controller
 
 	public function postIndex(SignUpRequest $request)
 	{
-		$aRegisterData = $request->except(['_token','user_type','g-recaptcha-response','password_confirmation']);
+		$aRegisterData = $request->except(['_token','user_type','g-recaptcha-response','password_confirmation','agreement']);
 		$aRegisterData['password'] = Hash::make($aRegisterData['password']);
 		$oUser = User::create($aRegisterData);
 		$oUser->UserTypes()->attach($request->input('user_type'));

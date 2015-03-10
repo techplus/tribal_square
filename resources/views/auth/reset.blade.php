@@ -1,12 +1,12 @@
 @extends('layouts.front')
 
 @section('content')
-
+    <div class="page-wrap">
         <div class="row header_wrap">
             <div class="container">
                 <div class="col-xs-12">
                     <div class="logo">
-                        <a href="#">
+                        <a href="{{url('/')}}">
                             <img src="{{asset('/images/logo.png')}}" alt="" class="img-responsive">
                         </a>
                     </div>
@@ -80,4 +80,5 @@
 		</div>
 	</div>
 </div>
+    </div>
 @endsection

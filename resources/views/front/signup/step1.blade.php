@@ -66,10 +66,10 @@
                                         <p class="text-danger">Captcha validation failed!</p>
                                     </div>
                                 @endif
-                                <div class="col-sm-11 col-xs-12 signup_chkbox">
+                                <div class="col-sm-11 col-xs-12 signup_chkbox {{ $errors->has('agreement') ? 'has-error' : '' }}">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"> I agree to the <a href="#"> Terms of Use </a> and <a href="#"> Privacy Statement.</a>
+                                            <input type="checkbox" name="agreement" value="1"> I agree to the <a href="#"> Terms of Use </a> and <a href="#"> Privacy Statement.</a>
                                         </label>
                                     </div>
                                 </div>

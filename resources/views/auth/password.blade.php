@@ -8,13 +8,13 @@
             <div class="container">
                 <div class="col-xs-12">
                     <div class="logo">
-                        <a href="#">
+                        <a href="{{url('/')}}">
                             <img src="{{asset('/images/logo.png')}}" alt="" class="img-responsive">
                         </a>
                     </div>
 
                     <div class="header_btns_wrap">
-                        <a href="#" class="btn btn-lg custome_blue_btn">Signup</a>
+                        <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg custome_blue_btn">Signup</a>
                         <!-- <a href="#" class="btn btn-lg custome_blue_btn">Login</a> -->
                     </div>
                     <div class="header_search">
