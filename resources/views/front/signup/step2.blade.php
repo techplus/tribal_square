@@ -1,6 +1,13 @@
 @extends('layouts.front')
 
 @section('content')
+    <style>
+        #wrapper.active {
+            padding-left: 0;
+            height: auto;
+        }
+    </style>
+    <div class="page-wrap">
     <div class="row header_wrap">
         @include('layouts.front_navbar')
         <div class="row">
@@ -9,6 +16,9 @@
                     <h1>$10 / Month
                         <img src="{{asset('images/paypal.png')}}" alt="" class="img-responsive paypal_img">
                     </h1>
+
+                    <a href="{{action('Auth\AuthController@getSelectUserType')}}?skip=payment">Skip Payment</a>
+
                     <div class="col-sm-12" align="center">
                         <h3>OR</h3>
                         <br>
@@ -90,6 +100,7 @@
             </div>
         </div>
 
+    </div>
     </div>
     </div>
 @endsection

@@ -1,7 +1,6 @@
 @extends('layouts.front')
 
 @section('content')
-    <div id="wrapper" class="active">
 
         <!-- Sidebar -->
         @include('layouts.sidebar')
@@ -74,5 +73,4 @@
                     </div>
                 </div>
             </div>
-        </div>
 @stop

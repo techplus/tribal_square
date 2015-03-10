@@ -81,7 +81,7 @@ class AuthController extends Controller {
 
 			$aUserData[ 'email' ] = $graph[ 'email' ];
 			$aUserData[ 'firstname' ] = $graph[ 'first_name' ];
-			$aUserData['lastname'] = $graph['middle_name']."  ".$graph['last_name'];
+			$aUserData['lastname'] = (isset( $graph['middle_name'] ) ? $graph['middle_name'] : '' )."  ".(isset( $graph['last_name'] ) ? $graph['last_name'] : '' );
 
 			$plainPassword = str_random ( 8 );
 			$aUserData[ 'password' ] = Hash::make ( $plainPassword );
@@ -95,7 +95,7 @@ class AuthController extends Controller {
 			Mail::send ( 'emails.signup' , array ( 'user' => $oUser , 'password' => $plainPassword ) , function ( $oMessage ) use ( $oUser ) {
 				$oMessage->to ( $oUser->email , $oUser->firstname )->subject ( "Registration Completed!" );
 			} );
-			return response()->redirectTo('/');
+			return response()->redirectTo(url('/'));
 		}
 		return $this->renderView('auth.login');
 	}
@@ -141,8 +141,16 @@ class AuthController extends Controller {
 					]);
 	}
 
-	public function getSelectUserType()
+	public function getSelectUserType(Request $request)
 	{
+		if( $request->has('skip') )
+		{
+			$this->auth->user()->subscription_end_at = date('Y-m-d',time() + 3*24*3600);
+			$this->auth->user()->save();
+			return response()->redirectTo(url('/'));
+		}
+
+
 		return $this->renderView('auth.select_user_type');
 	}
 

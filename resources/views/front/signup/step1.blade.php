@@ -1,6 +1,7 @@
 @extends('layouts.front')
 
 @section('content')
+    <div class="page-wrap">
     <div class="row header_wrap">
         @include('layouts.front_navbar')
                    <div class="row">
@@ -85,5 +86,6 @@
             </div>
 
         </div>
+    </div>
     </div>
 @endsection

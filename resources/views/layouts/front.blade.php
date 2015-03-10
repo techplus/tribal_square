@@ -25,12 +25,15 @@
 
   </head>
   <body class="{{$body_class or 'signin_body'}}">
+    @if( Auth::check() )
+        <div class="active" id="wrapper">
+    @endif
 
-  <div class="page-wrap">
+            @yield('content')
 
-    @yield('content')
-
-</div>
+    @if( Auth::check() )
+        </div>
+    @endif
 
 <div class="row footer_wrap">
   <div class="container">

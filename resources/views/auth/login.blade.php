@@ -1,6 +1,7 @@
 @extends('layouts.front')
 
 @section('content')
+    <div class="page-wrap">
 <div class="row header_wrap">
     @include('layouts.front_navbar')
 
@@ -53,5 +54,6 @@ to Tribal Square</p>
           </div>
         </div>
       </div>
+    </div>
     </div>
 @stop
