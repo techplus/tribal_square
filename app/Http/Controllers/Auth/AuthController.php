@@ -33,7 +33,13 @@ class AuthController extends Controller {
 		$this->registrar = $registrar;
 			
 		$this->middleware('guest', ['except' => 'getLogout']);
-	}	
+	}
+	public function getIndex()
+	{
+		$this->data['body_class'] = 'signin_body';
+		return $this->renderView('auth.login');
+	}
+
 	public function postLogin(Request $request)
 	{
 		$this->validate($request, [
@@ -41,7 +47,7 @@ class AuthController extends Controller {
 		]);
 
 		$credentials = $request->only('email', 'password');
-
+		$redirectPath = "/";
 		if ($this->auth->attempt($credentials, $request->has('remember')))
 		{
 			$oUser = $this->auth->user()->UserTypes()->first();										
@@ -51,10 +57,22 @@ class AuthController extends Controller {
 				{		
 					$aCats = Config::get('categories');
 					$name = reset( $aCats );
-					$this->redirectPath = route('category.sub-category.index' , [ $name ] );								
-				}				
+					$redirectPath = route('category.sub-category.index' , [ $name ] );
+				}
+				else if( $oUser->name == 'Providers' )
+				{
+
+				}
+				else if( $oUser->name == 'BabySitters' )
+				{
+
+				}
+				else if( $oUser->name == 'SalesAgent')
+				{
+
+				}
 			}	
-			return redirect()->intended($this->redirectPath());		
+			return redirect()->intended($redirectPath);
 		}
 		return redirect($this->loginPath())
 					->withInput($request->only('email', 'remember'))
