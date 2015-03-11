@@ -10,9 +10,9 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+                <span class="m-r-sm text-muted welcome-message">Welcome to Tribal Square.</span>
             </li>
-            <li class="dropdown">
+            <!-- <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                     <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
                 </a>
@@ -106,11 +106,9 @@
                         </div>
                     </li>
                 </ul>
-            </li>
-
-
+            </li> -->
             <li>
-                <a href="login.html">
+                <a href="{{ action('Auth\AuthController@getLogout') }}">
                     <i class="fa fa-sign-out"></i> Log out
                 </a>
             </li>

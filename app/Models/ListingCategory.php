@@ -5,4 +5,9 @@ class ListingCategory extends Model{
 	use SoftDeletes;
 	protected $table = "listing_categories";
 	protected $guarded = array( 'id' );
+
+	public function Classifieds()
+	{
+		return $this->hasMany('App\Models\Classified','category_id');
+	}
 }

@@ -24,6 +24,7 @@ Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 
 Route::group(['middleware'=>['auth.providers','payment']],function(){
 	Route::resource('providers','Users\ProvidersController',['only'=>['index']]);
+	Route::resource('posts','Users\PostsController');
 });
 
 Route::group(['middleware'=>['auth.babysitters','payment']],function(){

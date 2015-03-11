@@ -5,10 +5,8 @@ use App\Http\Controllers\Controller;
 
 class ProvidersController extends Controller
 {
-
-
 	public function index()
 	{
-		return $this->renderView('providers.index');
+		return redirect()->to('posts');
 	}
 }
