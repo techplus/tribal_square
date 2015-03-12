@@ -3,6 +3,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Classified;
 use App\Models\ListingCategory;
 use Auth;
+use Request;
 
 class PostsController extends Controller {
 	/**
@@ -35,7 +36,18 @@ class PostsController extends Controller {
 	 */
 	public function store()
 	{
-		
+		$aResp = array( 'success' => false );
+		if( Request::has( 'category_id' ) AND Request::has( 'location' ) )
+		{
+			$aQuery = Request::only( [ 'category_id' , 'location' ] );
+			$oClassified = Classified::create( $aQuery );
+			if( $oClassified )
+			{
+				$aResp[ 'success' ] = true;
+				$aResp[ 'id' ] = $oClassified->id;
+			}
+		}
+		return response()->json( $aResp );
 	}
 
 	/**
@@ -69,7 +81,23 @@ class PostsController extends Controller {
 	 */
 	public function update($id)
 	{
-		
+		$aResp = array( 'success' => false );
+		if( $id )
+		{
+			if( $currentIndex == 1 )
+			{
+				
+			}
+			else if( $currentIndex == 2 )
+			{
+				
+			}
+			else if( $currentIndex == 3 )
+			{
+
+			}
+		}
+		return response()->json( $aResp );
 	}
 
 	/**

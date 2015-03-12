@@ -542,18 +542,18 @@ fieldset[disabled] .btn-info.active {
   border-color: #26d7d9;
 }
 .btn-default {
-  background-color: #c2c2c2;
+  /*background-color: #c2c2c2;
   border-color: #c2c2c2;
-  color: #FFFFFF;
+  color: #FFFFFF;*/
 }
 .btn-default:hover,
 .btn-default:focus,
 .btn-default:active,
 .btn-default.active,
 .open .dropdown-toggle.btn-default {
-  background-color: #bababa;
+  /*background-color: #bababa;
   border-color: #bababa;
-  color: #FFFFFF;
+  color: #FFFFFF;*/
 }
 .btn-default:active,
 .btn-default.active,

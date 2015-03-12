@@ -46,6 +46,5 @@
 
 <!-- jQuery UI -->
 <script src="{{asset('inspinia/js/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
-
 </body>
 </html>
