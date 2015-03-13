@@ -38,7 +38,7 @@
                                         {{ ( $oPost->Category ) ? $oPost->ListingCategory->name : null }}
                                     </td>
                                     <td>
-                                        <a href="javascript:;" class="edit-posting">edit</a>
+                                        <a href="{{route('posts.edit',[$oPost->id])}}" class="edit-posting">edit</a>
                                         <a href="javascript:;" class="delete-posting">delete</a>
                                     </td>                       
                                 </tr>    
