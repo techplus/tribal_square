@@ -129,4 +129,9 @@ class PostsController extends Controller
 		return response ()->json ( [ 'success' => TRUE ] );
 	}
 
+	public function getDelete ( $id )
+	{
+		return $this->destroy($id);
+	}
+
 }

@@ -24,8 +24,10 @@ Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 
 Route::group(['middleware'=>['auth.providers','payment']],function(){
 	Route::resource('providers','Users\ProvidersController',['only'=>['index']]);
-	Route::resource('posts','Users\PostsController');
+	Route::resource('posts','Users\PostsController',['except'=>['show']]);
+	Route::controller('posts','Users\PostsController');
 	Route::resource('posts.images','Users\ImagesController',['only'=>['store','update','destroy']]);
+	Route::controller('images','Users\ImagesController');
 });
 
 Route::group(['middleware'=>['auth.babysitters','payment']],function(){

@@ -411,7 +411,7 @@
                     form.validate().settings.ignore = ":disabled";
 
                     // Start validation; Prevent form submission if false
-                    return form.valid();
+                    return form.valid() || currentIndex == 2;
                 },
                 onFinished: function (event, currentIndex)
                 {
@@ -419,6 +419,7 @@
 
                     // Submit form input
                     //saveData();
+                    console.log(currentIndex);
                     window.location.href = "{{ route('posts.index') }}";
                    //form.submit(form);
                 }
@@ -524,8 +525,8 @@
              $('#confirmation_modal' ).modal('show');
              $('#confirm_btn' ).on('click',function(){
                  $.ajax({
-                     type:'delete',
-                     url: '{{url('posts')}}/'+$('.post_id' ).val()+'/images/'+id
+                     //type:'delete',
+                     url: '{{url('images/delete/')}}/'+id
                  } ).success(function(data){
                     $('#media_'+id ).remove();
                      $('#confirmation_modal' ).modal('hide');

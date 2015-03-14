@@ -53,4 +53,15 @@ class ImagesController extends Controller {
 		return response()->json(['message'=>'image deleted']);
 	}
 
+	public function getDelete($id)
+	{
+		$image = ClassifiedImage::find($id);
+		if( ! $image )
+			return response()->json(['error'=>'image not found'],500);
+
+		$image->delete();
+
+		return response()->json(['message'=>'image deleted']);
+	}
+
 }

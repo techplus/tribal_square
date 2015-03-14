@@ -76,8 +76,8 @@
             $('#confirmation_modal' ).modal('show');
             $('#confirm_btn' ).on('click',function(){
                 $.ajax({
-                    type:'delete',
-                    url: '{{url('posts')}}/'+id
+                    //type:'delete',
+                    url: '{{url('posts')}}/delete/'+id
                 } ).success(function(data){
                     $('[data-id='+id+']' ).remove();
                     $('#confirmation_modal' ).modal('hide');
