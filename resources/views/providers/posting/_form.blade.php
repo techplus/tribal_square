@@ -1,8 +1,8 @@
     <link href="{{ asset('inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
     <link href="{{ asset('inspinia/css/plugins/steps/jquery.steps.css') }}" rel="stylesheet">
-    <link href="{{ asset('inspinia/inspinia/css/animate.css') }}" rel="stylesheet">
-    <link href="{{ asset('inspinia/css/plugins/dropzone/basic.css') }}" rel="stylesheet">
-    <link href="{{ asset('inspinia/css/plugins/dropzone/dropzone.css') }}" rel="stylesheet">
+    <link href="{{ asset('inspinia/css/animate.css') }}" rel="stylesheet">
+    <link href="{{asset('inspinia/css/plugins/jQueryUI/jquery-ui.min.css')}}" rel="stylesheet">
+    <link href="{{asset('inspinia/js/plugins/plupload/jquery.ui.plupload/css/jquery.ui.plupload.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('inspinia/css/summernote.css') }}">
     <link href="{{ asset('inspinia/css/style.css') }}" rel="stylesheet">        
     <style>
@@ -15,10 +15,16 @@
         .note-editable {
             background: #fff;
         }
-
+    .thumbnail img {
+        height: 200px;
+    }
     </style>
     <script type="text/javascript" src="{{ asset('inspinia/js/jquery.form.js') }}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/summernote.js') }}"></script>
+    <script type="text/javascript" src="{{asset('inspinia/js/jquery-ui.custom.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('inspinia/js/plugins/plupload/plupload.full.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('inspinia/js/plugins/plupload/moxie.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('inspinia/js/plugins/plupload/jquery.ui.plupload/jquery.ui.plupload.js') }}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
     <script>
     var autocomplete1;
@@ -280,16 +286,37 @@
                                         <input type="hidden" name="long" value="">
                                     </div>
                                 </fieldset>
-                                <h1>Warning</h1>
+                                <h1>Images / Videos</h1>
                                 <fieldset>
-                                    File upload remaining please use plupload dropzone is very bad in integration
+                                    <div class="col-md-12" id="post_images" style="margin-bottom:20px;">
+                                    @if( $oPost->ClassifiedImages )
+                                        @foreach($oPost->ClassifiedImages as $oImage )
+                                        <div class="col-md-3" id="media_{{$oImage->id}}">
+                                            <a href="{{$oImage->image_path}}" target="_blank" class="thumbnail">
+                                                <?php $ext = pathinfo($oImage->image_path,PATHINFO_EXTENSION); ?>
+                                                @if( $ext == 'jpg' OR $ext == 'jpeg' OR $ext == 'png')
+                                                    <img src="{{$oImage->image_path}}">
+                                                @else
+                                                    <img src="{{url('images/video.png')}}">
+                                                @endif
+                                            </a>
+                                            <button type="button" class="btn btn-block btn-primary" onclick="removeAttachment({{$oImage->id}})"><i class="fa fa-trash"></i> Delete</button>
+                                        </div>
+                                        @endforeach
+                                    @endif
+                                    </div>
+                                    <hr>
+                                    <div class="clearfix"></div>
+                                    <div id="uploader">
+                                        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+                                    </div>
                                 </fieldset>
 
-                                <h1>Finish</h1>
-                                <fieldset>
-                                    <h2>Terms and Conditions</h2>
-                                    <input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"><label for="acceptTerms">I agree with the Terms and Conditions.</label>
-                                </fieldset>
+                                {{--<h1>Finish</h1>--}}
+                                {{--<fieldset>--}}
+                                    {{--<h2>Terms and Conditions</h2>--}}
+                                    {{--<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"><label for="acceptTerms">I agree with the Terms and Conditions.</label>--}}
+                                {{--</fieldset>--}}
                             </form>
                         </div>
                     </div>                   
@@ -300,6 +327,7 @@
     <!-- Jquery Validate -->
     <script src="{{ asset('inspinia/js/plugins/validate/jquery.validate.min.js') }}"></script>
 	 <script>
+         var uploader;
         // pre-submit callback
         function showRequest(formData, jqForm, options)
         {
@@ -309,7 +337,7 @@
         function showResponse(responseText, statusText, xhr, $form)
         {
             $('.post_id').val( responseText.id );
-            $('form.wizard-big' ).attr('action',"{{url('posts')}}" + "/" + responseText.id + "/images");
+            $('#uploader' ).plupload('getUploader' ).settings.url = "{{url('posts')}}" + "/" + responseText.id + "/images";
             {{--Dropzone.options.myAwesomeDropzone.url = "{{url('posts')}}" + "/" + responseText.id + "/images";--}}
         }
         function saveData(form)
@@ -434,6 +462,75 @@
                 height: 200
             });
 
+                // Setup html5 version
+            uploader = $("#uploader").plupload({
+                // General settings
+                runtimes : 'html5,flash,silverlight,html4',
+                url : "/examples/upload",
+
+                // Maximum file size
+                max_file_size : '10mb',
+
+
+                // Resize images on clientside if we can
+//                resize : {
+//                    width : 200,
+//                    height : 200,
+//                    quality : 90,
+//                    crop: true // crop to exact dimensions
+//                },
+
+//                // Specify what files to browse for
+//                filters : [
+//                    {title : "Image files", extensions : "jpg,gif,png,jpeg"},
+//                    {title : "Video files", extensions : "avi,mp4,webm"}
+//                ],
+
+                // Rename files by clicking on their titles
+                rename: true,
+
+                // Sort files
+                sortable: true,
+
+                // Enable ability to drag'n'drop files onto the widget (currently only HTML5 supports that)
+                dragdrop: true,
+
+                // Views to activate
+                views: {
+                    list: true,
+                    thumbs: true, // Show thumbs
+                    active: 'thumbs'
+                },
+
+                // Flash settings
+                flash_swf_url : 'inspinia/js/plugins/plupload/Moxie.swf',
+
+                // Silverlight settings
+                silverlight_xap_url : 'inspinia/js/plugins/plupload/Moxie.xap',
+                uploaded: function(event,args) {
+                    response = $.parseJSON(args.response.response);
+                    console.log(response);
+                    var ext = response.image_path.split('.' ).pop();
+                    $('#post_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+( ( ext == 'jpg' || ext == 'jpeg' || ext == 'png' ) ? response.image_path : '{{url('images/video.png')}}')+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                },
+                selected: function(event,args) {
+                    args.up.start();
+                }
+            });
        });
+
+         function removeAttachment(id)
+         {
+             $('#confirmation_modal' ).modal('show');
+             $('#confirm_btn' ).on('click',function(){
+                 $.ajax({
+                     type:'delete',
+                     url: '{{url('posts')}}/'+$('.post_id' ).val()+'/images/'+id
+                 } ).success(function(data){
+                    $('#media_'+id ).remove();
+                     $('#confirmation_modal' ).modal('hide');
+                 });
+             })
+         }
     </script>
         
