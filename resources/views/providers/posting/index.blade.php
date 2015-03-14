@@ -39,7 +39,7 @@
                                     </td>
                                     <td>
                                         <a href="{{route('posts.edit',[$oPost->id])}}" class="edit-posting">edit</a>
-                                        <a href="javascript:;" class="delete-posting">delete</a>
+                                        <a href="javascript:;" onclick="removePost({{$oPost->id}})" class="delete-posting">delete</a>
                                     </td>                       
                                 </tr>    
                             @endforeach                
@@ -70,5 +70,19 @@
                 responsive: true
             });
         });
+
+        function removePost(id)
+        {
+            $('#confirmation_modal' ).modal('show');
+            $('#confirm_btn' ).on('click',function(){
+                $.ajax({
+                    type:'delete',
+                    url: '{{url('posts')}}/'+id
+                } ).success(function(data){
+                    $('[data-id='+id+']' ).remove();
+                    $('#confirmation_modal' ).modal('hide');
+                });
+            })
+        }
     </script>
 @stop

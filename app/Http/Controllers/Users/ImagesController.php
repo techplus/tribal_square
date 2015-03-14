@@ -48,9 +48,6 @@ class ImagesController extends Controller {
 		if( ! $image )
 			return response()->json(['error'=>'image not found'],500);
 
-		$name = pathinfo($image->image_path,PATHINFO_FILENAME);
-
-		File::delete(base_path('uploads/').$name);
 		$image->delete();
 
 		return response()->json(['message'=>'image deleted']);

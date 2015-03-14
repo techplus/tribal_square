@@ -117,6 +117,13 @@ class PostsController extends Controller
 		$oPost = Classified::find ( $id );
 		if ( $oPost )
 			return response ()->json ( [ 'success' => FALSE ] );
+
+		$images = $oPost->ClassifiedImages()->get();
+
+		// we don't remove file for future restore purpose
+		foreach( $images AS $oimage )
+			$oimage->delete();
+
 		$oPost->delete ();
 
 		return response ()->json ( [ 'success' => TRUE ] );
