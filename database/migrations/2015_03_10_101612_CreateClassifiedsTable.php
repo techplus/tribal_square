@@ -25,6 +25,9 @@ class CreateClassifiedsTable extends Migration {
 			$table->string('size')->nullbale()->default(null);
 			$table->text('fineprint')->nullbale()->default(null);
 			$table->string('location')->nullable()->default(null);
+			$table->string('location2')->nullable()->default(null);
+			$table->string('street1')->nullable()->default(null);
+			$table->string('street2')->nullable()->default(null);
 			$table->string('state')->nullable()->default(null);
 			$table->string('city')->nullable()->default(null);
 			$table->string('country')->nullable()->default(null);
@@ -40,7 +43,8 @@ class CreateClassifiedsTable extends Migration {
 			$table->boolean('can_text')->nullable()->default(0);		
 			$table->boolean('avail_for_other_services')->nullable()->default(0);	
 			$table->string('languages')->nullable()->default(null);		
-			$table->boolean('is_approved_by_admin')->nullable()->default(0);	
+			$table->boolean('is_approved_by_admin')->nullable()->default(0);
+			$table->text('language_spoken')->nullbale()->default(null);	
 			$table->softDeletes();
 			$table->timeStamps();
 		});
