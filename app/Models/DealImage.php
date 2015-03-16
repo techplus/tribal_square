@@ -7,6 +7,6 @@ class DealImage extends Model{
 	protected $guarded = array( 'id' );
 	public function Deal()
 	{
-		return $this->belongsTo('Deal','deal_id');
+		return $this->belongsTo('Deal');
 	}
 }
