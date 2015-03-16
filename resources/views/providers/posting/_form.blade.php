@@ -300,7 +300,7 @@
                                                     <img src="{{url('images/video.png')}}">
                                                 @endif
                                             </a>
-                                            <button type="button" class="btn btn-block btn-primary" onclick="removeAttachment({{$oImage->id}})"><i class="fa fa-trash"></i> Delete</button>
+                                            <button type="button" class="btn btn-block btn-primary" onclick="removeAttachment({{$oImage->id}},'images')"><i class="fa fa-trash"></i> Delete</button>
                                         </div>
                                         @endforeach
                                     @endif
@@ -314,6 +314,30 @@
 
                                 <h1>Video</h1>
                                 <fieldset>
+                                    <div class="col-md-12" id="post_videos" style="margin-bottom:20px;">
+                                        @if( $oPost->ClassifiedVideos )
+                                            @foreach($oPost->ClassifiedVideos as $oImage )
+                                                <div class="col-md-3" id="media_{{$oImage->id}}">
+                                                    <a href="{{$oImage->video_path}}" target="_blank" class="thumbnail">
+                                                        <?php $ext = pathinfo($oImage->video_path,PATHINFO_EXTENSION); ?>
+                                                        @if( $ext == 'jpg' OR $ext == 'jpeg' OR $ext == 'png')
+                                                            <img src="{{$oImage->video_path}}">
+                                                        @else
+                                                            <img src="{{url('images/video.png')}}">
+                                                        @endif
+                                                    </a>
+                                                    <button type="button" class="btn btn-block btn-primary" onclick="removeAttachment({{$oImage->id}},'video')"><i class="fa fa-trash"></i> Delete</button>
+                                                </div>
+                                            @endforeach
+                                        @endif
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2">Video URL:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="video_url" placeholder="Video URL">
+                                        </div>
+                                    </div>
+                                    <h3 class="text-center">OR</h3>
                                     <div id="video_uploader">
                                         <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
                                     </div>
@@ -339,6 +363,7 @@
         {
             $('.post_id').val( responseText.id );
             $('#uploader' ).plupload('getUploader' ).settings.url = "{{url('posts')}}" + "/" + responseText.id + "/images";
+            $('#video_uploader' ).plupload('getUploader' ).settings.url = "{{url('posts')}}" + "/" + responseText.id + "/videos";
             {{--Dropzone.options.myAwesomeDropzone.url = "{{url('posts')}}" + "/" + responseText.id + "/images";--}}
         }
         function saveData(form)
@@ -412,7 +437,7 @@
                     form.validate().settings.ignore = ":disabled";
 
                     // Start validation; Prevent form submission if false
-                    return form.valid() || currentIndex == 2;
+                    return form.valid();
                 },
                 onFinished: function (event, currentIndex)
                 {
@@ -420,8 +445,21 @@
 
                     // Submit form input
                     //saveData();
-                    console.log(currentIndex);
-                    window.location.href = "{{ route('posts.index') }}";
+                    if($('#video_url' ).val())
+                    {
+                        console.log($('#video_url' ).val());
+                        $.ajax({
+                            url: '{{url('posts/')}}/'+$('.post_id' ).val()+'/videos',
+                            data: {'video_path': $('#video_url' ).val()},
+                            type:"post",
+                            dataType:'json'
+                        } ).success(function(data){
+                            window.location.href = "{{ route('posts.index') }}";
+                        });
+                    }
+                    else
+                        window.location.href = "{{ route('posts.index') }}";
+
                    //form.submit(form);
                 }
             }).validate({
@@ -465,7 +503,7 @@
             });
 
                 // Setup html5 version
-            uploader = $("#uploader").plupload({
+            uploader = $("#uploader,#video_uploader").plupload({
                 // General settings
                 runtimes : 'html5,flash,silverlight,html4',
                 url : "/examples/upload",
@@ -511,9 +549,15 @@
                 silverlight_xap_url : 'inspinia/js/plugins/plupload/Moxie.xap',
                 uploaded: function(event,args) {
                     response = $.parseJSON(args.response.response);
-                    console.log(response);
-                    var ext = response.image_path.split('.' ).pop();
-                    $('#post_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+( ( ext == 'jpg' || ext == 'jpeg' || ext == 'png' ) ? response.image_path : '{{url('images/video.png')}}')+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                    if( response.image_path )
+                    {
+                        var ext = response.image_path.split('.' ).pop();
+                        $('#post_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                    }
+                    else
+                    {
+                        $('#post_videos' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.video_path+'" target="_blank"><img src="{{url('images/video.png')}}"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                    }
                 },
                 selected: function(event,args) {
                     args.up.start();
@@ -521,13 +565,18 @@
             });
        });
 
-         function removeAttachment(id)
+         function removeAttachment(id,type)
          {
+             var url;
              $('#confirmation_modal' ).modal('show');
+             if( type == 'images' )
+                url = '{{url('posts')}}/'+$('.post_id' ).val()+'/images/'+id
+             else
+                url = '{{url('posts')}}/'+$('.post_id' ).val()+'/videos/'+id
              $('#confirm_btn' ).on('click',function(){
                  $.ajax({
                      type:'delete',
-                     url: '{{url('posts')}}/'+$('.post_id' ).val()+'/images/'+id
+                     url:url
                  } ).success(function(data){
                     $('#media_'+id ).remove();
                      $('#confirmation_modal' ).modal('hide');
