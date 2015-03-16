@@ -1,9 +1,10 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Users;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
+use App\Models\Deal;
+use Request;
+use App\Models\ListingCategory;
 
 class DealsController extends Controller {
 
@@ -14,7 +15,8 @@ class DealsController extends Controller {
 	 */
 	public function index()
 	{
-		//
+	 	$this->data['aDeals'] = Deal::with('ListingCategory')->where ( 'user_id' , '=' , $this->data[ 'oUser' ]->id )->get ();;
+	 	return $this->renderView ( 'providers.deals.index' );
 	}
 
 	/**
@@ -24,7 +26,9 @@ class DealsController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		$this->data[ 'oDeal' ] = new Deal();
+		$this->data[ 'aListingCategories' ] = ListingCategory::where ( 'type' , '=' , 'Deal' )->get ();
+		return $this->renderView ( 'providers.deals.add' );
 	}
 
 	/**
@@ -34,7 +38,7 @@ class DealsController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		
 	}
 
 	/**
