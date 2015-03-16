@@ -26,9 +26,9 @@
                 <li class="active">
                     <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Posting</span></a>               
                 </li>
-                <li>
+                <?php /* <li>
                     <a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">Drafts</span></a>               
-                </li> 
+                </li> */ ?>
                 <li>
                     <a href="#"><i class="fa fa-file"></i> <span class="nav-label">Saved Searches</span></a>               
                 </li>

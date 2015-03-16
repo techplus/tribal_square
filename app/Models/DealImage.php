@@ -5,4 +5,8 @@ class DealImage extends Model{
 	use SoftDeletes;
 	protected $table = "deal_images";
 	protected $guarded = array( 'id' );
+	public function Deal()
+	{
+		return $this->belongsTo('Deal','deal_id');
+	}
 }
