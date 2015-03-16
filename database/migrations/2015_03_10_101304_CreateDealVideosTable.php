@@ -14,7 +14,7 @@ class CreateDealVideosTable extends Migration {
 	{
 		Schema::create('deal_videos',function($table){
 			$table->increments('id');
-			$table->integer('deal_id')->default(0);
+			$table->integer('deal_id')->nullbale()->default(0);
 			$table->string('video_path')->nullable()->default(null);
 			$table->softDeletes();
 			$table->timeStamps();

@@ -7,10 +7,10 @@ class Deal extends Model{
 	protected $guarded = array( 'id' );
 	public function DealImages()
 	{
-		return $this->hasMany('DealImage','deal_id');
+		return $this->hasMany('App\Models\DealImage','deal_id');
 	}
 	public function DealVideos()
 	{
-		return $this->hasMany('DealVideo','deal_id');
+		return $this->hasMany('App\Models\DealVideo','deal_id');
 	}
 }

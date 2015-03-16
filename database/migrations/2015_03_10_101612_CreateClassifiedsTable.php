@@ -15,9 +15,9 @@ class CreateClassifiedsTable extends Migration {
 		Schema::create('classifieds',function($table){
 			$table->increments('id');
 			$table->string('title')->nullable()->default(null);
-			$table->float('price')->default(0);
-			$table->integer('user_id')->default(0);
-			$table->integer('category_id')->default(0);
+			$table->float('price')->nullbale()->default(0);
+			$table->integer('user_id')->nullbale()->default(0);
+			$table->integer('category_id')->nullbale()->default(0);
 			$table->text('description')->nullbale()->default(null);
 			$table->string('condition')->nullbale()->default(null);
 			$table->string('manufacture')->nullbale()->default(null);

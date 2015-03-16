@@ -31,7 +31,7 @@ class UserTableSeeder extends Seeder{
 		); 
 		$oUser = User::create( array( 'firstname' => 'Sagar' , 'lastname' => 'Rabadiya' ,'email' => 'sagar.tps@gmail.com' , 'password' => Hash::make('sagar123') ) );
 		DB::table('user_usertypes')->insert(
-			[	'user_id'  => $oUser->id  ,  'user_type_id'	=> 1 , 'subscription_plan_id' => 1 , 'amount' => 0  ]
+			[	'user_id'  => $oUser->id  ,  'user_type_id'	=> 2 , 'subscription_plan_id' => 1 , 'amount' => 0  ]
 		); 
 	}
 }

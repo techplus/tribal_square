@@ -104,7 +104,7 @@
                     </div>
                 </div>
                 <div class="ibox-content">                                                 
-                    <form name="frmPost" id="frmPost" class="wizard-big wizard clearfix form-horizontal" action="#">                                           
+                    <form name="frmDeal" id="frmDeal" class="wizard-big wizard clearfix form-horizontal" action="#">                                           
                         <h1>Profile</h1>
                         <fieldset>    
                         	<input type="hidden" name="id" class="deal_id" value="{{$oDeal->id}}">                                   	                           
@@ -139,13 +139,13 @@
 	                                    <div class="form-group">
 	                                        <label class="control-label col-lg-4">Start Date *</label>
 	                                        <div class="col-lg-8">
-	                                            <input type="text" name="start_date" id="start_date" value="{{$oDeal->start_date}}" class="required form-control">
+	                                            <input type="text" name="start_date" id="start_date" value="{{ ( $oDeal->start_date ) ? date('d-m-Y',strtotime($oDeal->start_date)) : '' }}" class="required form-control">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group">
 	                                        <label class="control-label col-lg-4">Expiration Date *</label>
 	                                        <div class="col-lg-8">
-	                                            <input type="text" name="end_date" id="end_date" value="{{$oDeal->end_date}}" class="required form-control">
+	                                            <input type="text" name="end_date" id="end_date" value="{{( $oDeal->start_date ) ? date('d-m-Y',strtotime($oDeal->start_date)) : '' }}" class="required form-control">
 	                                        </div>
 	                                    </div>
 	                                </div>
@@ -210,7 +210,7 @@
 	                                    <div class="form-group">
 	                                         <label class="control-label col-lg-4">Street</label>
 	                                         <div class="col-lg-8">
-	                                            <input type="text" name="street1" id="street_number" value="{{$oDeal->manufacture}}" class="form-control" readonly>
+	                                            <input type="text" name="street1" id="street_number" value="{{$oDeal->street1}}" class="form-control" readonly>
 	                                        </div>	                                        
 	                                    </div>
 	                                     <div class="form-group">
@@ -230,7 +230,7 @@
 									<div class="col-lg-6">	 
 									   <div class="form-group">                                   	                                   
 									   		<div class="col-lg-12">
-	                                            <input type="text" name="street2" id="route" value="" class="form-control" readonly>
+	                                            <input type="text" name="street2" id="route" value="{{$oDeal->street2}}" class="form-control" readonly>
 	                                        </div>
 									   </div>
 	                                   <div class="form-group">
@@ -280,41 +280,71 @@
 	                                <div class="col-lg-6">
 	                                </div>
                                 </div>                                                          
-                                <input type="hidden" name="lat" value="">
-                                <input type="hidden" name="long" value="">
+                                <input type="hidden" name="lat" value="{{$oDeal->lat}}">
+                                <input type="hidden" name="long" value="{{$oDeal->long}}">
                             </div>
                         </fieldset>
                         <h1>Images</h1>
-                        <fieldset>
-                            <div class="col-md-12" id="post_images" style="margin-bottom:20px;">
-                            @if( $oDeal->ClassifiedImages )
-                                @foreach($oDeal->ClassifiedImages as $oImage )
-                                <div class="col-md-3" id="media_{{$oImage->id}}">
-                                    <a href="{{$oImage->image_path}}" target="_blank" class="thumbnail">
-                                        <?php $ext = pathinfo($oImage->image_path,PATHINFO_EXTENSION); ?>
-                                        @if( $ext == 'jpg' OR $ext == 'jpeg' OR $ext == 'png')
-                                            <img src="{{$oImage->image_path}}">
-                                        @else
-                                            <img src="{{url('images/video.png')}}">
+                                <fieldset>
+                                    <div class="col-md-12" id="deal_images" style="margin-bottom:20px;">
+                                    @if( $oDeal->DealImages->count() > 0 )
+                                        @foreach($oDeal->DealImages as $oImage )
+                                        <div class="col-md-3" id="media_{{$oImage->id}}">
+                                                <div class="radio text-right">
+                                                    <label>
+                                                        <input type="radio" {{$oImage->is_cover ? 'checked' : ''}} value="{{$oImage->id}}" class="required" name="is_cover"> Cover Photo
+                                                    </label>
+                                                </div>
+                                            <a href="{{$oImage->image_path}}" target="_blank" class="thumbnail">
+                                                <?php $ext = pathinfo($oImage->image_path,PATHINFO_EXTENSION); ?>
+                                                @if( $ext == 'jpg' OR $ext == 'jpeg' OR $ext == 'png')
+                                                    <img src="{{$oImage->image_path}}">
+                                                @else
+                                                    <img src="{{url('images/video.png')}}">
+                                                @endif
+                                            </a>
+                                            <button type="button" class="btn btn-block btn-primary" onclick="removeAttachment({{$oImage->id}},'images')"><i class="fa fa-trash"></i> Delete</button>
+                                        </div>
+                                        @endforeach
+                                    @endif
+                                    </div>
+                                    <hr>
+                                    <div class="clearfix"></div>
+                                    <div id="uploader">
+                                        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+                                    </div>
+                                </fieldset>
+
+                                <h1>Video</h1>
+                                <fieldset>
+                                    <div class="col-md-12" id="deal_videos" style="margin-bottom:20px;">
+                                        @if( $oDeal->DealVideos->count() > 0 )
+                                            @foreach($oDeal->DealVideos as $oImage )
+                                                <div class="col-md-3" id="media_{{$oImage->id}}">
+                                                    <a href="{{$oImage->video_path}}" target="_blank" class="thumbnail">
+                                                        <?php $ext = pathinfo($oImage->video_path,PATHINFO_EXTENSION); ?>
+                                                        @if( $ext == 'jpg' OR $ext == 'jpeg' OR $ext == 'png')
+                                                            <img src="{{$oImage->video_path}}">
+                                                        @else
+                                                            <img src="{{url('images/video.png')}}">
+                                                        @endif
+                                                    </a>
+                                                    <button type="button" class="btn btn-block btn-primary" onclick="removeAttachment({{$oImage->id}},'video')"><i class="fa fa-trash"></i> Delete</button>
+                                                </div>
+                                            @endforeach
                                         @endif
-                                    </a>
-                                    <button type="button" class="btn btn-block btn-primary" onclick="removeAttachment({{$oImage->id}})"><i class="fa fa-trash"></i> Delete</button>
-                                </div>
-                                @endforeach
-                            @endif
-                            </div>
-                            <hr>
-                            <div class="clearfix"></div>
-                            <div id="uploader">
-                                <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
-                            </div>
-                        </fieldset>
-                        <h1>Video</h1>
-                        <fieldset>
-                            <div id="video_uploader">
-                                <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
-                            </div>
-                        </fieldset>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2">Video URL:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="video_url" placeholder="Video URL">
+                                        </div>
+                                    </div>
+                                    <h3 class="text-center">OR</h3>
+                                    <div id="video_uploader">
+                                        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+                                    </div>
+                                </fieldset>
                     </form>
                 </div>
             </div>                   
@@ -331,25 +361,24 @@
         {
            return true;
         }	
-        // post-submit callback  
+        // deal-submit callback  
         function showResponse(responseText, statusText, xhr, $form)
         {
-            $('.post_id').val( responseText.id );
-            $('#uploader' ).plupload('getUploader' ).settings.url = "{{url('posts')}}" + "/" + responseText.id + "/images";
-            $('#video_uploader' ).plupload('getUploader' ).settings.url = "{{url('posts')}}" + "/" + responseText.id + "/videos";
-            {{--Dropzone.options.myAwesomeDropzone.url = "{{url('posts')}}" + "/" + responseText.id + "/images";--}}
+            $('.deal_id').val( responseText.id );
+            $('#uploader' ).plupload('getUploader' ).settings.url = "{{url('deals')}}" + "/" + responseText.id + "/images";
+            $('#video_uploader' ).plupload('getUploader' ).settings.url = "{{url('deals')}}" + "/" + responseText.id + "/videos";            
         }
         function saveData(form)
         {
             @if(! $oDeal->id )
-                var url = '{{ route("posts.store") }}';
+                var url = '{{ route("deals.store") }}';
                 var type = 'post';
             @endif
             if( $('.deal_id').val().length > 0 )
             {
-                url = '{{ url("posts") }}' + "/" + $('.deal_id').val();
+                url = '{{ url("deals") }}' + "/" + $('.deal_id').val();
                 type = 'put';
-                form.attr('action','{{url('posts')}}/'+$('.deal_id' ).val() + '/images');
+                form.attr('action','{{url('deals')}}/'+$('.deal_id' ).val() + '/images');
             }
             var options = { 
                 target:        '#output2',   // target element(s) to be updated with server response 
@@ -368,12 +397,7 @@
             $("form.wizard-big").steps({
                 bodyTag: "fieldset",
                 onStepChanging: function (event, currentIndex, newIndex)
-                {
-                    if( currentIndex == 0 )
-                    {
-                        $( '.category' ).html( $( 'input[name="category_id"]:checked' ).data( 'name' ) );
-                        $( '.location' ).html( $( '#autocomplete1' ).val() );
-                    }
+                {                    
                     // Always allow going backward even if the current step contains invalid fields!
                     if (currentIndex > newIndex)
                     {
@@ -390,10 +414,12 @@
                     // Disable validation on fields that are disabled or hidden.
                     form.validate().settings.ignore = ":disabled,:hidden";
                     // Start validation; Prevent going forward if false
-                    if( currentIndex == 2 )
+                    if( currentIndex == 1 )
                     {
-                        if( $('#post_images' ).find('.col-md-3' ).length )
-                            return true;
+                        if( $('#deal_images' ).find('.col-md-3' ).length )
+                        {
+                            //return true;
+                        }
                         else
                             return false;
                     }
@@ -418,7 +444,7 @@
 
                     // Start validation; Prevent form submission if false
 
-                    return form.valid() || currentIndex == 3;
+                    return form.valid() || currentIndex == 2;
                 },
                 onFinished: function (event, currentIndex)
                 {
@@ -449,8 +475,20 @@
                             element.before(error);
                         },
                         rules: {
-                            price: {
-                                number: true
+                            original_price: {
+                                number : true
+                            },
+                            new_price: {
+                                number : true
+                            },
+                            discount_percentage:{
+                            	number : true
+                            },
+                            available_stock:{
+                            	digits : true
+                            },
+                            email:{
+                            	email : true
                             }
                         }
             });
@@ -470,22 +508,6 @@
 
                 // Maximum file size
                 max_file_size : '10mb',
-
-
-                // Resize images on clientside if we can
-//                resize : {
-//                    width : 200,
-//                    height : 200,
-//                    quality : 90,
-//                    crop: true // crop to exact dimensions
-//                },
-
-//                // Specify what files to browse for
-//                filters : [
-//                    {title : "Image files", extensions : "jpg,gif,png,jpeg"},
-//                    {title : "Video files", extensions : "avi,mp4,webm"}
-//                ],
-
                 // Rename files by clicking on their titles
                 rename: true,
 
@@ -512,11 +534,11 @@
                     if( response.image_path )
                     {
                         var ext = response.image_path.split('.' ).pop();
-                        $('#post_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                        $('#deal_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
                     }
                     else
                     {
-                        $('#post_videos' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.video_path+'" target="_blank"><img src="{{url('images/video.png')}}"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                        $('#deal_videos' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.video_path+'" target="_blank"><img src="{{url('images/video.png')}}"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
                     }
                 },
                 selected: function(event,args) {
@@ -530,9 +552,9 @@
              var url;
              $('#confirmation_modal' ).modal('show');
              if( type == 'images' )
-                url = '{{url('posts')}}/'+$('.post_id' ).val()+'/images/'+id
+                url = '{{url('deals')}}/'+$('.deal_id' ).val()+'/images/'+id
              else
-                url = '{{url('posts')}}/'+$('.post_id' ).val()+'/videos/'+id
+                url = '{{url('deals')}}/'+$('.deal_id' ).val()+'/videos/'+id
              $('#confirm_btn' ).on('click',function(){
                  $.ajax({
                      type:'delete',

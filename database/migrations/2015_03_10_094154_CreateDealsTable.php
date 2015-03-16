@@ -15,15 +15,15 @@ class CreateDealsTable extends Migration {
 		Schema::create('deals',function($table){
 			$table->increments('id');
 			$table->string('title')->nullable()->default(null);
-			$table->integer('user_id')->default(0);
-			$table->integer('category_id')->default(0);
+			$table->integer('user_id')->nullbale()->default(0);
+			$table->integer('category_id')->nullbale()->default(0);
 			$table->date('start_date')->nullable()->default(null);
 			$table->date('end_date')->nullable()->default(null);
-			$table->float('original_price')->default(0);
-			$table->float('new_price')->default(0);
-			$table->integer('discount_percentage')->default(0);
+			$table->float('original_price')->nullbale()->default(0);
+			$table->float('new_price')->nullbale()->default(0);
+			$table->integer('discount_percentage')->nullbale()->default(0);
 			$table->text('description')->nullbale()->default(null);
-			$table->integer('available_stock')->default(0);
+			$table->integer('available_stock')->nullbale()->default(0);
 			$table->text('fineprint')->nullbale()->default(null);
 			$table->string('location')->nullable()->default(null);
 			$table->string('street1')->nullable()->default(null);

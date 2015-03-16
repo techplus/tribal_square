@@ -14,7 +14,7 @@ class CreateClassifiedVideosTable extends Migration {
 	{
 		Schema::create('classified_videos',function($table){
 			$table->increments('id');
-			$table->integer('classified_id')->default(0);
+			$table->integer('classified_id')->nullbale()->default(0);
 			$table->string('video_path')->nullable()->default(null);
 			$table->softDeletes();
 			$table->timeStamps();

@@ -15,7 +15,7 @@ class CreatePaymentTable extends Migration {
 		Schema::create('payments',function($table){
 			$table->increments('id');
 			$table->string('txn_id')->nullable()->default(null);
-			$table->integer('user_id')->default(0);
+			$table->integer('user_id')->nullbale()->default(0);
 			$table->string('subscriber_id')->nullable()->default(null);
 			$table->integer('subscription_id')->nullable()->default(null);
 			$table->string('amount')->nullbale()->default(null);

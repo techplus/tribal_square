@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Deal;
 use Request;
 use App\Models\ListingCategory;
+use Auth;
 
 class DealsController extends Controller {
 
@@ -15,7 +16,7 @@ class DealsController extends Controller {
 	 */
 	public function index()
 	{
-	 	$this->data['aDeals'] = Deal::with('ListingCategory')->where ( 'user_id' , '=' , $this->data[ 'oUser' ]->id )->get ();;
+	 	$this->data[ 'aDeals'  ] = Deal::with('ListingCategory')->where ( 'user_id' , '=' , $this->data[ 'oUser' ]->id )->get ();;
 	 	return $this->renderView ( 'providers.deals.index' );
 	}
 
@@ -38,7 +39,18 @@ class DealsController extends Controller {
 	 */
 	public function store()
 	{
-		
+		$aResp = array ( 'success' => FALSE );
+		$aData = Request::only ( [
+			'email' , 'title' , 'original_price' , 'new_price' , 'discount_percentage' , 'start_date' , 'end_date' , 'description' , 'available_stock' , 'fineprint' , 'category_id' , 'location' , 'street1' , 'street2'
+			, 'city' , 'country' , 'state' , 'pin' , 'website' , 'contact' , 'lat' , 'long'
+		] );
+		$aData[ 'start_date' ] = preg_replace('/(\d{2})\/(\d{2})\/(\d{4})/','$3-$1-$2', $aData[ 'start_date' ] );
+		$aData[ 'end_date' ] = preg_replace('/(\d{2})\/(\d{2})\/(\d{4})/','$3-$1-$2', $aData[ 'end_date' ] );
+		$aData[ 'user_id' ] = Auth::user()->id;		
+		$oDeal = Deal::create( $aData );
+		if( $oDeal )
+			return response()->json ( $oDeal -> array() );
+		return response ()->json ( $aResp , 500 );
 	}
 
 	/**
@@ -60,7 +72,13 @@ class DealsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$this->data[ 'aCategories' ] = Listingcategory::where ( 'type' , '=' , 'Deal' )->get ();
+		$this->data[ 'oDeal' ] = Deal::with ( [ 'DealImages' , 'DealVideos' ] )->find ( $id );
+
+		if ( ! $this->data[ 'oDeal' ] )
+			return abort ( 404 );
+
+		return $this->renderView ( 'providers.deals.edit' );
 	}
 
 	/**
@@ -71,7 +89,23 @@ class DealsController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$aResp = array ( 'success' => FALSE );
+		$oDeal = Deal::find ( $id );
+		if ( ! $oDeal )
+			return response ()->json ( $aResp );
+
+		$aUpdateData = Request::only ( [
+			'email' , 'title' , 'original_price' , 'new_price' , 'discount_percentage' , 'start_date' , 'end_date' , 'description' , 'available_stock' , 'fineprint' , 'category_id' , 'location' , 'street1' , 'street2'
+			, 'city' , 'country' , 'state' , 'pin' , 'website' , 'contact' , 'lat' , 'long'
+		] );
+		$aUpdateData[ 'start_date' ] = preg_replace( '/(\d{2})\/(\d{2})\/(\d{4})/' , '$3-$1-$2' , $aUpdateData[ 'start_date' ] );
+		$aUpdateData[ 'end_date' ] = preg_replace( '/(\d{2})\/(\d{2})\/(\d{4})/' , '$3-$1-$2' , $aUpdateData[ 'end_date' ] );
+		if( Request::has ( 'is_cover' ) )
+		{
+			DealImage::where( 'id' , Request::input( 'is_cover' ) )->update( [ 'is_cover' => 1 ] );
+		}
+		Deal::where( 'id' , $id )->update( $aUpdateData );
+		return response ()->json ( Deal::find ( $id )->toArray () );
 	}
 
 	/**
@@ -82,7 +116,32 @@ class DealsController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$oDeal = Deal::find ( $id );
+		if ( ! $oDeal )
+			return response ()->json ( [ 'success' => FALSE ] );
+
+		// remove deal-images
+		$aImages = $oDeal->DealImages()->get();
+		if( $aVideos->count() > 0 )
+		{
+			// we don't remove file for future restore purpose
+			foreach( $aImages AS $oimage )
+				$oimage->delete();
+		}	
+
+		// remove deal-videos
+		$aVideos = $oDeal->DealVideos()->get();
+		if( $aVideos->count() > 0 )
+		{			
+			// we don't remove file for future restore purpose
+			foreach( $aVideos AS $oVideo )
+				$oVideo->delete();
+		}
+		
+		// remove deal
+		$oDeal->delete ();
+
+		return response ()->json ( [ 'success' => TRUE ] );
 	}
 
 }
