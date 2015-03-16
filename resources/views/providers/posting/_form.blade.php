@@ -229,7 +229,13 @@
                                                     <input type="text" name="size" id="size" value="{{$oPost->size}}" class="form-control">
                                                 </div>
                                             </div>                                            
-                                        </div>    
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4">Fine Print</label>
+                                            <div class="col-lg-8">
+                                                <textarea name="fineprint" id="fineprint" class="form-control">{{$oPost->fineprint}}</textarea>
+                                            </div>
+                                        </div>
                                         <div class="col-lg-12">
                                              <div class="form-group">
                                                  <label class="control-label col-lg-4">Location</label>
@@ -291,6 +297,11 @@
                                     @if( $oPost->ClassifiedImages )
                                         @foreach($oPost->ClassifiedImages as $oImage )
                                         <div class="col-md-3" id="media_{{$oImage->id}}">
+                                                <div class="radio text-right">
+                                                    <label>
+                                                        <input type="radio" {{$oImage->is_cover ? 'checked' : ''}} value="{{$oImage->id}}" class="required" name="is_cover"> Cover Photo
+                                                    </label>
+                                                </div>
                                             <a href="{{$oImage->image_path}}" target="_blank" class="thumbnail">
                                                 <?php $ext = pathinfo($oImage->image_path,PATHINFO_EXTENSION); ?>
                                                 @if( $ext == 'jpg' OR $ext == 'jpeg' OR $ext == 'png')
@@ -382,7 +393,7 @@
                 beforeSubmit:  showRequest,  // pre-submit callback 
                 success:       showResponse, // post-submit callback                                    
                 url : url,
-                data:{description:$('#description').code()},
+                data:{description:$('#description').code(),fineprint:$('#fineprint' ).code()},
                 async : false,
                 type : type,
                 dataType : "json"                                                                                                    
@@ -416,15 +427,9 @@
                     // Disable validation on fields that are disabled or hidden.
                     form.validate().settings.ignore = ":disabled,:hidden";
                     // Start validation; Prevent going forward if false
-                    if( currentIndex == 2 )
-                    {
-                        if( $('#post_images' ).find('.col-md-3' ).length )
-                            return true;
-                        else
-                            return false;
-                    }
+
                     var bValid = form.valid();
-                    if( bValid )
+                    if( bValid && currentIndex != 0 )
                     {
                         saveData(form);
                     }
@@ -505,7 +510,7 @@
                     $('.text-container').find('input').removeClass('required');
                 }
             });
-            $('#description').summernote({
+            $('#description,#fineprint').summernote({
                 height: 200
             });
 
@@ -559,7 +564,7 @@
                     if( response.image_path )
                     {
                         var ext = response.image_path.split('.' ).pop();
-                        $('#post_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                        $('#post_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><div class="radio text-right"><label><input type="radio" class="required" value="'+response.id+'" name="is_cover"> Cover Photo</label></div><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
                     }
                     else
                     {

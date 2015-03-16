@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Models\Classified;
 use App\Models\ListingCategory;
+use App\Models\ClassifiedImage;
 use Auth;
 use Request;
 
@@ -96,10 +97,13 @@ class PostsController extends Controller
 			return response ()->json ( $aResp );
 
 		$aUpdateData = Request::only ( [
-			'email' , 'title' , 'can_phone' , 'can_text' , 'price' , 'description' , 'condition' ,'category_id','location',
+			'email' , 'title' , 'can_phone' , 'can_text' , 'price' , 'description' , 'condition' ,'category_id','location','fineprint',
 			'location2' , 'manufacture' , 'model_number' , 'size' , 'city' , 'country' , 'state' , 'pin' , 'avail_for_other_services' , 'phone' , 'contact_name' , 'lat' , 'long'
 		] );
-
+		if( Request::has('is_cover') )
+		{
+			ClassifiedImage::where('id',Request::input('is_cover'))->update(['is_cover'=>1]);
+		}
 		Classified::where('id',$id)->update($aUpdateData);
 		return response ()->json ( Classified::find ( $id )->toArray () );
 	}
