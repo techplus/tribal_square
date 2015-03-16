@@ -4,7 +4,9 @@
     <link href="{{asset('inspinia/css/plugins/jQueryUI/jquery-ui.min.css')}}" rel="stylesheet">
     <link href="{{asset('inspinia/js/plugins/plupload/jquery.ui.plupload/css/jquery.ui.plupload.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('inspinia/css/summernote.css') }}">
-    <link href="{{ asset('inspinia/css/style.css') }}" rel="stylesheet">        
+    <link href="{{ asset('inspinia/css/style.css') }}" rel="stylesheet">
+    <link href="{{asset('inspinia/js/plugins/token/jquery.tagsinput.min.css')}}" rel="stylesheet">
+
     <style>
         .wizard > .content > .body{
             position: relative;
@@ -18,6 +20,12 @@
     .thumbnail img {
         height: 200px;
     }
+        label label.error {
+            display: none !important;
+        }
+        #language_spoken_addTag, #language_spoken_addTag input {
+            width:130px !important;;
+        }
     </style>
     <script type="text/javascript" src="{{ asset('inspinia/js/jquery.form.js') }}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/summernote.js') }}"></script>
@@ -26,6 +34,7 @@
     <script type="text/javascript" src="{{ asset('inspinia/js/plugins/plupload/moxie.js') }}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/plugins/plupload/jquery.ui.plupload/jquery.ui.plupload.js') }}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+    <script src="{{asset('inspinia/js/plugins/token/jquery.tagsinput.min.js')}}" type="text/javascript"></script>
     <script>
     var autocomplete1;
     var autocomplete2;
@@ -228,14 +237,21 @@
                                                 <div class="col-lg-8">
                                                     <input type="text" name="size" id="size" value="{{$oPost->size}}" class="form-control">
                                                 </div>
-                                            </div>                                            
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-4">Fine Print</label>
-                                            <div class="col-lg-8">
-                                                <textarea name="fineprint" id="fineprint" class="form-control">{{$oPost->fineprint}}</textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-4">Fine Print</label>
+                                                <div class="col-lg-8">
+                                                    <textarea name="fineprint" id="fineprint" class="form-control">{{$oPost->fineprint}}</textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label col-lg-4">Language Spoken</label>
+                                                <div class="col-lg-8">
+                                                    <input name="language_spoken" id="language_spoken" class="form-control">
+                                                </div>
                                             </div>
                                         </div>
+
                                         <div class="col-lg-12">
                                              <div class="form-group">
                                                  <label class="control-label col-lg-4">Location</label>
@@ -243,15 +259,15 @@
                                                     <input type="text"  onFocus="geolocate()" name="location2" id="autocomplete2" value="{{$oPost->location2}}" class="form-control required">
                                                 </div>
                                             </div>                                            
-                                            {{--<div class="form-group">--}}
-                                                 {{--<label class="control-label col-lg-4">Street</label>--}}
-                                                 {{--<div class="col-lg-4">--}}
-                                                    {{--<input type="text" name="street1" id="street_number" value="{{$oPost->manufacture}}" class="form-control" readonly>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="col-lg-4">--}}
-                                                    {{--<input type="text" name="street2" id="route" value="" class="form-control" readonly>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
+                                            <div class="form-group">
+                                                 <label class="control-label col-lg-4">Street</label>
+                                                 <div class="col-lg-4">
+                                                    <input type="text" name="street1" id="street_number" value="{{$oPost->manufacture}}" class="form-control" readonly>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <input type="text" name="street2" id="route" value="" class="form-control" readonly>
+                                                </div>
+                                            </div>
                                             <div class="form-group">
                                                  <label class="control-label col-lg-4">City</label>
                                                  <div class="col-lg-8">
@@ -433,11 +449,15 @@
                     {
                         saveData(form);
                     }
+                    if( currentIndex == 2 && !bValid )
+                    {
+                        $('<div class="alert alert-danger"><p>Please select atleast one image as cover</div>' ).insertBefore('#post_images');
+                    }
                     return bValid;
                 },
                 onStepChanged: function (event, currentIndex, priorIndex)
                 {
-
+                    $('.alert' ).hide();
                 },
                 onFinishing: function (event, currentIndex)
                 {
@@ -575,7 +595,20 @@
                     args.up.start();
                 }
             });
-       });
+            $('#language_spoken' ).tagsInput({
+                'height':'70px',
+                'width':'100%',
+                'defaultText':'Add Languages',
+                'onAddTag':function(tag){
+                    $.ajax({
+                        url: '{{route('language.store')}}',
+                        type: 'post',
+                        data: {name:tag}
+                    })
+                },
+                'minChars' : 3,
+            });
+        });
 
          function removeAttachment(id,type)
          {

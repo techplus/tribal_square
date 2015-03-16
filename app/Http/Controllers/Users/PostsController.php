@@ -97,7 +97,7 @@ class PostsController extends Controller
 			return response ()->json ( $aResp );
 
 		$aUpdateData = Request::only ( [
-			'email' , 'title' , 'can_phone' , 'can_text' , 'price' , 'description' , 'condition' ,'category_id','location','fineprint',
+			'email' , 'title' , 'can_phone' , 'can_text' , 'price' , 'description' , 'condition' ,'category_id','location','fineprint','street1','street2','language_spoken',
 			'location2' , 'manufacture' , 'model_number' , 'size' , 'city' , 'country' , 'state' , 'pin' , 'avail_for_other_services' , 'phone' , 'contact_name' , 'lat' , 'long'
 		] );
 		if( Request::has('is_cover') )

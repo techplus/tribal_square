@@ -16,6 +16,7 @@ Route::controllers([
 	'login' => 'Auth\AuthController',
 	'register'	=>	'Auth\RegisterController',
 	'password' => 'Auth\PasswordController',
+	'languages'	=>	'LanguagesController'
 ]);
 Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 	Route::resource( 'category.sub-category' , 'Admin\SubCategoryController' );
@@ -43,3 +44,4 @@ Route::group(['middleware'=>['auth.salesagnet','payment']],function(){
 Route::group( ['middleware' => ['guest'] ], function() {
 	Route::controller('/','HomeController');
 });
+
