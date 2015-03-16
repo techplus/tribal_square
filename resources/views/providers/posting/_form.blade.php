@@ -93,13 +93,12 @@
         }
     }   
 
-    </script>  
-                                 
+    </script>
               	 <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Create New Posting</h5>
+                            <h5>{{$oPost->id ? 'Edit Post' : 'Create New Posting'}}</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -417,6 +416,13 @@
                     // Disable validation on fields that are disabled or hidden.
                     form.validate().settings.ignore = ":disabled,:hidden";
                     // Start validation; Prevent going forward if false
+                    if( currentIndex == 2 )
+                    {
+                        if( $('#post_images' ).find('.col-md-3' ).length )
+                            return true;
+                        else
+                            return false;
+                    }
                     var bValid = form.valid();
                     if( bValid )
                     {
@@ -437,7 +443,8 @@
                     form.validate().settings.ignore = ":disabled";
 
                     // Start validation; Prevent form submission if false
-                    return form.valid();
+
+                    return form.valid() || currentIndex == 3;
                 },
                 onFinished: function (event, currentIndex)
                 {
