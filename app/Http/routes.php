@@ -27,6 +27,9 @@ Route::group(['middleware'=>['auth.providers','payment']],function(){
 	Route::resource('posts','Users\PostsController',['except'=>['show']]);
 	Route::resource('posts.images','Users\ImagesController',['only'=>['store','update','destroy']]);
 	Route::resource('posts.videos','Users\VideosController',['only'=>['store','update','destroy']]);
+	Route::resource('deals','Users\DealsController');
+	Route::resource('deals.images','Users\ImagesController',['only'=>['store','update','destroy']]);
+	Route::resource('deals.videos','Users\VideosController',['only'=>['store','update','destroy']]);
 });
 
 Route::group(['middleware'=>['auth.babysitters','payment']],function(){

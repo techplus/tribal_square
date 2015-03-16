@@ -11,6 +11,6 @@ class Deal extends Model{
 	}
 	public function DealVideos()
 	{
-		return $this->hasMany('DealVideos','deal_id');
+		return $this->hasMany('DealVideo','deal_id');
 	}
 }
