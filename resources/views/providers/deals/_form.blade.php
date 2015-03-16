@@ -117,138 +117,169 @@
 	                                            <input type="text" name="title" id="title" value="{{$oDeal->title}}" class="required form-control">
 	                                        </div>
 	                                    </div>
+	                                     <div class="form-group">
+	                                        <label class="control-label col-lg-4">Deal Type *</label>
+	                                        <div class="col-lg-8">
+	                                            <select class="form-control required" name="category_id">
+	                                            	<option value="">Select</option>
+	                                            	@if ( $aListingCategories->count() > 0 )
+	                                            		@foreach ( $aListingCategories as $oCat )
+	                                            			<option value="{{ $oCat->id }}" {{ ( $oDeal->category_id == $oCat->id ) ? 'selected' : '' }}>{{ $oCat->name }}</option>
+	                                            		@endforeach
+	                                            	@endif
+	                                            </select>
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group">
+	                                        <label class="control-label col-lg-4">Available Stock *</label>
+	                                        <div class="col-lg-8">
+	                                            <input type="text" name="available_stock" id="available_stock" value="{{$oDeal->available_stock}}" class="required form-control">
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group">
+	                                        <label class="control-label col-lg-4">Start Date *</label>
+	                                        <div class="col-lg-8">
+	                                            <input type="text" name="start_date" id="start_date" value="{{$oDeal->start_date}}" class="required form-control">
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group">
+	                                        <label class="control-label col-lg-4">Expiration Date *</label>
+	                                        <div class="col-lg-8">
+	                                            <input type="text" name="end_date" id="end_date" value="{{$oDeal->end_date}}" class="required form-control">
+	                                        </div>
+	                                    </div>
 	                                </div>
 	                                <div class="col-lg-6">
 	                                    <div class="form-group">
 	                                        <label class="control-label col-lg-4">Original Price *</label>
 	                                        <div class="col-lg-8">
-	                                            <input type="text" name="price" id="price" value="{{$oDeal->price}}" class="required form-control">
+	                                            <input type="text" name="original_price" id="original_price" value="{{$oDeal->original_price}}" class="required form-control">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group">
 	                                        <label class="control-label col-lg-4">New Price *</label>
 	                                        <div class="col-lg-8">
-	                                            <input type="text" name="price" id="price" value="{{$oDeal->price}}" class="required form-control">
+	                                            <input type="text" name="new_price" id="new_price" value="{{$oDeal->new_price}}" class="required form-control">
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group">
 	                                        <label class="control-label col-lg-4">%off from Original Price*</label>
 	                                        <div class="col-lg-8">
-	                                            <input type="text" name="price" id="price" value="{{$oDeal->price}}" class="required form-control">
+	                                            <input type="text" name="discount_percentage" id="discount_percentage" value="{{$oDeal->discount_percentage}}" class="required form-control">
 	                                        </div>
 	                                    </div>
+	                                </div>	                                
+                                </div>    
+                                <div class="col-lg-12">
+                                	<div class="col-lg-10">
+                                		<div class="form-group">
+	                                        <label class="control-label col-lg-2">Description *</label>
+	                                        <div class="col-lg-10" style="padding-left:45px;">
+	                                            <textarea name="description" id="description" class="required form-control">{{$oDeal->description}}</textarea>
+	                                        </div>
+	                                    </div>   
+	                                    <div class="form-group">
+	                                        <label class="control-label col-lg-2">Fine Print *</label>
+	                                        <div class="col-lg-10" style="padding-left:45px;">
+	                                            <textarea name="fine_print" id="fine_print" class="required form-control">{{$oDeal->fine_print}}</textarea>
+	                                        </div>
+	                                    </div>                                    
+                                    </div>
+                                	<div class="col-lg-2">
+                                	</div>
+                                </div>          
+                                <div class="col-lg-12" style="padding-left:30px;">
+                                	<h3>
+                                		<b>
+                                			<u>
+                                				Location Details
+                                			</u>
+                                		</b>
+                                	</h3>
+                                </div>        	                                                             
+                                <div class="col-lg-12">
+                                     <div class="form-group">
+                                         <label class="control-label col-lg-2" style="padding-left:30px;">Location</label>
+                                         <div class="col-lg-10" style="padding-left:25px;">
+                                            <input type="text"  onFocus="geolocate()" name="location" id="autocomplete1" value="{{$oDeal->location}}" class="form-control required">
+                                        </div>
+                                    </div>    
+								</div>
+								<div class="col-lg-12"> 
+									<div class="col-lg-6">									                                                                   
+	                                    <div class="form-group">
+	                                         <label class="control-label col-lg-4">Street</label>
+	                                         <div class="col-lg-8">
+	                                            <input type="text" name="street1" id="street_number" value="{{$oDeal->manufacture}}" class="form-control" readonly>
+	                                        </div>	                                        
+	                                    </div>
+	                                     <div class="form-group">
+	                                         <label class="control-label col-lg-4">City</label>
+	                                         <div class="col-lg-8">
+	                                            <input type="text" name="city" id="locality" value="{{$oDeal->city}}" class="form-control" readonly>
+	                                        </div>
+	                                    </div>
+	                                     <div class="form-group">
+	                                         <label class="control-label col-lg-4">Country</label>
+	                                         <div class="col-lg-8">
+	                                            <input type="text" name="country" id="country" value="{{$oDeal->country}}" class="form-control" readonly>
+	                                        </div>
+	                                    </div>
+	                                    
+									</div>
+									<div class="col-lg-6">	 
+									   <div class="form-group">                                   	                                   
+									   		<div class="col-lg-12">
+	                                            <input type="text" name="street2" id="route" value="" class="form-control" readonly>
+	                                        </div>
+									   </div>
+	                                   <div class="form-group">
+	                                         <label class="control-label col-lg-4">State</label>
+	                                         <div class="col-lg-8">
+	                                            <input type="text" name="state" id="administrative_area_level_1" value="{{$oDeal->state}}" class="form-control" readonly>
+	                                        </div>
+	                                    </div>
+	                                    <div class="form-group">
+	                                         <label class="control-label col-lg-4">Pin</label>
+	                                         <div class="col-lg-8">
+	                                            <input type="text" name="pin" id="postal_code" value="{{$oDeal->pin}}" class="form-control" readonly>
+	                                        </div>
+	                                    </div>
+									</div>	                                    	                                    	                                    	                                    
+                                </div>  
+                                <div class="col-lg-12" style="padding-left:30px;">
+                                	<h3>
+                                		<b>
+                                			<u>
+                                				Contact Details
+                                			</u>
+                                		</b>
+                                	</h3>
+                                </div>  
+                                <div class="col-lg-12">
+                                	<div class="col-lg-6">
+	                                	<div class="form-group">
+	                                            <label class="col-lg-4 control-label">Website *</label>
+	                                            <div class="col-lg-8">
+	                                                <input id="website" name="website" type="text" value="{{$oDeal->website}}" class="form-control required">
+	                                            </div>
+	                                    </div>                                   	                            		
+	                                    <div class="form-group">
+	                                            <label class="col-lg-4 control-label">Contact Number *</label>
+	                                            <div class="col-lg-8">
+	                                                <input id="contact" name="contact" type="text" value="{{$oDeal->contact}}" class="form-control required">
+	                                            </div>
+	                                    </div>                                	
+	                                    <div class="form-group">
+	                                            <label class="col-lg-4 control-label">Email *</label>
+	                                            <div class="col-lg-8">
+	                                                <input id="email" name="email" type="text" value="{{$oDeal->email}}" class="form-control required">
+	                                            </div>
+	                                    </div>
 	                                </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-lg-4">Posting Content *</label>
-                                        <div class="col-lg-8">
-                                            <textarea name="description" id="description" class="required form-control">{{$oDeal->description}}</textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-lg-4">Condition *</label>
-                                         <div class="col-lg-8">
-                                            <select name="condition" id="condition" class="required form-control">
-                                                <option value="Good" {{$oDeal->condition == 'Good' ? 'selected' : ''}}>Good</option>
-                                                <option value="Average" {{$oDeal->condition == 'Average' ? 'selected' : ''}}>Average</option>
-                                                <option value="Excellent" {{$oDeal->condition == 'Excellent' ? 'selected' : ''}}>Excellent</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-lg-4">Make/Manufacture</label>
-                                        <div class="col-lg-8">
-                                            <input type="text" name="manufacture" id="manufature" value="{{$oDeal->manufacture}}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-lg-4">Model Number/Number</label>
-                                        <div class="col-lg-8">
-                                            <input type="text" name="model_number" id="model_number" value="{{$oDeal->model_number}}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-lg-4">Size/Dimensions</label>
-                                        <div class="col-lg-8">
-                                            <input type="text" name="size" id="size" value="{{$oDeal->size}}" class="form-control">
-                                        </div>
-                                    </div>                                            
-                                </div>                      	
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label class="col-lg-4 control-label">Email *</label>
-                                        <div class="col-lg-8">
-                                            <input id="email" name="email" type="text" value="{{$oDeal->email}}" class="form-control required">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">                                               
-                                           <label class="control-label col-lg-4">user can contact me by </label>&nbsp;&nbsp;
-                                           <div class="col-lg-8"> 
-                                            <input type="checkbox" name="can_phone" {{$oDeal->can_phone ? 'checked' : ''}} class="chkphone" value="1">&nbsp;<span>Phone</span>&nbsp;&nbsp;
-                                            <input type="checkbox" name="can_text" {{$oDeal->can_text ? 'checked' : ''}} class="chktext" value="1">&nbsp;<span>Text</span>
-                                           </div>
-                                    </div>
-                                    <div class="form-group">                                                
-                                            <div class="col-lg-6 phone-container" style="display: none;padding-left:0;"> 
-                                                <label>Phone Number *</label>
-                                                <input type="text" name="phone" id="phone" value="{{$oDeal->phone}}" value="" class="form-control">
-                                            </div>
-                                            <div class="col-lg-6 text-container" style="display: none;padding-right:0;"> 
-                                                <label>Contact Name *</label>
-                                                <input type="text" name="contact_name" value="{{$oDeal->contact_name}}" id="contact_name" value="" class="form-control">
-                                            </div>                                               
-                                    </div>
-                                </div>                                      
-                                <div class="col-lg-12">
-                                     <div class="form-group">
-                                         <label class="control-label col-lg-4">Location</label>
-                                         <div class="col-lg-8">
-                                            <input type="text"  onFocus="geolocate()" name="location2" id="autocomplete2" value="{{$oDeal->location2}}" class="form-control required">
-                                        </div>
-                                    </div>                                            
-                                    {{--<div class="form-group">--}}
-                                         {{--<label class="control-label col-lg-4">Street</label>--}}
-                                         {{--<div class="col-lg-4">--}}
-                                            {{--<input type="text" name="street1" id="street_number" value="{{$oDeal->manufacture}}" class="form-control" readonly>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="col-lg-4">--}}
-                                            {{--<input type="text" name="street2" id="route" value="" class="form-control" readonly>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    <div class="form-group">
-                                         <label class="control-label col-lg-4">City</label>
-                                         <div class="col-lg-8">
-                                            <input type="text" name="city" id="locality" value="{{$oDeal->city}}" class="form-control" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                         <label class="control-label col-lg-4">State</label>
-                                         <div class="col-lg-8">
-                                            <input type="text" name="state" id="administrative_area_level_1" value="{{$oDeal->state}}" class="form-control" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                         <label class="control-label col-lg-4">Country</label>
-                                         <div class="col-lg-8">
-                                            <input type="text" name="country" id="country" value="{{$oDeal->country}}" class="form-control" readonly>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                         <label class="control-label col-lg-4">Pin</label>
-                                         <div class="col-lg-8">
-                                            <input type="text" name="pin" id="postal_code" value="{{$oDeal->pin}}" class="form-control" readonly>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                     <div class="form-group">
-                                        <div class="col-lg-1">
-                                            <input type="checkbox" name="avail_for_other_services" {{$oDeal->avail_for_other_services ? 'checked' : ''}} value="1">
-                                        </div>
-                                        <div class="col-lg-11">
-                                             <span>Ok for others to contact you about other services, products or commercial interets</span>
-                                        </div>
-                                    </div>
-                                </div>                                
+	                                <div class="col-lg-6">
+	                                </div>
+                                </div>                                                          
                                 <input type="hidden" name="lat" value="">
                                 <input type="hidden" name="long" value="">
                             </div>
@@ -278,7 +309,6 @@
                                 <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
                             </div>
                         </fieldset>
-
                         <h1>Video</h1>
                         <fieldset>
                             <div id="video_uploader">
@@ -294,7 +324,7 @@
     <script src="{{ asset('inspinia/js/plugins/staps/jquery.steps.min.js') }}"></script>    
     <!-- Jquery Validate -->
     <script src="{{ asset('inspinia/js/plugins/validate/jquery.validate.min.js') }}"></script>
-	 <script>
+	<script>
          var uploader;
         // pre-submit callback
         function showRequest(formData, jqForm, options)
@@ -306,6 +336,7 @@
         {
             $('.post_id').val( responseText.id );
             $('#uploader' ).plupload('getUploader' ).settings.url = "{{url('posts')}}" + "/" + responseText.id + "/images";
+            $('#video_uploader' ).plupload('getUploader' ).settings.url = "{{url('posts')}}" + "/" + responseText.id + "/videos";
             {{--Dropzone.options.myAwesomeDropzone.url = "{{url('posts')}}" + "/" + responseText.id + "/images";--}}
         }
         function saveData(form)
@@ -314,18 +345,18 @@
                 var url = '{{ route("posts.store") }}';
                 var type = 'post';
             @endif
-            if( $('.post_id').val().length > 0 )
+            if( $('.deal_id').val().length > 0 )
             {
-                url = '{{ url("posts") }}' + "/" + $('.post_id').val();
+                url = '{{ url("posts") }}' + "/" + $('.deal_id').val();
                 type = 'put';
-                form.attr('action','{{url('posts')}}/'+$('.post_id' ).val() + '/images');
+                form.attr('action','{{url('posts')}}/'+$('.deal_id' ).val() + '/images');
             }
             var options = { 
                 target:        '#output2',   // target element(s) to be updated with server response 
                 beforeSubmit:  showRequest,  // pre-submit callback 
                 success:       showResponse, // post-submit callback                                    
                 url : url,
-                data:{description:$('#description').code()},
+                data:{description:$('#description').code(),fine_print:$('#fine_print').code()},
                 async : false,
                 type : type,
                 dataType : "json"                                                                                                    
@@ -359,6 +390,13 @@
                     // Disable validation on fields that are disabled or hidden.
                     form.validate().settings.ignore = ":disabled,:hidden";
                     // Start validation; Prevent going forward if false
+                    if( currentIndex == 2 )
+                    {
+                        if( $('#post_images' ).find('.col-md-3' ).length )
+                            return true;
+                        else
+                            return false;
+                    }
                     var bValid = form.valid();
                     if( bValid )
                     {
@@ -379,7 +417,8 @@
                     form.validate().settings.ignore = ":disabled";
 
                     // Start validation; Prevent form submission if false
-                    return form.valid() || currentIndex == 2;
+
+                    return form.valid() || currentIndex == 3;
                 },
                 onFinished: function (event, currentIndex)
                 {
@@ -387,8 +426,21 @@
 
                     // Submit form input
                     //saveData();
-                    console.log(currentIndex);
-                    window.location.href = "{{ route('posts.index') }}";
+                    if($('#video_url' ).val())
+                    {
+                        //console.log($('#video_url' ).val());
+                        $.ajax({
+                            url: '{{url('deals/')}}/'+$('.deal_id' ).val()+'/videos',
+                            data: {'video_path': $('#video_url' ).val()},
+                            type:"post",
+                            dataType:'json'
+                        } ).success(function(data){
+                            window.location.href = "{{ route('deals.index') }}";
+                        });
+                    }
+                    else
+                        window.location.href = "{{ route('deals.index') }}";
+
                    //form.submit(form);
                 }
             }).validate({
@@ -402,37 +454,16 @@
                             }
                         }
             });
-            google.maps.event.addDomListener(window, 'load', initialize);
-            $('.chkphone').on('change',function () {
-                if( $(this).prop('checked') )
-                {
-                    $('.phone-container').show();
-                     $('.phone-container').find('input').addClass('required');
-                }
-                else
-                {
-                    $('.phone-container').hide();   
-                    $('.phone-container').find('input').removeClass('required');
-                }
-            });
-            $('.chktext').on('change',function () {
-                if( $(this).prop('checked') )
-                {
-                    $('.text-container').show();
-                    $('.text-container').find('input').addClass('required');
-                }
-                else
-                {
-                    $('.text-container').hide();   
-                    $('.text-container').find('input').removeClass('required');
-                }
-            });
+            google.maps.event.addDomListener(window, 'load', initialize);                      
             $('#description').summernote({
-                height: 200
+                height: 150
+            });
+            $('#fine_print').summernote({
+                height: 150
             });
 
                 // Setup html5 version
-            uploader = $("#uploader").plupload({
+            uploader = $("#uploader,#video_uploader").plupload({
                 // General settings
                 runtimes : 'html5,flash,silverlight,html4',
                 url : "/examples/upload",
@@ -478,9 +509,15 @@
                 silverlight_xap_url : 'inspinia/js/plugins/plupload/Moxie.xap',
                 uploaded: function(event,args) {
                     response = $.parseJSON(args.response.response);
-                    console.log(response);
-                    var ext = response.image_path.split('.' ).pop();
-                    $('#post_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+( ( ext == 'jpg' || ext == 'jpeg' || ext == 'png' ) ? response.image_path : '{{url('images/video.png')}}')+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                    if( response.image_path )
+                    {
+                        var ext = response.image_path.split('.' ).pop();
+                        $('#post_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                    }
+                    else
+                    {
+                        $('#post_videos' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.video_path+'" target="_blank"><img src="{{url('images/video.png')}}"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                    }
                 },
                 selected: function(event,args) {
                     args.up.start();
@@ -488,13 +525,18 @@
             });
        });
 
-         function removeAttachment(id)
+         function removeAttachment(id,type)
          {
+             var url;
              $('#confirmation_modal' ).modal('show');
+             if( type == 'images' )
+                url = '{{url('posts')}}/'+$('.post_id' ).val()+'/images/'+id
+             else
+                url = '{{url('posts')}}/'+$('.post_id' ).val()+'/videos/'+id
              $('#confirm_btn' ).on('click',function(){
                  $.ajax({
                      type:'delete',
-                     url: '{{url('posts')}}/'+$('.post_id' ).val()+'/images/'+id
+                     url:url
                  } ).success(function(data){
                     $('#media_'+id ).remove();
                      $('#confirmation_modal' ).modal('hide');

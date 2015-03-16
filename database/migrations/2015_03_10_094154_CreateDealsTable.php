@@ -26,6 +26,8 @@ class CreateDealsTable extends Migration {
 			$table->integer('available_stock')->default(0);
 			$table->text('fineprint')->nullbale()->default(null);
 			$table->string('location')->nullable()->default(null);
+			$table->string('street1')->nullable()->default(null);
+			$table->string('street2')->nullable()->default(null);
 			$table->string('state')->nullable()->default(null);
 			$table->string('city')->nullable()->default(null);
 			$table->string('country')->nullable()->default(null);
