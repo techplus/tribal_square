@@ -247,7 +247,7 @@
                                             <div class="form-group">
                                                 <label class="control-label col-lg-4">Language Spoken</label>
                                                 <div class="col-lg-8">
-                                                    <input name="language_spoken" id="language_spoken" class="form-control">
+                                                    <input name="language_spoken" id="language_spoken" value="{{$oPost->language_spoken}}" class="form-control">
                                                 </div>
                                             </div>
                                         </div>
@@ -596,16 +596,19 @@
                 }
             });
             $('#language_spoken' ).tagsInput({
+                autocomplete_url: '{{route('languages.index')}}',
                 'height':'70px',
                 'width':'100%',
                 'defaultText':'Add Languages',
                 'onAddTag':function(tag){
+                    console.log(tag);
                     $.ajax({
-                        url: '{{route('language.store')}}',
+                        url: '{{url('languages')}}',
                         type: 'post',
                         data: {name:tag}
                     })
                 },
+                'delimiter': [','],
                 'minChars' : 3,
             });
         });

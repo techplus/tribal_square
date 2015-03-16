@@ -1,9 +1,8 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use Request;
 use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
+use App\Models\Language;
 
 class LanguagesController extends Controller {
 
@@ -14,7 +13,8 @@ class LanguagesController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		$oLanguage = Language::where('name','LIKE','%'.Request::input('term','')."%")->lists('name');
+		return response()->json($oLanguage);
 	}
 
 	/**
@@ -34,7 +34,15 @@ class LanguagesController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		if( ! Request::has('name') )
+			return response()->json(['error'=>'name is required'],500);
+
+		$language = Language::where('name',Request::input('name'))->first();
+		if( $language )
+			return response()->json(['success']);
+
+		$oLanguage = Language::create(['name'=>Request::input('name')]);
+		return $oLanguage->toArray();
 	}
 
 	/**

@@ -15,9 +15,9 @@
 Route::controllers([
 	'login' => 'Auth\AuthController',
 	'register'	=>	'Auth\RegisterController',
-	'password' => 'Auth\PasswordController',
-	'languages'	=>	'LanguagesController'
+	'password' => 'Auth\PasswordController'
 ]);
+Route::resource('languages','LanguagesController');
 Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 	Route::resource( 'category.sub-category' , 'Admin\SubCategoryController' );
 	Route::get('cat-type','Admin\SubCategoryController@getCatType');
