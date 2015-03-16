@@ -14,8 +14,9 @@ class CreateClassifiedImagesTable extends Migration {
 	{
 		Schema::create('classified_images',function($table){
 			$table->increments('id');
-			$table->integer('classified_id')->default(0);
+			$table->integer('classified_id')->nullable()->default(0);
 			$table->string('image_path')->nullable()->default(null);
+			$table->boolean('is_cover')->nullable()->default(0);
 			$table->softDeletes();
 			$table->timeStamps();
 		});

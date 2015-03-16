@@ -21,10 +21,10 @@
                 <div class="logo-element">
                     IN+
                 </div>
-            </li>
+            </li>            
             @if( $oUser->type == "Providers" )
-                <li class="active">
-                    <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Posting</span></a>               
+                <li {{ ( Request::segment(1) == "posts" ) ? 'class=active' : '' }}>
+                    <a href="{{ route('posts.index') }}" ><i class="fa fa-edit"></i> <span class="nav-label">Posting</span></a>               
                 </li>
                 <?php /* <li>
                     <a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">Drafts</span></a>               
@@ -38,6 +38,9 @@
                 <li>
                     <a href="#"><i class="fa fa-list-alt"></i> <span class="nav-label">Billing</span></a>               
                 </li>
+                <li {{ ( Request::segment(1) == "deals" ) ? 'class=active' : '' }}>
+                    <a href="{{ route('deals.index') }}"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Deals</span></a>               
+                </li> 
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Posted Deals</span></a>               
                 </li>          
