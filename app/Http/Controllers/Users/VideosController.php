@@ -1,62 +1,34 @@
-<?php namespace App\Http\Controllers;
-
+<?php namespace App\Http\Controllers\Users;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-
+use Request;
+use File;
+use App\Models\ClassifiedVideo;
 class VideosController extends Controller {
-
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store($classified)
 	{
-		//
-	}
+		if( ! Request::hasFile('file') AND ! Request::input('video_path'))
+			return response()->json(['error'=>'file is not specified'],500);
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+		$aVideoData = array('classified_id'=>$classified);
+		if( Request::hasFile('file') ) {
+			$oFile = Request::file ( 'file' );
+			$oFile->move ( base_path ( 'uploads' ) , $oFile->getClientOriginalName () );
+			$aVideoData['video_path'] = $oFile->getClientOriginalName();
+		}
+		else
+			$aVideoData['video_path'] = Request::input('video_path');
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
+		$aFileData = $aVideoData;
+
+		$oFile = ClassifiedVideo::create($aFileData);
+		return response()->json($oFile->toArray());
 	}
 
 	/**
@@ -65,7 +37,7 @@ class VideosController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($classified,$id)
 	{
 		//
 	}
@@ -76,9 +48,14 @@ class VideosController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($classified,$id)
 	{
-		//
-	}
+		$image = ClassifiedVideo::find($id);
+		if( ! $image )
+			return response()->json(['error'=>'video not found'],500);
 
+		$image->delete();
+
+		return response()->json(['message'=>'video deleted']);
+	}
 }
