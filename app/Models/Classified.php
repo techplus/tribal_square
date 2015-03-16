@@ -7,7 +7,7 @@ class Classified extends Model{
 	protected $guarded = array( 'id' );
 	public function ListingCategory()
 	{
-		return $this->belongsTo('App\Models\ListingCategory');
+		return $this->belongsTo('App\Models\ListingCategory','category_id');
 	}
 	public function ClassifiedImages()
 	{

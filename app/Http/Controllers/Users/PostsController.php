@@ -16,7 +16,6 @@ class PostsController extends Controller
 	public function index ()
 	{
 		$this->data[ 'aPostings' ] = Classified::with ( [ 'Listingcategory' ] )->where ( 'user_id' , '=' , $this->data[ 'oUser' ]->id )->get ();
-
 		return $this->renderView ( 'providers.posting.index' );
 	}
 
@@ -115,7 +114,7 @@ class PostsController extends Controller
 	public function destroy ( $id )
 	{
 		$oPost = Classified::find ( $id );
-		if ( $oPost )
+		if ( ! $oPost )
 			return response ()->json ( [ 'success' => FALSE ] );
 
 		$images = $oPost->ClassifiedImages()->get();
@@ -127,11 +126,6 @@ class PostsController extends Controller
 		$oPost->delete ();
 
 		return response ()->json ( [ 'success' => TRUE ] );
-	}
-
-	public function getDelete ( $id )
-	{
-		return $this->destroy($id);
 	}
 
 }

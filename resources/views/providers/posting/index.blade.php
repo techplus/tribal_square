@@ -35,7 +35,7 @@
                                 <tr data-id = "{{ $oPost->id }}">
                                     <td>{{ $oPost->title }}</td>
                                     <td>
-                                        {{ ( $oPost->Category ) ? $oPost->ListingCategory->name : null }}
+                                        {{ ( $oPost->Listingcategory ) ? $oPost->Listingcategory->name : null }}
                                     </td>
                                     <td>
                                         <a href="{{route('posts.edit',[$oPost->id])}}" class="edit-posting">edit</a>
@@ -76,8 +76,8 @@
             $('#confirmation_modal' ).modal('show');
             $('#confirm_btn' ).on('click',function(){
                 $.ajax({
-                    //type:'delete',
-                    url: '{{url('posts')}}/delete/'+id
+                    type:'delete',
+                    url: '{{url('posts')}}/'+id
                 } ).success(function(data){
                     $('[data-id='+id+']' ).remove();
                     $('#confirmation_modal' ).modal('hide');

@@ -286,7 +286,7 @@
                                         <input type="hidden" name="long" value="">
                                     </div>
                                 </fieldset>
-                                <h1>Images / Videos</h1>
+                                <h1>Images</h1>
                                 <fieldset>
                                     <div class="col-md-12" id="post_images" style="margin-bottom:20px;">
                                     @if( $oPost->ClassifiedImages )
@@ -312,11 +312,12 @@
                                     </div>
                                 </fieldset>
 
-                                {{--<h1>Finish</h1>--}}
-                                {{--<fieldset>--}}
-                                    {{--<h2>Terms and Conditions</h2>--}}
-                                    {{--<input id="acceptTerms" name="acceptTerms" type="checkbox" class="required"><label for="acceptTerms">I agree with the Terms and Conditions.</label>--}}
-                                {{--</fieldset>--}}
+                                <h1>Video</h1>
+                                <fieldset>
+                                    <div id="video_uploader">
+                                        <p>Your browser doesn't have Flash, Silverlight or HTML5 support.</p>
+                                    </div>
+                                </fieldset>
                             </form>
                         </div>
                     </div>                   
@@ -525,8 +526,8 @@
              $('#confirmation_modal' ).modal('show');
              $('#confirm_btn' ).on('click',function(){
                  $.ajax({
-                     //type:'delete',
-                     url: '{{url('images/delete/')}}/'+id
+                     type:'delete',
+                     url: '{{url('posts')}}/'+$('.post_id' ).val()+'/images/'+id
                  } ).success(function(data){
                     $('#media_'+id ).remove();
                      $('#confirmation_modal' ).modal('hide');
