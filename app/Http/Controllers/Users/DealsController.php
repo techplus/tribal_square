@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Deal;
 use Request;
 use App\Models\ListingCategory;
+use App\Models\DealImage;
 use Auth;
 
 class DealsController extends Controller {
@@ -16,7 +17,7 @@ class DealsController extends Controller {
 	 */
 	public function index()
 	{
-	 	$this->data[ 'aDeals'  ] = Deal::with('ListingCategory')->where ( 'user_id' , '=' , $this->data[ 'oUser' ]->id )->get ();;
+	 	$this->data[ 'aDeals'  ] = Deal::with ( [ 'Listingcategory' ] )->where ( 'user_id' , '=' , $this->data[ 'oUser' ]->id )->get ();;
 	 	return $this->renderView ( 'providers.deals.index' );
 	}
 
@@ -49,7 +50,7 @@ class DealsController extends Controller {
 		$aData[ 'user_id' ] = Auth::user()->id;		
 		$oDeal = Deal::create( $aData );
 		if( $oDeal )
-			return response()->json ( $oDeal -> array() );
+			return response()->json ( $oDeal -> toArray() );
 		return response ()->json ( $aResp , 500 );
 	}
 
@@ -72,7 +73,7 @@ class DealsController extends Controller {
 	 */
 	public function edit($id)
 	{
-		$this->data[ 'aCategories' ] = Listingcategory::where ( 'type' , '=' , 'Deal' )->get ();
+		$this->data[ 'aListingCategories' ] = Listingcategory::where ( 'type' , '=' , 'Deal' )->get ();
 		$this->data[ 'oDeal' ] = Deal::with ( [ 'DealImages' , 'DealVideos' ] )->find ( $id );
 
 		if ( ! $this->data[ 'oDeal' ] )
@@ -122,7 +123,7 @@ class DealsController extends Controller {
 
 		// remove deal-images
 		$aImages = $oDeal->DealImages()->get();
-		if( $aVideos->count() > 0 )
+		if( $aImages->count() > 0 )
 		{
 			// we don't remove file for future restore purpose
 			foreach( $aImages AS $oimage )

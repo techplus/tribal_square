@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Request;
 use File;
 use App\Models\ClassifiedVideo;
+use App\Models\DealVideo;
 class VideosController extends Controller {
 
 	/**
@@ -16,7 +17,7 @@ class VideosController extends Controller {
 		if( ! Request::hasFile('file') AND ! Request::input('video_path'))
 			return response()->json(['error'=>'file is not specified'],500);
 
-		$aVideoData = array('classified_id'=>$classified);
+		$aVideoData = array();
 		if( Request::hasFile('file') ) {
 			$oFile = Request::file ( 'file' );
 			$oFile->move ( base_path ( 'uploads' ) , $oFile->getClientOriginalName () );
@@ -27,7 +28,18 @@ class VideosController extends Controller {
 
 		$aFileData = $aVideoData;
 
-		$oFile = ClassifiedVideo::create($aFileData);
+		if( Request::segment(1) == "deals" )
+		{
+			$aFileData[ 'deal_id' ] = $classified;
+			$oFile = DealVideo::create($aFileData);
+		}
+		else if( Request::segment(1) == "posts" )
+		{
+			$aFileData[ 'classified_id' ] = $classified;
+			$oFile = ClassifiedVideo::create($aFileData);
+		}
+		else
+			return response()->json(['error'=>'Something went wrong'],500);		
 		return response()->json($oFile->toArray());
 	}
 
@@ -50,7 +62,12 @@ class VideosController extends Controller {
 	 */
 	public function destroy($classified,$id)
 	{
-		$image = ClassifiedVideo::find($id);
+		$image = false;
+		if( Request::segment(1) == "deals" )
+			$image = DealVideo::find($id);
+		else if( Request::segment(1) == "posts" )
+			$image = ClassifiedVideo::find($id);	
+		
 		if( ! $image )
 			return response()->json(['error'=>'video not found'],500);
 

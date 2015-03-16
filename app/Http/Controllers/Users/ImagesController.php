@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Request;
 use File;
 use App\Models\ClassifiedImage;
+use App\Models\DealImage;
 class ImagesController extends Controller {
 
 	/**
@@ -18,10 +19,19 @@ class ImagesController extends Controller {
 
 		$oFile = Request::file('file');
 		$oFile->move(base_path('uploads'),$oFile->getClientOriginalName());
-
-		$aFileData = array('classified_id'=>$classified,'image_path'=>url('uploads/'.$oFile->getClientOriginalName()));
-
-		$oFile = ClassifiedImage::create($aFileData);
+		
+		if( Request::segment(1) == "deals" )
+		{
+			$aFileData = array('deal_id'=>$classified,'image_path'=>url('uploads/'.$oFile->getClientOriginalName()));
+			$oFile = DealImage::create($aFileData);
+		}
+		else if( Request::segment(1) == "posts" )
+		{
+			$aFileData = array('classified_id'=>$classified,'image_path'=>url('uploads/'.$oFile->getClientOriginalName()));
+			$oFile = ClassifiedImage::create($aFileData);
+		}
+		else
+			return response()->json(['error'=>'Something went wrong'],500);
 		return response()->json($oFile->toArray());
 	}
 
@@ -44,7 +54,11 @@ class ImagesController extends Controller {
 	 */
 	public function destroy($classified,$id)
 	{
-		$image = ClassifiedImage::find($id);
+		$image = false;
+		if( Request::segment(1) == "deals" )
+			$image = DealImage::find($id);
+		else if( Request::segment(1) == "posts" )
+			$image = ClassifiedImage::find($id);		
 		if( ! $image )
 			return response()->json(['error'=>'image not found'],500);
 

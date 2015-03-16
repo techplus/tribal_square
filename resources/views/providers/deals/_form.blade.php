@@ -3,8 +3,8 @@
     <link href="{{ asset('inspinia/css/animate.css') }}" rel="stylesheet">
     <link href="{{asset('inspinia/css/plugins/jQueryUI/jquery-ui.min.css')}}" rel="stylesheet">
     <link href="{{asset('inspinia/js/plugins/plupload/jquery.ui.plupload/css/jquery.ui.plupload.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('inspinia/css/summernote.css') }}">
-    <link href="{{ asset('inspinia/css/style.css') }}" rel="stylesheet">  
+    <link rel="stylesheet" href="{{ asset('inspinia/css/summernote.css') }}">      
+    <link href="{{asset('inspinia/css/plugins/jasny/jasny-bootstrap.min.css')}}" rel="stylesheet"> 
     <style>
         .wizard > .content > .body{
             position: relative;
@@ -19,13 +19,15 @@
 	        height: 200px;
 	    }
     </style>    
-     <script type="text/javascript" src="{{ asset('inspinia/js/jquery.form.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('inspinia/js/jquery.form.js') }}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/summernote.js') }}"></script>
     <script type="text/javascript" src="{{asset('inspinia/js/jquery-ui.custom.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/plugins/plupload/plupload.full.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/plugins/plupload/moxie.js') }}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/plugins/plupload/jquery.ui.plupload/jquery.ui.plupload.js') }}"></script>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+     <!-- Input Mask-->
+    <script src="{{ asset('inspinia/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>    
     <script>
     var autocomplete1;   
     var placeSearch;
@@ -69,7 +71,7 @@
                     document.getElementById(addressType).value = val;
             }
         }
-    }
+    }    
     // Bias the autocomplete object to the user's geographical location,
     // as supplied by the browser's 'navigator.geolocation' object.
     function geolocate() {
@@ -90,7 +92,13 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>Create New Deal</h5>
+                    <h5>
+                    @if(! $oDeal->id )
+                    	Create New Deal
+                    @else
+                    	Edit Deal
+                    @endif
+                    </h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -139,15 +147,17 @@
 	                                    <div class="form-group">
 	                                        <label class="control-label col-lg-4">Start Date *</label>
 	                                        <div class="col-lg-8">
-	                                            <input type="text" name="start_date" id="start_date" value="{{ ( $oDeal->start_date ) ? date('d-m-Y',strtotime($oDeal->start_date)) : '' }}" class="required form-control">
+	                                            <input type="text" data-mask="99/99/9999" name="start_date" id="start_date" value="{{ ( $oDeal->start_date ) ? date('m/d/Y',strtotime($oDeal->start_date)) : '' }}" class="required form-control" placeholder="">
+                                              <span class="help-block">mm/dd/yyyy</span>
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group">
 	                                        <label class="control-label col-lg-4">Expiration Date *</label>
 	                                        <div class="col-lg-8">
-	                                            <input type="text" name="end_date" id="end_date" value="{{( $oDeal->start_date ) ? date('d-m-Y',strtotime($oDeal->start_date)) : '' }}" class="required form-control">
+	                                            <input type="text" data-mask="99/99/9999" name="end_date" id="end_date" value="{{( $oDeal->end_date ) ? date('m/d/Y',strtotime($oDeal->end_date)) : '' }}" class="required form-control" placeholder="">
+                                              <span class="help-block">mm/dd/yyyy</span>
 	                                        </div>
-	                                    </div>
+	                                    </div>                                      
 	                                </div>
 	                                <div class="col-lg-6">
 	                                    <div class="form-group">
@@ -171,7 +181,7 @@
 	                                </div>	                                
                                 </div>    
                                 <div class="col-lg-12">
-                                	<div class="col-lg-10">
+                                	<div class="col-lg-10">                                                                
                                 		<div class="form-group">
 	                                        <label class="control-label col-lg-2">Description *</label>
 	                                        <div class="col-lg-10" style="padding-left:45px;">
@@ -181,7 +191,7 @@
 	                                    <div class="form-group">
 	                                        <label class="control-label col-lg-2">Fine Print *</label>
 	                                        <div class="col-lg-10" style="padding-left:45px;">
-	                                            <textarea name="fine_print" id="fine_print" class="required form-control">{{$oDeal->fine_print}}</textarea>
+	                                            <textarea name="fine_print" id="fine_print" class="required form-control">{{$oDeal->fineprint}}</textarea>
 	                                        </div>
 	                                    </div>                                    
                                     </div>
@@ -204,9 +214,9 @@
                                             <input type="text"  onFocus="geolocate()" name="location" id="autocomplete1" value="{{$oDeal->location}}" class="form-control required">
                                         </div>
                                     </div>    
-								</div>
-								<div class="col-lg-12"> 
-									<div class="col-lg-6">									                                                                   
+								                  </div>
+                  								<div class="col-lg-12"> 
+                  									<div class="col-lg-6">									                                                                   
 	                                    <div class="form-group">
 	                                         <label class="control-label col-lg-4">Street</label>
 	                                         <div class="col-lg-8">
@@ -226,13 +236,13 @@
 	                                        </div>
 	                                    </div>
 	                                    
-									</div>
-									<div class="col-lg-6">	 
-									   <div class="form-group">                                   	                                   
-									   		<div class="col-lg-12">
+									                   </div>
+                  									 <div class="col-lg-6">	 
+                  									   <div class="form-group">                                   	                                   
+                  									   		<div class="col-lg-12">
 	                                            <input type="text" name="street2" id="route" value="{{$oDeal->street2}}" class="form-control" readonly>
 	                                        </div>
-									   </div>
+									                   </div>
 	                                   <div class="form-group">
 	                                         <label class="control-label col-lg-4">State</label>
 	                                         <div class="col-lg-8">
@@ -385,7 +395,7 @@
                 beforeSubmit:  showRequest,  // pre-submit callback 
                 success:       showResponse, // post-submit callback                                    
                 url : url,
-                data:{description:$('#description').code(),fine_print:$('#fine_print').code()},
+                data:{description:$('#description').code(),fineprint:$('#fine_print').code()},
                 async : false,
                 type : type,
                 dataType : "json"                                                                                                    
@@ -393,9 +403,19 @@
             };
             form.ajaxSubmit(options);
         }
-        $(document).ready(function(){            	       
+        $(document).ready(function(){           
+            $('#sandbox-container .input-daterange').datepicker({
+                  multidate: false,
+                  calendarWeeks: true,
+                  autoclose: true,
+                  todayHighlight: true
+            });        	       
             $("form.wizard-big").steps({
                 bodyTag: "fieldset",
+                enableCancelButton: false,
+                /*onCanceled : function(){
+                  window.location = "{{ route('deals.index') }}";
+                },*/
                 onStepChanging: function (event, currentIndex, newIndex)
                 {                    
                     // Always allow going backward even if the current step contains invalid fields!
@@ -533,12 +553,12 @@
                     response = $.parseJSON(args.response.response);
                     if( response.image_path )
                     {
-                        var ext = response.image_path.split('.' ).pop();
-                        $('#deal_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                       var ext = response.image_path.split('.' ).pop();                       
+                       $('#deal_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><div class="radio text-right"><label><input type="radio" class="required" value="'+response.id+'" name="is_cover"> Cover Photo</label></div><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+',\'images\'//)"><i class="fa fa-trash"></i> Delete</button></div>');
                     }
                     else
                     {
-                        $('#deal_videos' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.video_path+'" target="_blank"><img src="{{url('images/video.png')}}"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                        $('#deal_videos' ).append('<div class="col-md-3" id="media_'+response.id+'"><a class="thumbnail" href="'+response.video_path+'" target="_blank"><img src="{{url('images/video.png')}}"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+',\'videos\')"><i class="fa fa-trash"></i> Delete</button></div>');                        
                     }
                 },
                 selected: function(event,args) {

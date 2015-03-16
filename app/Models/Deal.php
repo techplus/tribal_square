@@ -5,6 +5,10 @@ class Deal extends Model{
 	use SoftDeletes;
 	protected $table = "deals";
 	protected $guarded = array( 'id' );
+	public function ListingCategory()
+	{
+		return $this->belongsTo('App\Models\ListingCategory','category_id');
+	}
 	public function DealImages()
 	{
 		return $this->hasMany('App\Models\DealImage','deal_id');

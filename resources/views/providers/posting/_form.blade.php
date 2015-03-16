@@ -420,6 +420,10 @@
         $(document).ready(function(){            	       
             $("form.wizard-big").steps({
                 bodyTag: "fieldset",
+                enableCancelButton: false,
+                /*onCanceled : function(){
+                  window.location = "{{ route('posts.index') }}";
+                },*/
                 onStepChanging: function (event, currentIndex, newIndex)
                 {
                     if( currentIndex == 0 )

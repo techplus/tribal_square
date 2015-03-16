@@ -16,6 +16,7 @@
     <link href="{{asset('inspinia/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('inspinia/css/style.css')}}" rel="stylesheet">
     <script src="{{asset('inspinia/js/jquery-2.1.1.js')}}"></script>
+    <script src="{{asset('inspinia/js/bootstrap.min.js')}}"></script>
 </head>
 
 <body>
@@ -56,7 +57,6 @@
 
 <!-- Mainly scripts -->
 
-<script src="{{asset('inspinia/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('inspinia/js/plugins/metisMenu/jquery.metisMenu.js')}}"></script>
 
 <!-- Custom and plugin javascript -->

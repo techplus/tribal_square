@@ -38,8 +38,8 @@
                                         {{ ( $oDeal->Listingcategory ) ? $oDeal->Listingcategory->name : null }}
                                     </td>
                                     <td>
-                                        <a href="{{route('oDeal.edit',[$oDeal->id])}}">edit</a>
-                                        <a href="javascript:;" onclick="removePost({{$oDeal->id}})">delete</a>
+                                        <a href="{{route('deals.edit',[$oDeal->id])}}">edit</a> |
+                                        <a href="javascript:;" onclick="removeDeal({{$oDeal->id}})">delete</a>
                                     </td>                       
                                 </tr>    
                             @endforeach                
