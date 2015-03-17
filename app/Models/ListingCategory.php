@@ -10,4 +10,9 @@ class ListingCategory extends Model{
 	{
 		return $this->hasMany('App\Models\Classified','category_id');
 	}
+
+	public function scopeDeals($query)
+	{
+		return $query->where('type','Deal');
+	}
 }

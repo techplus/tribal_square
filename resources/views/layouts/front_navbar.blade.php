@@ -1,4 +1,4 @@
-<div class="container">
+{{--<div class="container">--}}
     <div class="col-xs-12">
         <div class="logo">
             <a href="{{url('/')}}">
@@ -23,14 +23,14 @@
         </div>
     </div>
 </div>
-</div>
+{{--</div>--}}
 
 <div class="row login_subnav_wrap">
-    <div class="container">
+    {{--<div class="container">--}}
         <div class="login_subnav">
             <a href="#">View All Deals</a>
             <a href="#">Tribal Classifieds</a>
             <a href="#">View Baby Sitters </a>
         </div>
-    </div>
+    {{--</div>--}}
 </div>
