@@ -1,6 +1,13 @@
 @extends('layouts.front')
 
 @section('content')
+    <script src="{{asset('/js/bootstrap-carousel.min.js')}}" type="text/javascript"></script>
+        
+    <script>
+        $(document).ready(function(){
+            $('.carousel').carousel();
+        });
+    </script>
     <div class="page-wrap">
         <div class="row header_wrap">
             @include('layouts.front_navbar')
@@ -21,8 +28,9 @@
                                 <div class="carousel slide article-slide" id="article-photo-carousel">
                                     <!-- Wrapper for slides -->
                                     <div class="carousel-inner cont-slider">
+                                        <?php $counter = 1; ?>
                                         @foreach( $deal->DealImages AS $image )
-                                        <div class="item active">
+                                        <div class="item {{$counter++ == 1 ? 'active' : ''}}">
                                             <img alt="" title="" src="{{$image->image_path}}" style="width: 100%;">
                                         </div>
                                         @endforeach
