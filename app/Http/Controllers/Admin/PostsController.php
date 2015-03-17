@@ -24,6 +24,23 @@ Class PostsController extends Controller{
 		} 
 		return $this->renderView('admin.posts.index');
 	}
-	
+	public function postApprovePost($id)
+	{
+		$oPost = Classified::find($id);
+		if( ! $oPost )
+			return response()->json( array( 'error' => "Can't find Post" ) , 500 );
+
+		$oPost->update( array( 'is_approved_by_admin' => 1 ) );
+		return response()->json( $oPost -> toArray() );
+	}
+	public function postDeclinedPost($id)
+	{
+		$oPost = Classified::find($id);
+		if( ! $oPost )
+			return response()->json( array( 'error' => "Can't find Post" ) , 500 );
+
+		$oPost->update( array( 'is_approved_by_admin' => 2 ) );
+		return response()->json( $oPost -> toArray() );
+	}
 }
 ?>

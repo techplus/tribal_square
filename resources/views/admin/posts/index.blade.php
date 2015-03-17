@@ -25,8 +25,8 @@
 									<td>{{ $oPost->ListingCategory->name }}</td>
 									@if( $sStatus == "Pending" )
 									<td style="text-align:center;">
-										<button class="btn btn-success">Approve</button>&nbsp; 
-										<button class="btn btn-danger">Decline</button>
+										<button class="btn btn-success approve-post">Approve</button>&nbsp; 
+										<button class="btn btn-danger decline-post">Decline</button>
 									</td>
 									@endif
 								</tr>
@@ -37,4 +37,44 @@
 			</div>
 		</div>		
 	</div>
+<script>
+	$(document).ready(function(){
+		$('.approve-post').on('click',function(){			
+			var id = $(this).parents('tr').data('id');
+			var $this  = $(this);
+			$.ajax({
+				url : "{{ url( '/admin/posts/approve-post' ) }}" + "/" + id ,				
+				type : "post",
+				success : function(resp)
+				{
+					$this.parents('tr').remove();
+				},
+				error : function(resp)
+				{
+					var data = resp.responseText;
+					var dataObj = $.parseJSON(data);
+					alert( dataObj.error );
+				}
+			});
+		});
+		$('.decline-post').on('click',function(){
+			var id = $(this).parents('tr').data('id');
+			var $this  = $(this);
+			$.ajax({
+				url : "{{ url( '/admin/posts/declined-post' ) }}" + "/" + id ,
+				type : "post",
+				success : function(resp)
+				{
+					$this.parents('tr').remove();
+				},
+				error : function(resp)
+				{
+					var data = resp.responseText;
+					var dataObj = $.parseJSON(data);
+					alert( dataObj.error );
+				}
+			});
+		});
+	});
+</script>
 @endsection	

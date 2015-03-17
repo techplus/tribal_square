@@ -24,5 +24,23 @@ Class DealsController extends Controller{
 		} 
 		return $this->renderView('admin.deals.index');
 	}
+	public function postApproveDeal($id)
+	{
+		$oDeal = Deal::find($id);
+		if( ! $oDeal )
+			return response()->json( [ 'error'=>"Can't find Deal" ],500);
+
+		$oDeal->update( array( 'is_approved_by_admin' => 1 ) );
+		return response()->json( $oDeal -> toArray() );
+	}
+	public function postDeclinedDeal($id)
+	{
+		$oDeal = Deal::find($id);
+		if( ! $oDeal )
+			return response()->json( [ 'error' => "Can't find Deal" ],500);
+
+		$oDeal->update( array( 'is_approved_by_admin' => 2 ) );
+		return response()->json( $oDeal -> toArray() );
+	}
 }
 ?>
