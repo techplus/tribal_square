@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a9c19c4-7de9-404f-b9fb-78b2e47fddf3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/js/bootstrap.min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/front/deal_full_view.blade.php" afterPath="$PROJECT_DIR$/resources/views/front/deal_full_view.blade.php" />
     </list>
     <ignored path="tribal_square.iws" />
@@ -63,12 +62,12 @@
       <file leaf-file-name="deal_full_view.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/front/deal_full_view.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16756175" vertical-offset="0" max-vertical-offset="7488">
-              <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+            <state vertical-scroll-proportion="0.12567133" vertical-offset="0" max-vertical-offset="7488">
+              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
               <folding>
-                <element signature="e#940#964#0#HTML" expanded="true" />
-                <element signature="e#1611#1631#0#HTML" expanded="true" />
-                <element signature="e#6214#6236#0#HTML" expanded="true" />
+                <element signature="e#855#879#0#HTML" expanded="true" />
+                <element signature="e#1526#1546#0#HTML" expanded="true" />
+                <element signature="e#6207#6229#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -989,19 +988,19 @@
         <state vertical-scroll-proportion="0.25134265" vertical-offset="0" max-vertical-offset="931">
           <caret line="6" column="2877" selection-start-line="6" selection-start-column="2877" selection-end-line="6" selection-end-column="2877" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/front/deal_full_view.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16756175" vertical-offset="0" max-vertical-offset="7488">
-          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+        <state vertical-scroll-proportion="0.12567133" vertical-offset="0" max-vertical-offset="7488">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
           <folding>
-            <element signature="e#940#964#0#HTML" expanded="true" />
-            <element signature="e#1611#1631#0#HTML" expanded="true" />
-            <element signature="e#6214#6236#0#HTML" expanded="true" />
+            <element signature="e#855#879#0#HTML" expanded="true" />
+            <element signature="e#1526#1546#0#HTML" expanded="true" />
+            <element signature="e#6207#6229#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

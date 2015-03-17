@@ -1,11 +1,10 @@
 @extends('layouts.front')
 
 @section('content')
-    <script src="{{asset('/js/bootstrap-carousel.min.js')}}" type="text/javascript"></script>
-        
-    <script>
-        $(document).ready(function(){
-            $('.carousel').carousel();
+        <script>
+            // Stop carousel
+        $('.carousel').carousel({
+            interval: false
         });
     </script>
     <div class="page-wrap">
@@ -37,8 +36,9 @@
                                     </div>
                                     <!-- Indicators -->
                                     <ol class="carousel-indicators">
+                                        <?php $counter = 0; ?>
                                         @foreach( $deal->DealImages AS $image )
-                                        <li class="active" data-slide-to="0" data-target="#article-photo-carousel">
+                                        <li class="active" data-slide-to="{{ $counter++ }}" data-target="#article-photo-carousel">
                                             <img alt="" src="{{$image->image_path}}" class="img-responsive">
                                         </li>
                                         @endforeach
