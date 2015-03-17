@@ -1,6 +1,6 @@
 <?php 
 namespace App\Http\Controllers\Admin;
-use App\models\Deal;
+use App\Models\Deal;
 use App\Http\Controllers\Controller;
 Class DealsController extends Controller{
 	public function getIndex( $status = null )

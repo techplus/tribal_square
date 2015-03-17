@@ -12,6 +12,9 @@
                         <div class="clearfix"></div>
 
                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="margin-top:20px;">
+                            @if( $oDeals->isEmpty() )
+                                <h3>No deal found!</h3>
+                            @else
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap">
                                 <img src="{{$oDeals->first()->DealImages->first()->image_path}}" alt="" class="img-responsive" style="width:100%;">
                                 <div>
@@ -71,7 +74,7 @@
                                 {{--</a>--}}
 
                             </div>
-
+                            @endif
                         </div>
 
                         @include('layouts.front_deals_sidebar')
