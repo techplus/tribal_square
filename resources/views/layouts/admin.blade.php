@@ -71,10 +71,28 @@
 								<a href="#">Categories</a>							
 								<ul class="nav collapse in sub-menu" id="submenu1" role="menu" aria-labelledby="btn-1" aria-expanded="true">
 								@foreach( $categories AS $cat )
-									<li class="{{ ( $catnm ) ? ( ( $cat == $catnm ) ? 'active' : '' ) : '' }}"><a href="{{ route('category.sub-category.index',[$cat]) }}">{{$cat}}</a></li>
+									<li class="{{ ( Request::segment(1) == "category" ) ? (( $catnm ) ? ( ( $cat == $catnm ) ? 'active' : '' ) : '') : '' }}"><a href="{{ route('category.sub-category.index',[$cat]) }}">{{$cat}}</a></li>
 								@endforeach
 								</ul>
 							</li>
+							<li data-toggle="collapse" data-target="#submenu2" aria-expanded="true">
+								<a href="#">Posts</a>							
+								<ul class="nav collapse in sub-menu" id="submenu2" role="menu" aria-labelledby="btn-1" aria-expanded="true">									
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "posts" ) ? ( ( $sStatus == "Pending" ) ? "active" : "" ) : "" }}'><a href="{{ url( '/admin/posts/index',[ 'Pending' ]) }}">Pending</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "posts" ) ? ( ( $sStatus == "Approved" ) ? "active" : "" ) : "" }}'><a href="{{  url( '/admin/posts/index',['Approved']) }}">Approved</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "posts" ) ? ( ( $sStatus == "Declined" ) ? "active" : "" ) : "" }}'><a href="{{  url( '/admin/posts/index',['Declined']) }}">Declined</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "posts" ) ? ( ( $sStatus == "Archived" ) ? "active" : "" ) : "" }}'><a href="{{  url( '/admin/posts/index',['Archived']) }}">Archived</a></li>
+								</ul>
+							</li>
+							<li data-toggle="collapse" data-target="#submenu3" aria-expanded="true">
+								<a href="#">Deals</a>							
+								<ul class="nav collapse in sub-menu" id="submenu3" role="menu" aria-labelledby="btn-1" aria-expanded="true">									
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Pending" ) ? "active" : "" ) : "" }}'><a href="{{ url( '/admin/deals/index' , [ 'Pending' ] ) }}">Pending</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Approved" ) ? "active" : "" ) : "" }}'><a href="{{ url(  '/admin/deals/index' , [ 'Approved' ] ) }}">Approved</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Declined" ) ? "active" : "" ) : "" }}'><a href="{{ url(  '/admin/deals/index' , [ 'Declined' ] ) }}">Declined</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Archived" ) ? "active" : "" ) : "" }}'><a href="{{ url( '/admin/deals/index' , [ 'Archived' ] ) }}">Archived</a></li>
+								</ul>
+							</li>							
 						</ul>
 					</nav>				
 		</nav>

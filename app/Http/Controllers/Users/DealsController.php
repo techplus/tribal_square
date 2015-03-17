@@ -7,6 +7,7 @@ use Request;
 use App\Models\ListingCategory;
 use App\Models\DealImage;
 use Auth;
+use Session;
 
 class DealsController extends Controller {
 
@@ -16,7 +17,7 @@ class DealsController extends Controller {
 	 * @return Response
 	 */
 	public function index()
-	{
+	{				
 	 	$this->data[ 'aDeals'  ] = Deal::with ( [ 'Listingcategory' ] )->where ( 'user_id' , '=' , $this->data[ 'oUser' ]->id )->get ();;
 	 	return $this->renderView ( 'providers.deals.index' );
 	}
@@ -40,7 +41,7 @@ class DealsController extends Controller {
 	 */
 	public function store()
 	{
-		$aResp = array ( 'success' => FALSE );
+		$aResp = array ( 'success' => FALSE , 'msg' => 'Something went wrong , please try again' );
 		$aData = Request::only ( [
 			'email' , 'title' , 'original_price' , 'new_price' , 'discount_percentage' , 'start_date' , 'end_date' , 'description' , 'available_stock' , 'fineprint' , 'category_id' , 'location' , 'street1' , 'street2'
 			, 'city' , 'country' , 'state' , 'pin' , 'website' , 'contact' , 'lat' , 'long'
@@ -90,10 +91,10 @@ class DealsController extends Controller {
 	 */
 	public function update($id)
 	{
-		$aResp = array ( 'success' => FALSE );
+		$aResp = array ( 'success' => FALSE , 'msg' => 'Something went wrong , please try again' );		
 		$oDeal = Deal::find ( $id );
 		if ( ! $oDeal )
-			return response ()->json ( $aResp );
+			return response ()->json ( $aResp , 500 );
 
 		$aUpdateData = Request::only ( [
 			'email' , 'title' , 'original_price' , 'new_price' , 'discount_percentage' , 'start_date' , 'end_date' , 'description' , 'available_stock' , 'fineprint' , 'category_id' , 'location' , 'street1' , 'street2'
@@ -145,4 +146,10 @@ class DealsController extends Controller {
 		return response ()->json ( [ 'success' => TRUE ] );
 	}
 
+	/*public function getSetSuccessSession()
+	{	
+		echo 'hello';	
+		Session::put('success_deal','Your Deal details have been successfully posted to Admin. It will go live soon.');			
+		return response()->json(['hello'=>'abc']);
+	}*/
 }

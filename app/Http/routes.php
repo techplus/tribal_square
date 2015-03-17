@@ -21,6 +21,8 @@ Route::resource('languages','LanguagesController');
 Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 	Route::resource( 'category.sub-category' , 'Admin\SubCategoryController' );
 	Route::get('cat-type','Admin\SubCategoryController@getCatType');
+	Route::controller('admin/deals','Admin\DealsController');
+	Route::controller('admin/posts','Admin\PostsController');	
 });
 
 Route::group(['middleware'=>['auth.providers','payment']],function(){
@@ -30,9 +32,12 @@ Route::group(['middleware'=>['auth.providers','payment']],function(){
 	Route::resource('posts.videos','Users\VideosController',['only'=>['store','update','destroy']]);
 	Route::resource('deals','Users\DealsController');
 	Route::resource('deals.images','Users\ImagesController',['only'=>['store','update','destroy']]);
-	Route::resource('deals.videos','Users\VideosController',['only'=>['store','update','destroy']]);
+	Route::resource('deals.videos','Users\VideosController',['only'=>['store','update','destroy']]);	
+	Route::get('set-success-session-deal',function(){		
+		Session::put('success_deal','Your Deal details have been successfully posted to Admin. It will go live soon.');			
+		return response()->json([]);
+	});
 });
-
 Route::group(['middleware'=>['auth.babysitters','payment']],function(){
 	Route::resource('baby-sitters','Users\BabySittersController',['only'=>['index']]);
 });

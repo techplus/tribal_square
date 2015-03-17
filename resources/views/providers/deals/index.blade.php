@@ -4,6 +4,11 @@
     <link href="{{ asset('inspinia/css/plugins/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('inspinia/css/plugins/dataTables/dataTables.responsive.css') }}" rel="stylesheet">
     <div class="row">
+        @if( Session::has('success_deal') )
+        <div class="alert alert-success col-lg-12">
+            {{ Session::pull('success_deal') }}
+        </div>
+        @endif
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
@@ -67,7 +72,13 @@
         $(document).ready(function(){
              $('.dataTables-example').dataTable({
                 responsive: true
-            });
+             });
+             if( $('.alert-success').length > 0 )
+             {
+                window.setTimeout(function(){
+                    $('.alert-success').remove();
+                },10000);
+             }
         });
 
         function removeDeal(id)

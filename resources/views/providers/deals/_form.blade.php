@@ -376,7 +376,19 @@
         {
             $('.deal_id').val( responseText.id );
             $('#uploader' ).plupload('getUploader' ).settings.url = "{{url('deals')}}" + "/" + responseText.id + "/images";
-            $('#video_uploader' ).plupload('getUploader' ).settings.url = "{{url('deals')}}" + "/" + responseText.id + "/videos";            
+            $('#video_uploader' ).plupload('getUploader' ).settings.url = "{{url('deals')}}" + "/" + responseText.id + "/videos";                                  
+        }
+        function setSession()
+        {
+            $.ajax({
+              url : "{{ url('set-success-session-deal') }}",
+              data : {},
+              async : false,
+              success : function()
+              {
+                window.location.href = "{{ route('deals.index') }}";
+              }
+            });
         }
         function saveData(form)
         {
@@ -389,7 +401,7 @@
                 url = '{{ url("deals") }}' + "/" + $('.deal_id').val();
                 type = 'put';
                 form.attr('action','{{url('deals')}}/'+$('.deal_id' ).val() + '/images');
-            }
+            }            
             var options = { 
                 target:        '#output2',   // target element(s) to be updated with server response 
                 beforeSubmit:  showRequest,  // pre-submit callback 
@@ -398,18 +410,24 @@
                 data:{description:$('#description').code(),fineprint:$('#fine_print').code()},
                 async : false,
                 type : type,
-                dataType : "json"                                                                                                    
+                dataType : "json",
+                error : function(resp)
+                {                  
+                  var data = $.parseJSON(resp.responseText);
+                  alert(data.msg);                  
+                  return false;
+                }                                                                                                 
                 //timeout:   3000 
             };
-            form.ajaxSubmit(options);
+            form.ajaxSubmit(options);           
         }
         $(document).ready(function(){           
-            $('#sandbox-container .input-daterange').datepicker({
+            /*$('#sandbox-container .input-daterange').datepicker({
                   multidate: false,
                   calendarWeeks: true,
                   autoclose: true,
                   todayHighlight: true
-            });        	       
+            });      */  	       
             $("form.wizard-big").steps({
                 bodyTag: "fieldset",
                 enableCancelButton: false,
@@ -446,8 +464,9 @@
                     var bValid = form.valid();
                     if( bValid )
                     {
-                        saveData(form);
+                        saveData(form);                        
                     }
+                    
                     return bValid;
                 },
                 onStepChanged: function (event, currentIndex, priorIndex)
@@ -481,12 +500,14 @@
                             type:"post",
                             dataType:'json'
                         } ).success(function(data){
-                            window.location.href = "{{ route('deals.index') }}";
+                            setSession(); 
+                           // window.location.href = "{{ route('deals.index') }}";
                         });
                     }
-                    else
-                        window.location.href = "{{ route('deals.index') }}";
-
+                    else{
+                        setSession();
+                       // window.location.href = "{{ route('deals.index') }}";
+                    }
                    //form.submit(form);
                 }
             }).validate({
@@ -554,7 +575,7 @@
                     if( response.image_path )
                     {
                        var ext = response.image_path.split('.' ).pop();                       
-                       $('#deal_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><div class="radio text-right"><label><input type="radio" class="required" value="'+response.id+'" name="is_cover"> Cover Photo</label></div><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+',\'images\'//)"><i class="fa fa-trash"></i> Delete</button></div>');
+                       $('#deal_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><div class="radio text-right"><label><input type="radio" class="required" value="'+response.id+'" name="is_cover"> Cover Photo</label></div><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+',\'images\')"><i class="fa fa-trash"></i> Delete</button></div>');
                     }
                     else
                     {

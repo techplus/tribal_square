@@ -18,10 +18,15 @@ class VideosController extends Controller {
 			return response()->json(['error'=>'file is not specified'],500);
 
 		$aVideoData = array();
-		if( Request::hasFile('file') ) {
+		if( Request::hasFile('file') ) {			
 			$oFile = Request::file ( 'file' );
-			$oFile->move ( base_path ( 'uploads' ) , $oFile->getClientOriginalName () );
-			$aVideoData['video_path'] = $oFile->getClientOriginalName();
+			$filename = $oFile->getClientOriginalName();
+			$path = base_path('uploads').'/';
+			$counter = 1;
+			while( File::exists($path.$filename) )
+				$filename = pathinfo($oFile->getClientOriginalName(),PATHINFO_FILENAME)."_".$counter++.".".pathinfo($oFile->getClientOriginalName(),PATHINFO_EXTENSION);
+			$oFile->move ( base_path ( 'uploads' ) , $filename );
+			$aVideoData['video_path'] = $filename;
 		}
 		else
 			$aVideoData['video_path'] = Request::input('video_path');
@@ -39,7 +44,7 @@ class VideosController extends Controller {
 			$oFile = ClassifiedVideo::create($aFileData);
 		}
 		else
-			return response()->json(['error'=>'Something went wrong'],500);		
+			return response()->json( [ 'error'=>'Something went wrong' ] , 500 );		
 		return response()->json($oFile->toArray());
 	}
 

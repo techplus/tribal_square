@@ -18,16 +18,22 @@ class ImagesController extends Controller {
 			return response()->json(['error'=>'File not received!'],500);
 
 		$oFile = Request::file('file');
-		$oFile->move(base_path('uploads'),$oFile->getClientOriginalName());
+		$filename = $oFile->getClientOriginalName();
+		$path = base_path('uploads').'/';
+		$counter = 1;
+		while( File::exists($path.$filename) )
+			$filename = pathinfo($oFile->getClientOriginalName(),PATHINFO_FILENAME)."_".$counter++.".".pathinfo($oFile->getClientOriginalName(),PATHINFO_EXTENSION);
+			
+		$oFile->move(base_path('uploads'),$filename);
 		
 		if( Request::segment(1) == "deals" )
 		{
-			$aFileData = array('deal_id'=>$classified,'image_path'=>url('uploads/'.$oFile->getClientOriginalName()));
+			$aFileData = array('deal_id'=>$classified,'image_path'=>url('uploads/'.$filename));
 			$oFile = DealImage::create($aFileData);
 		}
 		else if( Request::segment(1) == "posts" )
 		{
-			$aFileData = array('classified_id'=>$classified,'image_path'=>url('uploads/'.$oFile->getClientOriginalName()));
+			$aFileData = array('classified_id'=>$classified,'image_path'=>url('uploads/'.$filename));
 			$oFile = ClassifiedImage::create($aFileData);
 		}
 		else
