@@ -15,13 +15,20 @@
                             @if( $oDeals->isEmpty() )
                                 <h3>No deal found!</h3>
                             @else
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap">
-                                <img src="{{$oDeals->first()->DealImages->first()->image_path}}" alt="" class="img-responsive" style="width:100%;">
-                                <div>
-                                    <span>{{ $oDeals->first()->discount_percentage }}%</span>
-                                    <p>DISCOUNT</p>
-                                </div>
-                            </div>
+                                <?php $counter = 0; ?>
+                            @foreach( $oDeals AS $deal )
+                                @if( $counter == 1 ) break; @endif
+                                @if( $deal->DealImages->count() && $counter == 0)
+                                    <?php $counter++; ?>
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap">
+                                            <img src="{{$deal->DealImages->first()->image_path}}" alt="" class="img-responsive" style="width:100%;">
+                                            <div>
+                                                <span>{{ $deal->discount_percentage }}%</span>
+                                                <p>DISCOUNT</p>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    @endforeach
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 deal_for_day_wrap">
                                 <h4>Deal of the Day</h4>
                                 <h3>
