@@ -110,7 +110,7 @@
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>{{$oPost->id ? 'Edit Post' : 'Create New Posting'}}</h5>
-                            <div class="ibox-tools">
+                            <!-- <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
                                 </a>
@@ -120,7 +120,7 @@
                                 <a class="close-link">
                                     <i class="fa fa-times"></i>
                                 </a>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="ibox-content">                                                 
                             <form name="frmPost" id="frmPost" class="wizard-big wizard clearfix form-horizontal" action="#">
