@@ -54,6 +54,8 @@
     function fillInAddress() {
           // Get the place details from the autocomplete object.
           var place = autocomplete1.getPlace();
+        $('#lat_val' ).val(place.geometry.location.lat());
+        $('#long_val' ).val(place.geometry.location.lng());
           for (var component in componentForm) {
             if( $('#'+component ).length ) {
                 document.getElementById( component ).value = '';
@@ -290,8 +292,8 @@
 	                                <div class="col-lg-6">
 	                                </div>
                                 </div>                                                          
-                                <input type="hidden" name="lat" value="{{$oDeal->lat}}">
-                                <input type="hidden" name="long" value="{{$oDeal->long}}">
+                                <input type="hidden" id="lat_val" name="lat" value="{{$oDeal->lat}}">
+                                <input type="hidden" name="long" id="long_val" value="{{$oDeal->long}}">
                             </div>
                         </fieldset>
                         <h1>Images</h1>
