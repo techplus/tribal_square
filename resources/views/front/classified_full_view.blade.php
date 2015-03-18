@@ -77,7 +77,7 @@
 
                             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 deal_content_wrap">
                                 <div class="col-sm-8 deal_content_left">
-                                    <h3>Coupon Details</h3>
+                                    <h3>Classified Details</h3>
                                     <h4>What You're Getting</h4>
                                     {!! $classified->description !!}
                                     <h4>Features/Specifications :</h4>
@@ -127,16 +127,28 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-md-12">
+                        @if( $classified->can_text OR $classified->can_photn )
                         <h3>Preferred Contact Method:</h3>
-                            {{$classified->can_text ? '<h5>- Email</h5>' : ''}}
-                            {{$classified->can_phone ? '<h5>- Phone</h5>' : ''}}
+                            {!! $classified->can_text ? '<h5>- Email</h5>' : '' !!}
+                            {!! $classified->can_phone ? '<h5>- Phone</h5>' : '' !!}
+                        @endif
+                        @if( ! empty( $classified->contact_name ) )
                         <h3>Contact Name:</h3>
                             <h5>{{$classified->contact_name}}</h5>
+                        @endif
+                        @if( ! empty( $classified->phone ) OR ! empty( $classified->mobile ) )
                         <h3>Contact By Phone:</h3>
-                            <h5><i class="glyphicon glyphicon-earphone"></i> {{$classified->phone}}</h5>
-                            <h5><i class="glyphicon glyphicon-earphone"></i> {{$classified->mobile}}</h5>
+                            @if( ! empty( $classified->phone ))
+                                <a href="callto:{{$classified->phone}}"><i class="glyphicon glyphicon-earphone"></i> {{$classified->phone}}</a>
+                            @endif
+                            @if( ! empty( $classified->mobile ) )
+                                <a href="callto:{{$classified->mobile}}"><i class="glyphicon glyphicon-earphone"></i> {{$classified->mobile}}</a>
+                            @endif
+                        @endif
+                        @if( ! empty( $classified->email ) )
                         <h3>Contact By Email:</h3>
-                            <h5><i class="glyphicon glyphicon-globe"></i> {{$classified->email}}</h5>
+                            <a href="mailto:{{$classified->email}}"><i class="glyphicon glyphicon-globe"></i> {{$classified->email}}</a>
+                        @endif
                     </div>
                 </div>
                 <div class="clearfix"></div>

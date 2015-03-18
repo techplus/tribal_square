@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a9c19c4-7de9-404f-b9fb-78b2e47fddf3" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/resources/views/layouts/front_deals_sidebar.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/front_sidebar.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/Classified.php" afterPath="$PROJECT_DIR$/app/Models/Classified.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/DealsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/DealsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/ListingCategory.php" afterPath="$PROJECT_DIR$/app/Models/ListingCategory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PostsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/SearchController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/providers/posting/_form.blade.php" afterPath="$PROJECT_DIR$/resources/views/providers/posting/_form.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/front.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/front.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/routes.php" afterPath="$PROJECT_DIR$/app/Http/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/front/search_deals.blade.php" afterPath="$PROJECT_DIR$/resources/views/front/search_deals.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/auth/select_user_type.blade.php" afterPath="$PROJECT_DIR$/resources/views/auth/select_user_type.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/front/classified_full_view.blade.php" afterPath="$PROJECT_DIR$/resources/views/front/classified_full_view.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/layouts/front_sidebar.blade.php" afterPath="$PROJECT_DIR$/resources/views/layouts/front_sidebar.blade.php" />
     </list>
     <ignored path="tribal_square.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -70,15 +60,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="classified_full_view.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="classified_full_view.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/front/classified_full_view.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7905478" vertical-offset="4646" max-vertical-offset="7059">
-              <caret line="138" column="74" selection-start-line="138" selection-start-column="74" selection-end-line="138" selection-end-column="74" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2808" max-vertical-offset="7527">
+              <caret line="79" column="50" selection-start-line="79" selection-start-column="50" selection-end-line="79" selection-end-column="50" />
               <folding>
                 <element signature="e#959#983#0#HTML" expanded="true" />
                 <element signature="e#1650#1670#0#HTML" expanded="true" />
-                <element signature="e#5455#5477#0#HTML" expanded="true" />
+                <element signature="e#5459#5481#0#HTML" expanded="true" />
+                <marker date="1426680283197" expanded="true" signature="8598:9566" placeholder="..." />
+                <marker date="1426680283197" expanded="true" signature="8611:9553" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -107,6 +99,16 @@
                 <element signature="e#1722#1739#0#HTML" expanded="true" />
                 <element signature="e#1935#1952#0#HTML" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="front_sidebar.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/layouts/front_sidebar.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.3351235" vertical-offset="585" max-vertical-offset="3666">
+              <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -169,12 +171,12 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/PostsController.php" />
         <option value="$PROJECT_DIR$/resources/views/providers/deals/_form.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/providers/posting/_form.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/front_sidebar.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/front/search_deals.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/DealsController.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ClassifiedsController.php" />
         <option value="$PROJECT_DIR$/resources/views/front/search_classified.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/front/classified_full_view.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/front_sidebar.blade.php" />
       </list>
     </option>
   </component>
@@ -991,14 +993,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/front_sidebar.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2094522" vertical-offset="0" max-vertical-offset="3666">
-          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/front/search_deals.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.49731472" vertical-offset="2618" max-vertical-offset="3666">
@@ -1050,13 +1044,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/front/classified_full_view.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7905478" vertical-offset="4646" max-vertical-offset="7059">
-          <caret line="138" column="74" selection-start-line="138" selection-start-column="74" selection-end-line="138" selection-end-column="74" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2808" max-vertical-offset="7527">
+          <caret line="79" column="50" selection-start-line="79" selection-start-column="50" selection-end-line="79" selection-end-column="50" />
           <folding>
             <element signature="e#959#983#0#HTML" expanded="true" />
             <element signature="e#1650#1670#0#HTML" expanded="true" />
-            <element signature="e#5455#5477#0#HTML" expanded="true" />
+            <element signature="e#5459#5481#0#HTML" expanded="true" />
+            <marker date="1426680283197" expanded="true" signature="8598:9566" placeholder="..." />
+            <marker date="1426680283197" expanded="true" signature="8611:9553" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/front_sidebar.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3351235" vertical-offset="585" max-vertical-offset="3666">
+          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+          <folding />
         </state>
       </provider>
     </entry>

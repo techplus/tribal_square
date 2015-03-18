@@ -21,7 +21,7 @@
     </div>
 
     <div class="advrt" align="center">
-        <img src="images/advrt_1.jpg" alt="" class="img-responsive">
+        <img src="{{url('images/advrt_1.jpg')}}" alt="" class="img-responsive">
     </div>
 
     <div class="current_deals_box">
