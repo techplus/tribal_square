@@ -49,6 +49,7 @@ Route::group(['middleware'=>['auth.salesagnet','payment']],function(){
 
 Route::group( ['middleware' => ['guest'] ], function() {
 	Route::resource('search','SearchController',['only'=>'store']);
+	Route::resource('search/classified','ClassifiedsController');
 	Route::resource('search/deals','DealsController');
 	Route::resource('search/categories','CategoriesController');
 	Route::controller('/','HomeController');

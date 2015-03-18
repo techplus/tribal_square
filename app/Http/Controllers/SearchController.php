@@ -13,6 +13,8 @@ class SearchController extends Controller {
 		session(['search'=>$aSearch]);
 		if( $aSearch['type'] == 'deals' )
 			return redirect()->route('search.deals.index');
+		if( $aSearch['type'] == 'classified' )
+			return redirect()->route('search.classified.index');
 	}
 
 }

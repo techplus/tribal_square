@@ -15,4 +15,9 @@ class ListingCategory extends Model{
 	{
 		return $query->where('type','Deal');
 	}
+
+	public function scopeClassified($query)
+	{
+		return $query->where('type','Classified');
+	}
 }

@@ -3,7 +3,7 @@
         <h2>Categories</h2>
         <ul class="nav nav-pills nav-stacked">
             <li class="active" role="presentation"><a href="#">All Deals</a></li>
-            @foreach( $deal_categories AS $category )
+            @foreach( $categories AS $category )
                 <li role="presentation"><a href="{{route('search.categories.show',[$category->id])}}">{{$category->name}}</a></li>
             @endforeach
         </ul>

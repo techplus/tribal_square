@@ -1,6 +1,6 @@
 <?php 
 namespace App\Http\Controllers\Admin;
-use App\models\Classified;
+use App\Models\Classified;
 use App\Http\Controllers\Controller;
 Class PostsController extends Controller{
 	public function getIndex( $status = null )

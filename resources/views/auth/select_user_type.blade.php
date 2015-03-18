@@ -1,6 +1,14 @@
 @extends('layouts.front')
 
 @section('content')
+    <style>
+        #wrapper.active {
+            padding-left: 0;
+        }
+        #wrapper {
+            padding-left:40px;
+        }
+    </style>
     <div class="page-wrap">
 
     <div class="row header_wrap">
@@ -12,8 +20,7 @@
                     </a>
                 </div>
                 <div class="header_btns_wrap">
-                    <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg custome_blue_btn">Signup</a>
-                    <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg custome_blue_btn">Login</a>
+                    <a href="{{action('Auth\AuthController@getLogout')}}" class="btn btn-lg custome_blue_btn">Logout</a>
                 </div>
             </div>
         </div>

@@ -3,14 +3,14 @@
 use App\Models\ListingCategory;
 use Request;
 use App\Http\Controllers\Controller;
-use App\Models\Deal;
-class DealsController extends Controller {
+use App\Models\Classified;
+class ClassifiedsController extends Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
 
-		$this->data['categories'] = ListingCategory::Deals()->get();
+		$this->data['categories'] = ListingCategory::classified()->get();
 	}
 
 	/**
@@ -21,16 +21,23 @@ class DealsController extends Controller {
 	public function index()
 	{
 		$aSearch = session('search');
-		$oDealsBuilder = Deal::approved()->future()->with(['DealImages'=>function($q){
+		$oDealsBuilder = Classified::approved()->with(['ClassifiedImages'=>function($q){
 			$q->where('is_cover',1);
-		}]);
+		},'ListingCategory']);
 		if( ! empty( $aSearch['term'] ) )
 			$oDealsBuilder = $oDealsBuilder->term($aSearch['term']);
 		if( ! empty( $aSearch['location'] ) )
 			$oDealsBuilder = $oDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');
 
-		$this->data['oDeals'] = $oDealsBuilder->get();
-		return $this->renderView('front.search_deals');
+		$classifieds = $oDealsBuilder->get();
+		$aViewData = array();
+		foreach( $classifieds AS $classified)
+		{
+			$aViewData[$classified->ListingCategory->name][] = $classified;
+		}
+		$this->data['classifieds'] = $aViewData;
+
+		return $this->renderView('front.search_classified');
 	}
 
 	/**
@@ -61,11 +68,11 @@ class DealsController extends Controller {
 	 */
 	public function show($id)
 	{
-		$deal = Deal::with('DealImages')->find($id);
-		if( ! $deal )
+		$classified = Classified::with(['ClassifiedImages','ListingCategory'])->find($id);
+		if( ! $classified )
 			return abort(404);
-		$this->data['deal'] = $deal;
-		return $this->renderView('front.deal_full_view');
+		$this->data['classified'] = $classified;
+		return $this->renderView('front.classified_full_view');
 	}
 
 	/**

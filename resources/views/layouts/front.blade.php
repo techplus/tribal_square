@@ -25,7 +25,7 @@
 
   </head>
   <body class="{{$body_class or 'signin_body'}}">
-    @if( Auth::check() )
+    @if( Auth::check() && ( Request::url() != url('auth/select-user-type') || Request::url() != url('login/select-user-type') ) )
         <div class="active" id="wrapper">
     @endif
 
