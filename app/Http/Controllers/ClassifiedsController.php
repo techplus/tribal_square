@@ -29,8 +29,8 @@ class ClassifiedsController extends Controller {
 		if( ! empty( $aSearch['location'] ) )
 			$oDealsBuilder = $oDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');
 
-			$oDealsBuilder = $oDealsBuilder->whereHas('ListingCategory',function($q) use( $aSearch ){
-				$q->orWhere('name','LIKE','%'.$aSearch['term']."%");
+			$oDealsBuilder = $oDealsBuilder->orWhereHas('ListingCategory',function($q) use( $aSearch ){
+				$q->where('name','LIKE','%'.$aSearch['term']."%");
 			});
 		$classifieds = $oDealsBuilder->get();
 		$aViewData = array();
@@ -39,7 +39,6 @@ class ClassifiedsController extends Controller {
 			$aViewData[$classified->ListingCategory->name][] = $classified;
 		}
 		$this->data['classifieds'] = $aViewData;
-
 		return $this->renderView('front.search_classified');
 	}
 

@@ -43,6 +43,7 @@
                                     <div class="item {{$counter++ == 1 ? 'active' : ''}}">
                                         <div class="row">
                                             @foreach( $chunk AS $key=>$item )
+                                                @if( $item->ClassifiedImages->count())
                                             <div class="col-sm-3 col-xs-6">
                                                 <div class="col-item">
                                                     <div class="photo">
@@ -69,6 +70,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                                @endif
                                             @endforeach
                                         </div>
                                     </div>

@@ -38,6 +38,7 @@
 
                             <div class="col-sm-12 all_deal_box_wrap">
                                 @foreach( $oDeals AS $oDeal )
+                                    @if( $oDeal->DealImages->count() )
                                 <div class="col-sm-4">
                                     <div class="col-item">
                                         <div class="photo">
@@ -66,6 +67,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                    @endif
                                 @endforeach
 
 
