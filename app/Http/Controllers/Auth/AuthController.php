@@ -50,7 +50,7 @@ class AuthController extends Controller {
 	public function getIndex()
 	{
 		$this->data['body_class'] = 'signin_body';
-		$this->data['fb_helper'] = new FacebookRedirectLoginHelper( action('Auth\AuthController@getIndex') );
+		$this->data['fb_helper'] = new FacebookRedirectLoginHelper( url('login') );
 
 		try {
 			$session = $this->data['fb_helper']->getSessionFromRedirect ();
@@ -134,7 +134,7 @@ class AuthController extends Controller {
 			}	
 			return redirect()->intended($redirectPath);
 		}
-		return redirect($this->loginPath())
+		return redirect()->back()
 					->withInput($request->only('email', 'remember'))
 					->withErrors([
 						'email' => $this->getFailedLoginMessage(),

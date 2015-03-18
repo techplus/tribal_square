@@ -1,6 +1,8 @@
 @extends('layouts.front')
 
 @section('content')
+    <div class="page-wrap">
+
     <div class="row header_wrap">
         <div class="container">
             <div class="col-xs-12">
@@ -45,5 +47,6 @@
                 </form>
             </div>
         </div>
+    </div>
     </div>
 @endsection

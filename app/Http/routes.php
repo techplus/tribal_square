@@ -14,6 +14,7 @@
 
 Route::controllers([
 	'login' => 'Auth\AuthController',
+	'auth'	=>	'Auth\AuthController',
 	'register'	=>	'Auth\RegisterController',
 	'password' => 'Auth\PasswordController'
 ]);
