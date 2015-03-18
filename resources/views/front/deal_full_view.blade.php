@@ -113,7 +113,7 @@
 
                         </div>
 
-                        @include('layouts.front_deals_sidebar')
+                        @include('layouts.front_sidebar')
 
 
 
