@@ -15,9 +15,9 @@
         .note-editable {
             background: #fff;
         }
-	    .thumbnail img {
+	      .thumbnail img {
 	        height: 200px;
-	    }
+	      }
     </style>    
     <script type="text/javascript" src="{{ asset('inspinia/js/jquery.form.js') }}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/summernote.js') }}"></script>
@@ -177,7 +177,7 @@
 	                                    <div class="form-group">
 	                                        <label class="control-label col-lg-4">%off from Original Price*</label>
 	                                        <div class="col-lg-8">
-	                                            <input type="text" name="discount_percentage" id="discount_percentage" value="{{$oDeal->discount_percentage}}" class="required form-control">
+	                                            <input type="text" name="discount_percentage" id="discount_percentage" value="{{$oDeal->discount_percentage}}" class="required form-control" readonly="">
 	                                        </div>
 	                                    </div>
 	                                </div>	                                
@@ -187,13 +187,13 @@
                                 		<div class="form-group">
 	                                        <label class="control-label col-lg-2">Description *</label>
 	                                        <div class="col-lg-10" style="padding-left:45px;">
-	                                            <textarea name="description" id="description" class="required form-control">{{$oDeal->description}}</textarea>
+	                                            <textarea name="description" id="description" class="form-control">{{$oDeal->description}}</textarea>
 	                                        </div>
 	                                    </div>   
 	                                    <div class="form-group">
 	                                        <label class="control-label col-lg-2">Fine Print *</label>
 	                                        <div class="col-lg-10" style="padding-left:45px;">
-	                                            <textarea name="fine_print" id="fine_print" class="required form-control">{{$oDeal->fineprint}}</textarea>
+	                                            <textarea name="fine_print" id="fine_print" class="form-control">{{$oDeal->fineprint}}</textarea>
 	                                        </div>
 	                                    </div>                                    
                                     </div>
@@ -368,11 +368,48 @@
     <script src="{{ asset('inspinia/js/plugins/validate/jquery.validate.min.js') }}"></script>
 	<script>
          var uploader;
+
+         // check date is valid date or not
+         function is_valid_date( dat )
+         {
+           var sDate = dat;
+           var comp = sDate.split('/');
+           var m = parseInt( comp[0] , 10 );
+           var d = parseInt( comp[1] , 10 );
+           var y = parseInt( comp[2] , 10 );
+           var date = new Date(y,m-1,d);
+           if( date.getFullYear() == y && date.getMonth() + 1 == m && date.getDate() == d){
+              return true;
+           }
+           else
+              return false;
+         }
+
+         //compare start and end date
+         function compare_dates( dat1,dat2,msg )
+         {
+             var sDate = dat1;
+             var comp = sDate.split('/');
+             var date1 = new Date(parseInt( comp[2] , 10 ),parseInt( comp[0] , 10 ) - 1 ,parseInt( comp[1] , 10 ));
+
+             sDate = dat2;
+             comp = sDate.split('/');            
+             var date2 = new Date(parseInt( comp[2] , 10 ),parseInt( comp[0] , 10 ) - 1 ,parseInt( comp[1] , 10 ));
+
+            if( date1 > date2 )
+            {
+              alert(msg);
+              return false;
+            }
+            return true;
+         }
+
         // pre-submit callback
         function showRequest(formData, jqForm, options)
         {
            return true;
         }	
+
         // deal-submit callback  
         function showResponse(responseText, statusText, xhr, $form)
         {
@@ -380,6 +417,7 @@
             $('#uploader' ).plupload('getUploader' ).settings.url = "{{url('deals')}}" + "/" + responseText.id + "/images";
             $('#video_uploader' ).plupload('getUploader' ).settings.url = "{{url('deals')}}" + "/" + responseText.id + "/videos";                                  
         }
+
         function setSession()
         {
             $.ajax({
@@ -392,6 +430,7 @@
               }
             });
         }
+
         function saveData(form)
         {
             @if(! $oDeal->id )
@@ -423,7 +462,52 @@
             };
             form.ajaxSubmit(options);           
         }
-        $(document).ready(function(){           
+        function calculateDiscount()
+        {
+          var orig_price = parseFloat( $('#original_price').val() );
+          var new_price = parseFloat( $('#new_price').val() );
+          var discount = 0;
+          if( orig_price >= 1 )
+          {
+            discount = ( new_price * 100 ) / orig_price ;  
+            discount = discount.toFixed(2);
+          }          
+           $('#discount_percentage').val(discount);
+        }
+        $(document).ready(function(){  
+              $.validator.addMethod("is_valid",function(value,element){
+                  return is_valid_date(value);
+              },"Please enter valid date");
+              $(document).on('blur','#original_price',function(){                
+                  $('#discount_percentage').val('0');
+                  if( $('#new_price').val().length > 0 )
+                  {                      
+                      if( parseFloat( $(this).val() ) < parseFloat( $('#new_price').val() ) ) 
+                      {                         
+                          $(this).val('');
+                          alert('Original Price must be greater than New Price');
+                      }
+                      else
+                      {
+                         calculateDiscount();                        
+                      }
+                  }
+              });    
+              $(document).on('blur','#new_price',function(){
+                  $('#discount_percentage').val('0');
+                  if( $('#original_price').val().length > 0 )
+                  {                      
+                      if( parseFloat( $(this).val() ) > parseFloat( $('#original_price').val() ) ) 
+                      {
+                          $(this).val('');
+                          alert('New Price must be less than Original Price');
+                      }
+                      else
+                      {
+                         calculateDiscount();
+                      }
+                  }
+              });         
             /*$('#sandbox-container .input-daterange').datepicker({
                   multidate: false,
                   calendarWeeks: true,
@@ -432,10 +516,9 @@
             });      */  	       
             $("form.wizard-big").steps({
                 bodyTag: "fieldset",
-                enableCancelButton: false,
-                /*onCanceled : function(){
+                onCanceled : function(){
                   window.location = "{{ route('deals.index') }}";
-                },*/
+                },
                 onStepChanging: function (event, currentIndex, newIndex)
                 {                    
                     // Always allow going backward even if the current step contains invalid fields!
@@ -444,6 +527,23 @@
                         return true;
                     }
                     var form = $(this);
+                    if( currentIndex == 0 )
+                    {
+                      if( $('#description').code() == '' )
+                      {
+                        alert( 'Description is required');
+                        return false;
+                      }
+                      if( $('#fine_print').code() == '' )
+                      {
+                        alert( 'fineprint is required');
+                        return false;
+                      }
+                      if( ! compare_dates( $('#start_date').val(),$('#end_date').val(),"Start date must less than or equal to end date" ) )  
+                      {
+                        return false;
+                      }
+                    }
                     // Clean up if user went backward before
                     if (currentIndex < newIndex)
                     {
@@ -485,14 +585,39 @@
 
                     // Start validation; Prevent form submission if false
 
-                    return form.valid() || currentIndex == 2;
+                    return  form.valid() || currentIndex == 2 ;
                 },
                 onFinished: function (event, currentIndex)
                 {
-                    var form = $(this);
-
+                    var form = $(this); 
+                    if( currentIndex == 0 )
+                    {
+                      if( $('#description').code() == '' )
+                      {
+                        alert( 'Description is required');
+                        return false;
+                      }
+                      if( $('#fine_print').code() == '' )
+                      {
+                        alert( 'fineprint is required');
+                        return false;
+                      }
+                    }                   
+                    if( $( 'input[name="is_cover"]' ).length > 0 )
+                    {
+                        if( $( 'input[name="is_cover"]' ).prop('checked').length <= 0 )
+                        {
+                            alert( "Select atleast one cover photo");
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                      alert( "Upload atleast one image");
+                      return false;
+                    }                    
                     // Submit form input
-                    //saveData();
+                    saveData(form);
                     if($('#video_url' ).val())
                     {
                         //console.log($('#video_url' ).val());
@@ -503,12 +628,12 @@
                             dataType:'json'
                         } ).success(function(data){
                             setSession(); 
-                           // window.location.href = "{{ route('deals.index') }}";
+                            window.location.href = "{{ route('deals.index') }}";
                         });
                     }
                     else{
                         setSession();
-                       // window.location.href = "{{ route('deals.index') }}";
+                        window.location.href = "{{ route('deals.index') }}";
                     }
                    //form.submit(form);
                 }
@@ -532,6 +657,15 @@
                             },
                             email:{
                             	email : true
+                            },
+                            contact:{
+                              digits : true
+                            },
+                            start_date:{
+                              is_valid:true
+                            },
+                            end_date:{
+                              is_valid:true
                             }
                         }
             });
