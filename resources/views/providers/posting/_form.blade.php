@@ -508,6 +508,16 @@
                         rules: {
                             price: {
                                 number: true
+                            },
+                            phone:{
+                                digits : true
+                            }
+                        },
+                        errorPlacement: function(error, element) {
+                            if(element.attr("name") == "category_id") {
+                                error.prependTo( element.parents(".form-group") );
+                            } else {
+                                error.insertBefore(element);
                             }
                         }
             });

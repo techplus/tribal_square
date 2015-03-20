@@ -18,6 +18,9 @@
 	      .thumbnail img {
 	        height: 200px;
 	      }
+          label label.error {
+            display: none !important;
+        }
     </style>    
     <script type="text/javascript" src="{{ asset('inspinia/js/jquery.form.js') }}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/summernote.js') }}"></script>
@@ -547,6 +550,7 @@
                     // Clean up if user went backward before
                     if (currentIndex < newIndex)
                     {
+                        $('.alert-danger').remove();
                         // To remove error styles
                         $(".body:eq(" + newIndex + ") label.error", form).remove();
                         $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
@@ -554,21 +558,18 @@
                     // Disable validation on fields that are disabled or hidden.
                     form.validate().settings.ignore = ":disabled,:hidden";
                     // Start validation; Prevent going forward if false
-                    if( currentIndex == 1 )
-                    {
-                        if( $('#deal_images' ).find('.col-md-3' ).length )
-                        {
-                            //return true;
-                        }
-                        else
-                            return false;
-                    }
+                    
                     var bValid = form.valid();
                     if( bValid )
                     {
                         saveData(form);                        
                     }
                     
+                    if( currentIndex == 1 && !bValid )
+                    {
+                        $('<div class="alert alert-danger"><p>Please select atleast one image as cover</div>' ).insertBefore('#deal_images');
+                    }
+
                     return bValid;
                 },
                 onStepChanged: function (event, currentIndex, priorIndex)

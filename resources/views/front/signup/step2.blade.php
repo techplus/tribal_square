@@ -28,7 +28,7 @@
                         <h4>Purchase Information</h4>
                         <div class="billing_info_wrap">
                             <p>Billing Info</p>
-                            <img src="images/cards.png" alt="">
+                            <img src="{{asset('images/cards.png')}}" alt="">
                         </div>
                         <div class="clearfix"></div>
                         <div class="form-group col-sm-6 col-xs-12">

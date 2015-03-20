@@ -18,18 +18,21 @@ to Tribal Square</p>
             </a>
           </div>
           <div class="col-sm-7 login_box_right">
-            <h4>Sign in with your Tribal Square account</h4>
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <h4>Sign in with your Tribal Square account</h4>           
+            <form action="{{action('Auth\AuthController@postLogin')}}" method="post">
+               @if (count($errors) > 0)
+                <div class="form-group col-sm-11 col-xs-12">
+                  <div class="alert alert-danger">
+                  Email address/Password not correct!
+                    <!-- <strong>Whoops!</strong> There were some problems with your input.<br><br>
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
-                    </ul>
+                    </ul> -->
+                    </div>
                 </div>
-            @endif
-            <form action="{{action('Auth\AuthController@postLogin')}}" method="post">
+              @endif
               <div class="form-group col-sm-11 col-xs-12 {{$errors->has('email') ? 'has-error' : ''}}">
                 <input value="{{old('email')}}" type="email" class="form-control login_input" name="email" placeholder="Email">
               </div>
