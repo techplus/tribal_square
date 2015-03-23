@@ -2,45 +2,61 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\Deal;
 use App\Http\Controllers\Controller;
+use Request;
 Class DealsController extends Controller{
-	public function getIndex( $status = null )
+	public function index()
 	{
-		$this->data[ 'aDeals' ] = Deal::with( [ 'ListingCategory' ] )->where( 'is_approved_by_admin' , '=' , 0 )->get();
-		$this->data[ 'sStatus' ] = "Pending";
-		if( $status != null )
+		$oDeal = Deal::with('ListingCategory');
+		$status = Request::has('status') ? Request::input('status') : 'pending';
+		switch( $status )
 		{
-			if( $status == "Approved" ){
-				$this->data[ 'aDeals' ] = Deal::with( [ 'ListingCategory' ] )->where( 'is_approved_by_admin' , '=' , 1 )->get();
-				$this->data[ 'sStatus' ] = "Approved";
-			}
-			else if( $status == "Declined" ){
-				$this->data[ 'aDeals' ] = Deal::with( [ 'ListingCategory' ] )->where( 'is_approved_by_admin' , '=' , 2 )->get();
-				$this->data[ 'sStatus' ] = "Declined";
-			}
-			else if( $status == "Archived" ){
-				$this->data[ 'aDeals' ] = Deal::with( [ 'ListingCategory' ] )->onlyTrashed()->get();
-				$this->data[ 'sStatus' ] = "Archived";
-			}
-		} 
+			case "approved" :
+				$oDeal = $oDeal->where('is_approved_by_admin',1);
+				break;
+			case "declined":
+				$oDeal = $oDeal->where('is_approved_by_admin',2);
+				break;
+			case "archived":
+				$oDeal = $oDeal->onlyTrashed();
+				break;
+			case "pending":
+				$oDeal = $oDeal->where('is_approved_by_admin',0);
+				break;
+		}
+		$this->data['aDeals'] = $oDeal->get();
+		$this->data['sStatus'] = ucfirst($status);
 		return $this->renderView('admin.deals.index');
 	}
-	public function postApproveDeal($id)
+	public function update($id)
 	{
-		$oDeal = Deal::find($id);
-		if( ! $oDeal )
-			return response()->json( [ 'error'=>"Can't find Deal" ],500);
+		$deal = Deal::withTrashed()->find($id);
+		if( ! $deal )
+			return response()->json(array('error'=>'can\'t find deal'),500);
 
-		$oDeal->update( array( 'is_approved_by_admin' => 1 ) );
-		return response()->json( $oDeal -> toArray() );
+		if( Request::has('is_approved_by_admin') )
+		{
+			$deal->restore();
+			$deal->is_approved_by_admin = Request::input('is_approved_by_admin');
+			$deal->save();
+		}
+		if( Request::has('status') )
+		{
+			if( Request::input('status') == 'archived' )
+				$deal->delete();
+			if( Request::input('status') == 'force_delete' )
+				return $this->destroy($id);
+		}
+		return response()->json($deal->toArray());
 	}
-	public function postDeclinedDeal($id)
-	{
-		$oDeal = Deal::find($id);
-		if( ! $oDeal )
-			return response()->json( [ 'error' => "Can't find Deal" ],500);
 
-		$oDeal->update( array( 'is_approved_by_admin' => 2 ) );
-		return response()->json( $oDeal -> toArray() );
+	public function destroy($id)
+	{
+		$deal = Deal::withTrashed()->find($id);
+		if( ! $deal )
+			return response()->json(array('error'=>'can\'t find deal'),500);
+
+		$deal->forceDelete();
+		return response()->json(['success'=>true]);
 	}
 }
 ?>

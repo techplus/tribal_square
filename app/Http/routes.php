@@ -22,8 +22,8 @@ Route::resource('languages','LanguagesController');
 Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 	Route::resource( 'category.sub-category' , 'Admin\SubCategoryController' );
 	Route::get('cat-type','Admin\SubCategoryController@getCatType');
-	Route::controller('admin/deals','Admin\DealsController');
-	Route::controller('admin/posts','Admin\PostsController');	
+	Route::resource('admin/deals','Admin\DealsController',['only'=>['index','update','destroy']]);
+	Route::resource('admin/posts','Admin\PostsController',['only'=>['index','update','destroy']]);
 });
 
 Route::group(['middleware'=>['auth.providers','payment']],function(){

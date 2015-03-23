@@ -78,19 +78,19 @@
 							<li data-toggle="collapse" data-target="#submenu2" aria-expanded="true">
 								<a href="#">Posts</a>							
 								<ul class="nav collapse in sub-menu" id="submenu2" role="menu" aria-labelledby="btn-1" aria-expanded="true">									
-									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "posts" ) ? ( ( $sStatus == "Pending" ) ? "active" : "" ) : "" }}'><a href="{{ url( '/admin/posts/index',[ 'Pending' ]) }}">Pending</a></li>
-									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "posts" ) ? ( ( $sStatus == "Approved" ) ? "active" : "" ) : "" }}'><a href="{{  url( '/admin/posts/index',['Approved']) }}">Approved</a></li>
-									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "posts" ) ? ( ( $sStatus == "Declined" ) ? "active" : "" ) : "" }}'><a href="{{  url( '/admin/posts/index',['Declined']) }}">Declined</a></li>
-									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "posts" ) ? ( ( $sStatus == "Archived" ) ? "active" : "" ) : "" }}'><a href="{{  url( '/admin/posts/index',['Archived']) }}">Archived</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "posts" ) ? ( ( $sStatus == "Pending" ) ? "active" : "" ) : "" }}'><a href="{{ route( 'admin.posts.index',[ 'status'=>'pending' ]) }}">Pending</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "posts" ) ? ( ( $sStatus == "Approved" ) ? "active" : "" ) : "" }}'><a href="{{  route( 'admin.posts.index',['status'=>'approved']) }}">Approved</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "posts" ) ? ( ( $sStatus == "Declined" ) ? "active" : "" ) : "" }}'><a href="{{  route( 'admin.posts.index',['status'=>'declined']) }}">Declined</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "posts" ) ? ( ( $sStatus == "Archived" ) ? "active" : "" ) : "" }}'><a href="{{  route( 'admin.posts.index',['status'=>'archived']) }}">Archived</a></li>
 								</ul>
 							</li>
 							<li data-toggle="collapse" data-target="#submenu3" aria-expanded="true">
 								<a href="#">Deals</a>							
 								<ul class="nav collapse in sub-menu" id="submenu3" role="menu" aria-labelledby="btn-1" aria-expanded="true">									
-									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Pending" ) ? "active" : "" ) : "" }}'><a href="{{ url( '/admin/deals/index' , [ 'Pending' ] ) }}">Pending</a></li>
-									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Approved" ) ? "active" : "" ) : "" }}'><a href="{{ url(  '/admin/deals/index' , [ 'Approved' ] ) }}">Approved</a></li>
-									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Declined" ) ? "active" : "" ) : "" }}'><a href="{{ url(  '/admin/deals/index' , [ 'Declined' ] ) }}">Declined</a></li>
-									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Archived" ) ? "active" : "" ) : "" }}'><a href="{{ url( '/admin/deals/index' , [ 'Archived' ] ) }}">Archived</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Pending" ) ? "active" : "" ) : "" }}'><a href="{{ route( 'admin.deals.index' , [ 'status'=>'pending' ] ) }}">Pending</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Approved" ) ? "active" : "" ) : "" }}'><a href="{{ route( 'admin.deals.index' , ['status'=>'approved'] ) }}">Approved</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Declined" ) ? "active" : "" ) : "" }}'><a href="{{ route(  'admin.deals.index' ,['status'=>'declined'] ) }}">Declined</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Archived" ) ? "active" : "" ) : "" }}'><a href="{{ route( 'admin.deals.index' ,['status'=>'archived'] ) }}">Archived</a></li>
 								</ul>
 							</li>							
 						</ul>

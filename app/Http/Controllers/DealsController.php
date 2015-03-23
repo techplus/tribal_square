@@ -29,7 +29,7 @@ class DealsController extends Controller {
 		if( ! empty( $aSearch['location'] ) )
 			$oDealsBuilder = $oDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');
 
-		$oDealsBuilder = $oDealsBuilder->orWhereHas('ListingCategory',function($q) use( $aSearch ){
+		$oDealsBuilder = $oDealsBuilder->whereHas('ListingCategory',function($q) use( $aSearch ){
 			$q->where('name','LIKE','%'.$aSearch['term']."%");
 		});
 		$this->data['oDeals'] = $oDealsBuilder->get();
