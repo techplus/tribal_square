@@ -19,15 +19,6 @@ class SubCategoryController extends Controller {
 		return $this->renderView('admin.category.index');
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
 
 	/**
 	 * Store a newly created resource in storage.
@@ -83,27 +74,6 @@ class SubCategoryController extends Controller {
 		return response()->json( $aResp );
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
 
 	/**
 	 * Update the specified resource in storage.
@@ -211,5 +181,72 @@ class SubCategoryController extends Controller {
 		}
 		else 
 			return false;
+	}
+
+	public function exportCategory($name)
+	{
+		$categories = ListingCategory::where( 'type' , '=' , $name )->get();
+		$filename = "categories.csv";
+		$handle = fopen($filename, 'w+');
+		fputcsv($handle, array('name', 'type'));
+
+		foreach($categories as $category) {
+			$type = $name;
+			if( ListingCategory::where('id','!=',$category->id)->where('name','=',$category->name)->count() )
+				$type = 'Both';
+			fputcsv($handle, array($category->name, $type));
+		}
+
+		fclose($handle);
+		return response()->download($filename)->deleteFileAfterSend(true);
+	}
+
+	public function postImportCategory($name)
+	{
+		if(! Request::hasFile('file') )
+			return redirect()->back()->with('error','no file recived!');
+		$oFile = Request::file('file');
+		$filename = $oFile->getClientOriginalName();
+		$oFile = $oFile->move(base_path('uploads').'/',$filename);
+		$file = file_get_contents(base_path('uploads/'.$filename));
+		$data = array_map("str_getcsv", preg_split('/\r*\n+|\r+/', $file));
+		unset($data[0]);
+		array_values($data);
+		foreach( $data AS $row )
+		{
+			if( ! empty( $row['0'] ) AND ! empty( $row[1] ) )
+			{
+				if( $row[1] == 'Deal' || $row[1] == 'Classified' || $row[1] == 'Both' )
+				{
+					if( $row[1] == 'Both' )
+					{
+						if(! ListingCategory::where('name',$row[0])->where('type','Deal')->count() )
+						{
+							$oCategory = new ListingCategory();
+							$oCategory->name = $row[0];
+							$oCategory->type = 'Deal';
+							$oCategory->save();
+						}
+						if( ! ListingCategory::where('name',$row[0])->where('type','Classified')->count() )
+						{
+							$oCategory = new ListingCategory();
+							$oCategory->name = $row[0];
+							$oCategory->type = 'Classified';
+							$oCategory->save();
+						}
+					}
+					else
+					{
+						if( ! ListingCategory::where('name',$row[0])->where('type',$row[1])->count() ) {
+							$oCategory = new ListingCategory();
+							$oCategory->name = $row[ 0 ];
+							$oCategory->type = $row[ 1 ];
+							$oCategory->save ();
+						}
+					}
+				}
+			}
+		}
+		return redirect()->back()->with('success','Import successfull!');
 	}
 }

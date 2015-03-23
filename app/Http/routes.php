@@ -20,7 +20,9 @@ Route::controllers([
 ]);
 Route::resource('languages','LanguagesController');
 Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
-	Route::resource( 'category.sub-category' , 'Admin\SubCategoryController' );
+	Route::resource( 'category.sub-category' , 'Admin\SubCategoryController',['only'=>['index','store','update','destroy']] );
+	Route::get('category/{name}/export','Admin\SubCategoryController@exportCategory');
+	Route::post('cateogry/{name}/import','Admin\SubCategoryController@postImportCategory');
 	Route::get('cat-type','Admin\SubCategoryController@getCatType');
 	Route::resource('admin/deals','Admin\DealsController',['only'=>['index','update','destroy']]);
 	Route::resource('admin/posts','Admin\PostsController',['only'=>['index','update','destroy']]);
