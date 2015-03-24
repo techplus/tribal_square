@@ -183,11 +183,11 @@
                                                    </div>
                                             </div>
                                             <div class="form-group">                                                
-                                                    <div class="col-lg-6 phone-container" style="display: none;padding-left:0;"> 
+                                                    <div class="col-lg-6 phone-container" style="{{$oPost->can_phone ? 'display: none;' : ''}}padding-left:0;">
                                                         <label>Phone Number *</label>
                                                         <input type="text" name="phone" id="phone" value="{{$oPost->phone}}" value="" class="form-control">
                                                     </div>
-                                                    <div class="col-lg-6 text-container" style="display: none;padding-right:0;"> 
+                                                    <div class="col-lg-6 text-container" style="{{$oPost->can_text ? 'display: none;' : ''}}padding-right:0;">
                                                         <label>Contact Name *</label>
                                                         <input type="text" name="contact_name" value="{{$oPost->contact_name}}" id="contact_name" value="" class="form-control">
                                                     </div>                                               
