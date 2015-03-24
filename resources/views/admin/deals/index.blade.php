@@ -29,12 +29,12 @@
                                             <button class="btn btn-danger action" data-status="archived" data-id="{{$oDeal->id}}">Archive</button>
                                         @elseif( $sStatus == 'Declined' )
                                             <button class="btn btn-success action" data-status="approved" data-id="{{$oDeal->id}}">Approve</button>&nbsp;
-                                            <button class="btn btn-danger action" data-status="Pending" data-id="{{$oDeal->id}}">Move To Pending</button>
+                                            <button class="btn btn-danger action" data-status="pending" data-id="{{$oDeal->id}}">Move To Pending</button>
                                             <button class="btn btn-danger action" data-status="archived" data-id="{{$oDeal->id}}">Archive</button>
                                         @elseif( $sStatus == 'Archived')
                                             <button class="btn btn-success action" data-status="approved" data-id="{{$oDeal->id}}">Approve</button>&nbsp;
                                             <button class="btn btn-danger action" data-status="declined" data-id="{{$oDeal->id}}">Decline</button>
-                                            <button class="btn btn-danger action" data-status="Pending" data-id="{{$oDeal->id}}">Move To Pending</button>
+                                            <button class="btn btn-danger action" data-status="pending" data-id="{{$oDeal->id}}">Move To Pending</button>
                                             <button class="btn btn-danger action" data-status="deleted" data-id="{{$oDeal->id}}">Delete Forever</button>
                                         @endif
 									</td>

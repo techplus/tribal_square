@@ -29,7 +29,7 @@
                                             <button class="btn btn-danger action" data-status="archived" data-id="{{$oPost->id}}">Archive</button>
                                         @elseif( $sStatus == 'Declined' )
                                             <button class="btn btn-success action" data-status="approved" data-id="{{$oPost->id}}">Approve</button>&nbsp;
-                                            <button class="btn btn-danger action" data-status="Pending" data-id="{{$oPost->id}}">Move To Pending</button>
+                                            <button class="btn btn-danger action" data-status="pending" data-id="{{$oPost->id}}">Move To Pending</button>
                                             <button class="btn btn-danger action" data-status="archived" data-id="{{$oPost->id}}">Archive</button>
                                         @elseif( $sStatus == 'Archived')
                                             <button class="btn btn-success action" data-status="approved" data-id="{{$oPost->id}}">Approve</button>&nbsp;
