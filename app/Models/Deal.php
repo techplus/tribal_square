@@ -32,7 +32,9 @@ class Deal extends Model{
 	public function scopeTerm($query,$term)
 	{
 		return $query->where(function($q) use($term){
-			$q->orWhere('title','LIKE',"%".$term."%")->orWhere('description','LIKE','%'.$term.'%')->orWhere('fineprint','LIKE','%'.$term.'%');
+			$q->orWhere('title','LIKE',"%".$term."%")->orWhere('description','LIKE','%'.$term.'%')->orWhere('fineprint','LIKE','%'.$term.'%')->orWhereHas('ListingCategory',function($q) use( $term ){
+				$q->where('name','LIKE','%'.$term."%");
+			});
 		});
 	}
 }

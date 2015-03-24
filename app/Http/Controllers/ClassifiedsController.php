@@ -29,9 +29,6 @@ class ClassifiedsController extends Controller {
 		if( ! empty( $aSearch['location'] ) )
 			$oDealsBuilder = $oDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');
 
-			$oDealsBuilder = $oDealsBuilder->whereHas('ListingCategory',function($q) use( $aSearch ){
-				$q->where('name','LIKE','%'.$aSearch['term']."%");
-			});
 		$classifieds = $oDealsBuilder->get();
 		$aViewData = array();
 		foreach( $classifieds AS $classified)
