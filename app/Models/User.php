@@ -38,4 +38,39 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	{
 		return $this->hasMany('App\Models\Payment','user_id');
 	}
+
+	public function Account()
+	{
+		return $this->hasOne('App\Models\Account');
+	}
+
+	public function Bio()
+	{
+		return $this->hasOne('App\Models\Bio');
+	}
+
+	public function Availability()
+	{
+		return $this->hasOne('App\Models\Availability');
+	}
+
+	public function Experience()
+	{
+		return $this->hasOne('App\Models\Experience');
+	}
+
+	public function Skill()
+	{
+		return $this->hasOne('App\Models\Skill');
+	}
+
+	public function Days()
+	{
+		return belongsToMany('App\Models\Day','day_shifts','user_id','day_id');	
+	}
+
+	public function Shifts()
+	{
+		return belongsToMany('App\Models\Shift','day_shifts','user_id','shift_id');	
+	}
 }

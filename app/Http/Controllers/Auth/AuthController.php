@@ -125,7 +125,7 @@ class AuthController extends Controller {
 				}
 				else if( $oUser->name == 'BabySitters' )
 				{
-
+					//$redirectPath = route( '' );
 				}
 				else if( $oUser->name == 'SalesAgent')
 				{

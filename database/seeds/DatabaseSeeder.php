@@ -1,6 +1,8 @@
 <?php 
 use App\Models\User;
 use App\Models\UserType;
+use App\Models\Day;
+use App\Models\Shift;
 use App\Models\ListingCategory;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +20,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('UserTypesTableSeeder');		
 		$this->call('UserTableSeeder');		
 		$this->call('ListingCategoriesTableSeeder');
+		$this->call('DaysTableSeeder');
+		$this->call('ShiftsTableSeeder');
 	}
 
 }
@@ -32,6 +36,10 @@ class UserTableSeeder extends Seeder{
 		$oUser = User::create( array( 'firstname' => 'Sagar' , 'lastname' => 'Rabadiya' ,'email' => 'sagar.tps@gmail.com' , 'password' => Hash::make('sagar123') ) );
 		DB::table('user_usertypes')->insert(
 			[	'user_id'  => $oUser->id  ,  'user_type_id'	=> 2 , 'subscription_plan_id' => 1 , 'amount' => 0  ]
+		); 
+		$oUser = User::create( array( 'firstname' => 'Dhara' , 'lastname' => 'Shah' ,'email' => 'dhara.tps@gmail.com' , 'password' => Hash::make('dhara123') ) );
+		DB::table('user_usertypes')->insert(
+			[	'user_id'  => $oUser->id  ,  'user_type_id'	=> 3 , 'subscription_plan_id' => 1 , 'amount' => 0  ]
 		); 
 	}
 }
@@ -53,5 +61,31 @@ class UserTypesTableSeeder extends Seeder{
 		UserType::create( array( 'name' => 'Providers' ) );
 		UserType::create( array( 'name' => 'BabySitters' ) );
 		UserType::create( array( 'name' => 'SalesAgent' ) );
+	}
+}
+class DaysTableSeeder extends Seeder{
+	public function run()
+	{
+		DB::table('days')->delete();
+		Day::create( array( 'name' => 'Su' ) );
+		Day::create( array( 'name' => 'Mo' ) );
+		Day::create( array( 'name' => 'Tu' ) );
+		Day::create( array( 'name' => 'We' ) );
+		Day::create( array( 'name' => 'Th' ) );
+		Day::create( array( 'name' => 'Fr' ) );
+		Day::create( array( 'name' => 'Sa' ) );
+	}
+}
+class ShiftsTableSeeder extends Seeder{
+	public function run()
+	{
+		DB::table('shifts')->delete();
+		Shift::create( array( 'name' => 'Early Morning' , 'time' => '(6am - 9am)' ) );
+		Shift::create( array( 'name' => 'Late Morning' , 'time' => '(9am - 12pm)' ) );
+		Shift::create( array( 'name' => 'Early Afternoon' , 'time' => '(12pm - 3pm)' ) );
+		Shift::create( array( 'name' => 'Late Afternoon' , 'time' => '(3pm - 6pm)' ) );
+		Shift::create( array( 'name' => 'Early Evening' , 'time' => '(6pm - 9pm)' ) );
+		Shift::create( array( 'name' => 'Late Evening' , 'time' => '(9pm - 12am)' ) );
+		Shift::create( array( 'name' => 'Overnight' , 'time' => '(12am - 6am)' ) );
 	}
 }
