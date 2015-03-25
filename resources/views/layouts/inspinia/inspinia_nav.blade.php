@@ -43,7 +43,26 @@
                 </li> 
                 <li>
                     <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Posted Deals</span></a>               
-                </li>          
+                </li>    
+            @elseif( $oUser->type == "BabySitters" )      
+                 <li>
+                    <a href="{{ action('Users\BabySittersController@getIndex') }}/index/account1" >Account Basics</span></a>               
+                 </li> 
+                 <li>
+                    <a href="{{ action('Users\BabySittersController@getIndex') }}/index/account2" >Account Info</span></a>               
+                 </li>                 
+                 <li>
+                    <a href="{{ action('Users\BabySittersController@getIndex') }}/index/bio" >Bio & Preferences</span></a>               
+                 </li>
+                 <li>
+                    <a href="{{ action('Users\BabySittersController@getIndex') }}/index/experience" >Experience</span></a>               
+                </li>                               
+                <li>
+                    <a href="{{ action('Users\BabySittersController@getIndex') }}/index/availability" >Availability</span></a>               
+                </li>                               
+                <li>
+                    <a href="{{ action('Users\BabySittersController@getIndex') }}/index/skill" >Skills and Abilities</span></a>               
+                </li>                               
             @endif          
         </ul>
 

@@ -23,7 +23,8 @@ class CreateBioTable extends Migration {
 			$table->float('average_rate_from')->nullable()->default(0);
 			$table->float('average_rate_to')->nullable()->default(0);
 			$table->float('increase_rate_for_each_child')->nullable()->default(0);
-			$table->integer('miles_from_home')->nullable()->default(0);	
+			$table->integer('miles_from_home')->nullable()->default(0);
+			$table->integer('no_of_childrens_comfortable_with')->nullable()->default(1);	
 			$table->softDeletes();
 			$table->timeStamps();		
 		});

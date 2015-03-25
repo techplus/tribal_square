@@ -735,7 +735,7 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
   height: 16px;
 }
 .input-daterange input {
- /* text-align: center;*/
+  text-align: center;
 }
 .input-daterange input:first-child {
   border-radius: 3px 0 0 3px;

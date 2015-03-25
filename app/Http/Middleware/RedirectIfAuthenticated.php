@@ -55,7 +55,7 @@ class RedirectIfAuthenticated {
 				}
 				else if( $oUser->name == 'BabySitters' )
 				{
-					$path = route('baby-sitters.index');
+					$path = action('Users\BabySittersController@getIndex');
 				}
 				else if( $oUser->name == 'SalesAgent')
 				{

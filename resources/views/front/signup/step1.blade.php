@@ -28,13 +28,13 @@
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="user_type" id="optionsRadios2" value="3">
+                                            <input type="radio" name="user_type" id="optionsRadios2" value="4">
                                             Sales Agent
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="user_type" id="optionsRadios3" value="4">
+                                            <input type="radio" name="user_type" id="optionsRadios3" value="3">
                                             Baby Sitter
                                         </label>
                                     </div>

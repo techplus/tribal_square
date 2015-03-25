@@ -15,7 +15,7 @@ class BabySittersMiddleware {
 	public function handle($request, Closure $next)
 	{
 		if( ! Auth::check() )
-			return response()->redirectToAction('HomeController@getIndex');
+			return redirect()->action('Users\BabySittersController@getIndex');
 
 		$oUser = Auth::user()->UserTypes()->first();
 		if( $oUser->name != 'BabySitters' )
