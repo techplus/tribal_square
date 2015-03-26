@@ -9,11 +9,11 @@ class Day extends Model{
 
 	public function Shifts()
 	{		
-		return belongsToMany('App\Models\Shift','day_shifts','day_id','shift_id');
+		return $this->belongsToMany('App\Models\Shift','day_shifts','day_id','shift_id');
 	}
 
 	public function Users()
 	{
-		return belongsToMany('App\Models\Shift','day_shifts','day_id','user_id');	
-	}
+		return $this->belongsToMany('App\Models\Shift','day_shifts','day_id','user_id')->withPivot( [ 'id' , 'shift_id' , 'user_id' , 'day_id'  ] );	
+	}	
 }

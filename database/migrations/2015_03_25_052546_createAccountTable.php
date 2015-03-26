@@ -23,7 +23,7 @@ class CreateAccountTable extends Migration {
 			$table->string('pin')->nullbale()->default(null);
 			$table->string('phone')->nullbale()->default(null);
 			$table->boolean('display_phone_on_profile')->nullbale()->default(0);
-			$table->string('birthdate')->nullbale()->default(null);
+			$table->date('birthdate')->nullbale()->default(null);
 			$table->enum('gender',[ 'Male' , 'Female' ])->nullbale()->default(null);
 			$table->text('profile_pic')->nullbale()->default(null);
 			$table->softDeletes();

@@ -10,7 +10,8 @@
 
     <link href="{{asset('inspinia/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('inspinia/font-awesome/css/font-awesome.css')}}" rel="stylesheet">
-    
+
+
 
     <link href="{{asset('inspinia/css/animate.css')}}" rel="stylesheet">
     <link href="{{asset('inspinia/css/style.css')}}" rel="stylesheet">
@@ -62,7 +63,6 @@
 <script src="{{asset('inspinia/js/inspinia.js')}}"></script>
 
 
-<!-- jQuery UI -->
-<script src="{{asset('inspinia/js/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
+
 </body>
 </html>

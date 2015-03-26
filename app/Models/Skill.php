@@ -9,6 +9,6 @@ class Skill extends Model{
 	protected $guarded = array('id');
 
 	public function User(){
-		return hasOne('App\Model\User');
+		return $this->hasOne('App\Models\User');
 	}
 }

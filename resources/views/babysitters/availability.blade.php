@@ -2,6 +2,7 @@
 @section('content') 
      <link href="{{ url('inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
      <link href="{{ url('inspinia/css/plugins/datapicker/datepicker3.css') }}" rel="stylesheet">
+     <script src="{{ asset('inspinia/js/plugins/validate/jquery.validate.min.js') }}"></script>
      <div class="row">
         <div class="col-lg-10">
             <div class="ibox float-e-margins">
@@ -9,7 +10,7 @@
                             <h5>Availability</h5>                            
                         </div>
                         <div class="ibox-content">
-                            <form method="get" class="form-horizontal" name="frmBabySitter">                                
+                            <form method="post" class="form-horizontal" name="frmBabySitter" id="frmBabySitter" action="{{ action('Users\BabySittersController@postStore') }}">
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <label class="control-label">Are you available on short notice?</label>                                   
@@ -17,8 +18,8 @@
                                 </div>
                                 <div class="form-group">                                    
                                     <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="available_on_short_notice" value="1">&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="available_on_short_notice" value="0">&nbsp;&nbsp;No
+                                        <input type="radio" class="required i-checks" name="available_on_short_notice" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_on_short_notice == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="required i-checks" name="available_on_short_notice" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_on_short_notice == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div> 
@@ -29,8 +30,8 @@
                                 </div>                                
                                 <div class="form-group">                                    
                                     <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="available_to_provide_daytime_care_during_summer_months" value="1">&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="available_to_provide_daytime_care_during_summer_months" value="0">&nbsp;&nbsp;No
+                                        <input type="radio" class="required i-checks" name="available_to_provide_daytime_care_during_summer_months" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_to_provide_daytime_care_during_summer_months == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="required i-checks" name="available_to_provide_daytime_care_during_summer_months" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_to_provide_daytime_care_during_summer_months == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
                                     </div>
                                 </div> 
                                 <div class="hr-line-dashed"></div> 
@@ -41,8 +42,8 @@
                                 </div>                                
                                 <div class="form-group">                                    
                                     <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="available_before_school_care" value="1">&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="available_before_school_care" value="0">&nbsp;&nbsp;No
+                                        <input type="radio" class="required i-checks" name="available_before_school_care" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_before_school_care == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="required i-checks" name="available_before_school_care" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_before_school_care == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
                                     </div>
                                 </div>   
                                 <div class="hr-line-dashed"></div> 
@@ -53,10 +54,10 @@
                                 </div>                                
                                 <div class="form-group">                                    
                                     <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="available_after_school_care" value="1">&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="available_after_school_care" value="0">&nbsp;&nbsp;No
+                                        <input type="radio" class="required i-checks" name="available_after_school_care" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_after_school_care == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="required i-checks" name="available_after_school_care" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_after_school_care == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
                                     </div>
-                                </div>  
+                                </div>                                  
                                 <div class="hr-line-dashed"></div> 
                                 <div class="form-group">                               
                                     <div class="col-sm-8 table-responsive">
@@ -75,7 +76,7 @@
                                                     @endif
                                                 </tr>                                                
                                             </thead>
-                                            <tbody>
+                                            <tbody>                                                
                                                 @if( $aShifts )
                                                     @foreach( $aShifts as $oShift )
                                                         <tr>
@@ -86,7 +87,7 @@
                                                             @if( $aDays )
                                                                 @foreach( $aDays as $oDay )
                                                                 <td style="vertical-align: middle;">
-                                                                   <input type="checkbox" class="i-checks" name='{{ "shift_".$oShift->id."_".$oDay->id }}' value="on">
+                                                                   <input type="checkbox" class="i-checks" name='{{ "shift_".$oShift->id."_".$oDay->id }}'  value="on" {{ ( isset( $aDayShifts[$oShift->id][$oDay->id] ) ) ? 'checked' : '' }}>
                                                                 </td>
                                                                 @endforeach
                                                             @endif
@@ -108,7 +109,7 @@
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
                                             </span>
-                                            <input type="text" class="form-control required" id="schedule_valid_until" name="schedule_valid_until" value="" readonly="" style="background: #fff;cursor: pointer">
+                                            <input type="text" class="form-control required" id="schedule_valid_until" name="schedule_valid_until" readonly="" style="background: #fff;cursor: pointer" value="{{ ( $oAvailability->schedule_valid_until ) ? date('m/d/Y',strtotime($oAvailability->schedule_valid_until)) : ''}}">
                                         </div> 
                                     </div>
                                     <div class="col-sm-9"> 
@@ -117,9 +118,10 @@
                                 
                                 <div class="form-group">
                                     <div class="col-sm-12">                                        
-                                        <button class="btn btn-primary" type="button">Save & Continue</button>
+                                        <button class="btn btn-primary" type="submit">Save & Continue</button>
                                     </div>
                                 </div>
+                                <input type="hidden" name="section" value="{{ $section }}">
                             </form>
                         </div>
                     </div>
@@ -128,7 +130,7 @@
     <!-- iCheck -->
     <script src="{{ url('inspinia/js/plugins/iCheck/icheck.min.js') }}"></script>
 
-    <!-- Data picker -->
+    
     <script src="{{ url('inspinia/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
 
     <script>
@@ -144,6 +146,15 @@
                 forceParse: false,
                 autoclose: true
             });
+            $('#frmBabySitter').validate({
+                rules:{                   
+                },
+                submitHandler:function()
+                {
+                    document.frmBabySitter.submit();
+                    return false;
+                }
+           });    
         });
     </script>
 @endsection

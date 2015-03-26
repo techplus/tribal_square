@@ -3,9 +3,9 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Bio extends Model{
+class Availability extends Model{
 
-	protected $table = "bios";
+	protected $table = "availabilities";
 	protected $guarded = array('id');
 
 	public function User(){
