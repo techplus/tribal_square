@@ -102,7 +102,7 @@
                 autocomplete2.setBounds(circle.getBounds());
             });
         }
-    }   
+    }
 
     </script>
               	 <div class="row">
@@ -116,35 +116,35 @@
                                 </a>
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                     <i class="fa fa-wrench"></i>
-                                </a>                              
+                                </a>
                                 <a class="close-link">
                                     <i class="fa fa-times"></i>
                                 </a>
                             </div> -->
                         </div>
-                        <div class="ibox-content">                                                 
+                        <div class="ibox-content">
                             <form name="frmPost" id="frmPost" class="wizard-big wizard clearfix form-horizontal" action="#">
                                 <h1>Location and Category</h1>
-                                <fieldset>                    
+                                <fieldset>
                                     <input type="hidden" name="id" class="post_id" value="{{$oPost->id}}">
                                     <div class="row">
                                         <div class="col-lg-8">
 	                                            <div class="form-group">
 	                                                <label>Where do you want to Post your Classified ?</label>
 	                                               <input id="autocomplete1" class="form-control required" name="location" placeholder="Enter your address" value="{{$oPost->location}}" type="text"></input>
-	                                            </div>	                                            
+	                                            </div>
 	                                            <div class="form-group">
-	                                                <label>Category</label>                                                
-	                                            </div>                                                                                 
+	                                                <label>Category</label>
+	                                            </div>
                                             	@if( $aCategories->count() > 0 )
                                             		@foreach( $aCategories as $oCat )
-                                            			<div class="form-group">    
-                                            				<div class="col-lg-12">      
+                                            			<div class="form-group">
+                                            				<div class="col-lg-12">
                                                 				<input name="category_id" type="radio" class="required col-sm-1" value="{{ $oCat->id }}" data-name="{{ $oCat->name }}" {{$oPost->category_id == $oCat->id ? 'checked' : ''}}><span class="col-sm-11">{{ $oCat->name }}</span>
-                                                			</div>                                                			
-                                                		</div>                                                		
+                                                			</div>
+                                                		</div>
                                                 	@endforeach
-												@endif                                                	                                           
+												@endif
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="text-center">
@@ -156,7 +156,7 @@
                                     </div>
                                 </fieldset>
                                 <h1>Profile</h1>
-                                <fieldset>                                       	                           
+                                <fieldset>
                                     <div class="row">
                                     	<div class="col-lg-12">
                                             <h3 style="font-weight: normal;">
@@ -175,24 +175,24 @@
                                                     <input id="email" name="email" type="text" value="{{$oPost->email}}" class="form-control required">
                                                 </div>
                                             </div>
-                                            <div class="form-group">                                               
+                                            <div class="form-group">
                                                    <label class="control-label col-lg-4">user can contact me by </label>&nbsp;&nbsp;
-                                                   <div class="col-lg-8"> 
+                                                   <div class="col-lg-8">
                                                     <input type="checkbox" name="can_phone" {{$oPost->can_phone ? 'checked' : ''}} class="chkphone" value="1">&nbsp;<span>Phone</span>&nbsp;&nbsp;
                                                     <input type="checkbox" name="can_text" {{$oPost->can_text ? 'checked' : ''}} class="chktext" value="1">&nbsp;<span>Text</span>
                                                    </div>
                                             </div>
-                                            <div class="form-group">                                                
-                                                    <div class="col-lg-6 phone-container" style="{{$oPost->can_phone ? 'display: none;' : ''}}padding-left:0;">
+                                            <div class="form-group">
+                                                    <div class="col-lg-6 phone-container" style="{{$oPost->can_phone ? '' : 'display: none;'}}padding-left:0;">
                                                         <label>Phone Number *</label>
-                                                        <input type="text" name="phone" id="phone" value="{{$oPost->phone}}" value="" class="form-control">
+                                                        <input type="text" name="phone" id="phone" value="{{$oPost->phone}}" class="form-control">
                                                     </div>
-                                                    <div class="col-lg-6 text-container" style="{{$oPost->can_text ? 'display: none;' : ''}}padding-right:0;">
+                                                    <div class="col-lg-6 text-container" style="{{$oPost->can_text ? '' : 'display: none;'}}padding-right:0;">
                                                         <label>Contact Name *</label>
-                                                        <input type="text" name="contact_name" value="{{$oPost->contact_name}}" id="contact_name" value="" class="form-control">
-                                                    </div>                                               
+                                                        <input type="text" name="contact_name" value="{{$oPost->contact_name}}" id="contact_name" class="form-control">
+                                                    </div>
                                             </div>
-                                        </div>   
+                                        </div>
                                         <div class="col-lg-12">
                                             <div class="form-group">
                                                 <label class="control-label col-lg-4">Post Title *</label>
@@ -260,7 +260,7 @@
                                                  <div class="col-lg-8">
                                                     <input type="text"  onFocus="geolocate()" name="location2" id="autocomplete2" value="{{$oPost->location2}}" class="form-control required">
                                                 </div>
-                                            </div>                                            
+                                            </div>
                                             <div class="form-group">
                                                  <label class="control-label col-lg-4">Street</label>
                                                  <div class="col-lg-4">
@@ -304,7 +304,7 @@
                                                      <span>Ok for others to contact you about other services, products or commercial interets</span>
                                                 </div>
                                             </div>
-                                        </div>                                
+                                        </div>
                                         <input type="hidden" name="lat" id="lat_val" value="">
                                         <input type="hidden" name="long" id="long_val" value="">
                                     </div>
@@ -372,11 +372,11 @@
                                 </fieldset>
                             </form>
                         </div>
-                    </div>                   
+                    </div>
                 </div>
             </div>
 	<!-- Steps -->
-    <script src="{{ asset('inspinia/js/plugins/staps/jquery.steps.min.js') }}"></script>    
+    <script src="{{ asset('inspinia/js/plugins/staps/jquery.steps.min.js') }}"></script>
     <!-- Jquery Validate -->
     <script src="{{ asset('inspinia/js/plugins/validate/jquery.validate.min.js') }}"></script>
 	 <script>
@@ -385,8 +385,8 @@
         function showRequest(formData, jqForm, options)
         {
            return true;
-        }	
-        // post-submit callback  
+        }
+        // post-submit callback
         function showResponse(responseText, statusText, xhr, $form)
         {
             $('.post_id').val( responseText.id );
@@ -406,20 +406,20 @@
                 type = 'put';
                 form.attr('action','{{url('posts')}}/'+$('.post_id' ).val() + '/images');
             }
-            var options = { 
-                target:        '#output2',   // target element(s) to be updated with server response 
-                beforeSubmit:  showRequest,  // pre-submit callback 
-                success:       showResponse, // post-submit callback                                    
+            var options = {
+                target:        '#output2',   // target element(s) to be updated with server response
+                beforeSubmit:  showRequest,  // pre-submit callback
+                success:       showResponse, // post-submit callback
                 url : url,
                 data:{description:$('#description').code(),fineprint:$('#fineprint' ).code()},
                 async : false,
                 type : type,
-                dataType : "json"                                                                                                    
-                //timeout:   3000 
+                dataType : "json"
+                //timeout:   3000
             };
             form.ajaxSubmit(options);
         }
-        $(document).ready(function(){            	       
+        $(document).ready(function(){
             $("form.wizard-big").steps({
                 bodyTag: "fieldset",
                 enableCancelButton: false,
@@ -530,7 +530,7 @@
                 }
                 else
                 {
-                    $('.phone-container').hide();   
+                    $('.phone-container').hide();
                     $('.phone-container').find('input').removeClass('required');
                 }
             });
@@ -542,7 +542,7 @@
                 }
                 else
                 {
-                    $('.text-container').hide();   
+                    $('.text-container').hide();
                     $('.text-container').find('input').removeClass('required');
                 }
             });
@@ -648,4 +648,3 @@
              })
          }
     </script>
-        
