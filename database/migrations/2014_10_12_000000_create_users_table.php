@@ -19,9 +19,11 @@ class CreateUsersTable extends Migration {
 			$table->string('lastname')->nullable()->default(null);			
 			$table->string('email')->unique();
 			$table->string('password', 60);
+			$table->integer('last_step')->nullable()->default(1);
 			$table->string('logo')->nullable()->default(null);			
 			$table->string('subscriber_id')->nullable()->default(null);
 			$table->date('subscription_end_at')->nullable()->default(null);
+			$table->datetime('last_logged_in')->nullable()->default(null);
 			$table->rememberToken();
 			$table->softDeletes();
 			$table->timestamps();

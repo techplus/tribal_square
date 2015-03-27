@@ -15,6 +15,8 @@ class SearchController extends Controller {
 			return redirect()->route('search.deals.index');
 		if( $aSearch['type'] == 'classified' )
 			return redirect()->route('search.classified.index');
+		if( $aSearch['type'] == 'baby_sitter' )
+			return redirect()->route('search.babysitters.index');
 	}
 
 }

@@ -1038,6 +1038,297 @@ textarea:focus, input:focus{ outline: none !important; }
     color: #23a820 !important;
 }
 
+.square, .btn {
+    border-radius: 0px!important;
+}
+
+/* -- color classes -- */
+.coralbg {
+    background-color: #fff;
+} 
+
+.coral {
+    color: #fff;
+}
+
+.turqbg {
+    background-color: #46D8D2;
+}
+
+.turq {
+    color: #46D8D2;
+}
+
+.white {
+    color: #1a1a1a!important;
+}
+.green {
+  color: #5cb85c;
+}
+.green_dot, .white_dot {
+  background-color: #5cb85c;
+  border: 1px solid #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.white_dot {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  width: 26px;
+  height: 26px;
+}
+
+/* -- The "User's Menu Container" specific elements. Custom container for the snippet -- */
+div.user-menu-container {
+  z-index: 10;
+  background-color: #fff;
+  margin-top: 20px;
+  background-clip: padding-box;
+  opacity: 0.97;
+  filter: alpha(opacity=97);
+  -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+}
+
+div.user-menu-container .btn-lg {
+    padding: 0px 12px;
+}
+
+div.user-menu-container h4 {
+    font-weight: 300;
+    color: #8b8b8b;
+}
+
+div.user-menu-container a, div.user-menu-container .btn  {
+    transition: 1s ease;
+}
+
+div.user-menu-container .thumbnail {
+   width:100%;
+   /*min-height:200px;*/
+   border: 0px!important;
+   padding: 0px;
+   border-radius: 0;
+   border: 0px!important;
+}
+
+/* -- Vertical Button Group -- */
+div.user-menu-container .btn-group-vertical {
+    display: block;
+}
+
+div.user-menu-container .btn-group-vertical>a {
+    padding: 35.4px 25px;
+    background-color: #00a2ee;
+    color: white;
+    border-color: #fff;
+}
+
+div.btn-group-vertical>a:hover {
+    color: white;
+    border-color: white;
+}
+
+div.btn-group-vertical>a.active {
+    background: #5cb85c;
+    box-shadow: none;
+    color: white;
+}
+/* -- Individual button styles of vertical btn group -- */
+div.user-menu-btns {
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+}
+
+div.user-menu-btns div.btn-group-vertical>a.active:after{
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  margin-top: -13px;
+  border-left: 0;
+  border-bottom: 13px solid transparent;
+  border-top: 13px solid transparent;
+  border-left: 10px solid #5cb85c;
+}
+/* -- The main tab & content styling of the vertical buttons info-- */
+div.user-menu-content {
+    color: #323232;
+}
+
+ul.user-menu-list {
+    list-style: none;
+    margin-top: 20px;
+    margin-bottom: 0;
+    padding: 10px;
+    border: 1px solid #eee;
+}
+ul.user-menu-list>li {
+    padding-bottom: 8px;
+    text-align: center;
+}
+
+div.user-menu div.user-menu-content:not(.active){
+  display: none;
+}
+
+/* -- The btn stylings for the btn icons -- */
+.btn-label {position: relative;left: -12px;display: inline-block;padding: 6px 12px;background: rgba(0,0,0,0.15);border-radius: 3px 0 0 3px;}
+.btn-labeled {padding-top: 0;padding-bottom: 0;}
+
+/* -- Custom classes for the snippet, won't effect any existing bootstrap classes of your site, but can be reused. -- */
+
+.user-pad {
+    padding: 10px 25px;
+}
+.user-pad h3 {
+  padding-top: 0px;
+  margin-top: 8px;
+}
+
+.no-pad {
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+}
+
+.user-details {
+    background: #fff;
+    min-height: 205px;
+    padding: 0;
+}
+
+.user-image {
+  /*max-height:200px;*/
+  overflow:hidden;
+  padding: 5px;
+}
+
+.overview h3 {
+    font-weight: 300;
+    margin-top: 15px;
+    margin: 10px 0 0 0;
+}
+
+.overview h4 {
+    font-weight: bold!important;
+    font-size: 40px;
+    margin-top: 0;
+}
+
+.view {
+    position:relative;
+    overflow:hidden;
+    margin-top: 10px;
+}
+
+.view p {
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+ 
+.caption {
+    position:absolute;
+    top:0;
+    right:0;
+    background: rgba(70, 216, 210, 0.44);
+    width:100%;
+    height:100%;
+    padding:2%;
+    display: none;
+    text-align:center;
+    color:#fff !important;
+    z-index:2;
+}
+
+.caption a {
+    padding-right: 10px;
+    color: #fff;
+}
+
+.info {
+    display: block;
+    padding: 10px;
+    background: #eee;
+    text-transform: uppercase;
+    font-weight: 300;
+    text-align: right;
+}
+
+.info p, .stats p {
+    margin-bottom: 0;
+}
+
+.stats {
+    display: block;
+    padding: 10px;
+    color: white;
+}
+
+.share-links {
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-top: 15px;
+}
+
+.square, .btn {
+    border-radius: 0px!important;
+}
+
+/* -- media query for user profile image -- */
+@media (max-width: 767px) {
+    .user-image {
+        max-height: 400px;
+    }
+}
+
+.view_profile_btn {
+  margin-top: 6px;
+  margin-bottom: 20px;
+}
+.Babysitters_sub_header {
+  float: left;
+  margin-top: 20px;
+  width: 100%;
+}
+.Babysitters_sub_header h5 {
+  float: left;
+  line-height: 40px;
+}
+.Babysitters_sub_header img {
+  float: right;
+}
+.bottom_advrt {
+  margin: 20px 0;
+}
+.BabySitter_profile_wrap {
+  background-color: #fff;
+}
+.BabySitter_pageinfo {
+  text-align: right;
+  float: right;
+  margin-top: 10px;
+}
+.BabySitter_sidebar {
+  background-color: #f9f9f9;
+  padding: 15px 15px;
+  float: left;
+  width: 100%;
+  margin-top: 20px;
+}
+.BabySitter_sidebar h3 {
+  margin-top: 0;
+}
+.BabySitter_sidebar ul {
+  padding-left: 0;
+}
+.BabySitter_sidebar ul li {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 10px;
+}
 
 
 
@@ -1180,6 +1471,14 @@ textarea:focus, input:focus{ outline: none !important; }
     }
     .clasiffied_top form button {
         float: right;
+    }
+    .square {
+      float: left;
+      width: 100%;
+    }
+    .square a {
+      float: left !important;
+      width: 50% !important;
     }
 }
 

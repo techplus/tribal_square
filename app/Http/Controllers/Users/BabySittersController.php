@@ -380,6 +380,10 @@ class BabySittersController extends Controller
 		{
 			if( $oUserType->last_step < $step )
 			{
+				unset($oUser->type);
+				$oUser->last_step = $step;
+				$oUser->save();				
+				Auth::user()->last_step = $step;
 				DB::table('user_usertypes')->where( 'user_id' , '=' , $oUser->id )->update( [ 'last_step' => $step ] );
 				return $step;
 			}
