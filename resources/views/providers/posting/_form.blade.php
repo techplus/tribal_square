@@ -29,7 +29,7 @@
     </style>
     <script type="text/javascript" src="{{ asset('inspinia/js/jquery.form.js') }}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/summernote.js') }}"></script>
-    <script type="text/javascript" src="{{asset('inspinia/js/jquery-ui.custom.min.js')}}"></script>
+    <script src="{{asset('inspinia/js/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/plugins/plupload/plupload.full.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/plugins/plupload/moxie.js') }}"></script>
     <script type="text/javascript" src="{{ asset('inspinia/js/plugins/plupload/jquery.ui.plupload/jquery.ui.plupload.js') }}"></script>
@@ -376,7 +376,7 @@
                 </div>
             </div>
 	<!-- Steps -->
-    <script src="{{ asset('inspinia/js/plugins/staps/jquery.steps.min.js') }}"></script>
+    <script src="{{ asset('inspinia/js/plugins/staps/jquery.steps.js') }}"></script>
     <!-- Jquery Validate -->
     <script src="{{ asset('inspinia/js/plugins/validate/jquery.validate.min.js') }}"></script>
 	 <script>
@@ -422,6 +422,9 @@
         $(document).ready(function(){
             $("form.wizard-big").steps({
                 bodyTag: "fieldset",
+                onCanceled : function(){
+                  window.location = "{{ route('posts.index') }}";
+                },
                 enableCancelButton: false,
                 /*onCanceled : function(){
                   window.location = "{{ route('posts.index') }}";
