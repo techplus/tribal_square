@@ -116,7 +116,7 @@
                                         <input type="radio" class="required have-special-needs" name="have_special_needs_service_experience" value="0" {{ ( $oExperience ) ? ( ( $oExperience->have_special_needs_service_experience == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
                                     </div>
                                 </div>                                
-                                <div class="form-group special-needs">                                                                        
+                                <div class="form-group special-needs" style="{{ ( $oExperience ) ? ( ( $oExperience->have_special_needs_service_experience == 1 ) ? '' : 'display:none;' ) : 'display:none;' }}">                                                                        
                                         <?php $aSpecialNeeds = Config::get('SpecialNeedServices'); 
                                              $aExpSpecialNeeds = array();
                                              if( $oExperience->special_needs_service_experience )
@@ -174,7 +174,7 @@
                 submitHandler:function()
                 {
                     document.frmBabySitter.submit();
-                    return false;
+                    return false;                                                         
                 }
            });       
         });

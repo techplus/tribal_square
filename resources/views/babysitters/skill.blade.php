@@ -120,8 +120,17 @@
                 },
                 submitHandler:function()
                 {
-                    document.frmBabySitter.submit();
-                    return false;
+                    if( $('#languages_spoken_tagsinput').find('.tag').length > 0 )
+                    {
+                        document.frmBabySitter.submit();
+                        return false;
+                    }   
+                    else
+                    {                        
+                        $(window).scrollTop(0);
+                        alert("Add Languages");                        
+                        return false;
+                    }                 
                 }
            }); 
         });

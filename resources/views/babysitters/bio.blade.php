@@ -51,8 +51,8 @@
                                 </div>
                                 <div class="form-group">                                    
                                     <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="have_own_car" value="1" {{ ( $oBio ) ? ( ( $oBio->have_own_car == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="have_own_car" value="0" {{ ( $oBio ) ? ( ( $oBio->have_own_car == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                        <input type="radio" class="i-checks" name="have_own_car" value="1" {{ ( $oBio ) ? ( ( $oBio->have_own_car == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="i-checks" name="have_own_car" value="0" {{ ( $oBio ) ? ( ( $oBio->have_own_car == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div> 
@@ -63,8 +63,8 @@
                                 </div>                                
                                 <div class="form-group">                                    
                                     <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="comfortable_with_pets" value="1" {{ ( $oBio ) ? ( ( $oBio->comfortable_with_pets == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="comfortable_with_pets" value="0" {{ ( $oBio ) ? ( ( $oBio->comfortable_with_pets == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                        <input type="radio" class="i-checks" name="comfortable_with_pets" value="1" {{ ( $oBio ) ? ( ( $oBio->comfortable_with_pets == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="i-checks" name="comfortable_with_pets" value="0" {{ ( $oBio ) ? ( ( $oBio->comfortable_with_pets == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
                                     </div>
                                 </div>    
                                 <div class="hr-line-dashed"></div>
@@ -75,8 +75,8 @@
                                 </div>
                                 <div class="form-group">                                    
                                     <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="do_smoke" value="1" {{ ( $oBio ) ? ( ( $oBio->do_smoke == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="do_smoke" value="0" {{ ( $oBio ) ? ( ( $oBio->do_smoke == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                        <input type="radio" class="i-checks" name="do_smoke" value="1" {{ ( $oBio ) ? ( ( $oBio->do_smoke == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="i-checks" name="do_smoke" value="0" {{ ( $oBio ) ? ( ( $oBio->do_smoke == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
                                     </div>
                                 </div>    
                                 <div class="hr-line-dashed"></div>
@@ -90,7 +90,7 @@
                                         $
                                     </div>
                                     <div class="col-sm-2" style="padding: 0;">
-                                        <input type="text" class="form-control required" name="average_rate_from" placeholder="start range" value="{{ $oBio->average_rate_from }}">                                      
+                                        <input type="text" class="form-control required" id="average_rate_from" name="average_rate_from" placeholder="start range" value="{{ $oBio->average_rate_from }}">                                      
                                     </div>
                                     <div class="col-sm-1"  style="padding-right: 0;padding-top: 0.5%;width:auto;">
                                         To
@@ -99,7 +99,7 @@
                                         $
                                     </div>
                                     <div class="col-sm-2" style="padding: 0;">
-                                        <input type="text" class="form-control required" name="average_rate_to" placeholder="end range" value="{{ $oBio->average_rate_to }}">                                      
+                                        <input type="text" class="form-control required" id="average_rate_to" name="average_rate_to" placeholder="end range" value="{{ $oBio->average_rate_to }}">                                      
                                     </div>   
                                     <div class="col-sm-5" style="padding-top: 0.5%;">
                                         per hour
@@ -184,16 +184,24 @@
                         number : true
                     },
                     increase_rate_for_each_child:{
-                        digits : true
+                        number : true
                     },
                     miles_from_home:{
                         digits : true
                     }                 
                 },
                 submitHandler:function()
-                {
-                    document.frmBabySitter.submit();
-                    return false;
+                {                    
+                    if( parseFloat($('#average_rate_from').val()) > parseFloat($('#average_rate_to').val()) )
+                    {
+                        alert("average rate strat range must less than end range");
+                        return false;
+                    }
+                    else
+                    {
+                        document.frmBabySitter.submit();
+                        return false;
+                    }
                 }
            });
             $('#experience').on('keyup',function (argument) {

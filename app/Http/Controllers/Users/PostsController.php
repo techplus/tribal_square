@@ -97,13 +97,21 @@ class PostsController extends Controller
 			return response ()->json ( $aResp );
 
 		$aUpdateData = Request::only ( [
-			'email' , 'title' , 'can_phone' , 'can_text' , 'price' , 'description' , 'condition' ,'category_id','location','fineprint','street1','street2','language_spoken',
+			'email' , 'title' , 'price' , 'description' , 'condition' ,'category_id','location','fineprint','street1','street2','language_spoken',
 			'location2' , 'manufacture' , 'model_number' , 'size' , 'city' , 'country' , 'state' , 'pin' , 'avail_for_other_services' , 'phone' , 'contact_name' , 'lat' , 'long'
 		] );
 		if( Request::has('is_cover') )
 		{
 			ClassifiedImage::where('id',Request::input('is_cover'))->update(['is_cover'=>1]);
 		}
+		if( ! Request::has('can_phone') )
+			$aUpdateData['can_phone'] = 0;
+		else
+			$aUpdateData['can_phone'] = 1;
+		if( ! Request::has('can_text') ) 
+			$aUpdateData['can_text'] = 0;
+		else
+			$aUpdateData['can_text'] = 1;
 		Classified::where('id',$id)->update($aUpdateData);
 		return response ()->json ( Classified::find ( $id )->toArray () );
 	}

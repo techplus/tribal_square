@@ -26,10 +26,27 @@ class BabySittersController extends Controller
 			'5' => 'availability',
 			'6' => 'skill'
 	);	
+	private $aMenuLabels = array(		
+			'1' => 'Account Basics',
+			'2' => 'Account Info',
+			'3' => 'Bio & Preferences',
+			'4' => 'Experience',
+			'5' => 'Availability',
+			'6' => 'Skill and Abilities'
+	);	
 
 	public function getIndex( $section = null )
-	{
+	{				
+		$this->data['aMenu'] = $this->aMenu;
+		$this->data['aMenuLables'] = $this->aMenuLabels;
 		$section = ( $section == null OR empty( $section ) ) ? 'account1' : $section ;
+		$aResp = $this->__hasAccess( $section , $this->data['oUser']->id );			
+		if( ! $aResp['bAccess'] )
+		{
+			return abort(403,"Access Denied");
+		}
+		$this->data[ 'last_step' ] = $aResp['last_step'];	
+
 		$this->data['section'] = $section;
 
 		if( $section == "account1" OR $section == "account2" )
@@ -152,7 +169,7 @@ class BabySittersController extends Controller
 
 			if( $oAccountBasics )
 			{
-				$this->__setLastStep(1);
+				$this->__setLastStep(2);
 				$nextSection = "account2";				
 			}
 		}
@@ -167,6 +184,8 @@ class BabySittersController extends Controller
 
 			if( Request::hasFile('file') )
 			{
+				if( $oAccountInfo->profile_pic != "" )
+					File::delete( base_path('profile_pictures').'/'.$oAccountInfo->profile_pic  );
 				$oFile = Request::file('file');
 				$filename = $oFile->getClientOriginalName();
 				$path = base_path('profile_pictures').'/';
@@ -180,7 +199,7 @@ class BabySittersController extends Controller
 			if( $oAccountInfo )
 			{
 				 Account::where( 'user_id' , '=' , $oUser->id )->update( $aData );
-				 $this->__setLastStep(2);
+				 $this->__setLastStep(3);
 				 $nextSection = "bio";		
 			}			
 			
@@ -202,7 +221,7 @@ class BabySittersController extends Controller
 
 			if( $oBio )
 			{
-				$this->__setLastStep(3);
+				$this->__setLastStep(4);
 				$nextSection = "experience";		
 			}
 		}
@@ -238,7 +257,7 @@ class BabySittersController extends Controller
 
 			if( $oExperience )
 			{
-				$this->__setLastStep(4);
+				$this->__setLastStep(5);
 				$nextSection = "availability";		
 			}
 		}
@@ -313,7 +332,7 @@ class BabySittersController extends Controller
 
 			if( $oAvailability )
 			{
-				$this->__setLastStep(5); 
+				$this->__setLastStep(6); 
 				$nextSection = "skill";
 			}
 		}
@@ -346,8 +365,8 @@ class BabySittersController extends Controller
 				$aData[ 'user_id' ] = $oUser->id;
 				$oSkill = Skill::create($aData);				
 			}	
-			if( $oSkill )		
-				$this->__setLastStep(6); 				
+			/*if( $oSkill )		
+				$this->__setLastStep(6); 	*/			
 		}
 		
 		return redirect()->to( 'baby-sitters/index/'.$nextSection );
@@ -367,5 +386,29 @@ class BabySittersController extends Controller
 			return $oUserType->last_step;
 		}
 		return 1;
+	}
+
+	private function __hasAccess( $sSection , $iUserId )
+	{
+		$aResponse = array();
+		$aResponse[ 'bAccess' ] = false;
+		$aResponse[ 'sSection' ] = $this->aMenu[ 1 ]; 
+		$aResponse[ 'last_step' ] = 1; 
+		$oUserType = DB::table('user_usertypes')->where( 'user_id' , '=' , $iUserId )->first();
+		if( $oUserType )
+		{
+			$aResponse[ 'last_step' ] = $oUserType->last_step; 
+			$iStepNo = array_search( $sSection , $this->aMenu	);
+			if( $iStepNo > $oUserType->last_step )		
+			{
+				$aResponse[ 'sSection' ] = $this->aMenu[ $oUserType->last_step ];
+			}
+			else
+			{
+				$aResponse[ 'sSection' ] = $sSection;
+				$aResponse[ 'bAccess' ] = true;
+			}
+		}		
+		return $aResponse;
 	}
 }

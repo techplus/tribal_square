@@ -1,5 +1,5 @@
 @extends('layouts.inspinia.inspinia')
-@section('content')	
+@section('content')	    
      <link href="{{ url('inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
      <script src="{{ asset('inspinia/js/plugins/validate/jquery.validate.min.js') }}"></script>
 	 <div class="row">
@@ -21,8 +21,8 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="control-label" style="font-weight:normal;">Display on Profile : </label>&nbsp;&nbsp;
-                                    	<input type="radio" class="required i-checks" name="display_phone_on_profile" value="1" {{ ( $oAccountBasics ) ? ( ( $oAccountBasics->display_phone_on_profile == 1 ) ? 'checked' : '' ) : 'checked' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="display_phone_on_profile" value="0" {{ ( $oAccountBasics ) ? ( ( $oAccountBasics->display_phone_on_profile == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    	<input type="radio" class="required i-checks" name="display_phone_on_profile" value="1" {{ ( $oAccountBasics->phone ) ? ( ( $oAccountBasics->display_phone_on_profile == 1 ) ? 'checked' : '' ) : 'checked' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="required i-checks" name="display_phone_on_profile" value="0" {{ ( $oAccountBasics->phone ) ? ( ( $oAccountBasics->display_phone_on_profile == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
                                     </div>
                                 </div>                                
                                 <div class="form-group">
@@ -33,8 +33,8 @@
                                 <?php
                                     $sDay = "";
                                     $sMonth = "";
-                                    $sYear = "";
-                                    if( $oAccountBasics->birthdate )
+                                    $sYear = "";                                    
+                                    if( !in_array( $oAccountBasics->birthdate, [ "0000-00-00" , "1970-01-01" , "1969-12-31" ] ) )
                                     {
                                         $ts = strtotime($oAccountBasics->birthdate);
                                         $sDay = date('d',$ts);
@@ -86,8 +86,8 @@
                                 </div>
                                 <div class="form-group">                                	
                                     <div class="col-sm-12">                                    	 
-                                        <input type="radio" class="required i-checks" class="gender required" name="gender" value="Male" {{ ( $oAccountBasics->gender ) ? ( ( $oAccountBasics->gender == "Male" ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Male&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" class="gender required" name="gender" value="Female" {{ ( $oAccountBasics->gender ) ? ( ( $oAccountBasics->gender == "Female" ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Female
+                                        <input type="radio" class="required i-checks" class="gender" name="gender" value="Male" {{ ( $oAccountBasics ) ? ( ( $oAccountBasics->gender == "Male" ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Male&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="required i-checks" class="gender" name="gender" value="Female" {{ ( $oAccountBasics ) ? ( ( $oAccountBasics->gender == "Female" ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Female
                                     </div>
                                 </div>
                                 @if( $oAccountBasics->profile_pic )
