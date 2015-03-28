@@ -73,4 +73,46 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	{
 		return $this->belongsToMany('App\Models\Shift','day_shifts','user_id','shift_id');	
 	}
+
+	public function scopeLaststep($query,$step)
+	{
+		return $query->where('last_step','=',$step)->whereHas('UserTypes',function($q){
+			$q->where('name','BabySitters');
+		});
+	}
+
+	public function scopeSearch($query,$aSearch)
+	{
+		if( !empty($aSearch['term']) AND !empty($aSearch['location']) )
+		{
+			$query->whereHas('Bio' , function($q)use($aSearch){
+				$q->where('title','LIKE','%'.$aSearch['term'].'%')
+				->orWhere('experience','LIKE','%'.$aSearch['term'].'%');
+			})->whereHas('Account' , function($q)use($aSearch){
+				$q->where('address','LIKE','%'.$aSearch['location'].'%')
+				->orWhere('street','LIKE','%'.$aSearch['location'].'%')
+				->orWhere('city','LIKE','%'.$aSearch['location'].'%')
+				->orWhere('state','LIKE','%'.$aSearch['location'].'%')
+				->orWhere('country','LIKE','%'.$aSearch['location'].'%')
+				->orWhere('pin','LIKE','%'.$aSearch['location'].'%');
+			});
+		}
+		else if( !empty($aSearch['term']) ){
+			$query->whereHas('Bio' , function($q)use($aSearch){
+				$q->where('title','LIKE','%'.$aSearch['term'].'%')
+				->orWhere('experience','LIKE','%'.$aSearch['term'].'%');
+			});
+		}
+		else if( !empty($aSearch['location']) ){
+			$query->whereHas('Account' , function($q)use($aSearch){
+				$q->where('address','LIKE','%'.$aSearch['location'].'%')
+				->orWhere('street','LIKE','%'.$aSearch['location'].'%')
+				->orWhere('city','LIKE','%'.$aSearch['location'].'%')
+				->orWhere('state','LIKE','%'.$aSearch['location'].'%')
+				->orWhere('country','LIKE','%'.$aSearch['location'].'%')
+				->orWhere('pin','LIKE','%'.$aSearch['location'].'%');
+			});
+		}
+		return $query;
+	}
 }

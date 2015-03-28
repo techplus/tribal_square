@@ -32,6 +32,8 @@ class RegisterController extends Controller
 		$oUser = User::create($aRegisterData);
 		$oUser->UserTypes()->attach($request->input('user_type'));
 		Auth::login($oUser);
+		Auth::user()->last_logged_in = date('Y-m-d H:i:s');				
+		Auth::user()->save();					
 		return response()->redirectToAction('Auth\RegisterController@getStep2');
 	}
 

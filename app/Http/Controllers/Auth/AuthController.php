@@ -73,6 +73,8 @@ class AuthController extends Controller {
 			if ( $oUser ) {
 				/* found user */
 				$this->auth->login ( $oUser );
+				$oUser->last_logged_in = date('Y-m-d H:i:s');
+				$oUser->save();
 				return response()->redirectTo('/');
 			}
 
@@ -82,14 +84,16 @@ class AuthController extends Controller {
 			$aUserData[ 'email' ] = $graph[ 'email' ];
 			$aUserData[ 'firstname' ] = $graph[ 'first_name' ];
 			$aUserData['lastname'] = (isset( $graph['middle_name'] ) ? $graph['middle_name'] : '' )."  ".(isset( $graph['last_name'] ) ? $graph['last_name'] : '' );
+			$aUserData['last_logged_in'] = date('Y-m-d H:i:s');
+			$plainPassword = str_random ( 8 );			
 
-			$plainPassword = str_random ( 8 );
 			$aUserData[ 'password' ] = Hash::make ( $plainPassword );
 
-			$oUser = User::create ( $aUserData );
+			$oUser = User::create ( $aUserData );			
 
 			/* login the user */
 			$this->auth->login ( $oUser );
+
 
 			/** user should get mail about sign up success */
 			Mail::send ( 'emails.signup' , array ( 'user' => $oUser , 'password' => $plainPassword ) , function ( $oMessage ) use ( $oUser ) {
@@ -110,7 +114,10 @@ class AuthController extends Controller {
 		$redirectPath = "/";
 		if ($this->auth->attempt($credentials, $request->has('remember')))
 		{
-			$oUser = $this->auth->user()->UserTypes()->first();										
+			$this->auth->last_logged_in = date('Y-m-d H:i:s');				
+			$this->auth->user()->save();					
+			$oUser = $this->auth->user()->UserTypes()->first();							
+
 			if( $oUser->name )
 			{								
 				if( $oUser->name == "SuperAdmin" )

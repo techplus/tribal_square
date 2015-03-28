@@ -1,5 +1,42 @@
 @extends('layouts.front')
 @section('content')	
+<style>
+	.spin {
+  		 -webkit-animation: spin .5s infinite linear;
+  		 -moz-animation: spin .5s infinite linear;
+  		 -o-animation: spin .5s infinite linear;
+  		 animation: spin .5s infinite linear;
+    	 -webkit-transform-origin: 50% 58%;
+         transform-origin:50% 58%;
+         -ms-transform-origin:50% 58%; /* IE 9 */
+	}
+	@-moz-keyframes spin {
+	  from {
+	    -moz-transform: rotate(0deg);
+	  }
+	  to {
+	    -moz-transform: rotate(360deg);
+	  }
+	}
+
+	@-webkit-keyframes spin {
+	  from {
+	    -webkit-transform: rotate(0deg);
+	  }
+	  to {
+	    -webkit-transform: rotate(360deg);
+	  }
+	}
+
+	@keyframes spin {
+	  from {
+	    transform: rotate(0deg);
+	  }
+	  to {
+	    transform: rotate(360deg);
+	  }
+	}
+</style>
 	<div class="page-wrap">
 		<div id="page-content-wrapper">
 			<div class="row header_wrap">
@@ -12,20 +49,20 @@
 			            <br><br>
 
 			            <div class="Babysitters_sub_header">
-			              <h5>{{ $iTotal }} Babysitters Found</h5>
+			              <h5><span class="total-baby-sitters">{{ $iTotal }}</span> Babysitters Found</h5>
 			              <img src="http://placehold.it/450x60" alt="" class="img-responsive">
 			            </div>
 			            <div class="babysitter-container">
 			            	@include('front.sub_babysitters')	
 			            </div>
-			            <input type="hidden" name="offset" value="{{ $iOffset }}">
-			            <input type="hidden" name="limit" value="{{ $iLimit }}">
+			            <input type="hidden" name="offset" class="offset" value="{{ $iOffset }}">
+			            <input type="hidden" name="limit" class="limit" value="{{ $iLimit }}">
 			           	<div class="clearfix"></div>
-
-						    <div class="row">
+			           	@if( $iOffset < $iTotal )
+						    <div class="row load-more-parent">
 						      <div class="container">
 						        <div class="bottom_advrt" align="center">
-						            <a href="#" class="btn btn-md custome_blue_btn">
+						            <a href="javascript:;" class="btn btn-md custome_blue_btn load-more">
 						            <span class="glyphicon glyphicon-refresh"></span>
 						            Load More</a>
 						            <div class="clearfix"></div><br>
@@ -33,6 +70,7 @@
 						        </div>
 						      </div>
 						    </div>
+						@endif
       					</div>
     				</div>
  				 </div>
@@ -66,13 +104,40 @@ $( document ).ready(function() {
     ); 
    
    $('.load-more').on('click',function(){
-   		var ioffset = $('.offset').val();
-   		var ilimit = $('.limit').val();
-   		var 
-   		$.ajax({
-   			url : url("search/babysitters/paginated-baby-sitters"),
-   			data : {}
-   		});
+   		var iOffset = $('.offset').val();
+   		var iLimit = $('.limit').val();
+   		var total = $('.total-baby-sitters').html();
+   		
+   		if( parseInt(iOffset) <= parseInt(total) )
+   		{
+	   		$.ajax({
+	   			beforeSend: function(){
+	   				$('.load-more').find('span').addClass('spin');
+	   			},
+	   			url : '{{ url("search/babysitters/paginated-baby-sitters") }}',
+	   			data : {offset:iOffset,limit:iLimit},
+	   			type : "post",
+	   			dataType : "json",
+	   			success : function(resp)
+	   			{
+	   				if( resp.html )
+	   				{	
+	   					$('.babysitter-container').append(resp.html);	   					
+	   					if( parseInt(resp.iOffset)  >= parseInt(resp.iTotal) )
+	   					{
+	   						$('.load-more-parent').hide();
+	   					}
+	   				}
+	   				$('.offset').val(resp.iOffset);	   				
+	   				$('.total-baby-sitters').val(resp.iTotal);
+	   			},
+	   			complete:function()
+	   			{
+	   				if( $('.load-more').length > 0 ) 
+	   					$('.load-more').find('span').removeClass('spin');
+	   			}
+	   		});
+   		}
    });   
 });
 </script>
