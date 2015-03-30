@@ -32,7 +32,7 @@
 	                    About Me :
 	                </h3>
 	                <p>{{ (strlen($oBabySitter->Bio->experience) > 175 ) ? substr($oBabySitter->Bio->experience,0,174)."..." : $oBabySitter->Bio->experience }}</p>
-	                <a href="{{ route('search.babysitters.show', [ $oBabySitter->id ]) }}" class="btn btn-md custome_blue_btn view_profile_btn">See Full Profile</a>
+	                <a href="{{ action('BabySittersController@show', [ $oBabySitter->id ]) }}" class="btn btn-md custome_blue_btn view_profile_btn">See Full Profile</a>
 	            </div>
 	        </div>
 	    </div>						    

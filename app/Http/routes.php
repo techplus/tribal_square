@@ -55,6 +55,7 @@ Route::group( ['middleware' => ['guest'] ], function() {
 	Route::resource('search','SearchController',['only'=>'store']);
 	Route::resource('search/classified','ClassifiedsController');
 	Route::resource('search/babysitters','BabySittersController',[ 'only' => [ 'index' , 'show' ] ]);
+	//Route::get('search/babysitters/show/{user_id}','BabySittersController@show');
 	Route::resource('search/deals','DealsController');
 	Route::resource('search/categories','CategoriesController');
 	Route::post('search/babysitters/paginated-baby-sitters','BabySittersController@postPaginatedBabySitters');

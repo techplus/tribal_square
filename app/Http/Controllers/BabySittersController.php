@@ -10,6 +10,7 @@ use App\Models\Experience;
 use App\Models\Skill;
 use App\Models\Shift;
 use App\Models\Day;
+use App\Models\Language;
 use DB;
 use View;
 use App\Models\User;
@@ -44,25 +45,43 @@ class BabySittersController extends Controller {
 		$oQuery = User::laststep(6)
 			->with( [ 'UserTypes' , 'Account' => function($q){
 				$q->select( [ DB::raw('DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(accounts.birthdate)), "%Y") + 0 as age') , 'accounts.*' ] );
-			}, 'Bio']);			
+			}, 'Bio','Experience','Availability','Skill','Days']);			
 		
 		$oQuery->search( $aSearch['term'] );
 
+		$iTotal = $oQuery->count();
+		$aResp['iTotal'] = $iTotal;
 		if( !$needRow )
-		{
-			$iTotal = $oQuery->count();
+		{			
 
 			$aBabySitters = $oQuery->groupBy('users.id')
 						->take($limit)
 			   			->skip($offset)
 			   			->get();
-			$aResp['iTotal'] = $iTotal;
+			
 			$aResp['aBabySitters'] = $aBabySitters;			
 		}
 		else
 		{	
-			$oBabySitter = $oQuery->where('id',$id)->first();			   			
-			$aResp['oBabySitter'] = $oBabySitter;					
+			$oBabySitter = $oQuery->get();
+			$aArray = $oBabySitter->toArray();
+			
+			foreach ($aArray as $key=>$object) {
+				if( $id == $object['id'] )
+				{
+					$aResp['sequence_id'] = $key+1;
+
+					if( $key == (count($aArray) - 1) )
+						$aResp['next_id'] = $aArray[0]['id'];					
+					else
+						$aResp['next_id'] = $aArray[$key+1]['id'];									
+					break;
+				}
+			}
+
+			$aResp['oBabySitter'] = $oBabySitter->filter(function($q) use($id){
+				return $q->id == $id;
+			})->first();					
 		}
 		return $aResp;	
 
@@ -156,16 +175,35 @@ class BabySittersController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
+	public function show($user_id)
+	{		
+
 		$aSearch = session('search');
-		$oUser = User::find($id);
+		$oUser = User::find($user_id);
 		
 		if( !$oUser )
 			abort(404);		
+		
+		$this->data['aDays'] = Day::all();
+		$this->data['aShifts'] = Shift::all();				
 
-		$aResponse = $this->getBabysitters ( 0 , 0 , $aSearch , 1 , $id );
-		$oBabySitter = $aResponse[ 'oBabySitter' ];
+		$aResponse = $this->getBabysitters ( 0 , 0 , $aSearch , 1 , $user_id );
+		$this->data['oBabySitter'] = $aResponse[ 'oBabySitter' ];		
+		$this->data['iSequenceId'] = ( isset($aResponse['sequence_id']) ) ? $aResponse['sequence_id']  : 1;
+		$this->data['iNextId'] = ( isset($aResponse['next_id']) ) ? $aResponse['next_id']  : $user_id;
+		$this->data['iTotal'] = $aResponse['iTotal'];
+
+		$aDayShifts = [];
+		if( $this->data['oBabySitter']->Days->count() > 0 )
+		{
+			foreach( $this->data['oBabySitter']->Days as $oDay )
+			{
+				$aDayShifts[ $oDay->pivot->shift_id ][ $oDay->pivot->day_id ] = "on";
+			}
+		}
+		
+		$this->data['aDayShifts'] = $aDayShifts;
+
 		return $this->renderView( 'front.babysitter_profile' );
 	}
 		

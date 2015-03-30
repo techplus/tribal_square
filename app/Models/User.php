@@ -66,7 +66,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function Days()
 	{
-		return $this->belongsToMany('App\Models\Day','day_shifts','user_id','day_id');	
+		return $this->belongsToMany('App\Models\Day','day_shifts','user_id','day_id')->withPivot( [ 'id' , 'shift_id' , 'day_id' , 'user_id' ] );	
 	}
 
 	public function Shifts()
