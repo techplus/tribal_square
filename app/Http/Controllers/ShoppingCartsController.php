@@ -94,7 +94,7 @@ Class ShoppingCartsController extends Controller{
 				$aProduct = $aProducts[ Request::get('key') ];
 				if( $aProduct[ 'id' ] ==  Request::get('id') ){					
 					unset( $aProducts[ Request::get('key') ] );
-					$aProducts = array_values($aProducts);
+					//$aProducts = array_values($aProducts);
 					if( count($aProducts) > 0 )
 						Session::put('products',$aProducts);
 					else

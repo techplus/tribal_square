@@ -10,11 +10,11 @@
                       <img src="{{asset('/images/logo.jpg')}}" alt="" class="img-responsive">
                     </a>
                   </div>
-                  <div class="header_btns_wrap">
+                  <div class="header_btns_wrap">                                    
                     <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg custome_blue_btn">Signup</a>
-                    <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg custome_blue_btn">Login</a>
-                  </div>
-                  <p class="header_cart"><a href="{{ url('shopping-cart') }}">My Cart <span class="no_of_items">{{ (Session::has('products')) ? "( ".count(Session::get('products'))." Items )" : '' }}</span></p>
+                    <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg custome_blue_btn">Login</a>                    
+                  </div>                  
+                  <p class="header_cart"><a href="{{ url('shopping-cart') }}">My Cart <span class="no_of_items">{{ (Session::has('products')) ? "( ".count(Session::get('products'))." Items )" : '' }}</span></a></p>
                 </div>                 
               </div>
             </div>

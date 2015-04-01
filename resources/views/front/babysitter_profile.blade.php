@@ -23,12 +23,12 @@
 				                <div class="col-sm-6">
 				                    <div class="BabySitter_profile_info">
 				                        <h3>{{ ucfirst($oBabySitter->firstname)." ".ucfirst(substr($oBabySitter->lastname,0,1))."." }}</h3>
-				                        <p>Babysitter in {{ ucfirst($oBabySitter->Account->city).",".$oBabySitter->Account->state." ".$oBabySitter->Account->pin }}. Looking for work as a babysitter.</p>
+				                        <p>{{ $oBabySitter->Bio->title }}</p>
 				                        <h5 class="white"><i class="glyphicon glyphicon-heart"></i> Age : {{ $oBabySitter->Account->age }}</h5>
 				                        <h5 class="white"><i class="glyphicon glyphicon-map-marker"></i> Will travel {{ $oBabySitter->Bio->miles_from_home }} miles </h5>
 				                        <h5 class="white"><i class="glyphicon glyphicon-lock"></i> Last 
 				                        signed in: {{ date('m/d/Y h:i a',strtotime($oBabySitter->last_logged_in)) }}</h5>
-				                        <h5 class="white"><i class="glyphicon glyphicon-ok"></i> Enhanced Background Check</h5>
+				                        <h5 class="white"><i class="glyphicon glyphicon-ok"></i> Babysitter in {{ ucfirst($oBabySitter->Account->city).",".$oBabySitter->Account->state." ".$oBabySitter->Account->pin }}. </h5>
 				                        <h5 class="white"><i class="glyphicon glyphicon-user"></i> {{ $oBabySitter->Account->gender }}</h5>
 				                        @if( $oBabySitter->Account->display_phone_on_profile == 1 )
 				                        	<h5 class="white"><i class="glyphicon glyphicon-phone-alt"></i> {{ $oBabySitter->Account->phone }}</h5>

@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class PasswordController extends Controller {
 
@@ -38,6 +40,26 @@ class PasswordController extends Controller {
 	public function getIndex()
 	{
 		return $this->getEmail();
+	}
+
+	public function postEmail(Request $request)
+	{
+		$this->validate($request, ['email' => 'required|email']);
+
+		$user = User::where('email',$request->input('email'))->first();
+		$response = $this->passwords->sendResetLink($request->only('email'), function($m) use($user)
+		{
+			$m->subject( ucfirst($user->firstname).", link to reset your TribalSquare password");
+		});
+
+		switch ($response)
+		{
+			case PasswordBroker::RESET_LINK_SENT:
+				return redirect()->back()->with('status', trans($response));
+
+			case PasswordBroker::INVALID_USER:
+				return redirect()->back()->withErrors(['email' => trans($response)]);
+		}
 	}
 
 }

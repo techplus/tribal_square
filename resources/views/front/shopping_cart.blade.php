@@ -101,7 +101,7 @@
 					                    @endif						                    
 					                    <tr>
 					                        <td>
-					                        <a href="{{ url('/') }}"><button type="button" class="btn btn-md custome_blue_btn">
+					                        <a href="{{ url('search/deals') }}"><button type="button" class="btn btn-md custome_blue_btn">
 					                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
 					                        </button></a></td>
 					                        <td>   </td>
@@ -197,13 +197,16 @@
   							sub_total -= parseFloat(old_total);  							  							
   							$('.sub_total').html(sub_total);
   							if( $('tr.products').length > 0 )
-  							{  								
+  							{  				
+  								$('.no_of_items').html('( '+ $('tr.products').length +' Items )');				
   								$('.main_total').html( sub_total + parseFloat( $('.estimated_shipping').html() ) );
   							}  	
   							else
   							{
-  								$('.estimated_shipping').html('0');
-  								$('.main_total').html('0');
+  								$('table tbody tr').not(':last').remove();
+  								$('.no_of_items').html('');
+  								/*$('.estimated_shipping').html('0');
+  								$('.main_total').html('0');*/
   								$('.paypal').hide();
   							}						
   						},

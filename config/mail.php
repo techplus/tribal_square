@@ -54,7 +54,7 @@ return [
 	|
 	*/
 
-	'from' => ['address' => 'info@tpstracker.com', 'name' => 'Tpstracker Password'],
+	'from' => ['address' => 'info@tpstracker.com', 'name' => 'TribalSquare'],
 
 	/*
 	|--------------------------------------------------------------------------

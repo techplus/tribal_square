@@ -38,8 +38,10 @@
                                         {{ ( $oPost->Listingcategory ) ? $oPost->Listingcategory->name : null }}
                                     </td>
                                     <td>
-                                        <a href="{{route('posts.edit',[$oPost->id])}}" class="edit-posting">edit</a> |
-                                        <a href="javascript:;" onclick="removePost({{$oPost->id}})" class="delete-posting">delete</a>
+                                         @if( $oPost->is_approved_by_admin == 0 )
+                                            <a href="{{route('posts.edit',[$oPost->id])}}" class="edit-posting">edit</a> |
+                                            <a href="javascript:;" onclick="removePost({{$oPost->id}})" class="delete-posting">delete</a>
+                                         @endif
                                     </td>                       
                                 </tr>    
                             @endforeach                
