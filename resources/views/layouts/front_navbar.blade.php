@@ -20,8 +20,8 @@
                 <input type="text" class="form-control header_item_search" placeholder="What are you looking for ?">
                 <input type="text" class="form-control header_location_search" placeholder="Enter your Location">
             </form>
-        </div>
-        <p class="header_cart"><a href="{{ url('shopping-cart') }}">My Cart <span class="no_of_items"></span></p>
+        </div>        
+        <p class="header_cart"><a href="{{ url('shopping-cart') }}">My Cart <span class="no_of_items">{{ (Session::has('products')) ? "(".count(Session::get('products'))." Items )" : '' }}</span></p>
     </div>
 </div>
 {{--</div>--}}

@@ -197,7 +197,7 @@
                     dataType : "json",
                     success : function(json)
                     { 
-                       // window.location.href = '{{ url("shopping-cart") }}';
+                       window.location.href = '{{ url("shopping-cart") }}';
                     },
                     error : function(xhr, status, error)                         
                     {

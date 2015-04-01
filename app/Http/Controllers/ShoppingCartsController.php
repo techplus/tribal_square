@@ -76,7 +76,7 @@ Class ShoppingCartsController extends Controller{
 				if( $aProduct[ 'id' ] ==  Request::get('id') ){
 					$aProduct[ 'quantity' ] = Request::get('new_quantity');	
 					$aProducts[ Request::get('key') ] = $aProduct; 				 
-					Session::push('products',$aProducts);
+					Session::put('products',$aProducts);
 					return response()->json([],200);
 				}
 			}
