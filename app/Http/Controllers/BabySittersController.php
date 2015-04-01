@@ -24,7 +24,7 @@ class BabySittersController extends Controller {
 	 */
 	public function index()
 	{
-		$aSearch = session('search');
+		$aSearch = session('search');		
 		$iLimit = 3;
 		$iOffset = 0;
 		$aResp = $this->getBabysitters($iLimit,$iOffset,$aSearch);	
@@ -42,7 +42,7 @@ class BabySittersController extends Controller {
 		$aBabySitters = array();
 		$iTotal = 0;
 		
-		$oQuery = User::laststep(6)
+		$oQuery = User::laststep(6)->search($aSearch)
 			->with( [ 'UserTypes' , 'Account' => function($q){
 				$q->select( [ DB::raw('DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(accounts.birthdate)), "%Y") + 0 as age') , 'accounts.*' ] );
 			}, 'Bio','Experience','Availability','Skill','Days']);			
@@ -57,7 +57,7 @@ class BabySittersController extends Controller {
 			$aBabySitters = $oQuery->groupBy('users.id')
 						->take($limit)
 			   			->skip($offset)
-			   			->get();
+			   			->get();			 
 			
 			$aResp['aBabySitters'] = $aBabySitters;			
 		}

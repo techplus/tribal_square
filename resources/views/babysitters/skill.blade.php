@@ -1,9 +1,8 @@
 @extends('layouts.inspinia.inspinia')
-@section('content') 
-     <link href="{{ url('inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">    
+@section('content')   
+     @include('babysitters.babysitter_scripts') 
      <link href="{{asset('inspinia/css/plugins/jQueryUI/jquery-ui.min.css')}}" rel="stylesheet"> 
-     <link href="{{ url('inspinia/js/plugins/token/jquery.tagsinput.min.css')}}" rel="stylesheet"> 
-     <script src="{{ asset('inspinia/js/plugins/validate/jquery.validate.min.js') }}"></script>  
+     <link href="{{ url('inspinia/js/plugins/token/jquery.tagsinput.min.css')}}" rel="stylesheet">      
      <div class="row">
         <div class="col-lg-10">
             <div class="ibox float-e-margins">
@@ -38,7 +37,7 @@
                                         @if( count( $aHomeworkHelp ) > 0 )
                                             @foreach( $aHomeworkHelp as $key => $sElement )
                                                 <div class="col-sm-6" style="padding-top: 0.5%"> 
-                                                    <input type="checkbox" class="i-checks" name="homework_help[]" value="{{ $key }}" {{ ( in_array($key,$aExistHomeworkHelp) ) ? 'checked' : ''}}>&nbsp;&nbsp;{{ $sElement }}&nbsp;&nbsp;&nbsp;                                        
+                                                    <input type="checkbox" class="i-checks" name="homework_help[]" value="{{ $key }}" {{ ( in_array($key,$aExistHomeworkHelp) ) ? 'checked' : ''}}>&nbsp;&nbsp;<span class="chkTxt">{{ $sElement }}</span>&nbsp;&nbsp;&nbsp;                                        
                                                 </div>
                                             @endforeach                                                
                                         @endif  
@@ -59,7 +58,7 @@
                                         @if( count( $aAdditionalService ) > 0 )
                                             @foreach( $aAdditionalService as $key => $sElement )
                                                 <div class="col-sm-12" style="padding-top: 0.5%"> 
-                                                    <input type="checkbox" class="i-checks" name="additional_services[]" value="{{ $key }}" {{ ( in_array($key,$aExistAdditionalService) ) ? 'checked' : ''}}>&nbsp;&nbsp;{{ $sElement }}&nbsp;&nbsp;&nbsp;                                        
+                                                    <input type="checkbox" class="i-checks" name="additional_services[]" value="{{ $key }}" {{ ( in_array($key,$aExistAdditionalService) ) ? 'checked' : ''}}>&nbsp;&nbsp;<span class="chkTxt">{{ $sElement }}</span>&nbsp;&nbsp;&nbsp;                                        
                                                 </div>
                                             @endforeach                                                
                                         @endif  
@@ -71,10 +70,18 @@
                                 </div>
                                 <div class="form-group">                                    
                                     <div class="col-sm-6">                                      
-                                        <input type="text" name="reference_name" class="form-control required" placeholder="Reference Name" value="{{ $oSkill->reference_name }}">
+                                        <input type="text" name="reference_name" class="form-control" placeholder="Reference Name" value="{{ $oSkill->reference_name }}">
                                     </div>
                                     <div class="col-sm-6">                                      
-                                        <input type="text" name="reference_relationship" class="form-control required" placeholder="Reference Relationship" value="{{ $oSkill->reference_relationship }}">
+                                        <input type="text" name="reference_relationship" class="form-control" placeholder="Reference Relationship" value="{{ $oSkill->reference_relationship }}">
+                                    </div>
+                                </div> 
+                                <div class="form-group">                                    
+                                    <div class="col-sm-6">                                      
+                                        <input type="text" name="reference_name2" class="form-control" placeholder="Reference Name" value="{{ $oSkill->reference_name2 }}">
+                                    </div>
+                                    <div class="col-sm-6">                                      
+                                        <input type="text" name="reference_relationship2" class="form-control" placeholder="Reference Relationship" value="{{ $oSkill->reference_relationship2 }}">
                                     </div>
                                 </div> 
                                 <input type="hidden" name="section" value="{{ $section }}">
@@ -88,17 +95,12 @@
                     </div>
         </div>        
      </div>
-    <!-- iCheck -->
-    <script src="{{ url('inspinia/js/plugins/iCheck/icheck.min.js') }}"></script>
+  
     <script src="{{asset('inspinia/js/plugins/token/jquery.tagsinput.min.js')}}" type="text/javascript"></script>
     <!-- jQuery UI -->
     <script src="{{asset('inspinia/js/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
     <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({      
-                checkboxClass: 'icheckbox_square-green',         
-                radioClass: 'iradio_square-green',
-            });   
+        $(document).ready(function () {        
             $('#languages_spoken' ).tagsInput({
                 autocomplete_url: '{{route('languages.index')}}',
                 'height':'70px',

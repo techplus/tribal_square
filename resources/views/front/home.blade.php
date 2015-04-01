@@ -1,20 +1,21 @@
 @extends('layouts.front')
 
-@section('content')
+@section('content')    
     <div class="page-wrap">
         <div class="row header_wrap">
               <div class="container">
                 <div class="col-xs-12">
                   <div class="logo">
                     <a href="{{url('/')}}">
-                      <img src="{{asset('/images/logo.png')}}" alt="" class="img-responsive">
+                      <img src="{{asset('/images/logo.jpg')}}" alt="" class="img-responsive">
                     </a>
                   </div>
                   <div class="header_btns_wrap">
                     <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg custome_blue_btn">Signup</a>
                     <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg custome_blue_btn">Login</a>
                   </div>
-                </div>
+                  <p class="header_cart"><a href="{{ url('shopping-cart') }}">My Cart <span class="no_of_items"></span></p>
+                </div>                 
               </div>
             </div>
 

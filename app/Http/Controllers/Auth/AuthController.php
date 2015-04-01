@@ -83,8 +83,8 @@ class AuthController extends Controller {
 
 			$aUserData[ 'email' ] = $graph[ 'email' ];
 			$aUserData[ 'firstname' ] = $graph[ 'first_name' ];
-			$aUserData['lastname'] = (isset( $graph['middle_name'] ) ? $graph['middle_name'] : '' )."  ".(isset( $graph['last_name'] ) ? $graph['last_name'] : '' );
-			$aUserData['last_logged_in'] = date('Y-m-d H:i:s');
+			$aUserData[ 'lastname' ] = (isset( $graph[ 'middle_name' ] ) ? $graph[ 'middle_name' ] : '' )."  ".(isset( $graph['last_name'] ) ? $graph['last_name'] : '' );
+			$aUserData[ 'last_logged_in' ] = date('Y-m-d H:i:s');
 			$plainPassword = str_random ( 8 );			
 
 			$aUserData[ 'password' ] = Hash::make ( $plainPassword );
@@ -114,9 +114,12 @@ class AuthController extends Controller {
 		$redirectPath = "/";
 		if ($this->auth->attempt($credentials, $request->has('remember')))
 		{
-			$this->auth->last_logged_in = date('Y-m-d H:i:s');				
-			$this->auth->user()->save();					
-			$oUser = $this->auth->user()->UserTypes()->first();							
+			
+			$oUsr = $this->auth->user();
+			$oUsr->last_logged_in = date('Y-m-d H:i:s');
+			$oUsr->save();
+
+			$oUser = $this->auth->user()->UserTypes()->first();										
 
 			if( $oUser->name )
 			{								
@@ -153,7 +156,7 @@ class AuthController extends Controller {
 		if( $request->has('skip') )
 		{
 			$this->auth->user()->subscription_end_at = date('Y-m-d',time() + 3*24*3600);
-			$this->auth->user()->save();
+			$this->auth->user()->save();			
 			return response()->redirectTo(url('/'));
 		}
 
@@ -164,6 +167,8 @@ class AuthController extends Controller {
 	public function postSelectUserType(Request $request)
 	{
 		$this->auth->user()->UserTypes()->attach($request->input('user_type'));
+		$this->auth->user()->last_logged_in = date('Y-m-d H:i:s');
+		$this->auth->user()->save();
 		return redirect()->to(url('/'));
 	}
 }

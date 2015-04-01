@@ -2,7 +2,7 @@
     <div class="col-xs-12">
         <div class="logo">
             <a href="{{url('/')}}">
-                <img src="{{asset('/images/logo.png')}}" alt="" class="img-responsive">
+                <img src="{{asset('/images/logo.jpg')}}" height="41" alt="" class="img-responsive">
             </a>
         </div>
 
@@ -21,6 +21,7 @@
                 <input type="text" class="form-control header_location_search" placeholder="Enter your Location">
             </form>
         </div>
+        <p class="header_cart"><a href="{{ url('shopping-cart') }}">My Cart <span class="no_of_items"></span></p>
     </div>
 </div>
 {{--</div>--}}

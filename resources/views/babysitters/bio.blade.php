@@ -1,7 +1,6 @@
 @extends('layouts.inspinia.inspinia')
 @section('content') 
-     <link href="{{ url('inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
-     <script src="{{ asset('inspinia/js/plugins/validate/jquery.validate.min.js') }}"></script>
+     @include('babysitters.babysitter_scripts')
      <div class="row">
         <div class="col-lg-10">
             <div class="ibox float-e-margins">
@@ -165,13 +164,9 @@
                     </div>
         </div>        
      </div>
-      <!-- iCheck -->
-    <script src="{{ url('inspinia/js/plugins/iCheck/icheck.min.js') }}"></script>
+    
     <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({               
-                radioClass: 'iradio_square-green',
-            });
+        $(document).ready(function () {          
             $('#frmBabySitter').validate({
                 rules:{ 
                     experience:{

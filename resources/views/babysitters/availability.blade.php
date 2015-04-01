@@ -1,8 +1,6 @@
 @extends('layouts.inspinia.inspinia')
-@section('content') 
-     <link href="{{ url('inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
-     <link href="{{ url('inspinia/css/plugins/datapicker/datepicker3.css') }}" rel="stylesheet">
-     <script src="{{ asset('inspinia/js/plugins/validate/jquery.validate.min.js') }}"></script>
+@section('content')      
+      @include('babysitters.babysitter_scripts')
      <div class="row">
         <div class="col-lg-10">
             <div class="ibox float-e-margins">
@@ -18,8 +16,8 @@
                                 </div>
                                 <div class="form-group">                                    
                                     <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="available_on_short_notice" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_on_short_notice == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="available_on_short_notice" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_on_short_notice == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                        <input type="radio" class="required i-checks" name="available_on_short_notice" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_on_short_notice == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;<span>Yes</span>&nbsp;&nbsp;&nbsp;
+                                        <input type="radio" class="required i-checks" name="available_on_short_notice" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_on_short_notice == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;<span>No</span>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div> 
@@ -57,7 +55,8 @@
                                         <input type="radio" class="required i-checks" name="available_after_school_care" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_after_school_care == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
                                         <input type="radio" class="required i-checks" name="available_after_school_care" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_after_school_care == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
                                     </div>
-                                </div>                                  
+                                </div>         
+                                                       
                                 <div class="hr-line-dashed"></div> 
                                 <div class="form-group">                               
                                     <div class="col-sm-8 table-responsive">
@@ -126,19 +125,9 @@
                         </div>
                     </div>
         </div>        
-     </div>
-    <!-- iCheck -->
-    <script src="{{ url('inspinia/js/plugins/iCheck/icheck.min.js') }}"></script>
-
-    
-    <script src="{{ url('inspinia/js/plugins/datapicker/bootstrap-datepicker.js') }}"></script>
-
+     </div>    
     <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({      
-                checkboxClass: 'icheckbox_square-green',         
-                radioClass: 'iradio_square-green',
-            });
+        $(document).ready(function () {           
             $('#schedule_valid_until').datepicker({
                 startView: 1,
                 todayBtn: "linked",

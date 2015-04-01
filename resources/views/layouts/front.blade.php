@@ -20,9 +20,20 @@
         width: 38,
         height: 42
       });
-    });
+      // Stop carousel
+      $('.carousel').carousel({
+        interval: false
+      });
+    });      
   </script>
-
+  <style>
+    .header_btns_wrap{
+        margin-top:3px;
+    }
+    .header_search{
+        margin-top:10px;
+    }
+  </style>
   </head>
   <body class="{{$body_class or 'signin_body'}}">
     @if( Auth::check() && ( Request::url() != url('auth/select-user-type') || Request::url() != url('login/select-user-type') ) )

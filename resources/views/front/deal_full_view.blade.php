@@ -61,11 +61,11 @@
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="quantity">
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" id="frmdeal" name="frmdeal">
                                         <div class="form-group">
                                             <label class="col-sm-8 control-label">Quantity</label>
                                             <div class="col-sm-4">
-                                                <select class="form-control">
+                                                <select class="form-control" name="quantity">
                                                     <option selected>1</option>
                                                     <option>2</option>
                                                     <option>3</option>
@@ -75,10 +75,11 @@
                                             </div>
                                         </div><br>
                                         <div class="form-group">
-                                            <button type="button" class="btn btn-lg custome_blue_btn btn-block" aria-label="Left Align">
-                                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
+                                            <button type="button" class="btn btn-lg custome_blue_btn btn-block buy-now" aria-label="Left Align">
+                                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Buy Now
                                             </button>
                                         </div>
+                                        <input type="hidden" name="deal_id" value="{{ $deal->id }}">
                                     </form>
                                 </div>
 
@@ -160,11 +161,11 @@
     <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-// Define the latitude and longitude positions
+            // Define the latitude and longitude positions
             var latitude = parseFloat("{{$deal->lat}}"); // Latitude get from above variable
             var longitude = parseFloat("{{$deal->long}}"); // Longitude from same
             var latlngPos = new google.maps.LatLng(latitude, longitude);
-// Set up options for the Google map
+            // Set up options for the Google map
             var myOptions = {
                 zoom: 10,
                 center: latlngPos,
@@ -174,13 +175,39 @@
                     style: google.maps.ZoomControlStyle.LARGE
                 }
             };
-// Define the map
+            // Define the map
             map = new google.maps.Map(document.getElementById("map"), myOptions);
-// Add the marker
+            // Add the marker
             var marker = new google.maps.Marker({
                 position: latlngPos,
                 map: map,
                 title: "test"
+            });
+
+            $('.buy-now').on('click',function(){
+                var $this = $(this);
+                $.ajax({
+                    beforeSend : function()
+                    {
+                        $this.prop('disabled','disabled');                        
+                    },
+                    url : "{{ url('shopping-cart/set-session') }}",
+                    type : "post",
+                    data : $('#frmdeal').serialize(),
+                    dataType : "json",
+                    success : function(json)
+                    { 
+                       // window.location.href = '{{ url("shopping-cart") }}';
+                    },
+                    error : function(xhr, status, error)                         
+                    {
+                        alert(xhr.responseText);
+                    },
+                    complete : function()
+                    {
+                        $this.removeAttr('disabled'); 
+                    }
+                });
             });
         });
     </script>

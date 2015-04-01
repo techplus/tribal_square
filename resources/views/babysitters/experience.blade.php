@@ -1,7 +1,6 @@
 @extends('layouts.inspinia.inspinia')
 @section('content') 
-     <link href="{{ url('inspinia/css/plugins/iCheck/custom.css') }}" rel="stylesheet">
-     <script src="{{ asset('inspinia/js/plugins/validate/jquery.validate.min.js') }}"></script>
+    @include('babysitters.babysitter_scripts')
      <div class="row">
         <div class="col-lg-10">
             <div class="ibox float-e-margins">
@@ -89,7 +88,7 @@
                                         @if( count( $aAgeGroups ) > 0 )
                                             @foreach( $aAgeGroups as $key => $sElement )
                                                 <div class="col-sm-6" style="padding-top: 0.5%"> 
-                                                    <input type="checkbox" class="required i-checks" name="age_groups_experience_with[]" value="{{ $key }}" {{ ( in_array($key,$aExpAgeGroups) ) ? 'checked' : '' }}>&nbsp;&nbsp;{{ $sElement }}&nbsp;&nbsp;&nbsp;                                        
+                                                    <input type="checkbox" class="i-checks" name="age_groups_experience_with[]" value="{{ $key }}" {{ ( in_array($key,$aExpAgeGroups) ) ? 'checked' : '' }}>&nbsp;&nbsp;<span class="chkTxt">{{ $sElement }}</span>&nbsp;&nbsp;&nbsp;                                        
                                                 </div>
                                             @endforeach                                                
                                         @endif                                   
@@ -127,7 +126,7 @@
                                         @if( count( $aSpecialNeeds ) > 0 )
                                             @foreach( $aSpecialNeeds as $key => $sElement )
                                                 <div class="col-sm-6" style="padding-top: 0.5%"> 
-                                                    <input type="checkbox" class="required i-checks" name="special_needs_service_experience[]" value="{{ $key }}" {{ ( in_array($key,$aExpSpecialNeeds) ) ? 'checked' : '' }}>&nbsp;&nbsp;{{ $sElement }}&nbsp;&nbsp;&nbsp;                                        
+                                                    <input type="checkbox" class="i-checks" name="special_needs_service_experience[]" value="{{ $key }}" {{ ( in_array($key,$aExpSpecialNeeds) ) ? 'checked' : '' }}>&nbsp;&nbsp;<span class="chkTxt">{{ $sElement }}</span>&nbsp;&nbsp;&nbsp;                                        
                                                 </div>
                                             @endforeach                                                
                                         @endif                                   
@@ -142,15 +141,9 @@
                         </div>
                     </div>
         </div>        
-     </div>
-    <!-- iCheck -->
-    <script src="{{ url('inspinia/js/plugins/iCheck/icheck.min.js') }}"></script>
+     </div>  
     <script>
-        $(document).ready(function () {
-            $('.i-checks').iCheck({      
-                checkboxClass: 'icheckbox_square-green',         
-                radioClass: 'iradio_square-green'
-            });
+        $(document).ready(function () {           
             $('.have-special-needs').iCheck({
                 checkboxClass: 'icheckbox_square-green',         
                 radioClass: 'iradio_square-green'

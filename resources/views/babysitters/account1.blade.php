@@ -1,6 +1,6 @@
 @extends('layouts.inspinia.inspinia')
-@section('content')	
-    <script src="{{ asset('inspinia/js/plugins/validate/jquery.validate.min.js') }}"></script>
+@section('content')	    
+    @include('babysitters.babysitter_scripts')
 	 <div class="row">
         <div class="col-lg-10">
         	<div class="ibox float-e-margins">                       

@@ -87,17 +87,17 @@ class BabySittersController extends Controller
 			$aDayShift = array();
 			$oUser = $this->data['oUser'];
 
-			$aUserDays = Day::with( array( 'Users' => function($q) use($oUser){
+			$aUserDays = Day::with( array( 'Shifts' => function($q) use($oUser){
 				$q->where( 'day_shifts.user_id','=',$oUser->id );
-			}))->get();			
-
+			}))->get();
+			
 			if( $aUserDays->count() > 0 )
 			{
 				foreach( $aUserDays as $oUserDays )
-				{
-					foreach( $oUserDays->Users as $oUsers )
-					{							
-						$aDayShift[ $oUsers->pivot->shift_id ][ $oUsers->pivot->day_id ] = 'on';
+				{										
+					foreach( $oUserDays->Shifts as $oShifts )
+					{												
+						$aDayShift[ $oShifts->pivot->shift_id ][ $oShifts->pivot->day_id ] = 'on';
 					}
 				}
 			}	
@@ -341,7 +341,7 @@ class BabySittersController extends Controller
 
 			$oSkill = Skill::where( 'user_id' , '=' , $oUser->id )->first();
 			$aData = Request::only( 
-				[ 'languages_spoken' , 'reference_name' , 'reference_relationship' ] 
+				[ 'languages_spoken' , 'reference_name' , 'reference_relationship' , 'reference_name2' , 'reference_relationship2' ] 
 			);
 
 			if( Request::has('homework_help') ){

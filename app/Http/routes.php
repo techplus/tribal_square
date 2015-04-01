@@ -59,6 +59,7 @@ Route::group( ['middleware' => ['guest'] ], function() {
 	Route::resource('search/deals','DealsController');
 	Route::resource('search/categories','CategoriesController');
 	Route::post('search/babysitters/paginated-baby-sitters','BabySittersController@postPaginatedBabySitters');
+	Route::controller('shopping-cart','ShoppingCartsController');
 	Route::controller('/','HomeController');
 });
 

@@ -5,6 +5,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use DB;
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
 	use Authenticatable, CanResetPassword;
@@ -85,10 +86,15 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	{
 		if( !empty($aSearch['term']) AND !empty($aSearch['location']) )
 		{
-			$query->whereHas('Bio' , function($q)use($aSearch){
-				$q->where('title','LIKE','%'.$aSearch['term'].'%')
-				->orWhere('experience','LIKE','%'.$aSearch['term'].'%');
-			})->whereHas('Account' , function($q)use($aSearch){
+			$query->where(function($q)use($aSearch){
+				$q->where('firstname','LIKE','%'.$aSearch['term'].'%')
+				  ->orWhere('lastname','LIKE','%'.$aSearch['term'].'%')
+				  ->orWhere( DB::raw("concat_ws(' ',firstname,lastname)"),'LIKE','%'.$aSearch['term'].'%')
+				  ->orWhereHas('Bio' , function($q)use($aSearch){
+						$q->where('title','LIKE','%'.$aSearch['term'].'%')
+						->orWhere('experience','LIKE','%'.$aSearch['term'].'%');
+					});
+				})->whereHas('Account' , function($q)use($aSearch){
 				$q->where('address','LIKE','%'.$aSearch['location'].'%')
 				->orWhere('street','LIKE','%'.$aSearch['location'].'%')
 				->orWhere('city','LIKE','%'.$aSearch['location'].'%')
@@ -98,9 +104,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			});
 		}
 		else if( !empty($aSearch['term']) ){
-			$query->whereHas('Bio' , function($q)use($aSearch){
-				$q->where('title','LIKE','%'.$aSearch['term'].'%')
-				->orWhere('experience','LIKE','%'.$aSearch['term'].'%');
+			$query->where(function($q)use($aSearch){
+				$q->where('firstname','LIKE','%'.$aSearch['term'].'%')
+				  ->orWhere('lastname','LIKE','%'.$aSearch['term'].'%')
+				  ->orWhere( DB::raw("concat_ws(' ',firstname,lastname)"),'LIKE','%'.$aSearch['term'].'%')
+				  ->orWhereHas('Bio' , function($q)use($aSearch){
+						$q->where('title','LIKE','%'.$aSearch['term'].'%')
+						->orWhere('experience','LIKE','%'.$aSearch['term'].'%');
+					});
 			});
 		}
 		else if( !empty($aSearch['location']) ){

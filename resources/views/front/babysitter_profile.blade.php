@@ -30,6 +30,9 @@
 				                        signed in: {{ date('m/d/Y h:i a',strtotime($oBabySitter->last_logged_in)) }}</h5>
 				                        <h5 class="white"><i class="glyphicon glyphicon-ok"></i> Enhanced Background Check</h5>
 				                        <h5 class="white"><i class="glyphicon glyphicon-user"></i> {{ $oBabySitter->Account->gender }}</h5>
+				                        @if( $oBabySitter->Account->display_phone_on_profile == 1 )
+				                        	<h5 class="white"><i class="glyphicon glyphicon-phone-alt"></i> {{ $oBabySitter->Account->phone }}</h5>
+				                        @endif
 				                        <h3 class="green"><i class="glyphicon glyphicon-usd"></i> {{ $oBabySitter->Bio->average_rate_from }}-{{ $oBabySitter->Bio->average_rate_to }}  per hour</h3>
 				                    </div>
 				                </div>
@@ -188,11 +191,18 @@
 				                       				                    				                           
 
 				                    <div class="clearfix"></div>
-
-				                    <h3>References</h3>
-
-				                    <div class="col-sm-4">{{ ucfirst($oBabySitter->Skill->reference_name) }} is a reference for {{ ucfirst($oBabySitter->firstname)." ".ucfirst(substr($oBabySitter->lastname,0,1))."." }}</div>
-				                    <div class="col-sm-4">Relationship: {{ ucfirst($oBabySitter->Skill->reference_relationship) }}</div>
+				                    @if( $oBabySitter->Skill->reference_name != "" OR  $oBabySitter->Skill->reference_name2 != "" ) 
+				                    	<h3>References</h3>				                 
+				                    @endif   
+				                    @if( $oBabySitter->Skill->reference_name != "" )				                    
+				                    	<div class="col-sm-4">{{ ucfirst($oBabySitter->Skill->reference_name) }} is a reference for {{ ucfirst($oBabySitter->firstname)." ".ucfirst(substr($oBabySitter->lastname,0,1))."." }}</div>
+				                    	<div class="col-sm-4">Relationship: {{ ucfirst($oBabySitter->Skill->reference_relationship) }}</div>
+				                    	<div class="clearfix"></div>				                    
+				                    @endif
+				                    @if( $oBabySitter->Skill->reference_name2 != "" )				                    
+				                    	<div class="col-sm-4">{{ ucfirst($oBabySitter->Skill->reference_name2) }} is a reference for {{ ucfirst($oBabySitter->firstname)." ".ucfirst(substr($oBabySitter->lastname,0,1))."." }}</div>
+				                    	<div class="col-sm-4">Relationship: {{ ucfirst($oBabySitter->Skill->reference_relationship2) }}</div>				                    
+				                    @endif
 
 				                    <div class="clearfix"></div>
 				                   
@@ -347,16 +357,24 @@
 				                        </li>
 				                        @endif 
 
-				                        <!-- <li>
+				                        <li>
 				                            <span class="glyphicon glyphicon-ok"></span>
-				                            Two references available
-				                        </li> -->
+				                            @if( $oBabySitter->Skill->reference_name != "" AND  $oBabySitter->Skill->reference_name2 != "" )
+				                            	Two references available
+				                            @elseif( $oBabySitter->Skill->reference_name2 != "" ) 	
+				                            	One reference available
+				                            @elseif( $oBabySitter->Skill->reference_name != "" ) 	
+				                            	One reference available
+				                            @else
+				                            	No reference available
+				                            @endif
+				                        </li>
 				                    </ul>
-				                    <br>
+				                   <!--  <br>
 				                    <h5><strong>Qualifications include:</strong></h5>
 				                    <p>First Aid Training, CPR Training</p>
 				                    <p>Marriage/Relationship Counselor. Teacher/Mentor. DFCS Volunteer. 
-				                    Homeschool exp. Tutor. Etc.</p>
+				                    Homeschool exp. Tutor. Etc.</p> -->
 				                </div>
 
 				                <div class="BabySitter_sidebar">
