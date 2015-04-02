@@ -43,9 +43,17 @@
                                         {{ ( $oDeal->Listingcategory ) ? $oDeal->Listingcategory->name : null }}
                                     </td>
                                     <td>
-                                        @if( $oDeal->is_approved_by_admin == 0 )
-                                            <a href="{{route('deals.edit',[$oDeal->id])}}">edit</a> |
-                                            <a href="javascript:;" onclick="removeDeal({{$oDeal->id}})">delete</a>
+                                        @if( $oDeal->deleted_at != "" )
+                                            <label class="label label-success">Archived</label>
+                                        @else
+                                            @if( $oDeal->is_approved_by_admin == 0 )
+                                                <a href="{{route('deals.edit',[$oDeal->id])}}">edit</a> |
+                                                <a href="javascript:;" onclick="removeDeal({{$oDeal->id}})">delete</a>
+                                            @elseif( $oDeal->is_approved_by_admin == 1 )
+                                                <label class="label label-primary">Approved</label>
+                                            @elseif( $oDeal->is_approved_by_admin == 2 )
+                                                <label class="label label-danger">Declined</label>                                            
+                                            @endif
                                         @endif
                                     </td>                       
                                 </tr>    

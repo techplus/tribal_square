@@ -16,7 +16,7 @@ class PostsController extends Controller
 	 */
 	public function index ()
 	{
-		$this->data[ 'aPostings' ] = Classified::with ( [ 'Listingcategory' ] )->where ( 'user_id' , '=' , $this->data[ 'oUser' ]->id )->get ();
+		$this->data[ 'aPostings' ] = Classified::withTrashed()->with ( [ 'Listingcategory' ] )->where ( 'user_id' , '=' , $this->data[ 'oUser' ]->id )->get ();
 		return $this->renderView ( 'providers.posting.index' );
 	}
 

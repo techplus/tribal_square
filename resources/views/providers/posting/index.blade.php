@@ -38,10 +38,18 @@
                                         {{ ( $oPost->Listingcategory ) ? $oPost->Listingcategory->name : null }}
                                     </td>
                                     <td>
-                                         @if( $oPost->is_approved_by_admin == 0 )
-                                            <a href="{{route('posts.edit',[$oPost->id])}}" class="edit-posting">edit</a> |
-                                            <a href="javascript:;" onclick="removePost({{$oPost->id}})" class="delete-posting">delete</a>
-                                         @endif
+                                        @if( $oPost->deleted_at != "" )
+                                            <label class="label label-success">Archived</label>
+                                        @else
+                                             @if( $oPost->is_approved_by_admin == 0 )
+                                                <a href="{{route('posts.edit',[$oPost->id])}}" class="edit-posting">edit</a> |
+                                                <a href="javascript:;" onclick="removePost({{$oPost->id}})" class="delete-posting">delete</a>
+                                             @elseif( $oPost->is_approved_by_admin == 1 )
+                                                <label class="label label-primary">Approved</label>
+                                             @elseif( $oPost->is_approved_by_admin == 2 )
+                                                <label class="label label-danger">Declined</label>
+                                             @endif
+                                        @endif
                                     </td>                       
                                 </tr>    
                             @endforeach                
