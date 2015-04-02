@@ -12,11 +12,12 @@
 	                <div class="col-sm-6 no-pad">
 	                    <div class="user-pad">
 	                        <h3>{{ ucFirst($oBabySitter->firstname)." ".ucFirst($oBabySitter->lastname)}}</h3>
+	                        <p>{{ $oBabySitter->Bio->title }}</p>
 	                        <h5 class="white"><i class="glyphicon glyphicon-heart"></i> Age : {{ $oBabySitter->Account->age }}</h5>
 	                        <h5 class="white"><i class="glyphicon glyphicon-map-marker"></i> Less than {{ $oBabySitter->Bio->miles_from_home }} mile <small style="color: #fff;"> (Atlanta, GA) </small></h5>
 	                        <h5 class="white"><i class="glyphicon glyphicon-lock"></i> Last 
 	                        signed in: {{ date('m/d/Y h:i a' , strtotime($oBabySitter->last_logged_in))}}</h5>
-	                        <h5 class="white"><i class="glyphicon glyphicon-ok"></i> Enhanced Background Check</h5>
+	                        <h5 class="white"><i class="glyphicon glyphicon-ok"></i> Babysitter in {{ ucfirst($oBabySitter->Account->city).",".$oBabySitter->Account->state." ".$oBabySitter->Account->pin }}. </h5>
 	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
 	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
 	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
