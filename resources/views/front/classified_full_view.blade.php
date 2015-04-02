@@ -97,7 +97,7 @@
                                         <div class="img-responsive" id="map" style="height: 300px;"></div>
                                         <br>
                                         <p>{{$classified->location2}}</p>
-                                        <p>Telephone: {{$classified->phone}}.</p>
+                                        <p>Telephone: {{$classified->phone}}</p>
                                         <p>E-mail: {{$classified->email}}</p>
                                     </div>
                                 </div>
