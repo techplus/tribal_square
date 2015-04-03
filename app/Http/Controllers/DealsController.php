@@ -65,6 +65,7 @@ class DealsController extends Controller {
 		if( ! $deal )
 			return abort(404);
 		$this->data['deal'] = $deal;
+		$this->data['layout'] = 'layouts.front';
 		return $this->renderView('front.deal_full_view');
 	}
 

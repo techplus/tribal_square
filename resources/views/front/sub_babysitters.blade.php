@@ -6,18 +6,18 @@
 	            <div class="row coralbg white">
 	                <div class="col-sm-6 no-pad">
 	                    <div class="user-image">
-	                        <img src="{{ url('profile_pictures/'.$oBabySitter->Account->profile_pic) }}" class="img-responsive thumbnail">
+	                        <img src="{{ ( $oBabySitter->Account ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) : 'https://farm7.staticflickr.com/6163/6195546981_200e87ddaf_b.jpg' }}" class="img-responsive thumbnail">
 	                    </div>
 	                </div>
 	                <div class="col-sm-6 no-pad">
 	                    <div class="user-pad">
 	                        <h3>{{ ucFirst($oBabySitter->firstname)." ".ucFirst($oBabySitter->lastname)}}</h3>
-	                        <p>{{ ( strlen( $oBabySitter->Bio->title ) > 40 ) ? substr($oBabySitter->Bio->title,0,39)."..."  : $oBabySitter->Bio->title }}</p>
-	                        <h5 class="white"><i class="glyphicon glyphicon-heart"></i> Age : {{ $oBabySitter->Account->age }}</h5>
-	                        <h5 class="white"><i class="glyphicon glyphicon-map-marker"></i> Less than {{ $oBabySitter->Bio->miles_from_home }} mile <small style="color: #fff;"> (Atlanta, GA) </small></h5>
+	                        <?php echo ( $oBabySitter->Bio ) ? '<p>'.( ( strlen( $oBabySitter->Bio->title ) > 40 ) ? substr($oBabySitter->Bio->title,0,39)."...</p>"  : '<p>'.$oBabySitter->Bio->title.'</p>' ) : ''; ?>
+	                        <?php echo ( $oBabySitter->Account ) ? ' <h5 class="white"><i class="glyphicon glyphicon-heart"></i> Age : '.$oBabySitter->Account->age.'</h5>' : ''; ?>
+	                        <?php echo ( $oBabySitter->Bio ) ?  '<h5 class="white"><i class="glyphicon glyphicon-map-marker"></i> Less than  '.$oBabySitter->Bio->miles_from_home.' mile </h5>' : ''; ?>
 	                        <h5 class="white"><i class="glyphicon glyphicon-lock"></i> Last 
 	                        signed in: {{ date('m/d/Y h:i a' , strtotime($oBabySitter->last_logged_in))}}</h5>
-	                        <h5 class="white"><i class="glyphicon glyphicon-ok"></i> Babysitter in {{ ucfirst($oBabySitter->Account->city).",".$oBabySitter->Account->state." ".$oBabySitter->Account->pin }}. </h5>
+	                        <?php echo ( $oBabySitter->Account ) ? '<h5 class="white"><i class="glyphicon glyphicon-ok"></i> Babysitter in '.ucfirst($oBabySitter->Account->city).",".$oBabySitter->Account->state." ".$oBabySitter->Account->pin.".</h5>" : ''; ?> 
 	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
 	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
 	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
@@ -32,7 +32,7 @@
 	                <h3>
 	                    About Me :
 	                </h3>
-	                <p>{{ (strlen($oBabySitter->Bio->experience) > 175 ) ? substr($oBabySitter->Bio->experience,0,174)."..." : $oBabySitter->Bio->experience }}</p>
+	                <p>{{ ( $oBabySitter->Bio ) ? ( (strlen($oBabySitter->Bio->experience) > 175 ) ? substr($oBabySitter->Bio->experience,0,174)."..." : $oBabySitter->Bio->experience ) : '' }}</p>
 	                <a href="{{ action('BabySittersController@show', [ $oBabySitter->id ]) }}" class="btn btn-md custome_blue_btn view_profile_btn">See Full Profile</a>
 	            </div>
 	        </div>

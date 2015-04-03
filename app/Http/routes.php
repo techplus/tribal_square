@@ -24,8 +24,9 @@ Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 	Route::get('category/{name}/export','Admin\SubCategoryController@exportCategory');
 	Route::post('cateogry/{name}/import','Admin\SubCategoryController@postImportCategory');
 	Route::get('cat-type','Admin\SubCategoryController@getCatType');
-	Route::resource('admin/deals','Admin\DealsController',['only'=>['index','update','destroy']]);
-	Route::resource('admin/posts','Admin\PostsController',['only'=>['index','update','destroy']]);
+	Route::resource('admin/deals','Admin\DealsController',['only'=>['index','update','destroy','show']]);
+	Route::resource('admin/posts','Admin\PostsController',['only'=>['index','update','destroy','show']]);
+	Route::resource('admin/babysitters','Admin\BabySittersController',['only'=>['index','update','destroy','show']]);
 });
 
 Route::group(['middleware'=>['auth.providers','payment']],function(){

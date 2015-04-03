@@ -59,5 +59,33 @@ Class PostsController extends Controller{
 		$post->forceDelete();
 		return response()->json(['success'=>true]);
 	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		$classified = Classified::withTrashed()->with(['ClassifiedImages','ListingCategory'])->find($id);
+		if( ! $classified )
+			return abort(404);
+
+		$this->data['sStatus'] = "";
+
+		if( $classified->trashed() )
+			$this->data['sStatus'] = "Archived";
+		else if( $classified->is_approved_by_admin == 0 )
+			$this->data['sStatus'] = "Pending";
+		else if( $classified->is_approved_by_admin == 1 )
+			$this->data['sStatus'] = "Approved";
+		else if( $classified->is_approved_by_admin == 2 )
+			$this->data['sStatus'] = "Declined";
+		
+		$this->data['classified'] = $classified;
+		$this->data['layout'] = "layouts.admin";
+		return $this->renderView('front.classified_full_view');
+	}
 }
 ?>

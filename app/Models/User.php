@@ -32,7 +32,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	protected $hidden = ['password', 'remember_token'];
 	public function UserTypes()
 	{
-		return $this->belongsToMany('App\Models\UserType','user_usertypes','user_id','user_type_id')->withPivot(['user_type_id','subscription_plan_id','amount','has_paid']);
+		return $this->belongsToMany('App\Models\UserType','user_usertypes','user_id','user_type_id')->withPivot(['user_type_id','subscription_plan_id','amount','has_paid','is_approved_by_admin','last_step']);
 	}
 
 	public function Payments()
@@ -75,10 +75,18 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $this->belongsToMany('App\Models\Shift','day_shifts','user_id','shift_id');	
 	}
 
+	public function scopeApprovedstate($query,$state="All",$type="BabySitters"){
+		return $query->whereHas('UserTypes',function($q)use($state,$type){
+			if( $state != "All")
+				$q->where('is_approved_by_admin',$state);
+			$q->where('name',$type);
+		});
+	}
+
 	public function scopeLaststep($query,$step)
 	{
-		return $query->where('last_step','=',$step)->whereHas('UserTypes',function($q){
-			$q->where('name','BabySitters');
+		return $query->whereHas('UserTypes',function($q)use($step){
+			$q->where('name','BabySitters')->where('last_step','=',$step);
 		});
 	}
 

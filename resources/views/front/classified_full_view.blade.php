@@ -1,5 +1,4 @@
-@extends('layouts.front')
-
+@extends($layout)
 @section('content')
     <script>
         // Stop carousel
@@ -15,9 +14,39 @@
             border-radius: 4px;
         }
     </style>
-    <div class="page-wrap">
-        <div class="row header_wrap">
-            @include('layouts.front_navbar')
+    @if( Auth::check() )
+        <link href="{{asset('/css/style.css')}}" rel="stylesheet">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Baby Sitters
+                <div class="pull-right" style="margin-top:-7px;">
+                    @if( $sStatus == "Archived" )
+                        <button class="btn btn-success action" data-status="approved" data-id="{{$classified->id}}">Approve</button>&nbsp;
+                        <button class="btn btn-danger action" data-status="declined" data-id="{{$classified->id}}">Decline</button>
+                        <button class="btn btn-danger action" data-status="Pending" data-id="{{$classified->id}}">Move To Pending</button>
+                        <button class="btn btn-danger action" data-status="deleted" data-id="{{$classified->id}}">Delete Forever</button>
+                    @elseif( $sStatus == "Pending" )
+                        <button class="btn btn-success action" data-status="approved" data-id="{{$classified->id}}">Approve</button>&nbsp;
+                        <button class="btn btn-danger action" data-status="declined" data-id="{{$classified->id}}">Decline</button>
+                        <button class="btn btn-danger action" data-status="archived" data-id="{{$classified->id}}">Archive</button>
+                    @elseif( $sStatus == "Approved" )
+                        <button class="btn btn-success action" data-status="pending" data-id="{{$classified->id}}">Move To Pending</button>&nbsp;
+                        <button class="btn btn-danger action" data-status="declined" data-id="{{$classified->id}}">Decline</button>
+                        <button class="btn btn-danger action" data-status="archived" data-id="{{$classified->id}}">Archive</button>
+                    @elseif( $sStatus == "Declined" )
+                        <button class="btn btn-success action" data-status="approved" data-id="{{$classified->id}}">Approve</button>&nbsp;
+                        <button class="btn btn-danger action" data-status="pending" data-id="{{$classified->id}}">Move To Pending</button>
+                        <button class="btn btn-danger action" data-status="archived" data-id="{{$classified->id}}">Archive</button>                    
+                    @endif                  
+                </div>      
+            </div>
+            <div class="panel-body">                
+                <div class="row">                                       
+    @else
+        <div class="page-wrap">
+            <div class="row header_wrap">
+                @include('layouts.front_navbar')
+    @endif
             <div class="page-content">
                 <div class="row">
                     <div class="col-sm-12">
@@ -108,15 +137,56 @@
 
 
                         </div>
-
-                        @include('layouts.front_sidebar')
-
-
+                        
+                            @include('layouts.front_sidebar')
+                        
 
                     </div>
                 </div>
             </div>
         </div>
+        @if( Auth::check() )
+            <div class="row">
+                <div class="pull-right" style="margin-top:-7px;">
+                    @if( $sStatus == "Archived" )
+                        <button class="btn btn-success action" data-status="approved" data-id="{{$classified->id}}">Approve</button>&nbsp;
+                        <button class="btn btn-danger action" data-status="declined" data-id="{{$classified->id}}">Decline</button>
+                        <button class="btn btn-danger action" data-status="Pending" data-id="{{$classified->id}}">Move To Pending</button>
+                        <button class="btn btn-danger action" data-status="deleted" data-id="{{$classified->id}}">Delete Forever</button>
+                    @elseif( $sStatus == "Pending" )
+                        <button class="btn btn-success action" data-status="approved" data-id="{{$classified->id}}">Approve</button>&nbsp;
+                        <button class="btn btn-danger action" data-status="declined" data-id="{{$classified->id}}">Decline</button>
+                        <button class="btn btn-danger action" data-status="archived" data-id="{{$classified->id}}">Archive</button>
+                    @elseif( $sStatus == "Approved" )
+                        <button class="btn btn-success action" data-status="pending" data-id="{{$classified->id}}">Move To Pending</button>&nbsp;
+                        <button class="btn btn-danger action" data-status="declined" data-id="{{$classified->id}}">Decline</button>
+                        <button class="btn btn-danger action" data-status="archived" data-id="{{$classified->id}}">Archive</button>
+                    @elseif( $sStatus == "Declined" )
+                        <button class="btn btn-success action" data-status="approved" data-id="{{$classified->id}}">Approve</button>&nbsp;
+                        <button class="btn btn-danger action" data-status="pending" data-id="{{$classified->id}}">Move To Pending</button>
+                        <button class="btn btn-danger action" data-status="archived" data-id="{{$classified->id}}">Archive</button>                    
+                    @endif       
+                    <!-- Modal -->
+                    <div class="modal fade" id="confirmation_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Confirmation</h4>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to <span id="status_field"></span>?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" id="confirm_btn">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>           
+                </div>      
+            </div>
+        @endif 
     </div>
     <div class="modal fade" id="contact_details">
         <div class="modal-dialog">
@@ -161,6 +231,10 @@
     <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            function onSuccess($id,$sStatus)
+            {
+                 window.location = "{{ route('admin.posts.index') }}?status="+$sStatus;
+            }
 // Define the latitude and longitude positions
             var latitude = parseFloat("{{$classified->lat}}"); // Latitude get from above variable
             var longitude = parseFloat("{{$classified->long}}"); // Longitude from same
@@ -183,6 +257,9 @@
                 map: map,
                 title: "test"
             });
+            @if( Auth::check() )
+               @include('admin.posts.scripts')
+            @endif
         });
     </script>
 @stop

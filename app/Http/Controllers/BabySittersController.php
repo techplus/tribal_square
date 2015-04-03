@@ -42,7 +42,7 @@ class BabySittersController extends Controller {
 		$aBabySitters = array();
 		$iTotal = 0;
 		
-		$oQuery = User::laststep(6)->search($aSearch)
+		$oQuery = User::approvedstate(1)->search($aSearch)
 			->with( [ 'UserTypes' , 'Account' => function($q){
 				$q->select( [ DB::raw('DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(accounts.birthdate)), "%Y") + 0 as age') , 'accounts.*' ] );
 			}, 'Bio','Experience','Availability','Skill','Days']);			
@@ -203,7 +203,7 @@ class BabySittersController extends Controller {
 		}
 		
 		$this->data['aDayShifts'] = $aDayShifts;
-
+		$this->data['layout'] = 'layouts.front';
 		return $this->renderView( 'front.babysitter_profile' );
 	}
 		

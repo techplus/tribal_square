@@ -1,21 +1,23 @@
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-    <div class="categories_sidebar">
-        <h2>Categories</h2>
-        <ul class="nav nav-pills nav-stacked">
-            <li class="active" role="presentation"><a href="#">All Deals</a></li>
-            @foreach( $categories AS $category )
-                <li role="presentation"><a href="{{route('search.categories.show',[$category->id])}}">{{$category->name}}</a></li>
-            @endforeach
-        </ul>
-    </div>
-
+    
+    @if( !Auth::check() )
+        <div class="categories_sidebar">
+            <h2>Categories</h2>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active" role="presentation"><a href="#">All Deals</a></li>
+                @foreach( $categories AS $category )
+                    <li role="presentation"><a href="{{route('search.categories.show',[$category->id])}}">{{$category->name}}</a></li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="publish_deal_box">
         <p>Grow Your BUSINESS with <br>
             <strong>TRIBAL SQUARE</strong>
         </p>
         <span>Publish your great deal and get audience instantly.</span>
         <div class="clearfix"></div>
-        <a class="btn btn-lg custome_blue_btn col-sm-2" href="#">
+        <a class="btn btn-lg custome_blue_btn col-sm-2" href="#" {{ (Auth::check()) ? 'disabled' : '' }}>
             Publish Your Deal<span style="color:#fff; font-size:16px;" class="glyphicon glyphicon-triangle-right"></span>
         </a>
     </div>
@@ -83,7 +85,7 @@
     </div>
 
     <div class="advrt" align="center">
-        <img src="images/advrt_2.jpg" alt="" class="img-responsive">
+        <img src="{{ url( 'images/advrt_2.jpg' ) }}" alt="" class="img-responsive">
     </div>
 
 </div>

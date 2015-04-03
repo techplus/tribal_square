@@ -16,7 +16,7 @@
 						<tbody>
 							@foreach( $aPosts AS $oPost )
 								<tr data-id="{{ $oPost->id }}">
-									<td>{{ $oPost->title }}</td>
+									<td><a href="{{ route('admin.posts.show',[ $oPost->id ]) }}">{{ $oPost->title }}</a></td>
 									<td>{{ $oPost->ListingCategory->name }}</td>
 									<td>
                                         @if( $sStatus == "Pending" )
@@ -67,34 +67,13 @@
     </div>
 <script>
     var status,id;
+    function onSuccess($id,$sStatus)
+    {
+        $('tr[data-id='+$id+']').remove();
+        $('#confirmation_modal' ).modal('hide');
+    }
 	$(document).ready(function(){
-        $('.action' ).on('click',function(){
-            status = $(this ).data('status');
-            id = $(this ).data('id');
-            $('#status_field' ).html(status);
-            $('#confirmation_modal' ).modal('show');
-        });
-        $('#confirm_btn' ).on('click',function(){
-            var data = {};
-            if( status == 'approved')
-                data = {is_approved_by_admin:1};
-            else if( status == 'declined')
-                data = {is_approved_by_admin:2};
-            else if( status == 'pending' )
-                data = {is_approved_by_admin:0};
-            else if( status == 'archived' )
-                data = {status : 'archived'};
-            else if( status == 'deleted' )
-                data = {status:'force_delete'};
-            $.ajax({
-                url: '{{url('admin/posts')}}/'+id,
-                type:"PUT",
-                data:data
-            } ).success(function(data){
-                $('tr[data-id='+id+']').remove();
-                $('#confirmation_modal' ).modal('hide');
-            })
-        });
+       @include('admin.posts.scripts')
 	});
 </script>
 @endsection	

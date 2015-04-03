@@ -71,6 +71,7 @@ class ClassifiedsController extends Controller {
 		if( ! $classified )
 			return abort(404);
 		$this->data['classified'] = $classified;
+		$this->data['layout'] = "layouts.front";
 		return $this->renderView('front.classified_full_view');
 	}
 

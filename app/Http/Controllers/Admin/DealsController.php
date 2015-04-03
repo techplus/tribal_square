@@ -58,5 +58,33 @@ Class DealsController extends Controller{
 		$deal->forceDelete();
 		return response()->json(['success'=>true]);
 	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function show($id)
+	{
+		$deal = Deal::withTrashed()->with('DealImages')->find($id);
+		if( ! $deal )
+			return abort(404);
+
+		$this->data['sStatus'] = "";
+
+		if( $deal->trashed() )
+			$this->data['sStatus'] = "Archived";
+		else if( $deal->is_approved_by_admin == 0 )
+			$this->data['sStatus'] = "Pending";
+		else if( $deal->is_approved_by_admin == 1 )
+			$this->data['sStatus'] = "Approved";
+		else if( $deal->is_approved_by_admin == 2 )
+			$this->data['sStatus'] = "Declined";
+
+		$this->data['deal'] = $deal;
+		$this->data['layout'] = 'layouts.admin';
+		return $this->renderView('front.deal_full_view');
+	}
 }
 ?>
