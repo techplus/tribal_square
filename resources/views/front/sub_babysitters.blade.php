@@ -12,7 +12,7 @@
 	                <div class="col-sm-6 no-pad">
 	                    <div class="user-pad">
 	                        <h3>{{ ucFirst($oBabySitter->firstname)." ".ucFirst($oBabySitter->lastname)}}</h3>
-	                        <p>{{ $oBabySitter->Bio->title }}</p>
+	                        <p>{{ ( strlen( $oBabySitter->Bio->title ) > 40 ) ? substr($oBabySitter->Bio->title,0,39)."..."  : $oBabySitter->Bio->title }}</p>
 	                        <h5 class="white"><i class="glyphicon glyphicon-heart"></i> Age : {{ $oBabySitter->Account->age }}</h5>
 	                        <h5 class="white"><i class="glyphicon glyphicon-map-marker"></i> Less than {{ $oBabySitter->Bio->miles_from_home }} mile <small style="color: #fff;"> (Atlanta, GA) </small></h5>
 	                        <h5 class="white"><i class="glyphicon glyphicon-lock"></i> Last 
