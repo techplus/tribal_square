@@ -49,9 +49,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">                                    
-                                    <div class="col-sm-12">                                      
-                                        <input type="radio" class="i-checks" name="have_own_car" value="1" {{ ( $oBio ) ? ( ( $oBio->have_own_car == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="i-checks" name="have_own_car" value="0" {{ ( $oBio ) ? ( ( $oBio->have_own_car == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="i-checks" name="have_own_car" value="1" {{ ( $oBio ) ? ( ( $oBio->have_own_car == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="i-checks" name="have_own_car" value="0" {{ ( $oBio ) ? ( ( $oBio->have_own_car == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div> 
@@ -61,9 +67,15 @@
                                     </div>
                                 </div>                                
                                 <div class="form-group">                                    
-                                    <div class="col-sm-12">                                      
-                                        <input type="radio" class="i-checks" name="comfortable_with_pets" value="1" {{ ( $oBio ) ? ( ( $oBio->comfortable_with_pets == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="i-checks" name="comfortable_with_pets" value="0" {{ ( $oBio ) ? ( ( $oBio->comfortable_with_pets == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="i-checks" name="comfortable_with_pets" value="1" {{ ( $oBio ) ? ( ( $oBio->comfortable_with_pets == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="i-checks" name="comfortable_with_pets" value="0" {{ ( $oBio ) ? ( ( $oBio->comfortable_with_pets == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>    
                                 <div class="hr-line-dashed"></div>
@@ -73,9 +85,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">                                    
-                                    <div class="col-sm-12">                                      
-                                        <input type="radio" class="i-checks" name="do_smoke" value="1" {{ ( $oBio ) ? ( ( $oBio->do_smoke == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="i-checks" name="do_smoke" value="0" {{ ( $oBio ) ? ( ( $oBio->do_smoke == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="i-checks" name="do_smoke" value="1" {{ ( $oBio ) ? ( ( $oBio->do_smoke == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="i-checks" name="do_smoke" value="0" {{ ( $oBio ) ? ( ( $oBio->do_smoke == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>    
                                 <div class="hr-line-dashed"></div>
@@ -196,6 +214,13 @@
                     {
                         document.frmBabySitter.submit();
                         return false;
+                    }
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("type") == "radio") {
+                        element.parents('.form-group' ).append(error);
+                    } else {
+                        error.insertAfter(element);
                     }
                 }
            });

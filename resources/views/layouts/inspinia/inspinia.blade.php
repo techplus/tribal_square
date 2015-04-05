@@ -18,7 +18,11 @@
     <script src="{{asset('inspinia/js/jquery-2.1.1.js')}}"></script>
     <script src="{{asset('inspinia/js/bootstrap.min.js')}}"></script>
 </head>
-
+    <style>
+        .radio label, .checkbox label {
+            padding-left:0;
+        }
+    </style>
 <body>
 <div id="wrapper">
     @include('layouts.inspinia.inspinia_nav')

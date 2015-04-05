@@ -15,9 +15,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">                                    
-                                    <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="available_on_short_notice" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_on_short_notice == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;<span>Yes</span>&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="available_on_short_notice" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_on_short_notice == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;<span>No</span>
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="available_on_short_notice" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_on_short_notice == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;<span>Yes</span>&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="available_on_short_notice" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_on_short_notice == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;<span>No</span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div> 
@@ -27,9 +33,15 @@
                                     </div>
                                 </div>                                
                                 <div class="form-group">                                    
-                                    <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="available_to_provide_daytime_care_during_summer_months" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_to_provide_daytime_care_during_summer_months == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="available_to_provide_daytime_care_during_summer_months" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_to_provide_daytime_care_during_summer_months == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="available_to_provide_daytime_care_during_summer_months" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_to_provide_daytime_care_during_summer_months == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="available_to_provide_daytime_care_during_summer_months" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_to_provide_daytime_care_during_summer_months == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div> 
                                 <div class="hr-line-dashed"></div> 
@@ -39,9 +51,15 @@
                                     </div>
                                 </div>                                
                                 <div class="form-group">                                    
-                                    <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="available_before_school_care" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_before_school_care == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="available_before_school_care" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_before_school_care == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="available_before_school_care" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_before_school_care == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="available_before_school_care" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_before_school_care == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>   
                                 <div class="hr-line-dashed"></div> 
@@ -51,9 +69,15 @@
                                     </div>
                                 </div>                                
                                 <div class="form-group">                                    
-                                    <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="available_after_school_care" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_after_school_care == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="available_after_school_care" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_after_school_care == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="available_after_school_care" value="1" {{ ( $oAvailability ) ? ( ( $oAvailability->available_after_school_care == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="available_after_school_care" value="0" {{ ( $oAvailability ) ? ( ( $oAvailability->available_after_school_care == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>         
                                                        
@@ -142,6 +166,13 @@
                 {
                     document.frmBabySitter.submit();
                     return false;
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("type") == "radio") {
+                        element.parents('.form-group' ).append(error);
+                    } else {
+                        error.insertAfter(element);
+                    }
                 }
            });    
         });

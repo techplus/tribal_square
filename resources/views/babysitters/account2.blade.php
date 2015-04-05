@@ -20,8 +20,17 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <label class="control-label" style="font-weight:normal;">Display on Profile : </label>&nbsp;&nbsp;
-                                    	<input type="radio" class="required i-checks" name="display_phone_on_profile" value="1" {{ ( $oAccountBasics->phone ) ? ( ( $oAccountBasics->display_phone_on_profile == 1 ) ? 'checked' : '' ) : 'checked' }}>&nbsp;&nbsp;<span>Yes</span>&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="display_phone_on_profile" value="0" {{ ( $oAccountBasics->phone ) ? ( ( $oAccountBasics->display_phone_on_profile == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;<span>No</span>
+                                        <div class="clearfix"></div>
+                                            <div class="radio">
+                                                <label>
+                                                <input type="radio" class="required i-checks" name="display_phone_on_profile" value="1" {{ ( $oAccountBasics->phone ) ? ( ( $oAccountBasics->display_phone_on_profile == 1 ) ? 'checked' : '' ) : 'checked' }}>
+                                                &nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                                </label>
+                                                <label>
+                                                    <input type="radio" class="required i-checks" name="display_phone_on_profile" value="0" {{ ( $oAccountBasics->phone ) ? ( ( $oAccountBasics->display_phone_on_profile == 0 ) ? 'checked' : '' ) : '' }}>
+                                                    &nbsp;&nbsp;No
+                                                </label>
+                                            </div>
                                     </div>
                                 </div>                                
                                 <div class="form-group">
@@ -84,9 +93,15 @@
                                 	</div>
                                 </div>
                                 <div class="form-group">                                	
-                                    <div class="col-sm-12">                                    	 
-                                        <input type="radio" class="required i-checks" class="gender" name="gender" value="Male" {{ ( $oAccountBasics ) ? ( ( $oAccountBasics->gender == "Male" ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;<span>Male</span>&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" class="gender" name="gender" value="Female" {{ ( $oAccountBasics ) ? ( ( $oAccountBasics->gender == "Female" ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;<span>Female</span>
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="required i-checks" class="gender" name="gender" value="Male" {{ ( $oAccountBasics ) ? ( ( $oAccountBasics->gender == "Male" ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;<span>Male</span>&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="required i-checks" class="gender" name="gender" value="Female" {{ ( $oAccountBasics ) ? ( ( $oAccountBasics->gender == "Female" ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;<span>Female</span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 @if( $oAccountBasics->profile_pic )
@@ -131,6 +146,13 @@
                 {
                     document.frmBabySitter.submit();
                     return false;
+                },
+                errorPlacement: function(error, element) {
+                    if (element.attr("type") == "radio") {
+                        element.parents('.form-group' ).append(error);
+                    } else {
+                        error.insertAfter(element);
+                    }
                 }
            });
         });

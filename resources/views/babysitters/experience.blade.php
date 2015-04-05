@@ -15,9 +15,15 @@
                                     </div>
                                 </div>
                                 <div class="form-group">                                    
-                                    <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="have_experience_caring_child_with_special_needs" value="1" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_caring_child_with_special_needs == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="have_experience_caring_child_with_special_needs" value="0" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_caring_child_with_special_needs == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="have_experience_caring_child_with_special_needs" value="1" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_caring_child_with_special_needs == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="have_experience_caring_child_with_special_needs" value="0" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_caring_child_with_special_needs == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div> 
@@ -27,9 +33,15 @@
                                     </div>
                                 </div>                                
                                 <div class="form-group">                                    
-                                    <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="have_experience_caring_infants" value="1" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_caring_infants == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="have_experience_caring_infants" value="0" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_caring_infants == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="have_experience_caring_infants" value="1" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_caring_infants == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="have_experience_caring_infants" value="0" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_caring_infants == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div> 
                                 <div class="hr-line-dashed"></div> 
@@ -39,9 +51,15 @@
                                     </div>
                                 </div>                                
                                 <div class="form-group">                                    
-                                    <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="have_experience_caring_twins" value="1" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_caring_twins == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="have_experience_caring_twins" value="0" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_caring_twins == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="have_experience_caring_twins" value="1" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_caring_twins == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="have_experience_caring_twins" value="0" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_caring_twins == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>    
                                 <div class="hr-line-dashed"></div> 
@@ -51,9 +69,15 @@
                                     </div>
                                 </div>                                
                                 <div class="form-group">                                    
-                                    <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="have_experience_provide_homework_help" value="1" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_provide_homework_help == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="have_experience_provide_homework_help" value="0" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_provide_homework_help == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="have_experience_provide_homework_help" value="1" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_provide_homework_help == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="have_experience_provide_homework_help" value="0" {{ ( $oExperience ) ? ( ( $oExperience->have_experience_provide_homework_help == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>                                                                                                             
                                 <div class="hr-line-dashed"></div> 
@@ -100,9 +124,15 @@
                                     </div>
                                 </div>                                
                                 <div class="form-group">                                    
-                                    <div class="col-sm-12">                                      
-                                        <input type="radio" class="required i-checks" name="willing_care_for_sick_children" value="1" {{ ( $oExperience ) ? ( ( $oExperience->willing_care_for_sick_children == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required i-checks" name="willing_care_for_sick_children" value="0" {{ ( $oExperience ) ? ( ( $oExperience->willing_care_for_sick_children == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    <div class="col-sm-12">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="willing_care_for_sick_children" value="1" {{ ( $oExperience ) ? ( ( $oExperience->willing_care_for_sick_children == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="required i-checks" name="willing_care_for_sick_children" value="0" {{ ( $oExperience ) ? ( ( $oExperience->willing_care_for_sick_children == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div> 
@@ -110,9 +140,15 @@
                                     <div class="col-sm-4">
                                         <label class="control-label">Do you have Special Needs Services Experience?</label>                                   
                                     </div>
-                                    <div class="col-sm-8">                                      
-                                        <input type="radio" class="required have-special-needs"  name="have_special_needs_service_experience" value="1" {{ ( $oExperience ) ? ( ( $oExperience->have_special_needs_service_experience == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
-                                        <input type="radio" class="required have-special-needs" name="have_special_needs_service_experience" value="0" {{ ( $oExperience ) ? ( ( $oExperience->have_special_needs_service_experience == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                    <div class="col-sm-8">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" class="required have-special-needs"  name="have_special_needs_service_experience" value="1" {{ ( $oExperience ) ? ( ( $oExperience->have_special_needs_service_experience == 1 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;
+                                            </label>
+                                            <label>
+                                                <input type="radio" class="required have-special-needs" name="have_special_needs_service_experience" value="0" {{ ( $oExperience ) ? ( ( $oExperience->have_special_needs_service_experience == 0 ) ? 'checked' : '' ) : '' }}>&nbsp;&nbsp;No
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>                                
                                 <div class="form-group special-needs" style="{{ ( $oExperience ) ? ( ( $oExperience->have_special_needs_service_experience == 1 ) ? '' : 'display:none;' ) : 'display:none;' }}">                                                                        
@@ -168,7 +204,14 @@
                 {
                     document.frmBabySitter.submit();
                     return false;                                                         
-                }
+                },
+                 errorPlacement: function(error, element) {
+                     if (element.attr("type") == "radio") {
+                         element.parents('.form-group' ).append(error);
+                     } else {
+                         error.insertAfter(element);
+                     }
+                 }
            });       
         });
     </script>
