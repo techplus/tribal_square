@@ -4,7 +4,9 @@
     <link href="{{asset('inspinia/css/plugins/jQueryUI/jquery-ui.min.css')}}" rel="stylesheet">
     <link href="{{asset('inspinia/js/plugins/plupload/jquery.ui.plupload/css/jquery.ui.plupload.css')}}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('inspinia/css/summernote.css') }}">      
-    <link href="{{asset('inspinia/css/plugins/jasny/jasny-bootstrap.min.css')}}" rel="stylesheet"> 
+    <link href="{{asset('inspinia/css/plugins/jasny/jasny-bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('inspinia/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
+    <script type="text/javascript" src="{{asset('inspinia/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
     <style>
         .wizard > .content > .body{
             position: relative;
@@ -149,18 +151,23 @@
 	                                            <input type="text" name="available_stock" id="available_stock" value="{{$oDeal->available_stock}}" class="required form-control">
 	                                        </div>
 	                                    </div>
-	                                    <div class="form-group">
+	                                    <div class="form-group" id="data_1">
 	                                        <label class="control-label col-lg-4">Start Date *</label>
 	                                        <div class="col-lg-8">
-	                                            <input type="text" data-mask="99/99/9999" name="start_date" id="start_date" value="{{ ( $oDeal->start_date ) ? date('m/d/Y',strtotime($oDeal->start_date)) : '' }}" class="required form-control" placeholder="">
-                                              <span class="help-block">mm/dd/yyyy</span>
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                        <input type="text" name="start_date" id="start_date" value="{{ ( $oDeal->start_date ) ? date('m/d/Y',strtotime($oDeal->start_date)) : '' }}" class="required form-control" placeholder="">
+                                                    </div>
 	                                        </div>
 	                                    </div>
-	                                    <div class="form-group">
+
+                                        <div class="form-group" id="data_2">
 	                                        <label class="control-label col-lg-4">Expiration Date *</label>
 	                                        <div class="col-lg-8">
-	                                            <input type="text" data-mask="99/99/9999" name="end_date" id="end_date" value="{{( $oDeal->end_date ) ? date('m/d/Y',strtotime($oDeal->end_date)) : '' }}" class="required form-control" placeholder="">
-                                              <span class="help-block">mm/dd/yyyy</span>
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <input type="text" name="end_date" id="end_date" value="{{( $oDeal->end_date ) ? date('m/d/Y',strtotime($oDeal->end_date)) : '' }}" class="required form-control" placeholder="">
+                                                </div>
 	                                        </div>
 	                                    </div>                                      
 	                                </div>
@@ -478,10 +485,7 @@
            $('#discount_percentage').val(discount);
         }
         $(document).ready(function(){  
-              $.validator.addMethod("is_valid",function(value,element){
-                  return is_valid_date(value);
-              },"Please enter valid date");
-              $(document).on('blur','#original_price',function(){                
+              $(document).on('blur','#original_price',function(){
                   $('#discount_percentage').val('0');
                   if( $('#new_price').val().length > 0 )
                   {                      
@@ -542,10 +546,10 @@
                         alert( 'fineprint is required');
                         return false;
                       }
-                      if( ! compare_dates( $('#start_date').val(),$('#end_date').val(),"Start date must less than or equal to end date" ) )  
-                      {
-                        return false;
-                      }
+//                      if( ! compare_dates( $('#start_date').val(),$('#end_date').val(),"Start date must less than or equal to end date" ) )
+//                      {
+//                        return false;
+//                      }
                     }
                     // Clean up if user went backward before
                     if (currentIndex < newIndex)
@@ -661,12 +665,6 @@
                             },
                             contact:{
                               digits : true
-                            },
-                            start_date:{
-                              is_valid:true
-                            },
-                            end_date:{
-                              is_valid:true
                             }
                         }
             });
@@ -743,5 +741,25 @@
                  });
              })
          }
+
+        $(function(){
+            $('#data_1 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true,
+                startDate: new Date(),
+                todayHighlight: true
+            });
+            $('#data_2 .input-group.date').datepicker({
+                todayBtn: "linked",
+                keyboardNavigation: false,
+                forceParse: false,
+                autoclose: true,
+                startDate: new Date(),
+                todayHighlight: true
+            });
+
+        })
     </script>
         
