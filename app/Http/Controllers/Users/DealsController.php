@@ -18,7 +18,7 @@ class DealsController extends Controller {
 	 */
 	public function index()
 	{				
-	 	$this->data[ 'aDeals'  ] = Deal::withTrashed()->with ( [ 'Listingcategory' ] )->where ( 'user_id' , '=' , $this->data[ 'oUser' ]->id )->get ();;
+	 	$this->data[ 'aDeals'  ] = Deal::withTrashed()->with ( [ 'Listingcategory','Purchases' ] )->where ( 'user_id' , '=' , $this->data[ 'oUser' ]->id )->get ();;
 	 	return $this->renderView ( 'providers.deals.index' );
 	}
 
@@ -63,7 +63,14 @@ class DealsController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		$deal = Deal::with(['Purchases'=>function($q){
+			$q->with('Transaction');
+		}])->find($id);
+		if( ! $deal )
+			return abort(404);
+
+		$this->data['deal'] = $deal;
+		return $this->renderView('providers.deals.purchases');
 	}
 
 	/**

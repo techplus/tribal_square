@@ -22,6 +22,10 @@ class Deal extends Model{
 	{
 		return $this->hasMany('App\Models\DealVideo','deal_id');
 	}
+	public function Purchases()
+	{
+		return $this->hasMany('App\Models\Purchase','item_id');
+	}
 	public function scopeApproved($query)
 	{
 		return $query->where('is_approved_by_admin',1);

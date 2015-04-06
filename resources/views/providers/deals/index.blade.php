@@ -21,8 +21,8 @@
                             <i class="fa fa-times"></i>
                         </a>
                     </div> -->
-                </div>                             
-                <div class="ibox-content">                   
+                </div>
+                <div class="ibox-content">
                 <div class="col-sm-12">
                     <a href="{{ route('deals.create') }}"><button class="btn btn-primary pull-right">Add New</button></a>
                 </div>
@@ -31,7 +31,8 @@
                     <tr>
                         <th>Deal Titles</th>
                         <th>Category</th>
-                        <th>Actions</th>                        
+                        <th>Purchases</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -43,6 +44,12 @@
                                         {{ ( $oDeal->Listingcategory ) ? $oDeal->Listingcategory->name : null }}
                                     </td>
                                     <td>
+                                        @if($oDeal->is_approved_by_admin == 1)
+                                            <a href="{{route('deals.show',[$oDeal->id])}}">{{$oDeal->Purchases->count()}}</a></td>
+                                        @else
+                                            -
+                                        @endif
+                                    <td>
                                         @if( $oDeal->deleted_at != "" )
                                             <label class="label label-success">Archived</label>
                                         @else
@@ -52,23 +59,23 @@
                                             @elseif( $oDeal->is_approved_by_admin == 1 )
                                                 <label class="label label-primary">Approved</label>
                                             @elseif( $oDeal->is_approved_by_admin == 2 )
-                                                <label class="label label-danger">Declined</label>                                            
+                                                <label class="label label-danger">Declined</label>
                                             @endif
                                         @endif
-                                    </td>                       
-                                </tr>    
-                            @endforeach                
-                        @endif                            
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                     <tfoot>
                     <tr>
                         <th>Deal Titles</th>
                         <th>Category</th>
-                        <th>Actions</th>                        
+                        <th>Actions</th>
                     </tr>
                     </tfoot>
-                    </table>                                 
-                </div>               
+                    </table>
+                </div>
             </div>
         </div>
     </div>

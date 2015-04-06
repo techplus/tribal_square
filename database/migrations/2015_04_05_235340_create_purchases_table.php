@@ -16,7 +16,7 @@ class CreatePurchasesTable extends Migration {
 			$table->increments('id');
 			$table->integer('item_id');
 			$table->integer('order_id');
-			$table->integer('user_id');
+			$table->integer('user_id')->nullable()->deafult(null);
 			$table->string('email')->nullable()->default(null);
 			$table->enum('item_type',['deal','classified','babysitter'])->nullable()->default('classified');
 			$table->integer('quantity')->default(0);
