@@ -11,7 +11,7 @@
 			            <h1>Shopping Carts
 			            @if( !empty( $aProducts ) )
 			            	<span class="pull-right">
-			              		<a href="#" class="paypal"><img src="{{ url('images/paypal_btn.png') }}" alt="" class="img-resposnsive"></a>
+			              		<a href="{{action('ShoppingCartsController@getPaypalCheckOut')}}" class="paypal"><img src="{{ url('images/paypal_btn.png') }}" alt="" class="img-resposnsive"></a>
 			            	</span>
 			            @endif
 			            </h1>
@@ -109,7 +109,7 @@
 					                        <td>   </td>
 					                        @if( !empty( $aProducts ) )
 						                        <td class="text-right">
-						                          <a href="#" class="paypal"><img src="{{ url('images/paypal_btn.png') }}" alt=""></a>
+						                          <a href="{{action('ShoppingCartsController@getPaypalCheckOut')}}" class="paypal"><img src="{{ url('images/paypal_btn.png') }}" alt=""></a>
 						                        </td>
 					                        @else
 					                        	<td>   </td>
