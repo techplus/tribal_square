@@ -29,6 +29,8 @@ class DealsController extends Controller {
 		if( ! empty( $aSearch['location'] ) )
 			$oDealsBuilder = $oDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');
 
+		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
+
 		$this->data['oDeals'] = $oDealsBuilder->get();
 		return $this->renderView('front.search_deals');
 	}
@@ -66,6 +68,7 @@ class DealsController extends Controller {
 			return abort(404);
 		$this->data['deal'] = $deal;
 		$this->data['layout'] = 'layouts.front';
+		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
 		return $this->renderView('front.deal_full_view');
 	}
 

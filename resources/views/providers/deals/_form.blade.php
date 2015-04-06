@@ -665,6 +665,9 @@
                             },
                             contact:{
                               digits : true
+                            },
+                            title:{
+                              maxlength :  100
                             }
                         }
             });

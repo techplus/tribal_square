@@ -1,6 +1,25 @@
 @extends('layouts.front')
 
-@section('content')    
+@section('content')   
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script> 
+    <script>
+    var autocomplete1;         
+    function initialize() {
+      // Create the autocomplete object, restricting the search
+      // to geographical location types.
+      autocomplete1 = new google.maps.places.Autocomplete(
+              /** @type {HTMLInputElement} */(document.getElementById('autocomplete1')),
+              { types: ['geocode'] });       
+      // When the user selects an address from the dropdown,
+      // populate the address fields in the form.
+      google.maps.event.addListener(autocomplete1, 'place_changed', function() {
+            
+      });     
+    }    
+    $(document).ready(function(){
+      initialize();
+    });
+    </script> 
     <div class="page-wrap">
         <div class="row header_wrap">
               <div class="container">
@@ -50,7 +69,7 @@
                     <div class="col-sm-6 col-xs-12">
                       <div class="form-group col-xs-12 serach_input_wrap">
                         <img src="images/location_icon.png" alt="">
-                        <input type="text" name="location" class="form-control serach_input" placeholder="Enter Your Location">
+                        <input type="text" name="location" id="autocomplete1" class="form-control serach_input" placeholder="Enter Your Location">
                       </div>
                     </div>
                     <div class="col-sm-12 col-xs-12">

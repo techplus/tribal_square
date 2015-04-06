@@ -50,7 +50,7 @@
             <div class="page-content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1>{{$classified->title}}
+                        <h1 style="font-size: 26px;font-weight: bold;">{{$classified->title}}
                             <div class="Discount_Tag">
                                 {{$classified->ListingCategory->name}}
                             </div>
@@ -114,7 +114,12 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <h3>Contact Information</h3>
-                                    <img src="http://placehold.it/300x150" alt="" class="img-responsive">
+                                    <p>{{$classified->location2}}</p>
+                                    <p>Telephone: {{$classified->phone}}</p>
+                                    <p>E-mail: {{$classified->email}}</p>                                  
+                                    <div class="google_map">
+                                        <div class="img-responsive" id="map" style="height: 300px;"></div>                                        
+                                    </div>
                                     <h4>Language Spoken</h4>
                                     <ul>
                                         <?php $languages = explode(',',$classified->language_spoken); ?>
@@ -122,13 +127,6 @@
                                             <li>{{$lang}}</li>
                                         @endforeach
                                     </ul>
-                                    <div class="google_map">
-                                        <div class="img-responsive" id="map" style="height: 300px;"></div>
-                                        <br>
-                                        <p>{{$classified->location2}}</p>
-                                        <p>Telephone: {{$classified->phone}}</p>
-                                        <p>E-mail: {{$classified->email}}</p>
-                                    </div>
                                 </div>
 
                             </div>

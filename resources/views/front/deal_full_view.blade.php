@@ -43,7 +43,7 @@
             <div class="page-content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1>{{$deal->title}}
+                        <h1 style="font-size:26px;font-weight:bold;">{{$deal->title}}
                             <div class="Discount_Tag">
                                 <span class="glyphicon glyphicon-tag"></span>
                                 {{$deal->discount_percentage}}% Discount
@@ -125,23 +125,15 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <h3>Contact Information</h3>
-                                    <img src="http://placehold.it/300x150" alt="" class="img-responsive">
-                                    <h4>Dental Associations</h4>
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+                                    <!-- <img src="http://placehold.it/300x150" alt="" class="img-responsive"> -->                                     
+                                    <p>{{$deal->location}}</p>
+                                    <p>Telephone: {{$deal->contact}}.</p>
+                                    <p>E-mail: {{$deal->email}}</p>                                    
                                     <div class="google_map">
-                                        <div class="img-responsive" id="map" style="height: 300px;"></div>
-                                        <br>
-                                        <p>{{$deal->location}}</p>
-                                        <p>Telephone: {{$deal->contact}}.</p>
-                                        <p>E-mail: {{$deal->email}}</p>
+                                        <div class="img-responsive" id="map" style="height: 300px;"></div>                                       
                                     </div>
                                 </div>
-
                             </div>
-
-
-
-
                         </div>
 
                         @include('layouts.front_sidebar')

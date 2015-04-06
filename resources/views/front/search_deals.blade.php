@@ -20,8 +20,8 @@
                                 @if( $counter == 1 ) break; @endif
                                 @if( $deal->DealImages->count() && $counter == 0)
                                     <?php $counter++; ?>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap">
-                                            <img src="{{$deal->DealImages->first()->image_path}}" alt="" class="img-responsive" style="width:100%;">
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap">                                            
+                                            <img src="{{$deal->DealImages->first()->image_path}}" alt="" class="img-responsive" style="width:100%;">                                            
                                             <div>
                                                 <span>{{ $deal->discount_percentage }}%</span>
                                                 <p>DISCOUNT</p>
@@ -44,12 +44,16 @@
                             <div class="clearfix"></div>
 
                             <div class="col-sm-12 all_deal_box_wrap">
-                                @foreach( $oDeals AS $oDeal )
-                                    @if( $oDeal->DealImages->count() )
+                                <?php $counter = 0; ?>
+                                @foreach( $oDeals AS $oDeal )  
+                                    @if( $counter++ == 0 ) <?php continue; ?> @endif                                  
+                                    @if( $oDeal->DealImages->count() )                                        
                                 <div class="col-sm-4">
                                     <div class="col-item">
-                                        <div class="photo">
-                                            <img alt="{{$oDeal->title}}" class="img-responsive" src="{{$oDeal->DealImages->first()->image_path}}">
+                                        <div class="photo">   
+                                            <a href="{{route('search.deals.show',[$oDeal->id])}}" style="margin-left:0;">                                         
+                                                <img alt="{{$oDeal->title}}" class="img-responsive" src="{{$oDeal->DealImages->first()->image_path}}">                                            
+                                            </a>
                                         </div>
                                         <div class="info">
                                             <div class="row">
@@ -66,8 +70,8 @@
                                                 </div>
                                             </div>
                                             <div class="separator clear-left">
-                                                <p class="btn-add">{{$oDeal->new_price}}$</p>
-                                                <p class="btn-details">-{{$oDeal->discount_percentage}}%</p>
+                                                 <a href="{{route('search.deals.show',[$oDeal->id])}}"><p class="btn-add">{{$oDeal->new_price}}$</p>
+                                                <p class="btn-details">-{{$oDeal->discount_percentage}}%</p></a>
                                             </div>
                                             <div class="clearfix">
                                             </div>

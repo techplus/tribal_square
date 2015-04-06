@@ -13,6 +13,11 @@ class Deal extends Model{
 	{
 		return $this->hasMany('App\Models\DealImage','deal_id');
 	}
+	public function CoverPic()
+	{
+		$images = $this->DealImages();
+		return $images->where('is_cover',1);
+	}
 	public function DealVideos()
 	{
 		return $this->hasMany('App\Models\DealVideo','deal_id');
@@ -36,5 +41,5 @@ class Deal extends Model{
 				$q->where('name','LIKE','%'.$term."%");
 			});
 		});
-	}
+	}	
 }

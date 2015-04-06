@@ -514,6 +514,9 @@
                             },
                             phone:{
                                 digits : true
+                            },
+                            title:{
+                              maxlength :  100
                             }
                         },
                         errorPlacement: function(error, element) {

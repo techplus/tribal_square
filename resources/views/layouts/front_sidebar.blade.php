@@ -17,8 +17,8 @@
         </p>
         <span>Publish your great deal and get audience instantly.</span>
         <div class="clearfix"></div>
-        <a class="btn btn-lg custome_blue_btn col-sm-2" href="#" {{ (Auth::check()) ? 'disabled' : '' }}>
-            Publish Your Deal<span style="color:#fff; font-size:16px;" class="glyphicon glyphicon-triangle-right"></span>
+        <a class="btn btn-lg custome_blue_btn col-sm-2" href="{{action('Auth\AuthController@getIndex')}}" {{ (Auth::check()) ? 'disabled' : '' }}>
+           Publish Your Deal<span style="color:#fff; font-size:16px;" class="glyphicon glyphicon-triangle-right"></span>
         </a>
     </div>
 
@@ -28,10 +28,10 @@
 
     <div class="current_deals_box">
         <h2>Current Deals</h2>
-        <a href="#">See all</a>
+        <a href="{{ route('search.deals.index') }}">See all</a>
 
         <div class="clearfix"></div>
-
+<!-- 
         <div class="col-item">
             <div class="photo">
                 <img src="http://placehold.it/350x260" class="img-responsive" alt="a">
@@ -56,30 +56,23 @@
                 </div>
             </div>
         </div>
-
+ -->
         <ul class="media-list">
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img alt="64x64" data-src="holder.js/64x64" class="media-object" style="width: 64px; height: 64px;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjEyLjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
-                    </a>
-                    -51%
-                </div>
-                <div class="media-body">
-                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.</p>
-                </div>
-            </li>
-            <li class="media">
-                <div class="media-left">
-                    <a href="#">
-                        <img alt="64x64" data-src="holder.js/64x64" class="media-object" style="width: 64px; height: 64px;" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+PGRlZnMvPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjEyLjUiIHk9IjMyIiBzdHlsZT0iZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQ7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9nPjwvc3ZnPg==" data-holder-rendered="true">
-                    </a>
-                    -74%
-                </div>
-                <div class="media-body">
-                    <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo.</p>
-                </div>
-            </li>
+            @if( $aLatestDeals->count() > 0 )
+                @foreach( $aLatestDeals as $oDeal  )
+                    <li class="media">
+                        <div class="media-left">
+                            <a href="{{ route('search.deals.show' , [ $oDeal->id ] ) }}">
+                                <img alt="64x64" data-src="holder.js/64x64" class="media-object" style="width: 64px; height: 64px;" src="{{ $oDeal->CoverPic->count() ? $oDeal->CoverPic->first()->image_path : url('images/no_image.png') }}" data-holder-rendered="true">                            
+                                <span style="color:#000;">{{ $oDeal->discount_percentage }}%
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <a href="{{ route('search.deals.show' , [ $oDeal->id ] ) }}" style="width:100%;color:#000;"><p>{{ $oDeal->title }}</p></a>
+                        </div>
+                    </li>
+                @endforeach
+            @endif          
         </ul>
 
     </div>

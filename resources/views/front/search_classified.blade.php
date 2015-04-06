@@ -47,17 +47,21 @@
                                             <div class="col-sm-3 col-xs-6">
                                                 <div class="col-item">
                                                     <div class="photo">
-                                                        <a href="{{route('search.classified.show',[$item->id])}}">
+                                                        <a href="{{route('search.classified.show',[$item->id])}}" style="margin-left:0;">
                                                             <img src="{{$item->ClassifiedImages->first()->image_path}}" class="img-responsive" alt="{{$item->title}}" />
                                                         </a>
                                                     </div>
-                                                    <div class="info">
+                                                    <div class="info" style="text-align: left;">
                                                         <div class="row">
                                                             <div class="price col-md-12">
-                                                                <h5 class="pro_title">{{$item->title}}</h5>
+                                                                <a href="{{route('search.classified.show',[$item->id])}}" style="margin-left:0;width:100%;">
+                                                                    <h5 class="pro_title" style="text-indent: 0;">                                                                    
+                                                                            {{$item->title}}                                                                    
+                                                                    </h5>
+                                                                </a>
                                                             </div>
                                                             <div class="price col-md-7">
-                                                                <h5 class="price-text-color clasiffied_price">${{$item->price}}</h5>
+                                                                <h5 class="price-text-color clasiffied_price" style="text-indent: 0;">${{$item->price}}</h5>
                                                             </div>
                                                             <div class="rating col-md-5">
                                                                 <i class="price-text-color glyphicon glyphicon-star"></i><i class="price-text-color glyphicon glyphicon-star">

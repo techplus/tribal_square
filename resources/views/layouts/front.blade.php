@@ -24,6 +24,9 @@
       $('.carousel').carousel({
         interval: false
       });
+      $('.styledRadio').parent().on('click',function(){
+        $(this).children('.styledRadio').trigger('click');
+      });
     });      
   </script>
   <style>

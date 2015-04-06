@@ -4,6 +4,7 @@ use App\Models\ListingCategory;
 use Request;
 use App\Http\Controllers\Controller;
 use App\Models\Classified;
+use App\Models\Deal;
 class ClassifiedsController extends Controller {
 
 	public function __construct()
@@ -72,6 +73,7 @@ class ClassifiedsController extends Controller {
 			return abort(404);
 		$this->data['classified'] = $classified;
 		$this->data['layout'] = "layouts.front";
+		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
 		return $this->renderView('front.classified_full_view');
 	}
 
