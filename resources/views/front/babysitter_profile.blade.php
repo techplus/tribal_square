@@ -49,11 +49,11 @@
 				                </ol>
 				                @endif
 				                <div class="col-sm-6">
-				                    <div class="user-image" align="center">
+				                    <div class="user-image" align="center" style="height:363px;width:539px;position:relative;">
 				                    	<?php
-					                        $image = ( $oBabySitter->Account ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) : 'https://farm7.staticflickr.com/6163/6195546981_200e87ddaf_b.jpg';
-					                        $path = ( $oBabySitter->Account ) ? base_path('profile_pictures/'.$oBabySitter->Account->profile_pic) : '';
-					                        echo getImage($image,539,363,$path);
+					                        $image = ( $oBabySitter->Account ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) : url('images/6195546981_200e87ddaf_b.jpg');
+					                        $path = ( $oBabySitter->Account ) ? base_path('profile_pictures/'.$oBabySitter->Account->profile_pic) : base_path('images/6195546981_200e87ddaf_b.jpg');
+					                        echo getImage($image,539,363,$path,true);
 				                        ?>
 				                    </div>
 				                </div>

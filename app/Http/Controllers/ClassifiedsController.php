@@ -32,7 +32,7 @@ class ClassifiedsController extends Controller {
 		if( ! empty( $aSearch['term'] ) )
 			$oDealsBuilder = $oDealsBuilder->term($aSearch['term']);
 		if( ! empty( $aSearch['location'] ) )
-			$oDealsBuilder = $oDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');
+			$oDealsBuilder = $oDealsBuilder->where('location2','LIKE','%'.$aSearch['location'].'%');
 		if( !empty( $aSearch['cat'] ) )	{
 			$oDealsBuilder = $oDealsBuilder->whereHas('ListingCategory',function($q)use($aSearch){
 				$q->where('id',$aSearch['cat']);				
@@ -93,7 +93,7 @@ class ClassifiedsController extends Controller {
 		if( ! empty( $aSearch['term'] ) )
 			$oDealsBuilder = $oDealsBuilder->term($aSearch['term']);
 		if( ! empty( $aSearch['location'] ) )
-			$oDealsBuilder = $oDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');
+			$oDealsBuilder = $oDealsBuilder->where('location2','LIKE','%'.$aSearch['location'].'%');
 		if( !empty( $aSearch['cat'] ) )	{
 			$oDealsBuilder = $oDealsBuilder->whereHas('ListingCategory',function($q)use($aSearch){
 				$q->where('id',$aSearch['cat']);				

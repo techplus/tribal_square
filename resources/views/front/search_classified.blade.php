@@ -1,6 +1,7 @@
 @extends('layouts.front')
 
 @section('content')
+ @include('front.getimage')
     <div class="page-wrap">
         <div class="row header_wrap">
             @include('layouts.front_navbar')
@@ -47,16 +48,23 @@
                                             <div class="col-sm-3 col-xs-6">
                                                 <div class="col-item">
                                                     <div class="photo">
-                                                        <a href="{{route('search.classified.show',[$item->id])}}" style="margin-left:0;">
-                                                            <img src="{{$item->ClassifiedImages->first()->image_path}}" class="img-responsive" alt="{{$item->title}}" />
+                                                        <a href="{{route('search.classified.show',[$item->id])}}" style="margin-left:0;width:100%;">                                                            
+                                                            <div class="user-image" style="height:260px;width:364px;position:relative;">
+                                                                <?php /*<img src="{{$item->ClassifiedImages->first()->image_path}}" class="img-responsive" alt="{{$item->title}}" />*/ ?>
+                                                                 <?php
+                                                                    $image = ( $item->ClassifiedImages ) ? $item->ClassifiedImages->first()->image_path : url('images/6195546981_200e87ddaf_b.jpg');
+                                                                    $path =  ( $item->ClassifiedImages ) ? base_path('uploads/'.pathinfo($item->ClassifiedImages->first()->image_path,PATHINFO_BASENAME)) : base_path('images/6195546981_200e87ddaf_b.jpg');
+                                                                    echo getImage($image,364,260,$path,true);
+                                                                ?>
+                                                            </div>
                                                         </a>
                                                     </div>
                                                     <div class="info" style="text-align: left;">
                                                         <div class="row">
-                                                            <div class="price col-md-12">
+                                                            <div class="price col-md-12" style="height:40px;">
                                                                 <a href="{{route('search.classified.show',[$item->id])}}" style="margin-left:0;width:100%;">
                                                                     <h5 class="pro_title" style="text-indent: 0;">                                                                    
-                                                                            {{$item->title}}                                                                    
+                                                                            {{ ( strlen( $item->title ) > 50 ) ? substr($item->title,0,50)."..." : $item->title }}                                                                    
                                                                     </h5>
                                                                 </a>
                                                             </div>

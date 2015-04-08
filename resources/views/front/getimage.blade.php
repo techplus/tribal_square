@@ -1,4 +1,4 @@
-<?php function getImage($image,$width,$height,$path)
+<?php function getImage($image,$width,$height,$path,$absolute = false)
 	{		
 		// Set the width of the area and height of the area
 		$inputwidth = $width;
@@ -22,6 +22,19 @@
 		        $outputwidth = $inputwidth;
 		        $outputheight = $inputheight;
 		        }
+
+		    if( $absolute )    
+		    {
+		    	$top = 0;
+		    	$remainheight = (float) number_format( ($inputheight - $outputheight) , 2);
+		    	if( $remainheight != 0 OR  $remainheight != 0.00 )
+		    		$top = (float)number_format(( $remainheight / 2 ), 2);
+		    	$left = 0;
+		    	$remainwidth = (float) number_format( ($inputwidth - $outputwidth) , 2);
+		    	if( $remainwidth != 0 OR  $remainwidth != 0.00 )
+		    		$left = (float)number_format(( $remainwidth / 2 ), 2);
+
+		    }
 		// Echo out the results and done
-		return '<img class="img-responsive" src="'.$image.'" width="'.$outputwidth.'" height="'.$outputheight.'">';
+		return '<img class="img-responsive img-custom" src="'.$image.'"  style="'.($absolute ? 'position:absolute;left:'.$left.'px;;height:'.$outputheight.'px;width:'.$outputwidth.'px;top:'.$top."px;" : '' ).'">';
 	} ?>
