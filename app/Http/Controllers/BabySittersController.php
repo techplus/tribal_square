@@ -17,6 +17,13 @@ use App\Models\User;
 
 class BabySittersController extends Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		
+		$this->data['aSearch'] = session('search');
+	}
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -39,6 +46,7 @@ class BabySittersController extends Controller {
 
 	public function getBabysitters($limit,$offset,$aSearch,$needRow = 0,$id = 0)
 	{
+		DB::enableQueryLog();
 		$aBabySitters = array();
 		$iTotal = 0;
 		
@@ -59,6 +67,8 @@ class BabySittersController extends Controller {
 			   			->skip($offset)
 			   			->get();			 
 			
+			//var_dump(DB::getQueryLog());			
+			//exit;
 			$aResp['aBabySitters'] = $aBabySitters;			
 		}
 		else
@@ -83,6 +93,7 @@ class BabySittersController extends Controller {
 				return $q->id == $id;
 			})->first();					
 		}
+
 		return $aResp;	
 
 		//dd($oQuery);

@@ -1,9 +1,18 @@
 <?php 
 namespace App\Http\Controllers\Admin;
 use App\Models\Classified;
+use App\Models\ListingCategory;
 use App\Http\Controllers\Controller;
 use Request;
 Class PostsController extends Controller{
+
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->data['subcategories'] = ListingCategory::classified()->get();
+	}
+
 	public function index()
 	{
 		$oClassified = Classified::with('ListingCategory');
@@ -72,8 +81,10 @@ Class PostsController extends Controller{
 		if( ! $classified )
 			return abort(404);
 
-		$this->data['sStatus'] = "";
+		$this->data['aLatestPosts'] = Classified::with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
 
+		$this->data['sStatus'] = "";
+		$this->data['cat_id'] = "";
 		if( $classified->trashed() )
 			$this->data['sStatus'] = "Archived";
 		else if( $classified->is_approved_by_admin == 0 )

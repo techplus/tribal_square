@@ -13,6 +13,13 @@ class Classified extends Model{
 	{
 		return $this->hasMany('App\Models\ClassifiedImage','classified_id');
 	}
+
+	public function CoverPic()
+	{
+		$images = $this->ClassifiedImages();
+		return $images->where('is_cover',1);		
+	}
+	
 	public function ClassifiedVideos()
 	{
 		return $this->hasMany('App\Models\ClassifiedVideo','classified_id');
@@ -34,4 +41,5 @@ class Classified extends Model{
 			});;
 		});
 	}
+
 }

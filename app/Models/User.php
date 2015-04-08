@@ -103,12 +103,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 						->orWhere('experience','LIKE','%'.$aSearch['term'].'%');
 					});
 				})->whereHas('Account' , function($q)use($aSearch){
-				$q->where('address','LIKE','%'.$aSearch['location'].'%')
-				->orWhere('street','LIKE','%'.$aSearch['location'].'%')
-				->orWhere('city','LIKE','%'.$aSearch['location'].'%')
-				->orWhere('state','LIKE','%'.$aSearch['location'].'%')
-				->orWhere('country','LIKE','%'.$aSearch['location'].'%')
-				->orWhere('pin','LIKE','%'.$aSearch['location'].'%');
+					$q->where(function($q1)use($aSearch){
+						$q1->where('address','LIKE','%'.$aSearch['location'].'%')
+							->orWhere('street','LIKE','%'.$aSearch['location'].'%')
+							->orWhere('city','LIKE','%'.$aSearch['location'].'%')
+							->orWhere('state','LIKE','%'.$aSearch['location'].'%')
+							->orWhere('country','LIKE','%'.$aSearch['location'].'%')
+							->orWhere('pin','LIKE','%'.$aSearch['location'].'%');
+					});
 			});
 		}
 		else if( !empty($aSearch['term']) ){
@@ -124,12 +126,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		}
 		else if( !empty($aSearch['location']) ){
 			$query->whereHas('Account' , function($q)use($aSearch){
-				$q->where('address','LIKE','%'.$aSearch['location'].'%')
-				->orWhere('street','LIKE','%'.$aSearch['location'].'%')
-				->orWhere('city','LIKE','%'.$aSearch['location'].'%')
-				->orWhere('state','LIKE','%'.$aSearch['location'].'%')
-				->orWhere('country','LIKE','%'.$aSearch['location'].'%')
-				->orWhere('pin','LIKE','%'.$aSearch['location'].'%');
+				$q->where(function($q1)use($aSearch){
+					$q1->where('address','LIKE','%'.$aSearch['location'].'%')
+						->orWhere('street','LIKE','%'.$aSearch['location'].'%')
+						->orWhere('city','LIKE','%'.$aSearch['location'].'%')
+						->orWhere('state','LIKE','%'.$aSearch['location'].'%')
+						->orWhere('country','LIKE','%'.$aSearch['location'].'%')
+						->orWhere('pin','LIKE','%'.$aSearch['location'].'%');
+				});
 			});
 		}
 		return $query;

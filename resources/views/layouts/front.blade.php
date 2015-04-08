@@ -27,15 +27,42 @@
       $('.styledRadio').parent().on('click',function(){
         $(this).children('.styledRadio').trigger('click');
       });
+      $('.menu-links').on('click',function(){
+        $('#frmMenuLinks').find('.type').val($(this).data('type'));
+        $('#frmMenuLinks').submit();
+      });      
     });      
   </script>
   <style>
+    
+    .login_subnav .menu-links{
+      text-decoration: none;
+      color: #999;
+    }
+    .login_subnav .link-active{
+        color:#0293D7;
+        font-weight: bold;
+        text-decoration: underline;        
+    }
     .header_btns_wrap{
         margin-top:3px;
     }
     .header_search{
         margin-top:10px;
+        width:450px;
     }
+     .header_search input{
+      width : 44%;
+    }
+    .header_search input[type="submit"]{
+      border-radius: 15px !important;
+      width:10%;  
+      margin-left:5px;
+    }    
+    .user-image{      
+      background: #e8e8e8;
+      border: 1px solid #ccc;
+    }    
   </style>
   </head>
   <body class="{{$body_class or 'signin_body'}}">

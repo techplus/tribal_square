@@ -1,9 +1,9 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use Request;
 use App\Http\Controllers\Controller;
+use Session;
 
-use Illuminate\Http\Request;
 
 class CategoriesController extends Controller {
 
@@ -14,7 +14,21 @@ class CategoriesController extends Controller {
 	 */
 	public function index()
 	{
-		//
+		if( ! Request::has('type') )
+			abort(404);
+
+		if( Session::has('search') )
+		{
+			$aSearch = Session::get('search');
+			$aSearch['type'] = Request::get('type','deals');
+			$aSearch['cat'] = "";
+			Session::put( 'search' , $aSearch );
+		}		
+
+		if( Request::get('type') == "classified" )
+			return redirect()->route('search.classified.index');
+		else
+			return redirect()->route('search.deals.index');
 	}
 
 	/**
@@ -45,7 +59,25 @@ class CategoriesController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		if( ! Request::has('type') )
+			abort(404);
+
+		if( Session::has('search') )
+		{
+			$aSearch = Session::get('search');
+			$aSearch['type'] = Request::get('type','deals');
+			$aSearch['cat'] = $id;			
+		}	
+		else{
+			$aSearch['type'] = Request::get('type','deals');
+			$aSearch['cat'] = $id;
+		}	
+		Session::put( 'search' , $aSearch );
+
+		if( Request::get('type') == "classified" )
+			return redirect()->route('search.classified.index');
+		else
+			return redirect()->route('search.deals.index');
 	}
 
 	/**

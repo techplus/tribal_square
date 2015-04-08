@@ -1,9 +1,18 @@
 <?php 
 namespace App\Http\Controllers\Admin;
 use App\Models\Deal;
+use App\Models\ListingCategory;
 use App\Http\Controllers\Controller;
 use Request;
 Class DealsController extends Controller{
+
+	public function __construct()
+	{
+		parent::__construct();
+
+		$this->data['subcategories'] = ListingCategory::Deals()->get();
+	}
+
 	public function index()
 	{
 		$oDeal = Deal::with('ListingCategory');
@@ -72,7 +81,7 @@ Class DealsController extends Controller{
 			return abort(404);
 
 		$this->data['sStatus'] = "";
-
+		$this->data['cat_id'] = "";
 		if( $deal->trashed() )
 			$this->data['sStatus'] = "Archived";
 		else if( $deal->is_approved_by_admin == 0 )
@@ -82,6 +91,7 @@ Class DealsController extends Controller{
 		else if( $deal->is_approved_by_admin == 2 )
 			$this->data['sStatus'] = "Declined";
 
+		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
 		$this->data['deal'] = $deal;
 		$this->data['layout'] = 'layouts.admin';
 		return $this->renderView('front.deal_full_view');

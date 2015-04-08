@@ -11,7 +11,8 @@ class ClassifiedsController extends Controller {
 	{
 		parent::__construct();
 
-		$this->data['categories'] = ListingCategory::classified()->get();
+		$this->data['subcategories'] = ListingCategory::classified()->get();
+		$this->data['aSearch'] = session('search');
 	}
 
 	/**
@@ -20,15 +21,24 @@ class ClassifiedsController extends Controller {
 	 * @return Response
 	 */
 	public function index()
-	{
+	{		
 		$aSearch = session('search');
+
 		$oDealsBuilder = Classified::approved()->with(['ClassifiedImages'=>function($q){
 			$q->where('is_cover',1);
 		},'ListingCategory']);
+
+		$this->data['cat_id'] = 0;
 		if( ! empty( $aSearch['term'] ) )
 			$oDealsBuilder = $oDealsBuilder->term($aSearch['term']);
 		if( ! empty( $aSearch['location'] ) )
 			$oDealsBuilder = $oDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');
+		if( !empty( $aSearch['cat'] ) )	{
+			$oDealsBuilder = $oDealsBuilder->whereHas('ListingCategory',function($q)use($aSearch){
+				$q->where('id',$aSearch['cat']);				
+			});
+			$this->data['cat_id'] = $aSearch['cat'];
+		}	
 
 		$classifieds = $oDealsBuilder->get();
 		$aViewData = array();
@@ -71,9 +81,27 @@ class ClassifiedsController extends Controller {
 		$classified = Classified::with(['ClassifiedImages','ListingCategory'])->find($id);
 		if( ! $classified )
 			return abort(404);
+
 		$this->data['classified'] = $classified;
 		$this->data['layout'] = "layouts.front";
-		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
+
+		$aSearch = session('search');
+
+		$oDealsBuilder = Classified::approved()->with( [ 'CoverPic' ] )->orderBy('updated_at','DESC');
+
+		$this->data['cat_id'] = 0;
+		if( ! empty( $aSearch['term'] ) )
+			$oDealsBuilder = $oDealsBuilder->term($aSearch['term']);
+		if( ! empty( $aSearch['location'] ) )
+			$oDealsBuilder = $oDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');
+		if( !empty( $aSearch['cat'] ) )	{
+			$oDealsBuilder = $oDealsBuilder->whereHas('ListingCategory',function($q)use($aSearch){
+				$q->where('id',$aSearch['cat']);				
+			});
+			$this->data['cat_id'] = $aSearch['cat'];
+		}			
+
+		$this->data['aLatestPosts'] = $oDealsBuilder->take(5)->get();
 		return $this->renderView('front.classified_full_view');
 	}
 

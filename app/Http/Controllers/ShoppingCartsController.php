@@ -16,6 +16,7 @@ Class ShoppingCartsController extends Controller
 	public function __construct ( PaypalRestInterface $paypal )
 	{
 		$this->paypal = $paypal;
+		$this->data['aSearch'] = session('search');
 	}
 
 	public function getIndex ()

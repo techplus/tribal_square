@@ -1,5 +1,6 @@
 @extends($layout)
-@section('content')
+@section('content')	
+	@include('front.getimage')
 	@if( Auth::check() )
 		<link href="{{asset('/css/style.css')}}" rel="stylesheet">
 		<div class="panel panel-default">
@@ -48,8 +49,12 @@
 				                </ol>
 				                @endif
 				                <div class="col-sm-6">
-				                    <div class="user-image">
-				                        <img class="img-responsive thumbnail" src="{{ ( $oBabySitter->Account ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) : 'https://farm7.staticflickr.com/6163/6195546981_200e87ddaf_b.jpg' }}">
+				                    <div class="user-image" align="center">
+				                    	<?php
+					                        $image = ( $oBabySitter->Account ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) : 'https://farm7.staticflickr.com/6163/6195546981_200e87ddaf_b.jpg';
+					                        $path = ( $oBabySitter->Account ) ? base_path('profile_pictures/'.$oBabySitter->Account->profile_pic) : '';
+					                        echo getImage($image,539,363,$path);
+				                        ?>
 				                    </div>
 				                </div>
 				                <div class="col-sm-6">

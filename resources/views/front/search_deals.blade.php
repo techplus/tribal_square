@@ -17,10 +17,10 @@
                             @else
                                 <?php $counter = 0; ?>
                             @foreach( $oDeals AS $deal )
-                                @if( $counter == 1 ) break; @endif
+                                @if( $counter == 1 ) <?php break; ?> @endif
                                 @if( $deal->DealImages->count() && $counter == 0)
                                     <?php $counter++; ?>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap">                                            
+                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap user-image">                                            
                                             <img src="{{$deal->DealImages->first()->image_path}}" alt="" class="img-responsive" style="width:100%;">                                            
                                             <div>
                                                 <span>{{ $deal->discount_percentage }}%</span>

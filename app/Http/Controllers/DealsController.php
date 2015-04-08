@@ -4,13 +4,15 @@ use App\Models\ListingCategory;
 use Request;
 use App\Http\Controllers\Controller;
 use App\Models\Deal;
+
 class DealsController extends Controller {
 
 	public function __construct()
 	{
 		parent::__construct();
 
-		$this->data['categories'] = ListingCategory::Deals()->get();
+		$this->data['subcategories'] = ListingCategory::Deals()->get();
+		$this->data['aSearch'] = session('search');
 	}
 
 	/**
@@ -21,17 +23,26 @@ class DealsController extends Controller {
 	public function index()
 	{
 		$aSearch = session('search');
+		
 		$oDealsBuilder = Deal::approved()->future()->with(['DealImages'=>function($q){
 			$q->where('is_cover',1);
 		}]);
+
+		$this->data['cat_id'] = 0;
 		if( ! empty( $aSearch['term'] ) )
 			$oDealsBuilder = $oDealsBuilder->term($aSearch['term']);
 		if( ! empty( $aSearch['location'] ) )
-			$oDealsBuilder = $oDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');
-
-		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
-
+			$oDealsBuilder = $oDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');		
+		if( !empty( $aSearch['cat'] ) )	{
+			$oDealsBuilder = $oDealsBuilder->whereHas('ListingCategory',function($q)use($aSearch){
+				$q->where('id',$aSearch['cat']);
+			});
+			$this->data['cat_id'] = $aSearch['cat'];
+		}
+		
+		$oLatestDealsBuilder = $oDealsBuilder;
 		$this->data['oDeals'] = $oDealsBuilder->get();
+		$this->data['aLatestDeals'] = $oLatestDealsBuilder->with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
 		return $this->renderView('front.search_deals');
 	}
 
@@ -65,10 +76,28 @@ class DealsController extends Controller {
 	{
 		$deal = Deal::with('DealImages')->find($id);
 		if( ! $deal )
-			return abort(404);
+			return abort(404);		
+
 		$this->data['deal'] = $deal;
 		$this->data['layout'] = 'layouts.front';
-		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
+
+		$aSearch = session('search');
+		$oLatestDealsBuilder = Deal::approved()->future()->with( [ 'CoverPic' ] )->orderBy('updated_at','DESC');
+
+		$this->data['cat_id'] = 0;
+		if( ! empty( $aSearch['term'] ) )
+			$oLatestDealsBuilder = $oLatestDealsBuilder->term($aSearch['term']);
+		if( ! empty( $aSearch['location'] ) )
+			$oLatestDealsBuilder = $oLatestDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');		
+		if( !empty( $aSearch['cat'] ) )	{
+			$oLatestDealsBuilder = $oLatestDealsBuilder->whereHas('ListingCategory',function($q)use($aSearch){
+				$q->where('id',$aSearch['cat']);
+			});
+			$this->data['cat_id'] = $aSearch['cat'];
+		}
+				
+		$this->data['aLatestDeals'] = $oLatestDealsBuilder->take(5)->get();	
+
 		return $this->renderView('front.deal_full_view');
 	}
 
