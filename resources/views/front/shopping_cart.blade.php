@@ -198,7 +198,7 @@
   							$('.sub_total').html(sub_total);
   							if( $('tr.products').length > 0 )
   							{  				
-  								$('.no_of_items').html('( '+ $('tr.products').length +' Items )');				
+  								$('.no_of_items').html('MY CART ( '+ $('tr.products').length +' Items )');				
   								$('.main_total').html( sub_total + parseFloat( $('.estimated_shipping').html() ) );
   							}  	
   							else

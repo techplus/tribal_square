@@ -61,7 +61,7 @@
             <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'babysitters' ) ? 'link-active' : '' }}" data-type="baby_sitter">View Baby Sitters </a>
         </div>
         @if( Request::segment(2) == "deals" OR Request::segment(1) == "shopping-cart" )
-            <p class="header_cart"><a href="{{ url('shopping-cart') }}">My Cart <span class="no_of_items">{{ (Session::has('products')) ? "(".count(Session::get('products'))." Items )" : '' }}</span></a></p>
+            <a href="{{ url('shopping-cart') }}"><button class="header_cart btn custome_blue_btn no_of_items" style="margin:0;margin-right:10px;">My Cart {{ (Session::has('products')) ? "( ".count(Session::get('products'))." Items )" : '' }}</button></a>
         @endif
     {{--</div>--}}
 </div>
