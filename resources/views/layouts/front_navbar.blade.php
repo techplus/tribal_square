@@ -55,13 +55,13 @@
             @endif
             <input type="hidden" name="cat" value="{{ ( !empty($aSearch) ) ? $aSearch['cat'] : '' }}">                
         </form>         
-        <div class="login_subnav">
+        <div class="login_subnav" style="{{ (  Request::segment(2) == "deals" OR Request::segment(1) == "shopping-cart"  ) ? 'margin-top:5px;' : '' }}">
             <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'deals' ) ? 'link-active' : '' }}" data-type="deals">View All Deals</a>
             <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'classified' ) ? 'link-active' : '' }}" data-type="classified">Tribal Classifieds</a>
             <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'babysitters' ) ? 'link-active' : '' }}" data-type="baby_sitter">View Baby Sitters </a>
         </div>
         @if( Request::segment(2) == "deals" OR Request::segment(1) == "shopping-cart" )
-            <a href="{{ url('shopping-cart') }}"><button class="header_cart btn custome_blue_btn no_of_items" style="margin:0;margin-right:10px;">My Cart {{ (Session::has('products')) ? "( ".count(Session::get('products'))." Items )" : '' }}</button></a>
+            <a href="{{ url('shopping-cart') }}"><button class="header_cart btn  btn-success btn-md " style="margin:0;margin-right:10px;"><span class="glyphicon glyphicon-shopping-cart"></span><span class="no_of_items"> My Cart {{ (Session::has('products')) ? "( ".count(Session::get('products'))." Items )" : '' }}</span></button></a>
         @endif
     {{--</div>--}}
 </div>
