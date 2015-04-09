@@ -22,7 +22,7 @@ Class ShoppingCartsController extends Controller
 	public function getIndex ()
 	{
 		$aProducts = array ();
-		//Session::pull('products');
+		
 		if ( Session::has( 'products' ) ) {
 			$aProducts = Session::get( 'products' );
 		}
@@ -62,6 +62,16 @@ Class ShoppingCartsController extends Controller
 					return response()->json( [ 'error' => "Couldn't find Deal" ] , 404 );
 				if ( $oProduct->DealImages->count() > 0 ) {
 					$oProduct->image_path = $oProduct->DealImages->first()->image_path;
+				}
+				else
+				{
+					$oProductImage = $oProduct->DealImages();
+					if( $oProductImage->count() > 0 )
+					{
+						$oProduct->image_path = $oProductImage->first()->image_path;		
+					}
+					else
+						$oProduct->image_path = url('images/no_image.png');	
 				}
 
 				$oProduct->quantity = Request::get( 'quantity' );

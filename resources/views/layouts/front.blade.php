@@ -12,8 +12,19 @@
     <script src="{{asset('/js/bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('/js/jquery.screwdefaultbuttonsV2.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('/js/script.js') }}" type="text/javascript"></script>
-
-    <script type="text/javascript">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script> 
+    <script type="text/javascript">       
+                
+        var autocomplete1;          
+        function autocompleteHomePage() {
+          // Create the autocomplete object, restricting the search
+          // to geographical location types.
+          autocomplete1 = new google.maps.places.Autocomplete(
+                  /** @type {HTMLInputElement} */(document.getElementById('autocomplete1')),
+                  { types: ['geocode'] });       
+              
+        }            
+                   
     $(function(){
       $('.fancy-radio').screwDefaultButtons({
         image: 'url("{{asset('/images/radio.png')}}")',
@@ -30,7 +41,8 @@
       $('.menu-links').on('click',function(){
         $('#frmMenuLinks').find('.type').val($(this).data('type'));
         $('#frmMenuLinks').submit();
-      });      
+      });            
+      autocompleteHomePage();
     });      
   </script>
   <style>

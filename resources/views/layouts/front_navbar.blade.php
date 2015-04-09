@@ -18,7 +18,7 @@
         <div class="header_search">
             <form  action="{{ route('search.store') }}" method="post">                
                 <input type="text" name="term" class="form-control header_item_search" placeholder="What are you looking for ?" value="{{ ( !empty($aSearch) ) ? $aSearch['term'] : '' }}">
-                <input type="text" name="location" class="form-control header_location_search" placeholder="Enter your Location" value="{{ ( !empty($aSearch) ) ? $aSearch['location'] : '' }}">               
+                <input type="text" name="location" id="autocomplete1" class="form-control header_location_search" placeholder="Enter your Location" value="{{ ( !empty($aSearch) ) ? $aSearch['location'] : '' }}">               
                 <input type="submit" name="search" class="btn custome_blue_btn" value="Go">
 
                 @if( !empty( $aSearch[ 'type' ] ) )
@@ -32,8 +32,7 @@
                 @endif
                 <input type="hidden" name="cat" value="{{ ( !empty($aSearch) ) ? $aSearch['cat'] : '' }}">                
             </form> 
-        </div>        
-        <p class="header_cart"><a href="{{ url('shopping-cart') }}">My Cart <span class="no_of_items">{{ (Session::has('products')) ? "(".count(Session::get('products'))." Items )" : '' }}</span></a></p>
+        </div>                
     </div>
 </div>
 {{--</div>--}}
@@ -61,5 +60,8 @@
             <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'classified' ) ? 'link-active' : '' }}" data-type="classified">Tribal Classifieds</a>
             <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'babysitters' ) ? 'link-active' : '' }}" data-type="baby_sitter">View Baby Sitters </a>
         </div>
+        @if( Request::segment(2) == "deals" OR Request::segment(1) == "shopping-cart" )
+            <p class="header_cart"><a href="{{ url('shopping-cart') }}">My Cart <span class="no_of_items">{{ (Session::has('products')) ? "(".count(Session::get('products'))." Items )" : '' }}</span></a></p>
+        @endif
     {{--</div>--}}
 </div>

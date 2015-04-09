@@ -18,17 +18,28 @@
                                 <?php $counter = 0; ?>
                             @foreach( $oDeals AS $deal )
                                 @if( $counter == 1 ) <?php break; ?> @endif
-                                @if( $deal->DealImages->count() && $counter == 0)
-                                    <?php $counter++; ?>
-                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap user-image">                                            
-                                            <img src="{{$deal->DealImages->first()->image_path}}" alt="" class="img-responsive" style="width:100%;">                                            
-                                            <div>
-                                                <span>{{ $deal->discount_percentage }}%</span>
-                                                <p>DISCOUNT</p>
+                                    @if( $counter == 0 )                                    
+                                        <?php $counter++; ?>
+                                        @if( $deal->DealImages->count() > 0 )
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap user-image">                                            
+                                                <img src="{{$deal->DealImages->first()->image_path}}" alt="" class="img-responsive" style="width:100%;">                                            
+                                                <div>
+                                                    <span>{{ $deal->discount_percentage }}%</span>
+                                                    <p>DISCOUNT</p>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @else
+                                            <?php $oDealImages = $deal->DealImages(); ?>
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap user-image">                                            
+                                                <img src="{{ $oDealImages->count() > 0 ? $oDealImages->first()->image_path : url('images/no_image.png') }}" alt="" class="img-responsive" style="width:100%;">                                            
+                                                <div>
+                                                    <span>{{ $deal->discount_percentage }}%</span>
+                                                    <p>DISCOUNT</p>
+                                                </div>
+                                            </div>
+                                        @endif
                                     @endif
-                                    @endforeach
+                                @endforeach
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 deal_for_day_wrap">
                                 <h4>Deal of the Day</h4>
                                 <h3>
@@ -46,8 +57,7 @@
                             <div class="col-sm-12 all_deal_box_wrap">
                                 <?php $counter = 0; ?>
                                 @foreach( $oDeals AS $oDeal )  
-                                    @if( $counter++ == 0 ) <?php continue; ?> @endif                                  
-                                    @if( $oDeal->DealImages->count() )                                        
+                                    @if( $counter++ == 0 ) <?php continue; ?> @endif                                                                                                          
                                 <div class="col-sm-4">
                                     <div class="col-item">
                                         <div class="photo">   
@@ -55,8 +65,9 @@
                                                 <div class="user-image" align="center" style="height:260px;width:346px;position:relative;">
                                                     <?php /*<img alt="{{$oDeal->title}}" class="img-responsive" src="{{$oDeal->DealImages->first()->image_path}}">*/ ?>
                                                     <?php
-                                                        $image = ( $oDeal->DealImages ) ? $oDeal->DealImages->first()->image_path : url('images/6195546981_200e87ddaf_b.jpg');
-                                                        $path =  ( $oDeal->DealImages ) ? base_path('uploads/'.pathinfo($oDeal->DealImages->first()->image_path,PATHINFO_BASENAME)) : base_path('images/6195546981_200e87ddaf_b.jpg');
+                                                        $oDealsImages = $oDeal->DealImages();                                                        
+                                                        $image = ( $oDeal->DealImages->count() > 0 ) ? $oDeal->DealImages->first()->image_path : ( $oDealsImages->count()  ? $oDealsImages->first()->image_path : url('images/no_image.png'));
+                                                        $path =  ( $oDeal->DealImages->count() > 0 ) ? base_path('uploads/'.pathinfo($oDeal->DealImages->first()->image_path,PATHINFO_BASENAME)) : ( $oDealsImages->count()  ? base_path('uploads/'.pathinfo( $oDealsImages->first()->image_path,PATHINFO_BASENAME)) : base_path('images/no_image.png'));
                                                         echo getImage($image,340,260,$path,true);
                                                     ?>
                                                 </div>
@@ -84,8 +95,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                    @endif
+                                </div>                                   
                                 @endforeach
 
 

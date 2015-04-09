@@ -7,11 +7,11 @@
 	            <div class="row coralbg white">
 	                <div class="col-sm-6 no-pad">	                	
 	                    <div class="user-image" align="center" style="height:295px;width:443px;position:relative;">
-	                       <?php
-	                        $image = ( $oBabySitter->Account ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) : 'https://farm7.staticflickr.com/6163/6195546981_200e87ddaf_b.jpg';
-	                        $path = ( $oBabySitter->Account ) ? base_path('profile_pictures/'.$oBabySitter->Account->profile_pic) : '';
-	                        echo getImage($image,443,295,$path,true);
-	                        ?>
+	                      <?php
+		                        $image = ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png');
+		                        $path = ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? base_path('profile_pictures/'.$oBabySitter->Account->profile_pic) : base_path('images/no_image.png') ) : base_path('images/no_image.png');
+		                        echo getImage($image,443,295,$path,true);
+	                      ?>
 	                    </div>
 	                </div>
 	                <div class="col-sm-6 no-pad">

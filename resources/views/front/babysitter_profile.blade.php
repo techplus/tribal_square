@@ -3,6 +3,12 @@
 	@include('front.getimage')
 	@if( Auth::check() )
 		<link href="{{asset('/css/style.css')}}" rel="stylesheet">
+		<style>
+			.user-image{      
+			    background: #e8e8e8;
+			    border: 1px solid #ccc;			   
+			}  
+		</style>
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Baby Sitters
@@ -28,7 +34,10 @@
                 </div>		
 			</div>
 			<div class="panel-body">				
-				<div class="row">										
+				<div class="row">															
+					<div style="position:relative;width:100%;height:100%;">
+						<div style="position: absolute;opacity:0;width:100%;height:100%;z-index:1030;"></div>
+
 	@else
 		<div class="page-wrap">
 			<div id="page-content-wrapper">	
@@ -49,11 +58,12 @@
 				                </ol>
 				                @endif
 				                <div class="col-sm-6">
-				                    <div class="user-image" align="center" style="height:363px;width:539px;position:relative;">
+				                    <div class="user-image" align="center" style="height:363px;{{ (!Auth::check() ) ? 'width:539px;':'width:400px;' }}position:relative;">
 				                    	<?php
-					                        $image = ( $oBabySitter->Account ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) : url('images/6195546981_200e87ddaf_b.jpg');
-					                        $path = ( $oBabySitter->Account ) ? base_path('profile_pictures/'.$oBabySitter->Account->profile_pic) : base_path('images/6195546981_200e87ddaf_b.jpg');
-					                        echo getImage($image,539,363,$path,true);
+					                        $image = ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png');
+					                        $path = ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? base_path('profile_pictures/'.$oBabySitter->Account->profile_pic) : base_path('images/no_image.png') ) : base_path('images/no_image.png');
+					                        $wid = (!Auth::check() ) ? '539px':'400';
+					                        echo getImage($image,$wid,363,$path,true);
 				                        ?>
 				                    </div>
 				                </div>
@@ -491,7 +501,10 @@
 					            </div>
 					        </div>
 					    </div>	
-                	@endif
+                	@endif 
+                	@if( Auth::check() )  
+                	</div>	           
+                	@endif      
     	</div>
   </div>
 <script>

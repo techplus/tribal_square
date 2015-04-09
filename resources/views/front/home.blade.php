@@ -1,25 +1,5 @@
 @extends('layouts.front')
-
-@section('content')   
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script> 
-    <script>
-    var autocomplete1;         
-    function initialize() {
-      // Create the autocomplete object, restricting the search
-      // to geographical location types.
-      autocomplete1 = new google.maps.places.Autocomplete(
-              /** @type {HTMLInputElement} */(document.getElementById('autocomplete1')),
-              { types: ['geocode'] });       
-      // When the user selects an address from the dropdown,
-      // populate the address fields in the form.
-      google.maps.event.addListener(autocomplete1, 'place_changed', function() {
-            
-      });     
-    }    
-    $(document).ready(function(){
-      initialize();
-    });
-    </script> 
+@section('content')           
     <div class="page-wrap">
         <div class="row header_wrap">
               <div class="container">
@@ -32,8 +12,7 @@
                   <div class="header_btns_wrap">                                    
                     <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg custome_blue_btn">Signup</a>
                     <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg custome_blue_btn">Login</a>                    
-                  </div>                  
-                  <p class="header_cart"><a href="{{ url('shopping-cart') }}">My Cart <span class="no_of_items">{{ (Session::has('products')) ? "( ".count(Session::get('products'))." Items )" : '' }}</span></a></p>
+                  </div>                                    
                 </div>                 
               </div>
             </div>

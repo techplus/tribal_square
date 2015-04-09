@@ -34,7 +34,9 @@
                 </div>      
             </div>
             <div class="panel-body">                
-                <div class="row">                                       
+                <div class="row"> 
+                    <div style="position:relative;width:100%;height:100%;">
+                        <div style="position: absolute;opacity:0;width:100%;height:100%;z-index:1030;"></div>                                       
     @else
         <div class="page-wrap">
             <div class="row header_wrap">
@@ -57,21 +59,33 @@
                                 <div class="carousel slide article-slide" id="article-photo-carousel">
                                     <!-- Wrapper for slides -->
                                     <div class="carousel-inner cont-slider">
-                                        <?php $counter = 1; ?>
-                                        @foreach( $deal->DealImages AS $image )
-                                        <div class="item {{$counter++ == 1 ? 'active' : ''}}">
-                                            <img alt="" title="" src="{{$image->image_path}}" style="width: 100%;">
-                                        </div>
-                                        @endforeach
+                                        @if( $deal->DealImages->count() > 0 )
+                                            <?php $counter = 1; ?>                                        
+                                            @foreach( $deal->DealImages AS $image )
+                                            <div class="item {{$counter++ == 1 ? 'active' : ''}}">
+                                                <img alt="" title="" src="{{$image->image_path}}" style="width: 100%;">
+                                            </div>
+                                            @endforeach
+                                        @else
+                                            <div class="item active">
+                                                <img alt="" title="" src="{{ url('images/no_image.png') }}" style="width: 100%;">
+                                            </div>
+                                        @endif
                                     </div>
                                     <!-- Indicators -->
                                     <ol class="carousel-indicators">
-                                        <?php $counter = 0; ?>
-                                        @foreach( $deal->DealImages AS $image )
-                                        <li class="active" data-slide-to="{{ $counter++ }}" data-target="#article-photo-carousel">
-                                            <img alt="" src="{{$image->image_path}}" class="img-responsive">
-                                        </li>
-                                        @endforeach
+                                        @if( $deal->DealImages->count() > 0 )
+                                            <?php $counter = 0; ?>
+                                            @foreach( $deal->DealImages AS $image )
+                                            <li class="active" data-slide-to="{{ $counter++ }}" data-target="#article-photo-carousel">
+                                                <img alt="" src="{{$image->image_path}}" class="img-responsive">
+                                            </li>
+                                            @endforeach
+                                        @else
+                                            <li class="active" data-slide-to="0" data-target="#article-photo-carousel">
+                                                <img alt="" src="{{ url('images/no_image.png') }}" class="img-responsive">
+                                            </li>
+                                        @endif
                                     </ol>
                                 </div>
                             </div>
@@ -145,6 +159,7 @@
             </div>             
         </div>
         @if( Auth::check() )
+            </div>
             <div class="row">
                 <div class="pull-right">
                             @if( $sStatus == "Archived" )

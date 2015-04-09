@@ -51,7 +51,8 @@
                             <li class="media" style="border-top:1px dashed #999;padding-top:5px;">
                                 <div class="media-left">
                                     <a href="{{ route('search.classified.show' , [ $oPost->id ] ) }}">
-                                        <img alt="64x64" data-src="holder.js/64x64" class="media-object" style="width: 64px; height: 64px;" src="{{ $oPost->CoverPic->count() ? $oPost->CoverPic->first()->image_path : url('images/no_image.png') }}" data-holder-rendered="true">                                                               
+                                        <?php $oClassifiedImagesSidebar = ( $oPost->CoverPic->count() ) ? $oPost->CoverPic : $oPost->ClassifiedImages(); ?>
+                                        <img alt="64x64" data-src="holder.js/64x64" class="media-object" style="width: 64px; height: 64px;" src="{{ $oPost->CoverPic->count() ? $oPost->CoverPic->first()->image_path : ( $oClassifiedImagesSidebar->count() ? $oClassifiedImagesSidebar->first()->image_path : url('images/no_image.png')) }}" data-holder-rendered="true">                                                               
                                     </a>
                                 </div>
                                 <div class="media-body">
@@ -75,7 +76,8 @@
                             <li class="media" style="border-top:1px dashed #999;padding-top:5px;">
                                 <div class="media-left">
                                     <a href="{{ route('search.deals.show' , [ $oDeal->id ] ) }}">
-                                        <img alt="64x64" data-src="holder.js/64x64" class="media-object" style="width: 64px; height: 64px;" src="{{ $oDeal->CoverPic->count() ? $oDeal->CoverPic->first()->image_path : url('images/no_image.png') }}" data-holder-rendered="true">                            
+                                        <?php $oDealImagesSidebar = ( $oDeal->CoverPic->count() ) ? $oDeal->CoverPic : $oDeal->DealImages(); ?>
+                                        <img alt="64x64" data-src="holder.js/64x64" class="media-object" style="width: 64px; height: 64px;" src="{{ $oDeal->CoverPic->count() ? $oDeal->CoverPic->first()->image_path : ( $oDealImagesSidebar->count() > 0 ? $oDealImagesSidebar->first()->image_path : url('images/no_image.png')) }}" data-holder-rendered="true">                            
                                         <span style="color:#000;">{{ $oDeal->discount_percentage }}%</span>
                                     </a>
                                 </div>
