@@ -203,8 +203,8 @@
   							}  	
   							else
   							{
-  								$('table tbody tr').not(':last').remove();
-  								$('.no_of_items').html('');
+  								$('.no_of_items').html('MY CART');	
+  								$('table tbody tr').not(':last').remove();  								
   								/*$('.estimated_shipping').html('0');
   								$('.main_total').html('0');*/
   								$('.paypal').hide();
