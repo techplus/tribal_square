@@ -71,7 +71,6 @@ class PaypalRest implements PaypalRestInterface
 		$this->amount->setCurrency( config( 'paypal.currency' ) );
 		$this->amount->setDetails( $this->details );
 		$this->amount->setTotal( $total );
-
 		/** set item list */
 		$this->itemList->setItems( $this->items );
 
@@ -84,9 +83,9 @@ class PaypalRest implements PaypalRestInterface
 
 	public function addDetails ( $shipping = 0 , $tax = 0 , $subtotal )
 	{
-		$this->details->setShipping( 0 );
-		$this->details->setTax( 0 );
-		$this->details->setSubtotal( 0 );
+		$this->details->setShipping( $shipping );
+		$this->details->setTax( $tax );
+		$this->details->setSubtotal( $subtotal );
 	}
 
 	public function addPayer ()

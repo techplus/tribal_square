@@ -1,5 +1,7 @@
 <?php function getImage($image,$width,$height,$path,$absolute = false)
 	{		
+		if( ! file_exists($path) )
+			return url('images/no_image.png');
 		// Set the width of the area and height of the area
 		$inputwidth = $width;
 		$inputheight = $height;

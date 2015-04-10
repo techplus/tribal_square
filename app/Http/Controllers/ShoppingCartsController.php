@@ -144,11 +144,13 @@ Class ShoppingCartsController extends Controller
 		}
 
 		//to add shipping tax and subtotal
-		//$this->paypal->addDetails($shipping,$tax,$subtotal);
+		 $shipping = 12;
+		 $tax = 0;
+		 $this->paypal->addDetails($shipping,$tax,$total);
 
 		$this->paypal->addPayer();
 
-		$this->paypal->addAmount( 'Purchases From Tribal Square' , $total );
+		$this->paypal->addAmount( 'Purchases From Tribal Square' , ( $total + $shipping + $tax ) );
 
 		$this->paypal->addRedirectUrls( action( 'ShoppingCartsController@getPaymentDone' ) , action( 'ShoppingCartsController@getPaymentCancel' ) );
 
