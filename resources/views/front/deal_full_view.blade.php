@@ -11,7 +11,7 @@
         <link href="{{asset('/css/style.css')}}" rel="stylesheet">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Baby Sitters
+                Deals
                 <div class="pull-right" style="margin-top:-7px;">
                     @if( $sStatus == "Archived" )
                         <button class="btn btn-success action" data-status="approved" data-id="{{$deal->id}}">Approve</button>&nbsp;

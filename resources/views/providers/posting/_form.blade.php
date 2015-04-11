@@ -317,7 +317,7 @@
                                         <div class="col-md-3" id="media_{{$oImage->id}}">
                                                 <div class="radio text-right">
                                                     <label>
-                                                        <input type="radio" {{$oImage->is_cover ? 'checked' : ''}} value="{{$oImage->id}}" class="required" name="is_cover"> Cover Photo
+                                                        <input type="radio" {{$oImage->is_cover ? 'checked' : ''}} value="{{$oImage->id}}" class="" name="is_cover"> Cover Photo
                                                     </label>
                                                 </div>
                                             <a href="{{$oImage->image_path}}" target="_blank" class="thumbnail">
@@ -458,10 +458,10 @@
                     {
                         saveData(form);
                     }
-                    if( currentIndex == 2 && !bValid )
+                    /*if( currentIndex == 2 && !bValid )
                     {
                         $('<div class="alert alert-danger"><p>Please select atleast one image as cover</div>' ).insertBefore('#post_images');
-                    }
+                    }*/
                     return bValid;
                 },
                 onStepChanged: function (event, currentIndex, priorIndex)
@@ -606,7 +606,7 @@
                     if( response.image_path )
                     {
                         var ext = response.image_path.split('.' ).pop();
-                        $('#post_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><div class="radio text-right"><label><input type="radio" class="required" value="'+response.id+'" name="is_cover"> Cover Photo</label></div><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
+                        $('#post_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><div class="radio text-right"><label><input type="radio" class="" value="'+response.id+'" name="is_cover"> Cover Photo</label></div><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+')"><i class="fa fa-trash"></i> Delete</button></div>');
                     }
                     else
                     {

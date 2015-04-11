@@ -62,15 +62,18 @@
                                     <div class="col-item">
                                         <div class="photo">   
                                             <a href="{{route('search.deals.show',[$oDeal->id])}}" style="margin-left:0;width:100%;">                                         
-                                                <div class="user-image" align="center" style="height:260px;width:346px;position:relative;">
-                                                    <?php /*<img alt="{{$oDeal->title}}" class="img-responsive" src="{{$oDeal->DealImages->first()->image_path}}">*/ ?>
+                                                <?php /*<div class="user-image" align="center" style="height:260px;width:346px;position:relative;">                                                    
                                                     <?php
                                                         $oDealsImages = $oDeal->DealImages();                                                        
                                                         $image = ( $oDeal->DealImages->count() > 0 ) ? $oDeal->DealImages->first()->image_path : ( $oDealsImages->count()  ? $oDealsImages->first()->image_path : url('images/no_image.png'));
                                                         $path =  ( $oDeal->DealImages->count() > 0 ) ? base_path('uploads/'.pathinfo($oDeal->DealImages->first()->image_path,PATHINFO_BASENAME)) : ( $oDealsImages->count()  ? base_path('uploads/'.pathinfo( $oDealsImages->first()->image_path,PATHINFO_BASENAME)) : base_path('images/no_image.png'));
                                                         echo getImage($image,340,260,$path,true);
                                                     ?>
-                                                </div>
+                                                </div>*/ ?>
+                                                <?php
+                                                        $oDealsImages = $oDeal->DealImages(); 
+                                                        ?>
+                                                <img alt="{{$oDeal->title}}" class="img-responsive" src="{{( $oDeal->DealImages->count() > 0 ) ? $oDeal->DealImages->first()->image_path : ( $oDealsImages->count()  ? $oDealsImages->first()->image_path : url('images/no_image.png'))}}">
                                             </a>
                                         </div>
                                         <div class="info">

@@ -1,18 +1,20 @@
- @if( !empty($aBabySitters) )
-  @include('front.getimage')
+@if( !empty($aBabySitters) )
 @foreach( $aBabySitters as $oBabySitter )	
     <div class="clearfix"></div>
 		<div class="row user-menu-container square">
 	        <div class="col-sm-7 user-details">
 	            <div class="row coralbg white">
 	                <div class="col-sm-6 no-pad">	                	
-	                    <div class="user-image" align="center" style="height:295px;width:443px;position:relative;">
+	                    <?php /*<div class="user-image" align="center" style="height:295px;width:443px;position:relative;">
 	                      <?php
 		                        $image = ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png');
 		                        $path = ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? base_path('profile_pictures/'.$oBabySitter->Account->profile_pic) : base_path('images/no_image.png') ) : base_path('images/no_image.png');
 		                        echo getImage($image,443,295,$path,true);
 	                      ?>
-	                    </div>
+	                    </div>*/ ?>
+	                    <div class="user-image">
+                        	<img src="{{ ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png') }}" class="img-responsive thumbnail">
+                    	</div>
 	                </div>
 	                <div class="col-sm-6 no-pad">
 	                    <div class="user-pad">

@@ -1,14 +1,13 @@
 @extends($layout)
-@section('content')	
-	@include('front.getimage')
+@section('content')		
 	@if( Auth::check() )
 		<link href="{{asset('/css/style.css')}}" rel="stylesheet">
-		<style>
+		<!-- <style>
 			.user-image{      
 			    background: #e8e8e8;
 			    border: 1px solid #ccc;			   
 			}  
-		</style>
+		</style> -->
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Baby Sitters
@@ -58,14 +57,17 @@
 				                </ol>
 				                @endif
 				                <div class="col-sm-6">
-				                    <div class="user-image" align="center" style="height:363px;{{ (!Auth::check() ) ? 'width:539px;':'width:400px;' }}position:relative;">
+				                   <?php /* <div class="user-image" align="center" style="height:363px;{{ (!Auth::check() ) ? 'width:539px;':'width:400px;' }}position:relative;">
 				                    	<?php
 					                        $image = ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png');
 					                        $path = ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? base_path('profile_pictures/'.$oBabySitter->Account->profile_pic) : base_path('images/no_image.png') ) : base_path('images/no_image.png');
 					                        $wid = (!Auth::check() ) ? '539px':'400';
 					                        echo getImage($image,$wid,363,$path,true);
 				                        ?>
-				                    </div>
+				                    </div> */ ?>
+				                    <div class="user-image">
+						                <img class="img-responsive thumbnail" src="{{ ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png') }}">
+						            </div>
 				                </div>
 				                <div class="col-sm-6">
 				                    <div class="BabySitter_profile_info">

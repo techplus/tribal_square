@@ -71,10 +71,10 @@
       width:10%;  
       margin-left:5px;
     }    
-    .user-image{      
+   /* .user-image{      
       background: #e8e8e8;
       border: 1px solid #ccc;
-    }    
+    }  */  
   </style>
   </head>
   <body class="{{$body_class or 'signin_body'}}">

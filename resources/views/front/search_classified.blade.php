@@ -49,15 +49,18 @@
                                                 <div class="col-item">
                                                     <div class="photo">
                                                         <a href="{{route('search.classified.show',[$item->id])}}" style="margin-left:0;width:100%;">                                                            
-                                                            <div class="user-image" style="height:260px;width:364px;position:relative;">
-                                                                <?php /*<img src="{{$item->ClassifiedImages->first()->image_path}}" class="img-responsive" alt="{{$item->title}}" />*/ ?>
+                                                            <?php /*<div class="user-image" style="height:260px;width:364px;position:relative;">                                                                
                                                                 <?php
                                                                     $oItemImages = $item->ClassifiedImages();
                                                                     $image = ( $item->ClassifiedImages->count() > 0 ) ? $item->ClassifiedImages->first()->image_path : ( $oItemImages->count() ? $oItemImages->first()->image_path : url('images/no_imgae.png'));
                                                                     $path =  ( $item->ClassifiedImages->count() > 0 ) ? base_path('uploads/'.pathinfo($item->ClassifiedImages->first()->image_path,PATHINFO_BASENAME)) : ( $oItemImages->count() ? base_path('uploads/'.pathinfo($oItemImages->first()->image_path,PATHINFO_BASENAME)) : base_path('images/no_image.png') );
                                                                     echo getImage($image,364,260,$path,true);
                                                                 ?>
-                                                            </div>
+                                                            </div>*/ ?>
+                                                            <?php
+                                                                    $oItemImages = $item->ClassifiedImages();
+                                                            ?>
+                                                            <img src="{{ ( $item->ClassifiedImages->count() > 0 ) ? $item->ClassifiedImages->first()->image_path : ( $oItemImages->count() ? $oItemImages->first()->image_path : url('images/no_imgae.png')) }}" class="img-responsive" alt="{{$item->title}}" />
                                                         </a>
                                                     </div>
                                                     <div class="info" style="text-align: left;">

@@ -314,7 +314,7 @@
                                         <div class="col-md-3" id="media_{{$oImage->id}}">
                                                 <div class="radio text-right">
                                                     <label>
-                                                        <input type="radio" {{$oImage->is_cover ? 'checked' : ''}} value="{{$oImage->id}}" class="required" name="is_cover"> Cover Photo
+                                                        <input type="radio" {{$oImage->is_cover ? 'checked' : ''}} value="{{$oImage->id}}" class="" name="is_cover"> Cover Photo
                                                     </label>
                                                 </div>
                                             <a href="{{$oImage->image_path}}" target="_blank" class="thumbnail">
@@ -569,10 +569,10 @@
                         saveData(form);                        
                     }
                     
-                    if( currentIndex == 1 && !bValid )
+                   /* if( currentIndex == 1 && !bValid )
                     {
                         $('<div class="alert alert-danger"><p>Please select atleast one image as cover</div>' ).insertBefore('#deal_images');
-                    }
+                    }*/
 
                     return bValid;
                 },
@@ -608,7 +608,7 @@
                         return false;
                       }
                     }                   
-                    if( $( 'input[name="is_cover"]' ).length > 0 )
+                    /*if( $( 'input[name="is_cover"]' ).length > 0 )
                     {
                         if( $( 'input[name="is_cover"]' ).prop('checked').length <= 0 )
                         {
@@ -620,7 +620,7 @@
                     {
                       alert( "Upload atleast one image");
                       return false;
-                    }                    
+                    }  */                  
                     // Submit form input
                     saveData(form);
                     if($('#video_url' ).val())
@@ -713,7 +713,7 @@
                     if( response.image_path )
                     {
                        var ext = response.image_path.split('.' ).pop();                       
-                       $('#deal_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><div class="radio text-right"><label><input type="radio" class="required" value="'+response.id+'" name="is_cover"> Cover Photo</label></div><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+',\'images\')"><i class="fa fa-trash"></i> Delete</button></div>');
+                       $('#deal_images' ).append('<div class="col-md-3" id="media_'+response.id+'"><div class="radio text-right"><label><input type="radio" class="" value="'+response.id+'" name="is_cover"> Cover Photo</label></div><a class="thumbnail" href="'+response.image_path+'" target="_blank"><img src="'+response.image_path+'"></a><button class="btn btn-block btn-primary" type="button" onclick="removeAttachment('+response.id+',\'images\')"><i class="fa fa-trash"></i> Delete</button></div>');
                     }
                     else
                     {
