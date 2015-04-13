@@ -30,7 +30,7 @@ Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 });
 
 Route::group(['middleware'=>['auth.providers','payment']],function(){
-	Route::resource('providers','Users\ProvidersController',['only'=>['index']]);
+	Route::resource('providers','Users\ProvidersController',['only'=>['index','show','update']]);
 	Route::resource('posts','Users\PostsController',['except'=>['show']]);
 	Route::resource('posts.images','Users\ImagesController',['only'=>['store','update','destroy']]);
 	Route::resource('posts.videos','Users\VideosController',['only'=>['store','update','destroy']]);

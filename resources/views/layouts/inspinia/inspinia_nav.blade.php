@@ -32,8 +32,8 @@
                 <li>
                     <a href="#"><i class="fa fa-file"></i> <span class="nav-label">Saved Searches</span></a>               
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Settings</span></a>               
+                <li class="{{Request::url() == route('providers.show',[Auth::user()->id]) ? 'active' : ''}}">
+                    <a href="{{route('providers.show',[Auth::user()->id])}}"><i class="fa fa-cog"></i> <span class="nav-label">Settings</span></a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-list-alt"></i> <span class="nav-label">Billing</span></a>               
@@ -41,9 +41,9 @@
                 <li {{ ( Request::segment(1) == "deals" ) ? 'class=active' : '' }}>
                     <a href="{{ route('deals.index') }}"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Deals</span></a>               
                 </li> 
-                <li>
-                    <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Posted Deals</span></a>               
-                </li>    
+                {{--<li>--}}
+                    {{--<a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Posted Deals</span></a>               --}}
+                {{--</li>    --}}
             @elseif( $oUser->type == "BabySitters" )      
                  @foreach( $aMenu as $key => $sMenu )
                      <li class="{{ ( $section == $sMenu ) ? 'active' : '' }}">
