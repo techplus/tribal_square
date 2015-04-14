@@ -42,7 +42,7 @@ class AuthController extends Controller {
 			
 		$this->middleware('guest', ['except' => ['getLogout','getSelectUserType','postSelectUserType']]);
 
-		session_start ();
+		//session_start ();
 
 		// init app with app id (APPID) and secret (SECRET)
 		FacebookSession::setDefaultApplication ( env('FACEBOOK_APP_ID') , env('FACEBOOK_CLIENT_SECRET') );

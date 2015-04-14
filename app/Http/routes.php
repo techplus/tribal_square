@@ -12,6 +12,7 @@
 */
 //
 
+
 Route::controllers([
 	'login' => 'Auth\AuthController',
 	'auth'	=>	'Auth\AuthController',
@@ -43,7 +44,6 @@ Route::group(['middleware'=>['auth.providers','payment']],function(){
 		return response()->json([]);
 	});
 });
-
 Route::group(['middleware'=>['auth.babysitters','payment']],function(){
 	//Route::resource('baby-sitters','Users\BabySittersController',['only'=>['index']]);
 	Route::controller('baby-sitters','Users\BabySittersController');
@@ -64,4 +64,3 @@ Route::group( ['middleware' => ['guest'] ], function() {
 	Route::controller('shopping-cart','ShoppingCartsController');
 	Route::controller('/','HomeController');
 });
-

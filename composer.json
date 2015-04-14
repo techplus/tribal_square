@@ -9,7 +9,8 @@
         "anhskohbo/no-captcha": "2.*",
         "facebook/php-sdk-v4" : "4.0.*",
 		"barryvdh/laravel-debugbar": "~2.0",
-        "paypal/rest-api-sdk-php": "1.3.2"
+        "paypal/rest-api-sdk-php": "1.3.2",
+        "folklore/image": "0.2.*"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

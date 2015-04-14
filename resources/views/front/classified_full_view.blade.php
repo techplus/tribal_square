@@ -69,7 +69,7 @@
                                             <?php $counter = 1; ?>
                                             @foreach( $classified->ClassifiedImages AS $image )
                                                 <div class="item {{ $counter++ == 1 ? 'active' : '' }}">
-                                                    <img alt="" title="" src="{{ $image->image_path }}" style="width: 100%;">
+                                                    <img alt="" title="" src="{{Image::url($image->image_path,600,400)}}" style="width: 100%;max-width:600px;height:400px;">
                                                 </div>
                                             @endforeach
                                         @else

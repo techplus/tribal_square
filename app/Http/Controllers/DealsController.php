@@ -4,7 +4,7 @@ use App\Models\ListingCategory;
 use Request;
 use DB;
 use App\Models\Deal;
-
+use Image;
 class DealsController extends Controller {
 
 	public function __construct()

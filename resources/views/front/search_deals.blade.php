@@ -22,7 +22,7 @@
                                         <?php $counter++; ?>
                                         @if( $deal->DealImages->count() > 0 )
                                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap user-image">                                            
-                                                <img src="{{$deal->DealImages->first()->image_path}}" alt="" class="img-responsive" style="width:100%;">                                            
+                                                <img src="{{Image::url($deal->DealImages->first()->image_path,590,300)}}" alt="" class="img-responsive" style="width: 100%;">
                                                 <div>
                                                     <span>{{ $deal->discount_percentage }}%</span>
                                                     <p>DISCOUNT</p>
@@ -68,12 +68,12 @@
                                                         $image = ( $oDeal->DealImages->count() > 0 ) ? $oDeal->DealImages->first()->image_path : ( $oDealsImages->count()  ? $oDealsImages->first()->image_path : url('images/no_image.png'));
                                                         $path =  ( $oDeal->DealImages->count() > 0 ) ? base_path('uploads/'.pathinfo($oDeal->DealImages->first()->image_path,PATHINFO_BASENAME)) : ( $oDealsImages->count()  ? base_path('uploads/'.pathinfo( $oDealsImages->first()->image_path,PATHINFO_BASENAME)) : base_path('images/no_image.png'));
                                                         echo getImage($image,340,260,$path,true);
-                                                    ?>
+
                                                 </div>*/ ?>
                                                 <?php
                                                         $oDealsImages = $oDeal->DealImages(); 
                                                         ?>
-                                                <img alt="{{$oDeal->title}}" class="img-responsive" src="{{( $oDeal->DealImages->count() > 0 ) ? $oDeal->DealImages->first()->image_path : ( $oDealsImages->count()  ? $oDealsImages->first()->image_path : url('images/no_image.png'))}}">
+                                                <img alt="{{$oDeal->title}}" style="max-width:350px;height: 260px;" class="img-responsive" src="{{Image::url(( $oDeal->DealImages->count() > 0 ) ? $oDeal->DealImages->first()->image_path : ( $oDealsImages->count()  ? $oDealsImages->first()->image_path : url('images/no_image.png')),350,260)}}">
                                             </a>
                                         </div>
                                         <div class="info">

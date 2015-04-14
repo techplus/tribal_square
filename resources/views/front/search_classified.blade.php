@@ -60,7 +60,7 @@
                                                             <?php
                                                                     $oItemImages = $item->ClassifiedImages();
                                                             ?>
-                                                            <img src="{{ ( $item->ClassifiedImages->count() > 0 ) ? $item->ClassifiedImages->first()->image_path : ( $oItemImages->count() ? $oItemImages->first()->image_path : url('images/no_imgae.png')) }}" class="img-responsive" alt="{{$item->title}}" />
+                                                            <img style="max-width:350px;height: 260px;" src="{{ Image::url(( $item->ClassifiedImages->count() > 0 ) ? $item->ClassifiedImages->first()->image_path : ( $oItemImages->count() ? $oItemImages->first()->image_path : url('images/no_imgae.png')),350,260) }}" class="img-responsive" alt="{{$item->title}}" />
                                                         </a>
                                                     </div>
                                                     <div class="info" style="text-align: left;">

@@ -63,12 +63,12 @@
                                             <?php $counter = 1; ?>                                        
                                             @foreach( $deal->DealImages AS $image )
                                             <div class="item {{$counter++ == 1 ? 'active' : ''}}">
-                                                <img alt="" title="" src="{{$image->image_path}}" style="width: 100%;">
+                                                <img alt="" title="" src="{{Image::url($image->image_path,600,400)}}" style="width: 100%;max-width:600px;height:400px;">
                                             </div>
                                             @endforeach
                                         @else
                                             <div class="item active">
-                                                <img alt="" title="" src="{{ url('images/no_image.png') }}" style="width: 100%;">
+                                                <img alt="" title="" src="{{ Image::url(url('images/no_image.png'),600,400) }}" style="width: 100%;">
                                             </div>
                                         @endif
                                     </div>
@@ -78,12 +78,12 @@
                                             <?php $counter = 0; ?>
                                             @foreach( $deal->DealImages AS $image )
                                             <li class="active" data-slide-to="{{ $counter++ }}" data-target="#article-photo-carousel">
-                                                <img alt="" src="{{$image->image_path}}" class="img-responsive">
+                                                <img alt="" src="{{Image::url($image->image_path,250,180)}}" class="img-responsive">
                                             </li>
                                             @endforeach
                                         @else
                                             <li class="active" data-slide-to="0" data-target="#article-photo-carousel">
-                                                <img alt="" src="{{ url('images/no_image.png') }}" class="img-responsive">
+                                                <img alt="" src="{{ Image::url(url('images/no_image.png'),250,180) }}" class="img-responsive">
                                             </li>
                                         @endif
                                     </ol>

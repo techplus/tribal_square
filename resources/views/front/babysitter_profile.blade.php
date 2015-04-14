@@ -66,7 +66,7 @@
 				                        ?>
 				                    </div> */ ?>
 				                    <div class="user-image">
-						                <img class="img-responsive thumbnail" src="{{ ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png') }}">
+						                <img style="width: 100%;max-width: 500px;height: 350px;" class="img-responsive thumbnail" src="{{ Image::url(( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png'),500,350) }}">
 						            </div>
 				                </div>
 				                <div class="col-sm-6">
