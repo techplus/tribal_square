@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a9c19c4-7de9-404f-b9fb-78b2e47fddf3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2015_03_10_094154_CreateDealsTable.php" afterPath="$PROJECT_DIR$/database/migrations/2015_03_10_094154_CreateDealsTable.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/DealsController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/DealsController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Requests/ProfileRequest.php" afterPath="$PROJECT_DIR$/app/Http/Requests/ProfileRequest.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/admin/deals/index.blade.php" afterPath="$PROJECT_DIR$/resources/views/admin/deals/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/views/providers/profile.blade.php" afterPath="$PROJECT_DIR$/resources/views/providers/profile.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Controllers/Users/ProvidersController.php" afterPath="$PROJECT_DIR$/app/Http/Controllers/Users/ProvidersController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tribal_square.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,11 +29,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DealsController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DealsController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/DealsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3146998" vertical-offset="570" max-vertical-offset="4028">
+            <state vertical-scroll-proportion="0.0" vertical-offset="456" max-vertical-offset="4028">
               <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="account2.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/babysitters/account2.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="6270">
+              <caret line="27" column="56" selection-start-line="23" selection-start-column="44" selection-end-line="27" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -51,17 +59,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="index.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/deals/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4028">
-              <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.51836306" vertical-offset="418" max-vertical-offset="4028">
+              <caret line="24" column="64" selection-start-line="24" selection-start-column="64" selection-end-line="24" selection-end-column="64" />
               <folding>
                 <element signature="e#651#687#0#HTML" expanded="true" />
                 <element signature="e#1300#1326#0#HTML" expanded="true" />
-                <marker date="1428974107545" expanded="true" signature="4792:4914" placeholder="{...}" />
-                <marker date="1428974107545" expanded="true" signature="4941:5679" placeholder="..." />
-                <marker date="1428974107545" expanded="true" signature="4952:5678" placeholder="..." />
+                <marker date="1428974878499" expanded="true" signature="4792:4914" placeholder="{...}" />
+                <marker date="1428974878499" expanded="true" signature="4941:5679" placeholder="..." />
+                <marker date="1428974878499" expanded="true" signature="4952:5678" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -117,8 +125,6 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/ShoppingCartsController.php" />
         <option value="$PROJECT_DIR$/app/Repositories/PaypalRest/PaypalRest.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/inspinia/inspinia_nav.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/Users/ProvidersController.php" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/resources/views/providers/posting/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/front/classified_full_view.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/front_sidebar.blade.php" />
@@ -133,9 +139,11 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/ClassifiedsController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2015_03_10_094154_CreateDealsTable.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/DealsController.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/deals/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Requests/ProfileRequest.php" />
         <option value="$PROJECT_DIR$/resources/views/providers/profile.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/Users/ProvidersController.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/deals/index.blade.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -316,6 +324,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="deals" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tribal_square" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tribal_square" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="babysitters" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -539,7 +569,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22760417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22760417" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -582,20 +612,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/paypal/rest-api-sdk-php/lib/PayPal/Core/PayPalLoggingManager.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4171" max-vertical-offset="7788">
-          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/paypal/rest-api-sdk-php/lib/PayPal/Api/Payer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8495197" vertical-offset="10644" max-vertical-offset="11968">
-          <caret line="260" column="32" selection-start-line="260" selection-start-column="20" selection-end-line="260" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/paypal/rest-api-sdk-php/lib/PayPal/Api/PayerInfo.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-7.652174" vertical-offset="7392" max-vertical-offset="19052">
@@ -765,14 +781,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="504" max-vertical-offset="1680">
           <caret line="34" column="105" selection-start-line="34" selection-start-column="105" selection-end-line="34" selection-end-column="105" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11902232" vertical-offset="0" max-vertical-offset="941">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
           <folding />
         </state>
       </provider>
@@ -947,20 +955,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/deals/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4028">
-          <caret line="14" column="54" selection-start-line="14" selection-start-column="54" selection-end-line="14" selection-end-column="54" />
-          <folding>
-            <element signature="e#651#687#0#HTML" expanded="true" />
-            <element signature="e#1300#1326#0#HTML" expanded="true" />
-            <marker date="1428974107545" expanded="true" signature="4792:4914" placeholder="{...}" />
-            <marker date="1428974107545" expanded="true" signature="4941:5679" placeholder="..." />
-            <marker date="1428974107545" expanded="true" signature="4952:5678" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Requests/ProfileRequest.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7536232" vertical-offset="260" max-vertical-offset="1406">
@@ -977,21 +971,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/babysitters/account1.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.9139559" vertical-offset="1824" max-vertical-offset="5624">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/babysitters/account2.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="6270">
+          <caret line="27" column="56" selection-start-line="23" selection-start-column="44" selection-end-line="27" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/DealsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="570" max-vertical-offset="4028">
+          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Users/ProvidersController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2194617" vertical-offset="548" max-vertical-offset="1634">
-          <caret line="20" column="5" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.45548654" vertical-offset="548" max-vertical-offset="1748">
+          <caret line="26" column="61" selection-start-line="26" selection-start-column="61" selection-end-line="26" selection-end-column="61" />
           <folding>
             <element signature="e#45#81#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/DealsController.php">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3146998" vertical-offset="570" max-vertical-offset="4028">
-          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.24229543" vertical-offset="0" max-vertical-offset="941">
+          <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/deals/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.51836306" vertical-offset="418" max-vertical-offset="4028">
+          <caret line="24" column="64" selection-start-line="24" selection-start-column="64" selection-end-line="24" selection-end-column="64" />
+          <folding>
+            <element signature="e#651#687#0#HTML" expanded="true" />
+            <element signature="e#1300#1326#0#HTML" expanded="true" />
+            <marker date="1428974878499" expanded="true" signature="4792:4914" placeholder="{...}" />
+            <marker date="1428974878499" expanded="true" signature="4941:5679" placeholder="..." />
+            <marker date="1428974878499" expanded="true" signature="4952:5678" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

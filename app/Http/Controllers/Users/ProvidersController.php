@@ -22,6 +22,9 @@ class ProvidersController extends Controller
 		$id = Auth::user()->id;
 		if( $request->hasFile('profile') )
 		{
+			@unlink(base_path('profile_pictures/'.$id.".png"));
+			@unlink(base_path('profile_pictures/'.$id.".jpg"));
+			@unlink(base_path('profile_pictures/'.$id.".jpeg"));
 			$file = $request->file('profile');
 			$file->move(base_path('profile_pictures'),$id.".".$file->getClientOriginalExtension());
 		}
