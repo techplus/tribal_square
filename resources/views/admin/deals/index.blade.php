@@ -7,10 +7,13 @@
 		<div class="panel-body">
 			<div class="row">
 				<div class="table-responsive">
-					<table class="vTable table table-stripped">
+                    <table class="vTable table table-stripped">
 						<thead>
                             <th style="width:35%;">Titles</th>
                             <th style="width:20%;">Category</th>
+                            @if( strtolower($sStatus) == 'approved' )
+                                <th class="text-center">Deal Of The Day</th>
+                            @endif
                             <th style="width:35%;text-align:center;">Actions</th>
 						</thead>
 						<tbody>
@@ -18,6 +21,9 @@
 								<tr data-id="{{ $oDeal->id }}">
 									<td><a href="{{ route('admin.deals.show',[ $oDeal->id ]) }}">{{ $oDeal->title }}</a></td>
 									<td>{{ $oDeal->ListingCategory->name }}</td>
+                                    @if( strtolower($sStatus) == 'approved' )
+                                        <td class="text-center"><input type="checkbox" class="deal_of_the_day" data-id="{{$oDeal->id}}" value="1" {{ $oDeal->is_deal_of_the_day ? 'checked=""' : '' }}> </td>
+                                    @endif
 									<td style="text-align:center;">
                                         @if( $sStatus == "Pending" )
                                             <button class="btn btn-success action" data-status="approved" data-id="{{$oDeal->id}}">Approve</button>&nbsp;
@@ -73,7 +79,23 @@
              $('#confirmation_modal' ).modal('hide');
         }
         $(document).ready(function(){
-            @include('admin.deals.scripts')            
+            @include('admin.deals.scripts')
+            $('.deal_of_the_day' ).on('change',function(){
+                var id = $(this).data('id');
+                var $this = $(this);
+                $.ajax({
+                    url: "{{url('admin/deals')}}/"+id,
+                    data:{is_deal_of_the_day:$this.prop('checked') ? '1' : 0},
+                    dataType:'json',
+                    type: "put"
+                } ).success(function(data){
+                    var msg = "deal is set to deal of the day!";
+                    if( data.is_deal_of_the_day == 0 )
+                        msg = "deal is removed from deal of the day!";
+
+                    alert(msg);
+                });
+            });
         });
     </script>
 @endsection	

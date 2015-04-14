@@ -38,6 +38,7 @@ class CreateDealsTable extends Migration {
 			$table->string('email')->nullable()->default(null);
 			$table->string('contact')->nullable()->default(null);
 			$table->boolean('is_approved_by_admin')->nullable()->default(0);
+			$table->boolean('is_deal_of_the_day')->nullable()->default(0);
 			$table->softDeletes();
 			$table->timeStamps();
 		});

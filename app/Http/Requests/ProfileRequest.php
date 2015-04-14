@@ -24,7 +24,7 @@ class ProfileRequest extends Request {
 			'firstname' =>  'required',
 		    'lastname'  =>  'required',
 		    'email'     =>  'required|email|unique:users,email,'.Auth::user()->id,
-		    'profile'   =>  'image|mimes:jpg,png'
+		    'profile'   =>  'image|mimes:jpg,png,jpeg'
 		];
 	}
 

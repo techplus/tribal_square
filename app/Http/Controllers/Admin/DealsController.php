@@ -55,6 +55,10 @@ Class DealsController extends Controller{
 			if( Request::input('status') == 'force_delete' )
 				return $this->destroy($id);
 		}
+		if( Request::has('is_deal_of_the_day') )
+			$deal->is_deal_of_the_day = Request::input('is_deal_of_the_day');
+
+		$deal->save();
 		return response()->json($deal->toArray());
 	}
 

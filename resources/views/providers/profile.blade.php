@@ -61,6 +61,8 @@
                                         $profile_picture = url('profile_pictures/'.Auth::user()->id.".png");
                                     if( file_exists(base_path('profile_pictures/'.Auth::user()->id.".jpg")))
                                         $profile_picture = url('profile_pictures/'.Auth::user()->id.".jpg");
+                                    if( file_exists(base_path('profile_pictures/'.Auth::user()->id.".jpeg")))
+                                        $profile_picture = url('profile_pictures/'.Auth::user()->id.".jpeg");
                                 ?>
                                 <img style="max-width: 250px;" id="profile_image" class="img-responsive" src="{{$profile_picture}}">
                                 <input type="file" id="profile" name="profile">
