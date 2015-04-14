@@ -33,7 +33,7 @@
                         @if( $aPostings->count() > 0 )
                             @foreach( $aPostings as $oPost )
                                 <tr data-id = "{{ $oPost->id }}">
-                                    <td>{{ $oPost->title }}</td>
+                                    <td><a href="{{route('posts.show',[$oPost->id])}}">{{ $oPost->title }}</a></td>
                                     <td>
                                         {{ ( $oPost->Listingcategory ) ? $oPost->Listingcategory->name : null }}
                                     </td>

@@ -1,5 +1,5 @@
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">   
-    @if( $subcategories->count() > 0 )
+    @if( isset( $subcategories ) AND $subcategories->count() > 0 )
         @if( Request::segment(2) == "deals" OR Request::segment(1) == "deals" )
             <div class="categories_sidebar">
                 <h2>Categories</h2>

@@ -31,10 +31,11 @@ Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 
 Route::group(['middleware'=>['auth.providers','payment']],function(){
 	Route::resource('providers','Users\ProvidersController',['only'=>['index','show','update']]);
-	Route::resource('posts','Users\PostsController',['except'=>['show']]);
+	Route::resource('posts','Users\PostsController');
 	Route::resource('posts.images','Users\ImagesController',['only'=>['store','update','destroy']]);
 	Route::resource('posts.videos','Users\VideosController',['only'=>['store','update','destroy']]);
 	Route::resource('deals','Users\DealsController');
+	Route::controller('deals','Users\DealsController');
 	Route::resource('deals.images','Users\ImagesController',['only'=>['store','update','destroy']]);
 	Route::resource('deals.videos','Users\VideosController',['only'=>['store','update','destroy']]);	
 	Route::get('set-success-session-deal',function(){		

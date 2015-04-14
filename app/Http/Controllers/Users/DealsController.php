@@ -63,14 +63,12 @@ class DealsController extends Controller {
 	 */
 	public function show($id)
 	{
-		$deal = Deal::with(['Purchases'=>function($q){
-			$q->with('Transaction');
-		}])->find($id);
+		$deal = Deal::with('DealImages')->find($id);
 		if( ! $deal )
 			return abort(404);
 
 		$this->data['deal'] = $deal;
-		return $this->renderView('providers.deals.purchases');
+		return $this->renderView('providers.deals.show');
 	}
 
 	/**
@@ -151,6 +149,18 @@ class DealsController extends Controller {
 		$oDeal->delete ();
 
 		return response ()->json ( [ 'success' => TRUE ] );
+	}
+
+	public function getPurchases($id)
+	{
+		$deal = Deal::with(['Purchases'=>function($q){
+			$q->with('Transaction');
+		}])->find($id);
+		if( ! $deal )
+			return abort(404);
+
+		$this->data['deal'] = $deal;
+		return $this->renderView('providers.deals.purchases');
 	}
 
 	/*public function getSetSuccessSession()

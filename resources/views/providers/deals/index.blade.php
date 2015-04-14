@@ -39,13 +39,13 @@
                         @if( $aDeals->count() > 0 )
                             @foreach( $aDeals as $oDeal )
                                 <tr data-id = "{{ $oDeal->id }}">
-                                    <td>{{ $oDeal->title }}</td>
+                                    <td><a href="{{route('deals.show',[$oDeal->id])}}">{{ $oDeal->title }}</a></td>
                                     <td>
                                         {{ ( $oDeal->Listingcategory ) ? $oDeal->Listingcategory->name : null }}
                                     </td>
                                     <td>
                                         @if($oDeal->is_approved_by_admin == 1)
-                                            <a href="{{route('deals.show',[$oDeal->id])}}">{{$oDeal->Purchases->count()}}</a></td>
+                                            <a href="{{action('Users\DealsController@getPurchases',[$oDeal->id])}}">{{$oDeal->Purchases->count()}}</a></td>
                                         @else
                                             -
                                         @endif

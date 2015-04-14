@@ -61,7 +61,14 @@ class PostsController extends Controller
 	 */
 	public function show ( $id )
 	{
-		//
+		$classified = Classified::with(['ClassifiedImages','ListingCategory'])->find($id);
+		if( ! $classified )
+			return abort(404);
+
+		$this->data['aLatestPosts'] = Classified::with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
+
+		$this->data['classified'] = $classified;
+		return $this->renderView('providers.posting.show');
 	}
 
 	/**

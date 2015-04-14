@@ -49,7 +49,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">Password</label>
-                            <input type="text" class="form-control" name="password">
+                            <input type="password" class="form-control" name="password">
                         </div>
                         <div class="form-group {{$errors->has('profile') ? 'has-error' : ''}}">
                             <label class="control-label">Profile Picture</label>
