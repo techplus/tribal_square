@@ -25,6 +25,15 @@
                 <div class="ibox-content">
                 <div class="col-sm-12">
                     <a href="{{ route('deals.create') }}"><button class="btn btn-primary pull-right">Add New</button></a>
+                    <div class="col-sm-3 pull-right">
+                        <select class="form-control filter_status">
+                            <option value="">All Deals</option>
+                            <option value="Approved">Approved Deals</option>
+                            <option value="Archived">Archived Deals</option>
+                            <option value="Declined">Declined Deals</option>
+                            <option value="Expired">Expired Deals</option>
+                        </select>
+                    </div>
                 </div>
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
@@ -52,7 +61,7 @@
                                     <td>
                                         @if( $oDeal->deleted_at != "" )
                                             <label class="label label-success">Archived</label>
-                                        @else
+                                        @elseif( strtotime( $oDeal->end_date ) > time() )
                                             @if( $oDeal->is_approved_by_admin == 0 )
                                                 <a href="{{route('deals.edit',[$oDeal->id])}}">edit</a> |
                                                 <a href="javascript:;" onclick="removeDeal({{$oDeal->id}})">delete</a>
@@ -61,6 +70,8 @@
                                             @elseif( $oDeal->is_approved_by_admin == 2 )
                                                 <label class="label label-danger">Declined</label>
                                             @endif
+                                        @else
+                                            <label class="label label-success">Expired</label>
                                         @endif
                                     </td>
                                 </tr>
@@ -71,6 +82,7 @@
                     <tr>
                         <th>Deal Titles</th>
                         <th>Category</th>
+                        <th>Purchases</th>
                         <th>Actions</th>
                     </tr>
                     </tfoot>
@@ -86,10 +98,14 @@
     <script src="{{ asset('inspinia/js/plugins/dataTables/dataTables.responsive.js') }}"></script>
 
     <script>
+        var dataTable;
         $(document).ready(function(){
-             $('.dataTables-example').dataTable({
-                responsive: true
-             });
+             dataTable = $('.dataTables-example').dataTable({
+                            responsive: true
+                         });
+            $('.filter_status' ).on('change',function(){
+                dataTable.fnFilter($(this ).val());
+            })
              if( $('.alert-success').length > 0 )
              {
                 window.setTimeout(function(){
