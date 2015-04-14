@@ -94,51 +94,32 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function scopeSearch($query,$aSearch)
 	{
-		if( !empty($aSearch['term']) AND !empty($aSearch['location']) )
-		{
-			$query->where(function($q)use($aSearch){
-				$q->where('firstname','LIKE','%'.$aSearch['term'].'%')
-				  ->orWhere('lastname','LIKE','%'.$aSearch['term'].'%')
-				  ->orWhere( DB::raw("concat_ws(' ',firstname,lastname)"),'LIKE','%'.$aSearch['term'].'%')
-				  ->orWhereHas('Bio' , function($q)use($aSearch){
-						$q->where('title','LIKE','%'.$aSearch['term'].'%')
-						->orWhere('experience','LIKE','%'.$aSearch['term'].'%');
+		$term = isset( $aSearch['term'] ) ? $aSearch["term"] : '';
+		$location = isset( $aSearch['location'] ) ? $aSearch['location'] : '';
+		return $query->where(function($q)use($term,$location){
+					$q->where('firstname','LIKE','%'.$term.'%')
+						->orWhere('lastname','LIKE','%'.$term.'%')
+						->orWhere( DB::raw("concat_ws(' ',firstname,lastname)"),'LIKE','%'.$term.'%')
+						->orWhereHas('Bio' , function($q)use($term){
+							$q->where('title','LIKE','%'.$term.'%')
+								->orWhere('experience','LIKE','%'.$term.'%');
+						});
+				})->whereHas('Account' , function($q)use($location){
+					$q->where(function($q1)use($location){
+						if( !empty( $location ) ) {
+							$locationParts = explode(',',$location);
+							$q1->where(DB::raw('1'));
+							foreach( $locationParts AS $part ) {
+								$q1->orWhere( 'address' , 'LIKE' , '%' . $part . '%' )
+									->orWhere( 'street' , 'LIKE' , '%' . $part . '%' )
+									->orWhere( 'city' , 'LIKE' , '%' . $part . '%' )
+									->orWhere( 'state' , 'LIKE' , '%' . $part . '%' )
+									->orWhere( 'country' , 'LIKE' , '%' . $part . '%' )
+									->orWhere( 'pin' , 'LIKE' , '%' . $part . '%' );
+							}
+						}
 					});
-				})->whereHas('Account' , function($q)use($aSearch){
-					$q->where(function($q1)use($aSearch){
-						$q1->where('address','LIKE','%'.$aSearch['location'].'%')
-							->orWhere('street','LIKE','%'.$aSearch['location'].'%')
-							->orWhere('city','LIKE','%'.$aSearch['location'].'%')
-							->orWhere('state','LIKE','%'.$aSearch['location'].'%')
-							->orWhere('country','LIKE','%'.$aSearch['location'].'%')
-							->orWhere('pin','LIKE','%'.$aSearch['location'].'%');
-					});
-			});
-		}
-		else if( !empty($aSearch['term']) ){
-			$query->where(function($q)use($aSearch){
-				$q->where('firstname','LIKE','%'.$aSearch['term'].'%')
-				  ->orWhere('lastname','LIKE','%'.$aSearch['term'].'%')
-				  ->orWhere( DB::raw("concat_ws(' ',firstname,lastname)"),'LIKE','%'.$aSearch['term'].'%')
-				  ->orWhereHas('Bio' , function($q)use($aSearch){
-						$q->where('title','LIKE','%'.$aSearch['term'].'%')
-						->orWhere('experience','LIKE','%'.$aSearch['term'].'%');
-					});
-			});
-		}
-		else if( !empty($aSearch['location']) ){
-			$query->whereHas('Account' , function($q)use($aSearch){
-				$q->where(function($q1)use($aSearch){
-					$q1->where('address','LIKE','%'.$aSearch['location'].'%')
-						->orWhere('street','LIKE','%'.$aSearch['location'].'%')
-						->orWhere('city','LIKE','%'.$aSearch['location'].'%')
-						->orWhere('state','LIKE','%'.$aSearch['location'].'%')
-						->orWhere('country','LIKE','%'.$aSearch['location'].'%')
-						->orWhere('pin','LIKE','%'.$aSearch['location'].'%');
 				});
-			});
-		}
-		return $query;
 	}
 
 	public function setPasswordAttribute($value)

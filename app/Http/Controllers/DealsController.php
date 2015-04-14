@@ -2,7 +2,7 @@
 
 use App\Models\ListingCategory;
 use Request;
-use App\Http\Controllers\Controller;
+use DB;
 use App\Models\Deal;
 
 class DealsController extends Controller {
@@ -32,7 +32,14 @@ class DealsController extends Controller {
 		if( ! empty( $aSearch['term'] ) )
 			$oDealsBuilder = $oDealsBuilder->term($aSearch['term']);
 		if( ! empty( $aSearch['location'] ) )
-			$oDealsBuilder = $oDealsBuilder->where('location','LIKE','%'.$aSearch['location'].'%');		
+			$oDealsBuilder = $oDealsBuilder->where(function($q)use( $aSearch ){
+				if( isset( $aSearch['location']) AND !empty( $aSearch['location'] ) ) {
+					$location_parts = explode( "," , $aSearch[ 'location' ] );
+					$q->where(DB::raw('1'));
+					foreach( $location_parts AS $p )
+						$q->orWhere( 'location' , 'LIKE' , '%' . $p . '%' );
+				}
+			});
 		if( !empty( $aSearch['cat'] ) )	{
 			$oDealsBuilder = $oDealsBuilder->whereHas('ListingCategory',function($q)use($aSearch){
 				$q->where('id',$aSearch['cat']);
