@@ -17,8 +17,8 @@ class CreatePaymentTable extends Migration {
 			$table->string('txn_id')->nullable()->default(null);
 			$table->integer('user_id')->nullbale()->default(0);
 			$table->string('subscriber_id')->nullable()->default(null);
-			$table->integer('subscription_id')->nullable()->default(null);
-			$table->string('amount')->nullbale()->default(null);
+			$table->string('subscription_id')->nullable()->default(null);
+			$table->float('amount')->nullbale()->default(null);
 			$table->string('duration')->nullbale()->default(null);
 			$table->string('post_type')->nullbale()->default(null);
 			$table->softDeletes();

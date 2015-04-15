@@ -8,6 +8,12 @@
                             <h5>Bio & Preferences</h5>                            
                         </div>
                         <div class="ibox-content">
+                            @if( session('payment_successfull') )
+                                <div class="alert alert-success">
+                                    <p>We have received your payment successfully!</p>
+                                </div>
+                                <?php Session::forget('payment_successfull'); ?>
+                            @endif
                             <form method="post" class="form-horizontal" name="frmBabySitter" id="frmBabySitter" action="{{ action('Users\BabySittersController@postStore') }}">
                                 <div class="form-group">
                                     <div class="col-sm-12">

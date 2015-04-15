@@ -13,8 +13,8 @@
         <div class="row">
             <div class="container">
                 <div class="signin_box">
-                    <h1>$10 / Month
-                        <img src="{{asset('images/paypal.png')}}" alt="" class="img-responsive paypal_img">
+                    <h1>${{$plan->amount}} / Month
+                        <a href="{{action('Auth\RegisterController@getPaypalSubscription')}}"><img src="{{asset('images/paypal_btn.png')}}" alt="" class="img-responsive paypal_img"></a>
                     </h1>
 
                     <a href="{{action('Auth\AuthController@getSelectUserType')}}?skip=payment">Skip Payment</a>

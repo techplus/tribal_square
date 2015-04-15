@@ -2,14 +2,16 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
+use App\Models\SubscriptionPlan;
 use App\Models\User;
-use Hash;
 use Auth;
 use Facebook\FacebookRedirectLoginHelper;
 use Facebook\FacebookSession;
-use Config;
+use App\Repositories\PaypalRest\PaypalRestInterface;
+use Request;
 class RegisterController extends Controller
 {
+
 	public function __construct()
 	{
 		$this->middleware('auth',['except'=>['getIndex','postIndex']]);
@@ -28,7 +30,7 @@ class RegisterController extends Controller
 	public function postIndex(SignUpRequest $request)
 	{
 		$aRegisterData = $request->except(['_token','user_type','g-recaptcha-response','password_confirmation','agreement']);
-		$aRegisterData['password'] = Hash::make($aRegisterData['password']);
+		//$aRegisterData['password'] = Hash::make($aRegisterData['password']); removed because added in user model
 		$oUser = User::create($aRegisterData);
 		$oUser->UserTypes()->attach($request->input('user_type'));
 		Auth::login($oUser);
@@ -39,6 +41,20 @@ class RegisterController extends Controller
 
 	public function getStep2()
 	{
+		$this->data['plan'] = SubscriptionPlan::where('role_id',Auth::user()->UserTypes()->first()->id)->where('post_type','monthly')->first();
 		return $this->renderView('front.signup.step2');
 	}
+
+	public function getPaypalSubscription(PaypalRestInterface $paypal)
+	{
+		$user = Auth::user();
+		$plan = SubscriptionPlan::where('role_id',Auth::user()->UserTypes()->first()->id)->where('post_type','monthly')->first();
+		// set this for different paypal benificiarry
+		//$paypal->setClient($client_id,$client_secret);
+
+		$agreement = $paypal->createSubscription($plan->paypal_id,'Subscription for tribal square','For tribal square subscription You will be charged $'.$plan->amount." every month from now!");
+		return redirect()->to($agreement->getApprovalLink());
+	}
+
+
 }

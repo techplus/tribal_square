@@ -12,12 +12,12 @@
 */
 //
 
-
 Route::controllers([
 	'login' => 'Auth\AuthController',
 	'auth'	=>	'Auth\AuthController',
 	'register'	=>	'Auth\RegisterController',
-	'password' => 'Auth\PasswordController'
+	'password' => 'Auth\PasswordController',
+    'payments'  => 'Users\PaymentsController'
 ]);
 Route::resource('languages','LanguagesController');
 Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {

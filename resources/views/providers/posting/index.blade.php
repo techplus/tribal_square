@@ -17,7 +17,13 @@
                         </a>
                     </div> -->
                 </div>                             
-                <div class="ibox-content">                   
+                <div class="ibox-content">
+                    @if( session('payment_successfull') )
+                        <div class="alert alert-success">
+                            <p>We have received your payment successfully!</p>
+                        </div>
+                        <?php Session::forget('payment_successfull'); ?>
+                    @endif
                 <div class="col-sm-12">
                     <a href="{{ route('posts.create') }}"><button class="btn btn-primary pull-right">Add New</button></a>
                 </div>
