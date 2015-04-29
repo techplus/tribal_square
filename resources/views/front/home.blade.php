@@ -1,6 +1,99 @@
 @extends('layouts.front')
-@section('content')           
-    <div class="page-wrap">
+@section('content') 
+<div class="row">
+    <div class="container">
+      <div class="pull-left logo">
+        <a href="{{url('/')}}">
+          <img src="{{asset('/images/logo1.jpg')}}" alt="" class="img-responsive">
+        </a>
+      </div>  
+      <a href="#" class="col-sm-4 col-lg-3 col-xs-12 pull-right text-center questions_top_btn">
+        <div>Got Questions ?</div>
+        <p>Click here to Post/Comment on your Forum</p>
+      </a>
+    </div>
+</div>  
+
+<div class="row banner_Wrap">
+    <div class="container">
+      <div class="banner_left col-sm-4">
+        <a href="#" class="active_slide">
+          <p>Neelam Creations – Canton</p>
+          <span>20% on Beauty Services</span>
+        </a>
+        <a href="#">
+          <p>Tony Saccos Coal Oven Pizza</p>
+          <span>20% Off on Coal Oven Pizza</span>
+        </a>
+        <a href="#">
+          <p>Sehaj boutique – Canton</p>
+          <span>25% Off on Indian Dresses</span>
+        </a>
+        <a href="#">
+          <p>Tony Saccos Coal Oven Pizza</p>
+          <span>20% Off on Coal Oven Pizza</span>
+        </a>
+      </div>
+      <div class="col-sm-8 deal_banner_wrap">
+        <img src="images/deal_banner.jpg" alt="" class="img-responsive">
+      </div>
+    </div>
+</div>
+
+<div class="row deals_holder">
+    <div class="container">
+      <div class="col-xs-12 col-sm-6 col-lg-4">
+        <a href="{{URL('search/deals')}}">
+          <div class="deal_holder_info holder_1">
+            <div>
+              <p>African Deals</p>
+              <span>Discounted deals on African items and services</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-lg-4">
+        <a href="{{URL('search/babysitters')}}">
+          <div class="deal_holder_info holder_2">
+            <div>
+              <p>African Sitters &amp; House Help</p>
+              <span>Find African Nannies, baby sitters, and house help</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-lg-4">
+        <a href="{{URL('search/classified')}}">
+          <div class="deal_holder_info holder_3">
+            <div>
+              <p>African Sitters &amp; House Help</p>
+              <span>Find African Nannies, baby sitters, and house help</span>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-lg-4">
+        <div class="deal_holder_info holder_4">
+          <div>
+            <p>Discuss African related topics</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-lg-4">
+        <a href="https://oaktrips.com/" target="_blank">
+          <div class="deal_holder_info holder_5">
+            <div>
+              <p>Travel to Africa</p>
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-lg-4">
+        <div class="advert"></div>
+      </div>
+    </div>
+  </div>
+<!-- <div class="page-wrap">
         <div class="row header_wrap">
               <div class="container">
                 <div class="col-xs-12">
@@ -15,7 +108,7 @@
                   </div>                                    
                 </div>                 
               </div>
-            </div>
+        </div>
 
             <div class="row">
               <div class="container">
@@ -58,5 +151,5 @@
                 </div>
               </div>
             </div>
-    </div>
+</div> -->
 @stop

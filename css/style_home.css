@@ -1,0 +1,332 @@
+@font-face {
+    font-family: 'UbuntuM';
+    src: url('../fonts/UbuntuM.eot');
+    src: url('../fonts/UbuntuM.eot') format('embedded-opentype'),
+         url('../fonts/UbuntuM.woff2') format('woff2'),
+         url('../fonts/UbuntuM.woff') format('woff'),
+         url('../fonts/UbuntuM.ttf') format('truetype'),
+         url('../fonts/UbuntuM.svg#UbuntuM') format('svg');
+}
+@font-face {
+    font-family: 'UbuntuB';
+    src: url('../fonts/UbuntuB.eot');
+    src: url('../fonts/UbuntuB.eot') format('embedded-opentype'),
+         url('../fonts/UbuntuB.woff2') format('woff2'),
+         url('../fonts/UbuntuB.woff') format('woff'),
+         url('../fonts/UbuntuB.ttf') format('truetype'),
+         url('../fonts/UbuntuB.svg#UbuntuB') format('svg');
+}
+@font-face {
+    font-family: 'UbuntuR';
+    src: url('../fonts/UbuntuR.eot');
+    src: url('../fonts/UbuntuR.eot') format('embedded-opentype'),
+         url('../fonts/UbuntuR.woff2') format('woff2'),
+         url('../fonts/UbuntuR.woff') format('woff'),
+         url('../fonts/UbuntuR.ttf') format('truetype'),
+         url('../fonts/UbuntuR.svg#UbuntuR') format('svg');
+}
+@font-face {
+    font-family: 'UbuntuL';
+    src: url('../fonts/UbuntuL.eot');
+    src: url('../fonts/UbuntuL.eot') format('embedded-opentype'),
+         url('../fonts/UbuntuL.woff2') format('woff2'),
+         url('../fonts/UbuntuL.woff') format('woff'),
+         url('../fonts/UbuntuL.ttf') format('truetype'),
+         url('../fonts/UbuntuL.svg#UbuntuL') format('svg');
+}
+@font-face {
+    font-family: 'HelveticaNeueLTComTh_0';
+    src: url('../fonts/HelveticaNeueLTComTh_0.eot');
+    src: url('../fonts/HelveticaNeueLTComTh_0.eot') format('embedded-opentype'),
+         url('../fonts/HelveticaNeueLTComTh_0.woff2') format('woff2'),
+         url('../fonts/HelveticaNeueLTComTh_0.woff') format('woff'),
+         url('../fonts/HelveticaNeueLTComTh_0.ttf') format('truetype'),
+         url('../fonts/HelveticaNeueLTComTh_0.svg#HelveticaNeueLTComTh_0') format('svg');
+}
+
+.row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+html, body {
+  height: 100%;
+}
+body {
+  background-color: #fff;
+}
+.logo {
+  margin-top: 10px;
+}
+.questions_top_btn {
+  background-image: -moz-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(51,51,51) 100%);
+  background-image: -webkit-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(51,51,51) 100%);
+  background-image: -ms-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(51,51,51) 100%);
+  color: #fff;
+  margin-top: 10px;
+}
+.questions_top_btn:hover, .questions_top_btn:focus {
+  color: #fff;
+  text-decoration: none;
+}
+.questions_top_btn div {
+  font-family: 'UbuntuM';
+  font-size: 18px;
+}
+.questions_top_btn p {
+  font-family: 'UbuntuR';
+  font-size: 13px;
+}
+.banner_Wrap {
+  margin-top: 10px;
+}
+.banner_left {
+  padding-right: 0;
+}
+.banner_left a {
+  float: left;
+  width: 92%;
+  color: #2b2b2b;
+  background-color: #dddddd;
+  margin-bottom: 2px;
+  padding: 16px 0 16px 20px;
+}
+.banner_left a:hover {
+  background-color: #000;
+  color: #fff;
+  text-decoration: none;
+}
+.banner_left a p {
+  font-size: 21px;
+  font-family: 'UbuntuM';
+  margin-bottom: 0;
+}
+.active_slide p {
+  color: #00a2ee;
+}
+.banner_left a span {
+  font-size: 16px;
+  font-family: 'UbuntuM';
+}
+.active_slide {
+  background-color: #2b2b2b !important;
+  color: #fff !important;
+}
+.active_slide:after, .active_slide:before {
+  left: 100%;
+  top: 30px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.active_slide:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-left-color: #2b2b2b;
+  border-width: 42px;
+  margin-top: -28px;
+  margin-left: -30px;
+}
+.deals_holder {
+  margin-top: 25px;
+}
+.holder_1 {
+  background: url(../images/African-Deals.jpg) no-repeat;
+  background-size: cover;
+  min-height: 181px;
+}
+.deal_holder_info {
+  position: relative;
+  margin-bottom: 26px;
+}
+.deal_holder_info div {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.deal_holder_info div p {
+  font-family: 'UbuntuM';
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 0;
+}
+.deal_holder_info div span {
+  color: #fff;
+}
+.holder_2 {
+  background: url(../images/African-Sitters.jpg) no-repeat;
+  background-size: cover;
+  min-height: 181px;
+}
+.holder_3 {
+  background: url(../images/Tribal-Lists.jpg) no-repeat;
+  background-size: cover;
+  min-height: 181px;
+}
+.holder_4 {
+  background: url(../images/Discuss-African-related-topics.jpg) no-repeat;
+  background-size: cover;
+  min-height: 181px;
+}
+.holder_5 {
+  background: url(../images/Travel-to-Africa.jpg) no-repeat;
+  background-size: cover;
+  min-height: 181px; 
+}
+.advert {
+  background: url(../images/advert.jpg) no-repeat;
+  background-size: cover;
+  min-height: 181px; 
+}
+.footer_wrap {
+  background-color: #000;
+  padding: 5px 0;
+  font-family: 'HelveticaNeueLTComTh_0';
+}
+.footer_links {
+  float: left;
+  font-size: 16px;
+}
+.footer_links {
+  color: #fff;
+}
+.footer_links a {
+  color: #fff;
+}
+.copyright {
+  float: right;
+  color: #fff;
+  font-size: 14px;
+}
+
+
+
+
+
+
+
+
+/* ================================================== */
+   /* #Media Queries */
+/* ================================================== */
+
+  @media only screen and (max-width: 1200px) {
+    .banner_left a {
+      padding: 11px 0 10px 15px;
+    }
+    .banner_left a p {
+      font-size: 17px;
+      /*padding: 10px 0px 11px 13px;*/
+    }
+    .active_slide::after {
+      border-width: 33px;
+      margin-left: -24px;
+      margin-top: -28px;
+    }
+  }
+
+  /* Smaller than standard 960 (devices and browsers) */
+  @media only screen and (max-width: 1024px) {
+     
+  }
+
+  @media only screen and (max-width: 990px) {
+   .copyright, .footer_links { 
+      float: left;
+      width: 100%;
+      text-align: center;
+    }
+    .banner_left a p {
+      font-size: 14px;
+    }
+    .banner_left a span {
+      font-size: 12px;
+    }
+    .active_slide::after {
+      border-width: 26px;
+      margin-left: -18px;
+      margin-top: -29px;
+    }
+    .banner_left a {
+      padding: 5px 0 7px 11px;
+    }
+    .deal_holder_info div p {
+      font-size: 20px;
+    }
+  }
+  
+  /* Tablet Portrait size to standard 960 (devices and browsers) */
+  @media only screen and (min-width: 768px) and (max-width: 959px) {
+    
+  }
+
+  /* All Mobile Sizes (devices and browser) */
+  @media only screen and (max-width: 767px) {
+    .deal_banner_wrap {
+      clear: left;
+    }
+    .active_slide:after, .active_slide:before { 
+      display: none;
+    }
+    .banner_left a {
+      width: 100%;
+    }
+    .holder_1, .holder_2, .holder_3, .holder_4, .holder_5, .holder_6 {
+      height: 235px;
+    }
+    .footer_wrap {
+      margin-top: 26px;
+    }
+    .banner_left {
+      padding-left: 0;
+    }
+    .deal_holder_info div p {
+      font-size: 16px;
+    }
+    .logo {
+      float: left;
+      width: 100%;
+    }
+    .logo img {
+      float: none;
+      width: 194px;
+      margin: 0 auto;
+    }
+    .deal_banner_wrap {
+      padding: 0;
+    }
+  }
+
+  @media only screen and (max-width: 634px) {
+    
+  }
+
+  /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+  @media only screen and (min-width: 480px) and (max-width: 767px) {
+    
+  }
+
+  @media only screen and (max-width: 540px) {
+    
+  }
+  
+  /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+  @media only screen and (max-width: 479px) {
+    
+  }
+
+  @media only screen and (max-width: 460px) {
+  }
+
+  /* Small Mobile devices */
+  @media only screen and (max-width: 350px) {
+    
+  }
+  
+  /* Very Small Mobile devices */
+  @media only screen and (max-width: 280px) {
+    
+  }

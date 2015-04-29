@@ -7,7 +7,15 @@
     <meta name="author" content="">
     <title>Tribal Square :: Home</title>
     <link href="{{asset('/css/bootstrap.min.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/style.css')}}" rel="stylesheet">
+
+    @if(Request::url() == url('/'))
+     
+      <link href="{{asset('/css/style_home.css')}}" rel="stylesheet"> 
+    @else
+      
+      <link href="{{asset('/css/style.css')}}" rel="stylesheet">
+    @endif
+    
     <script src="{{asset('/js/jquery.js')}}" type="text/javascript"></script>
     <script src="{{asset('/js/bootstrap.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('/js/jquery.screwdefaultbuttonsV2.min.js')}}" type="text/javascript"></script>
@@ -88,7 +96,24 @@
         </div>
     @endif
 
+
 <div class="row footer_wrap">
+  <div class="container">
+    <div class="footer_links">
+      <a href="#">Contact</a> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Terms and Services</a> |
+      <a href="#">Refund Policy</a> |
+      <a href="#">Blog</a> |
+      <a href="#">Advertise with us</a>
+    </div>
+    <div class="copyright">
+      @2015 TribalSquare All rights reserved.
+    </div>
+  </div>
+</div>    
+
+<!-- <div class="row footer_wrap">
   <div class="container">
     <div class="footer">
       <div class="footer_nav">
@@ -101,7 +126,7 @@
       <p>@2015 TribalSquare All rights reserved.</p>
     </div>
   </div>
-</div>
+</div> -->
 
 
   </body>
