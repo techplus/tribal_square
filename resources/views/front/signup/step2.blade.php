@@ -17,8 +17,8 @@
                         <a href="{{action('Auth\RegisterController@getPaypalSubscription')}}"><img src="{{asset('images/paypal_btn.png')}}" alt="" class="img-responsive paypal_img"></a>
                     </h1>
 
-                    <a href="{{action('Auth\AuthController@getSelectUserType')}}?skip=payment">Skip Payment</a>
-
+                    <a style="margin-top: 20px;" href="{{action('Auth\AuthController@getSelectUserType')}}?skip=payment" class="btn btn-primary">Free Trial</a>
+                    <?php /*
                     <div class="col-sm-12" align="center">
                         <h3>OR</h3>
                         <br>
@@ -95,7 +95,7 @@
                     <div class="form-group col-xs-12">
                         <input type="submit" value="Purchase &amp; Contiune" class="btn btn-lg  custome_blue_btn col-sm-4 col-xs-12">
                     </div>
-
+                    */ ?>
                 </div>
             </div>
         </div>

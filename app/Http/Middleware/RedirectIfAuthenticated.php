@@ -43,7 +43,7 @@ class RedirectIfAuthenticated {
 				return response()->redirectToAction('Auth\AuthController@getSelectUserType');
 			if( $oUser->name )
 			{
-				if( $oUser->name == "SuperAdmin" )
+				if( $oUser->name == "SuperAdmin" OR $oUser->name == 'Admin' )
 				{
 					$aCats = Config::get('categories');
 					$name = reset( $aCats );

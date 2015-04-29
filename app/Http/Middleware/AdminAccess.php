@@ -25,7 +25,7 @@ class AdminAccess
 		if( $this->auth->check() )
 		{
 			$oUser = $this->auth->user()->UserTypes()->first();
-			if( $oUser->name == "SuperAdmin" )
+			if( $oUser->name == "SuperAdmin" OR $oUser->name == 'Admin' )
 			{
 				return $next($request);
 			}			
