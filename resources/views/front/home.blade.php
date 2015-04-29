@@ -66,8 +66,8 @@
         <a href="{{URL('search/classified')}}">
           <div class="deal_holder_info holder_3">
             <div>
-              <p>African Sitters &amp; House Help</p>
-              <span>Find African Nannies, baby sitters, and house help</span>
+              <p>Tribal Lists</p>
+              <span>Advertise African foods, Services, or Post your needs</span>
             </div>
           </div>
         </a>
