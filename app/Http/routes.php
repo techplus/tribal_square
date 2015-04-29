@@ -11,7 +11,6 @@
 |
 */
 //
-
 Route::controllers([
 	'login' => 'Auth\AuthController',
 	'auth'	=>	'Auth\AuthController',
@@ -36,10 +35,10 @@ Route::group(['middleware'=>['auth.providers','payment']],function(){
 	Route::resource('posts','Users\PostsController');
 	Route::resource('posts.images','Users\ImagesController',['only'=>['store','update','destroy']]);
 	Route::resource('posts.videos','Users\VideosController',['only'=>['store','update','destroy']]);
-	Route::resource('deals','Users\DealsController');
-	Route::controller('deals','Users\DealsController');
+	Route::resource('deals','Users\DealsController');	
 	Route::resource('deals.images','Users\ImagesController',['only'=>['store','update','destroy']]);
 	Route::resource('deals.videos','Users\VideosController',['only'=>['store','update','destroy']]);	
+	Route::controller('deals','Users\DealsController');	
 	Route::get('set-success-session-deal',function(){		
 		Session::put('success_deal','Your Deal details have been successfully posted to Admin. It will go live soon.');			
 		return response()->json([]);

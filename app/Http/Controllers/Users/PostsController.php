@@ -42,8 +42,19 @@ class PostsController extends Controller
 	{
 		$aResp = array ( 'success' => FALSE );
 		if ( Request::has ( 'category_id' ) AND Request::has ( 'location' ) ) {
-			$aQuery = Request::only ( [ 'category_id' , 'location' ] );
+			$aQuery = Request::only ( [
+				'email' , 'title' , 'price' , 'description' , 'condition' ,'category_id','location','fineprint','street1','street2','language_spoken',
+				'location2' , 'manufacture' , 'model_number' , 'size' , 'city' , 'country' , 'state' , 'pin' , 'avail_for_other_services' , 'phone' , 'contact_name' , 'lat' , 'long'
+			] );
 			$aQuery['user_id'] = Auth::user()->id;
+			if( ! Request::has('can_phone') )
+				$aQuery['can_phone'] = 0;
+			else
+				$aQuery['can_phone'] = 1;
+			if( ! Request::has('can_text') ) 
+				$aQuery['can_text'] = 0;
+			else
+				$aQuery['can_text'] = 1;
 			$oClassified = Classified::create ( $aQuery );
 			if ( $oClassified )
 				return response ()->json ( $oClassified->toArray () );
