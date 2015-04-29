@@ -96,7 +96,7 @@
         </div>
     @endif
 
-
+@if(Request::url() == url('/'))
 <div class="row footer_wrap">
   <div class="container">
     <div class="footer_links">
@@ -112,8 +112,8 @@
     </div>
   </div>
 </div>    
-
-<!-- <div class="row footer_wrap">
+@else
+ <div class="row footer_wrap">
   <div class="container">
     <div class="footer">
       <div class="footer_nav">
@@ -126,8 +126,8 @@
       <p>@2015 TribalSquare All rights reserved.</p>
     </div>
   </div>
-</div> -->
-
+</div> 
+@endif
 
   </body>
 </html>
