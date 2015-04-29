@@ -29,6 +29,8 @@
                     <input type="hidden" name="type" value="classified">
                 @elseif( Request::segment(2) == "babysitters" )
                     <input type="hidden" name="type" value="baby_sitter">
+                @else
+                    <input type="hidden" class="type" name="type" value="">
                 @endif
                 <input type="hidden" name="cat" value="{{ ( !empty($aSearch) ) ? $aSearch['cat'] : '' }}">                
             </form> 
@@ -52,6 +54,8 @@
                 <input type="hidden" class="type" name="type" value="classified">
             @elseif( Request::segment(2) == "babysitters" )
                 <input type="hidden" class="type" name="type" value="baby_sitter">
+            @else
+                <input type="hidden" class="type" name="type" value="">
             @endif
             <input type="hidden" name="cat" value="{{ ( !empty($aSearch) ) ? $aSearch['cat'] : '' }}">                
         </form>         

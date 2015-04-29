@@ -4,21 +4,14 @@
 		<div class="row user-menu-container square">
 	        <div class="col-sm-7 user-details">
 	            <div class="row coralbg white">
-	                <div class="col-sm-6 no-pad">	                	
-	                    <?php /*<div class="user-image" align="center" style="height:295px;width:443px;position:relative;">
-	                      <?php
-		                        $image = ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png');
-		                        $path = ( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? base_path('profile_pictures/'.$oBabySitter->Account->profile_pic) : base_path('images/no_image.png') ) : base_path('images/no_image.png');
-		                        echo getImage($image,443,295,$path,true);
-	                      ?>
-	                    </div>*/ ?>
+	                <div class="col-sm-6 no-pad">
 	                    <div class="user-image">
                         	<img style="width:100%;max-width: 275px;height: 275px;margin-top: 16px;margin-left:50px;" src="{{ Image::url(( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png'),275,275) }}" class="img-responsive thumbnail">
                     	</div>
 	                </div>
 	                <div class="col-sm-6 no-pad">
 	                    <div class="user-pad">
-	                        <h3>{{ ucFirst($oBabySitter->firstname)." ".ucFirst($oBabySitter->lastname)}}</h3>
+	                        <h3><a href="{{ action('BabySittersController@show', [ $oBabySitter->id ]) }}" style="color:#000;">{{ ucFirst($oBabySitter->firstname)." ".ucFirst($oBabySitter->lastname)}}</a></h3>
 	                        <?php echo ( $oBabySitter->Bio ) ? '<p>'.( ( strlen( $oBabySitter->Bio->title ) > 40 ) ? substr($oBabySitter->Bio->title,0,39)."...</p>"  : '<p>'.$oBabySitter->Bio->title.'</p>' ) : ''; ?>
 	                        <?php echo ( $oBabySitter->Account ) ? ' <h5 class="white"><i class="glyphicon glyphicon-heart"></i> Age : '.$oBabySitter->Account->age.'</h5>' : ''; ?>
 	                        <?php echo ( $oBabySitter->Bio ) ?  '<h5 class="white"><i class="glyphicon glyphicon-map-marker"></i> Less than  '.$oBabySitter->Bio->miles_from_home.' mile </h5>' : ''; ?>
