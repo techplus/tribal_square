@@ -95,7 +95,7 @@ Class DealsController extends Controller{
 		else if( $deal->is_approved_by_admin == 2 )
 			$this->data['sStatus'] = "Declined";
 
-		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
+		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->approved()->future()->orderBy('updated_at','DESC')->take(5)->get();
 		$this->data['deal'] = $deal;
 		$this->data['layout'] = 'layouts.admin';
 		return $this->renderView('front.deal_full_view');

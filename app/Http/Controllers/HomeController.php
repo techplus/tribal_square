@@ -1,5 +1,11 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\ListingCategory;
+use Request;
+use DB;
+use App\Models\Deal;
+use Image;
+
 class HomeController extends Controller {
 
 	/*
@@ -30,6 +36,8 @@ class HomeController extends Controller {
 	 */
 	public function getIndex()
 	{
+		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->approved()->future()->orderBy('updated_at','DESC')->take(4)->get();
+
 		$this->data['body_class'] = 'home_page_body';
 		return $this->renderView('front.home');
 	}
