@@ -7,10 +7,17 @@
           <img src="{{asset('/images/logo1.jpg')}}" alt="" class="img-responsive">
         </a>
       </div>  
+      <div class="pull-right">
+        <div class="topbtn col-sm-6 col-lg-12 col-xs-12">
+              <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg red_btn">Signup</a>
+              <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg red_btn">Login</a>
+        </div>
+      </div>  
       <a href="#" class="col-sm-4 col-lg-3 col-xs-12 pull-right text-center questions_top_btn">
         <div>Got Questions ?</div>
         <p>Click here to Post/Comment on your Forum</p>
       </a>
+      
     </div>
 </div>  
 
@@ -20,10 +27,10 @@
       <div class="banner_left col-sm-4">
         @foreach( $aLatestDeals as $oDeal )
           <?php $oDealImagesSidebar = ( $oDeal->CoverPic->count() ) ? $oDeal->CoverPic : $oDeal->DealImages(); ?>
-          <a href="#" class="dealTitle" data-link="{{ route('search.deals.show' , [ $oDeal->id ] ) }}" data-path="{{ $oDeal->title }}" onclick="imagePath('{{ $oDeal->CoverPic->count() ? Image::url($oDeal->CoverPic->first()->image_path,769,361) : ( $oDealImagesSidebar->count() > 0 ? Image::url($oDealImagesSidebar->first()->image_path,769,361) : Image::url(url('images/no_image.png'),769,361)) }}')">
+          <a href="#" class="dealTitle" data-link="{{ route('search.deals.show' , [ $oDeal->id ] ) }}" data-path="{{ $oDeal->title }}" onclick="imagePath('{{ $oDeal->CoverPic->count() ? Image::url($oDeal->CoverPic->first()->image_path,769,344) : ( $oDealImagesSidebar->count() > 0 ? Image::url($oDealImagesSidebar->first()->image_path,769,344) : Image::url(url('images/no_image.png'),769,344)) }}')">
           <!-- <a href="#" class="dealTitle" data-link="{{ route('search.deals.show' , [ $oDeal->id ] ) }}" data-path="{{ $oDeal->title }}" onclick="imagePath('{{ $oDeal->CoverPic->count() ? $oDeal->CoverPic->first()->image_path : ( $oDealImagesSidebar->count() > 0 ? $oDealImagesSidebar->first()->image_path : url('images/no_image.png')) }}')"> -->
             <p>{{ ( strlen( $oDeal->title ) > 35 ) ? substr( $oDeal->title , 0 , 35 )."..." :  $oDeal->title }}</p>
-            <span>Discount : {{ $oDeal->discount_percentage }}</span>
+            <span>Discount : {{ $oDeal->discount_percentage }}%</span>
           </a>
         @endforeach  
        <!--  <a href="#">
@@ -74,7 +81,7 @@
         <a href="{{URL('search/classified')}}">
           <div class="deal_holder_info holder_3">
             <div>
-              <p>Tribal Lists</p>
+              <p>African Listings</p>
               <!-- <span>Advertise African foods, Services, or Post your needs</span> -->
             </div>
           </div>

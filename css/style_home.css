@@ -207,6 +207,20 @@ body {
   color: #fff;
   font-size: 14px;
 }
+.red_btn {
+    background-color: #AC1919 !important;
+    color: #fff;
+    border-radius: 0;
+    padding: 14px;
+}
+.red_btn:hover, .red_btn:focus {
+    background-color: #971212;
+    color: #fff;
+}
+.topbtn
+{
+  margin-top: 10px;
+}
 
 
 
