@@ -1,24 +1,28 @@
 @extends('layouts.front')
-@section('content')
-<div class="wrapper"> 
+@section('content') 
+<div class="wrapper">
+
 <div class="row">
     <div class="container">
-      <div class="pull-left logo">
+      <div class="col-sm-4">
+        <div class="pull-left logo">
         <a href="{{url('/')}}">
           <img src="{{asset('/images/logo1.jpg')}}" alt="" class="img-responsive">
         </a>
-        <span>...For Africans by Africans</span>
+        </div>  
       </div>
-      <div class="pull-right">
+      <div class="col-sm-4 text-center">
         <div class="topbtn col-sm-6 col-lg-12 col-xs-12">
               <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg red_btn">Signup</a>
               <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg red_btn">Login</a>
         </div>
-      </div>    
-      <a href="#" class="col-sm-4 col-lg-3 col-xs-12 pull-right text-center questions_top_btn">
-        <div>Discuss all things</div>
-        <p>Africa in the Forum</p>
-      </a>
+      </div>
+      <div class="col-sm-4">  
+        <a href="#" class="col-sm-4 col-lg-12 col-xs-12 pull-right text-center questions_top_btn">
+          <div>Discuss all things </div>
+          <p>Africa in the Forum</p>
+        </a>
+      </div>
     </div>
 </div>  
 
@@ -88,7 +92,7 @@
           </div>
         </a>
       </div>
-    <!--   <div class="col-xs-12 col-sm-6 col-lg-4">
+      <!-- <div class="col-xs-12 col-sm-6 col-lg-4">
         <div class="deal_holder_info holder_4">
           <div>
             <p>African Forum</p>
@@ -108,13 +112,8 @@
       <div class="col-xs-12 col-sm-6 col-lg-4">
         <div class="advert"></div>
       </div> -->
-      <div class="col-xs-12" style="color:#ac1919;font-weight:bold;"> 5% of our profit supports 
-        <a href="https://www.selfless4afric.org" target="_blank"> www.selfless4afric.org </a>
-        ..S4A inspiring change in Africa  </div>
     </div>
-
-  </div>
-
+</div>
 
 <div class="push"></div> <!-- Add for Sticky Footer -->
 </div> <!-- Wrapper End -->

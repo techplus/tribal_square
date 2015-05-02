@@ -56,6 +56,14 @@ body {
 }
 .logo {
   margin-top: 10px;
+  position: relative;
+}
+.logo span
+{
+  bottom: 10px;
+  left: 200px;
+  position: absolute;
+  width: 300px;
 }
 .questions_top_btn {
   background-image: -moz-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(51,51,51) 100%);
@@ -63,6 +71,7 @@ body {
   background-image: -ms-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(51,51,51) 100%);
   color: #fff;
   margin-top: 10px;
+  
 }
 .questions_top_btn:hover, .questions_top_btn:focus {
   color: #fff;
@@ -70,7 +79,7 @@ body {
 }
 .questions_top_btn div {
   font-family: 'arial';
-  font-size: 18px;
+  font-size: 19px;
 }
 .questions_top_btn p {
   font-family: 'arial';

@@ -1,4 +1,16 @@
 $(document).ready(function () {
+
+  // Sticky Footer 
+  $(window).resize(function(){
+    var footerHeight = $('.footer_wrap').outerHeight();
+    var stickFooterPush = $('.push').height(footerHeight);
+
+    $('.wrapper').css({'marginBottom':'-' + footerHeight + 'px'});
+  });
+
+  $(window).resize();
+  // Sticky Footer      
+
   $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("active");
