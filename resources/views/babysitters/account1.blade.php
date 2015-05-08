@@ -113,6 +113,36 @@
                                 	</div>
                                 </div>
                                 <div class="form-group">
+                                    <div class="col-sm-6">
+                                        <label class="control-label">Nationality</label>                                            
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <label class="control-label">Religion</label>                                            
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-6">                                      
+                                        <select class="form-control" name="nationality">
+                                          <option value="">Select Nationality</option>
+                                          @if( $aNationality->count() > 0 )
+                                            @foreach( $aNationality AS $oN )
+                                              <option value="{{ $oN->id }}" <?php if($oAccountBasics->nationality == $oN->id){echo "selected"; } ?> >{{ $oN->name }}</option>
+                                            @endforeach
+                                          @endif
+                                        </select>
+                                    </div>
+                                    <div class="col-sm-6">                                      
+                                        <select class="form-control" name="religion">
+                                          <option value="">Select Religion</option>
+                                          @if( $aReligion->count() > 0 )
+                                            @foreach( $aReligion AS $oR )
+                                              <option value="{{ $oR->id }}" <?php if($oAccountBasics->religion == $oR->id){echo "selected"; } ?> >{{ $oR->name }}</option>
+                                            @endforeach
+                                          @endif  
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <div class="col-sm-12">                                        
                                         <button class="btn btn-primary" type="submit">Save & Continue</button>
                                     </div>

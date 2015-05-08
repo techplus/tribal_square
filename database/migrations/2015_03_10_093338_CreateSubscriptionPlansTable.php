@@ -17,10 +17,10 @@ class CreateSubscriptionPlansTable extends Migration {
 			$table->string('post_type')->nullable()->default(null);
 			$table->float('amount')->nullable()->default(null);
 			$table->string('duration')->nullable()->default(null);
-			$table->integer('role_id')->nullable()->default(null);
-			$table->string('subscription_plans')->nullable()->default(null);
 			$table->softDeletes();
 			$table->timeStamps();
+			$table->integer('role_id')->nullable()->default(null);
+			$table->string('paypal_id')->nullable()->default(null);
 		});
 	}
 

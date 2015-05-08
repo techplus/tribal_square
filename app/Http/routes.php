@@ -11,6 +11,7 @@
 |
 */
 //
+//dd(app());
 Route::controllers([
 	'login' => 'Auth\AuthController',
 	'auth'	=>	'Auth\AuthController',
@@ -54,6 +55,7 @@ Route::group(['middleware'=>['auth.salesagnet','payment']],function(){
 });
 
 Route::group( ['middleware' => ['guest'] ], function() {
+	
 	Route::resource('search','SearchController',['only'=>'store']);
 	Route::resource('search/classified','ClassifiedsController');
 	Route::resource('search/babysitters','BabySittersController',[ 'only' => [ 'index' , 'show' ] ]);

@@ -2,7 +2,7 @@
 
 @section('content')    
     <div class="page-wrap">
-        <div class="row header_wrap">
+        <div class="row header_wrap new_header_wrap">
             @include('layouts.front_navbar')
             <div class="page-content">
                 <div class="row">
@@ -21,26 +21,26 @@
                                     @if( $counter == 0 )                                    
                                         <?php $counter++; ?>
                                         @if( $deal->DealImages->count() > 0 )
-                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap user-image">                                            
+                                            <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap user-image">                                            
                                                 <img src="{{Image::url($deal->DealImages->first()->image_path,590,300)}}" alt="" class="img-responsive" style="width: 100%;">
                                                 <div>
                                                     <span>{{ $deal->discount_percentage }}%</span>
                                                     <p>DISCOUNT</p>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         @else
                                             <?php $oDealImages = $deal->DealImages(); ?>
-                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap user-image">                                            
+                                            <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-9 deal_for_day_image_wrap user-image">                                            
                                                 <img src="{{ $oDealImages->count() > 0 ? $oDealImages->first()->image_path : url('images/no_image.png') }}" alt="" class="img-responsive" style="width:100%;">                                            
                                                 <div>
                                                     <span>{{ $deal->discount_percentage }}%</span>
                                                     <p>DISCOUNT</p>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         @endif
                                     @endif
                                 @endforeach
-                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 deal_for_day_wrap">
+                            <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 deal_for_day_wrap">
                                 <h4>Deal of the Day</h4>
                                 <h3>
                                     {{$oDeals->first()->title}} ${{$oDeals->first()->new_price}}
@@ -50,14 +50,15 @@
                                 <a href="{{route('search.deals.show',[$oDeals->first()->id])}}" class="btn btn-lg custome_blue_btn col-sm-2">
                                     View Deal Details <span class="glyphicon glyphicon-triangle-right" style="color:#fff; font-size:16px;"></span>
                                 </a>
-                            </div>
+                            </div> -->
 
                             <div class="clearfix"></div>
                             @include('front.getimage')
                             <div class="col-sm-12 all_deal_box_wrap">
                                 <?php $counter = 0; ?>
                                 @foreach( $oDeals AS $oDeal )  
-                                    @if( $counter++ == 0 ) <?php continue; ?> @endif                                                                                                          
+                                    <!-- @if( $counter++ == 0 ) <?php //continue; ?> @endif -->                                                                                                          
+                                    @if( $counter == 0 ) <?php continue; ?> @endif
                                 <div class="col-sm-4">
                                     <div class="col-item">
                                         <div class="photo">   
@@ -78,17 +79,18 @@
                                         </div>
                                         <div class="info">
                                             <div class="row">
-                                                <div class="price" style="height: 60px;">
+                                                <div class="price" style="height: 30px;text-transform: initial;">
                                                     <a href="{{route('search.deals.show',[$oDeal->id])}}" style="width:100%;" align="left">
-                                                        <h5 style="text-indent: 0;font-size: 15px;">{{ ( strlen( $oDeal->title ) > 65 ) ? substr($oDeal->title,0,65)."..." : $oDeal->title }}</h5>
+                                                        <h5 style="text-indent: 0;font-size: 15px;">{{ ( strlen( $oDeal->title ) > 30 ) ? substr($oDeal->title,0,30)."..." : $oDeal->title }}</h5>
                                                     </a>
                                                 </div>
-                                                <div class="clearfix"></div>
-                                                <div class="rating hidden-sm col-md-6">
-                                                    <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                    </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
-                                                    </i><i class="fa fa-star"></i>
+                                                <div class="price" style="height: 30px;text-align:left;">
+                                                    <h5 style="text-indent: 0;font-size:11px;color:#666;">
+                                                        <span class="glyphicon glyphicon-map-marker"></span>
+                                                        {{ ( strlen( $oDeal->location ) > 30 ) ? substr($oDeal->location,0,30)."..." : $oDeal->location }}
+                                                    </h5>
                                                 </div>
+                                                <div class="clearfix"></div>
                                             </div>
                                             <div class="separator clear-left">
                                                  <a href="{{route('search.deals.show',[$oDeal->id])}}"><p class="btn-add">{{$oDeal->new_price}}$</p>

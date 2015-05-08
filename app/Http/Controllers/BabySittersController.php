@@ -10,6 +10,8 @@ use App\Models\Experience;
 use App\Models\Skill;
 use App\Models\Shift;
 use App\Models\Day;
+use App\Models\Nationality;
+use App\Models\Religion;
 use App\Models\Language;
 use DB;
 use View;
@@ -21,6 +23,7 @@ class BabySittersController extends Controller {
 	{
 		parent::__construct();
 		
+		
 		$this->data['aSearch'] = session('search');
 	}
 
@@ -31,11 +34,17 @@ class BabySittersController extends Controller {
 	 */
 	public function index()
 	{
-		$aSearch = session('search');		
+		$this->data['aNationality'] = Nationality::all();
+		$this->data['aReligion'] = Religion::all();
+
+		$aSearch = session('search');
+		
 		$iLimit = 3;
 		$iOffset = 0;
+		
 		$aResp = $this->getBabysitters($iLimit,$iOffset,$aSearch);	
 		$aBabySitters = $aResp['aBabySitters'];
+
 		$this->data['iTotal'] = $aResp['iTotal'];
 		$this->data['aBabySitters'] = $aBabySitters;
 		$this->data['iLimit'] = $iLimit;
@@ -50,12 +59,53 @@ class BabySittersController extends Controller {
 		$aBabySitters = array();
 		$iTotal = 0;
 		
-		$oQuery = User::approvedstate(1)->search($aSearch)
+		//dd($aSearch['type']);
+		if( $aSearch['type'] == 'baby_sitter')
+		{	
+			// if(isset($aSearch['frate']))
+			// {
+			// 	//echo $aSearch['type'];
+			// 	$oQuery = User::approvedstate(1)
+			// 	->with( [ 'UserTypes' , 'Account' => function($q){
+			// 		$q->select( [ DB::raw('DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(accounts.birthdate)), "%Y") + 0 as age') , 'accounts.*' ] );
+			// 	}, 'Bio','Experience','Availability','Skill','Days']);
+
+			//  	$oQuery->filterrate($aSearch);
+			// }
+
+
+			if(isset($aSearch['ftype']))
+			{
+				//echo $aSearch['type'];
+				$oQuery = User::approvedstate(1)
+				->with( [ 'UserTypes' , 'Account' => function($q){
+					$q->select( [ DB::raw('DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(accounts.birthdate)), "%Y") + 0 as age') , 'accounts.*' ] );
+				}, 'Bio','Experience','Availability','Skill','Days']);
+
+			 	$oQuery->filterkeywords($aSearch);
+			}
+			else
+			{
+				//var_dump($aSearch);
+				$oQuery = User::approvedstate(1)
+				->with( [ 'UserTypes' , 'Account' => function($q){
+					$q->select( [ DB::raw('DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(accounts.birthdate)), "%Y") + 0 as age') , 'accounts.*' ] );
+				}, 'Bio','Experience','Availability','Skill','Days']);
+
+			 	$oQuery->filterkeywords($aSearch);
+		 	}
+
+		}
+		else
+		{	
+			$oQuery = User::approvedstate(1)->search($aSearch)
 			->with( [ 'UserTypes' , 'Account' => function($q){
 				$q->select( [ DB::raw('DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(accounts.birthdate)), "%Y") + 0 as age') , 'accounts.*' ] );
-			}, 'Bio','Experience','Availability','Skill','Days']);			
-		
-		$oQuery->search( $aSearch['term'] );
+			}, 'Bio','Experience','Availability','Skill','Days']);
+			
+			$oQuery->search($aSearch);
+		}
+
 
 		$iTotal = $oQuery->count();
 		$aResp['iTotal'] = $iTotal;

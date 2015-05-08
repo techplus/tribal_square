@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Experience;
 use App\Models\Availability;
 use App\Models\Skill;
+use App\Models\Nationality;
+use App\Models\Religion;
 use Request;
 use Auth;
 use Validator;
@@ -51,6 +53,9 @@ class BabySittersController extends Controller
 
 		if( $section == "account1" OR $section == "account2" )
 		{
+			$this->data['aNationality'] = Nationality::all();
+			$this->data['aReligion'] = Religion::all();
+
 			$oAccountBasics = Account::where( 'user_id' , '=' , $this->data['oUser']->id )->first();
 			if( $oAccountBasics )
 			{
@@ -137,7 +142,7 @@ class BabySittersController extends Controller
 		{			
 									
 			$oAccountBasics = Account::where( 'user_id' , '=' , $oUser->id )->first();
-			$aData = Request::only( [ 'address' , 'street' , 'state' , 'city' , 'country' , 'pin' ] );	
+			$aData = Request::only( [ 'address' , 'street' , 'state' , 'city' , 'country' , 'pin','nationality', 'religion' ] );	
 
 			$validator = Validator::make(
 					Request::all(),

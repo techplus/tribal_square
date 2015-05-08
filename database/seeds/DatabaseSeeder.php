@@ -3,6 +3,8 @@ use App\Models\User;
 use App\Models\UserType;
 use App\Models\Day;
 use App\Models\Shift;
+use App\Models\Nationality;
+use App\Models\Religion;
 use App\Models\ListingCategory;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +24,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('ListingCategoriesTableSeeder');
 		$this->call('DaysTableSeeder');
 		$this->call('ShiftsTableSeeder');
+		$this->call('NationalitiesTableSeeder');
+		$this->call('ReligionsTableSeeder');
 	}
 
 }
@@ -89,3 +93,26 @@ class ShiftsTableSeeder extends Seeder{
 		Shift::create( array( 'name' => 'Overnight' , 'time' => '(12am - 6am)' ) );
 	}
 }
+class NationalitiesTableSeeder extends Seeder{
+	public function run()
+	{
+		DB::table('nationalities')->delete();
+		Nationality::create( array( 'name' => 'African' ) );
+		Nationality::create( array( 'name' => 'Albanian' ) );
+		Nationality::create( array( 'name' => 'Arab' ) );
+	}
+}
+
+class ReligionsTableSeeder extends Seeder{
+	public function run()
+	{
+		DB::table('religions')->delete();
+		Religion::create( array( 'name' => 'christian [catholic]' ) );
+		Religion::create( array( 'name' => 'christian [anglican]' ) );
+		Religion::create( array( 'name' => 'christian [baptist/other]' ) );
+		Religion::create( array( 'name' => 'muslim' ) );
+		Religion::create( array( 'name' => 'Other Religion' ) );
+		Religion::create( array( 'name' => 'No Religion' ) );
+	}
+}
+

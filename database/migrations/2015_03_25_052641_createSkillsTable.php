@@ -18,8 +18,8 @@ class CreateSkillsTable extends Migration {
 			$table->text('languages_spoken')->nullable()->default(null);
 			$table->string('reference_name')->nullable()->default(null);
 			$table->string('reference_relationship')->nullable()->default(null);
-			$table->string('reference_name1')->nullable()->default(null);
-			$table->string('reference_relationship1')->nullable()->default(null);
+			$table->string('reference_name2')->nullable()->default(null);
+			$table->string('reference_relationship2')->nullable()->default(null);
 			$table->text('homework_help')->nullable()->default(null);
 			$table->text('additional_services')->nullable()->default(null);
 			$table->softDeletes();

@@ -1,12 +1,12 @@
 @if( !empty($aBabySitters) )
 @foreach( $aBabySitters as $oBabySitter )	
     <div class="clearfix"></div>
-		<div class="row user-menu-container square">
-	        <div class="col-sm-7 user-details">
+    	<div class="row user-menu-container square">
+	        <div class="col-sm-7 user-details"> 
 	            <div class="row coralbg white">
-	                <div class="col-sm-6 no-pad">
+	                <div class="col-sm-12 col-md-6 no-pad">
 	                    <div class="user-image">
-                        	<img style="width:100%;max-width: 275px;height: 275px;margin-top: 16px;margin-left:50px;" src="{{ Image::url(( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png'),275,275) }}" class="img-responsive thumbnail">
+                        	<img src="{{ Image::url(( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png'),275,275) }}" class="img-responsive thumbnail">
                     	</div>
 	                </div>
 	                <div class="col-sm-6 no-pad">
@@ -18,6 +18,8 @@
 	                        <h5 class="white"><i class="glyphicon glyphicon-lock"></i> Last 
 	                        signed in: {{ date('m/d/Y h:i a' , strtotime($oBabySitter->last_logged_in))}}</h5>
 	                        <?php echo ( $oBabySitter->Account ) ? '<h5 class="white"><i class="glyphicon glyphicon-ok"></i> Babysitter in '.ucfirst($oBabySitter->Account->city).",".$oBabySitter->Account->state." ".$oBabySitter->Account->pin.".</h5>" : ''; ?> 
+	                        <?php echo ( $oBabySitter->Bio ) ? '<h5 class="white"><i class="glyphicon glyphicon-ok"></i> Preferred Rate : $'.$oBabySitter->Bio->average_rate_from.' - $'.$oBabySitter->Bio->average_rate_to.".</h5>" : ''; ?> 
+	                        <?php echo ( $oBabySitter->nationality ) ? '<h5 class="white"><i class="glyphicon glyphicon-ok"></i> Nationality '.ucfirst($oBabySitter->Account->nationality).".</h5>" : ''; ?> 
 	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
 	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
 	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
@@ -33,7 +35,7 @@
 	                    About Me :
 	                </h3>
 	                <p>{{ ( $oBabySitter->Bio ) ? ( (strlen($oBabySitter->Bio->experience) > 175 ) ? substr($oBabySitter->Bio->experience,0,174)."..." : $oBabySitter->Bio->experience ) : '' }}</p>
-	                <a href="{{ action('BabySittersController@show', [ $oBabySitter->id ]) }}" class="btn btn-md custome_blue_btn view_profile_btn">See Full Profile</a>
+	                <a href="{{ action('BabySittersController@show', [ $oBabySitter->id ]) }}" class="btn btn-md red_btn view_profile_btn">See Full Profile</a>
 	            </div>
 	        </div>
 	    </div>						    

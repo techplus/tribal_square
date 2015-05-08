@@ -26,6 +26,8 @@ class CreateAccountTable extends Migration {
 			$table->date('birthdate')->nullbale()->default(null);
 			$table->enum('gender',[ 'Male' , 'Female' ])->nullbale()->default(null);
 			$table->text('profile_pic')->nullbale()->default(null);
+			$table->string('nationality')->nullbale()->default(null);
+			$table->string('religion')->nullbale()->default(null);
 			$table->softDeletes();
 			$table->timeStamps();
 		});

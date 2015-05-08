@@ -16,13 +16,13 @@ class CreateUserUsertypesTable extends Migration {
 			$table->increments('id');
 			$table->integer('user_id')->nullable()->default(0);
 			$table->integer('user_type_id')->nullable()->default(0);
-			$table->integer('last_step')->nullable()->default(1);
-			$table->boolean('is_approved_by_admin')->nullable()->default(0);
 			$table->integer('subscription_plan_id')->nullbale()->default(0);
 			$table->float('amount')->nullbale()->default(0);
 			$table->string('duration')->nullable()->default(null);
 			$table->boolean('has_paid')->nullable()->default(0);
 			$table->string('refferal_code',10)->nullable()->default(null);
+			$table->integer('last_step')->nullable()->default(1);
+			$table->boolean('is_approved_by_admin')->nullable()->default(0);
 			$table->softDeletes();			
 			$table->timestamps();
 		});

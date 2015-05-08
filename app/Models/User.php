@@ -92,6 +92,139 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		});
 	}
 
+	public function scopeFilterkeywords($query,$aSearch)
+	{	
+		//var_dump($aSearch);
+		$term = isset( $aSearch['term'] ) ? $aSearch["term"] : '';
+		$miles = isset( $aSearch['miles'] ) ? $aSearch['miles'] : '';
+		$near = isset( $aSearch['near'] ) ? $aSearch['near'] : '';
+		$nationality = isset( $aSearch['nationality'] ) ? $aSearch['nationality'] : '';
+		$religion = isset( $aSearch['religion'] ) ? $aSearch['religion'] : '';
+
+		$from_rate = isset( $aSearch['from_rate'] ) ? $aSearch['from_rate'] : '';
+		$to_rate = isset( $aSearch['to_rate'] ) ? $aSearch['to_rate'] : '';
+
+		$query = $query->where(function($q)use($term,$miles,$near,$nationality,$religion,$from_rate,$to_rate){
+					 $q->where(function($t) use($term) {
+					 	$t->where('firstname','LIKE','%'.$term.'%')
+					 	->orWhere('lastname','LIKE','%'.$term.'%')
+					 	->orWhereHas('Account' , function($x1)use($term){
+							$x1->where(function($y1) use($term){
+								$y1->where('address','LIKE','%'.$term.'%')
+								  ->orWhere( 'city' , 'LIKE' , '%' . $term . '%' )
+							  	  ->orWhere( 'state' , 'LIKE' , '%' . $term . '%' )
+								  ->orWhere( 'country' , 'LIKE' , '%' . $term . '%' )
+								  ->orWhere( 'street' , 'LIKE' , '%' . $term . '%' )
+								  ->orWhere('pin','LIKE','%'.$term.'%');
+								  	});
+							});
+								
+					 })->whereHas('Bio' , function($x)use($miles){
+				  	  	if(!empty( $miles ) ) 
+							$x->where(function($y) use($miles){
+								$y->where('miles_from_home','LIKE','%'.$miles.'%');
+								// ->orWhere('miles_from_home','LIKE','%'.$miles.'%');
+
+							});	
+
+					  })->whereHas('Account' , function($x)use($near){
+				  	  	if(!empty( $near ) ) 
+							$x->where(function($y) use($near){
+								$y->where('address','LIKE','%'.$near.'%')
+								  ->orWhere( 'city' , 'LIKE' , '%' . $near . '%' )
+							  	  ->orWhere( 'state' , 'LIKE' , '%' . $near . '%' )
+								  ->orWhere( 'country' , 'LIKE' , '%' . $near . '%' )
+								  ->orWhere( 'street' , 'LIKE' , '%' . $near . '%' )
+								  ->orWhere('pin','LIKE','%'.$near.'%');
+
+							});	
+
+					  })->whereHas('Account' , function($n)use($nationality){
+				  	  	if(!empty( $nationality ) ) 
+							$n->where(function($n1) use($nationality){
+								$n1->where('nationality',$nationality);
+						});
+				 	
+				 	})->whereHas('Account' , function($r)use($religion){
+				  	  	if(!empty( $religion ) ) 
+							$r->where(function($r1) use($religion){
+								$r1->where('religion',$religion);
+						});
+				 	
+				 	})->whereHas('Bio' , function($t)use($from_rate,$to_rate){
+				  	  	if(!empty( $from_rate ) || !empty( $to_rate )  ) 
+							$t->where(function($t1) use($from_rate,$to_rate){
+								$t1->where('average_rate_from','>=',$from_rate)
+								   ->where('average_rate_to','<=', $to_rate);
+						});
+				 	
+				 	});
+			// if(!empty( $miles ))
+			// {
+			// 	$q->whereHas('Bio' , function($q1)use($miles)
+			// 	{
+			// 		$q1->where('title','LIKE','%'.$miles.'%')
+			// 		  ->orWhere('experience','LIKE','%'.$miles.'%')
+			// 		  ->orWhere('miles_from_home','LIKE','%'.$miles.'%');
+			// 	});			
+			// } 
+		});
+		return $query;
+
+		// return $query->where(function($q)use($term,$miles){
+		// 			$q->where('firstname','LIKE','%'.$term.'%')
+		// 				->orWhere('lastname','LIKE','%'.$term.'%')
+		// 				->orWhere( DB::raw("concat_ws(' ',firstname,lastname)"),'LIKE','%'.$term.'%')
+		// 				->orWhereHas('Account' , function($x)use($term){
+		// 					$x->where(function($y) use($term){
+		// 						$y->where('address','LIKE','%'.$term.'%')
+		// 						  ->orWhere( 'city' , 'LIKE' , '%' . $term . '%' )
+		// 					  	  ->orWhere( 'state' , 'LIKE' , '%' . $term . '%' )
+		// 						  ->orWhere( 'country' , 'LIKE' , '%' . $term . '%' )
+		// 						  ->orWhere( 'street' , 'LIKE' , '%' . $term . '%' )
+		// 						  ->orWhere('pin','LIKE','%'.$term.'%');
+
+		// 					});
+		// 				});
+		// 			});
+	}
+
+	public function scopeFiltermiles($query,$aSearch)
+	{	
+		//dd($aSearch);
+		$term = isset( $aSearch['term'] ) ? $aSearch["term"] : '';
+		$location = isset( $aSearch['location'] ) ? $aSearch['location'] : '';
+
+		return $query->where(function($q)use($term,$location){
+					$q->where('firstname','LIKE','%'.$term.'%')
+						->orWhereHas('Bio' , function($x)use($term){
+							$x->where(function($y) use($term){
+								$y->where('title','LIKE','%'.$term.'%')
+								  ->orWhere('miles_from_home','LIKE','%'.$term.'%');
+							});
+						});
+					});
+	}
+
+	public function scopeFilterrate($query,$aSearch)
+	{	
+		//dd($aSearch);
+		$term = isset( $aSearch['term'] ) ? $aSearch["term"] : '';
+		$to_rate = isset( $aSearch['to_rate'] ) ? $aSearch["to_rate"] : '';
+		$location = isset( $aSearch['location'] ) ? $aSearch['location'] : '';
+
+		return $query->where(function($q)use($term,$to_rate){
+					$q->where('firstname','LIKE','%'.$term.'%')
+						->orWhereHas('Bio' , function($x)use($term,$to_rate){
+							$x->where(function($y) use($term){
+								$y->where('title','LIKE','%'.$term.'%')
+								  ->whereBetween('average_rate_from', array($term, 25));
+								  // ->whereBetween('average_rate_to', array($to_rate, $to_rate));
+							});
+						});
+					});
+	}
+
 	public function scopeSearch($query,$aSearch)
 	{
 		$term = isset( $aSearch['term'] ) ? $aSearch["term"] : '';
@@ -103,6 +236,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 						->orWhereHas('Bio' , function($q)use($term){
 							$q->where('title','LIKE','%'.$term.'%')
 								->orWhere('experience','LIKE','%'.$term.'%');
+								// ->orWhere('miles_from_home','%'.$term.'%');
 						});
 				})->whereHas('Account' , function($q)use($location){
 					$q->where(function($q1)use($location){

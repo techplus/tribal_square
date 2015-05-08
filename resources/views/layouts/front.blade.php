@@ -54,23 +54,22 @@
     });      
   </script>
   <style>
-    
-    .login_subnav .menu-links{
+    /*.login_subnav .menu-links{
       text-decoration: none;
       color: #999;
-    }
+    }*/
     .login_subnav .link-active{
-        color:#0293D7;
+        color:#AC1919;
         font-weight: bold;
-        text-decoration: underline;        
+        /*text-decoration: underline;        */
     }
-    .header_btns_wrap{
+    /*.header_btns_wrap{
         margin-top:3px;
-    }
-    .header_search{
+    }*/
+    /*.header_search{
         margin-top:10px;
         width:450px;
-    }
+    }*/
      .header_search input{
       width : 44%;
     }
@@ -113,10 +112,9 @@
   </div>
 </div>    
 @else
- <div class="row footer_wrap">
-  <div class="container">
-    <div class="footer">
-      <div class="footer_nav">
+ <div class="row footer_wrap"> 
+  <div class="footer">
+    <div class="footer_nav">
         <a href="#">Contact</a> |
         <a href="#">Terms and Service</a> |
         <a href="#">About Us</a> |
@@ -124,9 +122,8 @@
         <a href="#">Advertise with us</a>
       </div>
       <p>@2015 TribalSquare All rights reserved.</p>
-    </div>
-  </div>
-</div> 
+  </div>  
+  </div> 
 @endif
 
   </body>

@@ -3,7 +3,7 @@
 @section('content')
  @include('front.getimage')
     <div class="page-wrap">
-        <div class="row header_wrap">
+        <div class="row header_wrap new_header_wrap">
             @include('layouts.front_navbar')
             <div class="page-content">
                 <div class="row">

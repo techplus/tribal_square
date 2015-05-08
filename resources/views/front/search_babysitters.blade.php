@@ -2,13 +2,13 @@
 @section('content')	
 <style>
 	.spin {
-  		 -webkit-animation: spin .5s infinite linear;
-  		 -moz-animation: spin .5s infinite linear;
-  		 -o-animation: spin .5s infinite linear;
-  		 animation: spin .5s infinite linear;
-    	 -webkit-transform-origin: 50% 58%;
-         transform-origin:50% 58%;
-         -ms-transform-origin:50% 58%; /* IE 9 */
+    -webkit-animation: spin .5s infinite linear;
+    -moz-animation: spin .5s infinite linear;
+    -o-animation: spin .5s infinite linear;
+    animation: spin .5s infinite linear;
+    -webkit-transform-origin: 50% 58%;
+    transform-origin:50% 58%;
+    -ms-transform-origin:50% 58%; /* IE 9 */
 	}
 	@-moz-keyframes spin {
 	  from {
@@ -39,22 +39,132 @@
 </style>
 	<div class="page-wrap">
 		<div id="page-content-wrapper">
-			<div class="row header_wrap">
+			<div class="row header_wrap new_header_wrap">
 				@include('layouts.front_navbar')
 			 	<!-- Keep all page content within the page-content inset div! -->
-			      <div class="page-content">
+			      	<!-- breadcumbs -->
+			      	<div class="page-content">
+				      	<div class="pagination_wrap">
+	            			<div class="col-sm-12 col-xs-12" style="padding-left: 0;">
+	                		<ol class="breadcrumb custom_breadcrumb" style="background-color: transparent; margin-top: 6px;">
+	                    		<li><a href="#">Home</a></li>
+	                    		<li class="active">BabySitter</li>
+	                		</ol>
+	                		<div class="clearfix"></div>
+	            		</div>
+        			</div>	
+			        <!-- breadcumbs -->
 			        <div class="row">
-			          <div class="col-sm-12">
-			            <h1>Babysitters</h1>
+			        	<div class="col-sm-4 col-lg-3">
+                <div class="refine_result_wrap">
+                    <h3>Refine Results</h3>
+                    <form action="{{route('search.store')}}" method="post">
+                        <input type="hidden" name="type" value="baby_sitter">
+                        <?php //var_dump($aSearch); ?>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Keywords</label>
+                            <input type="text" class="form-control" placeholder="Search by keywords, etc." name="keywords" value="<?php if(isset($aSearch['fkeywords']) == 'keywords') { echo $aSearch['term']; } ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Near</label>
+                            <input type="text" class="form-control" placeholder="30303" name="near" value="<?php if(isset($aSearch['near'])) { echo $aSearch['near']; }  ?>">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" name="miles">
+                              <option value="">Select miles</option> 
+                              <option <?php if(isset($aSearch['miles'])) { if ($aSearch['miles'] == '10'){echo "selected"; } } ?> value="10">10 miles</option>  
+                              <option <?php if(isset($aSearch['miles'])) { if ($aSearch['miles'] == '20'){echo "selected"; } } ?> value="20">20 miles</option>
+                              <option <?php if(isset($aSearch['miles'])) { if ($aSearch['miles'] == '30'){echo "selected"; } } ?> value="30">30 miles</option>
+                              <option <?php if(isset($aSearch['miles'])) { if ($aSearch['miles'] == '40'){echo "selected"; } } ?> value="40">40 miles</option>
+                              <option <?php if(isset($aSearch['miles'])) { if ($aSearch['miles'] == '50'){echo "selected"; } } ?> value="50">50 miles</option>
+                              <option <?php if(isset($aSearch['miles'])) { if ($aSearch['miles'] == '60'){echo "selected"; } } ?> value="60">60 miles</option>
+                              <option <?php if(isset($aSearch['miles'])) { if ($aSearch['miles'] == '70'){echo "selected"; } } ?> value="70">70 miles</option>
+                              <option <?php if(isset($aSearch['miles'])) { if ($aSearch['miles'] == '80'){echo "selected"; } } ?> value="80">80 miles</option>
+                              <option <?php if(isset($aSearch['miles'])) { if ($aSearch['miles'] == '90'){echo "selected"; } } ?> value="90">90 miles</option>
+                              <option <?php if(isset($aSearch['miles'])) { if ($aSearch['miles'] == '100'){echo "selected"; } } ?> value="100">100 miles</option>
+                            </select>
+                        </div>
+                        <?php //var_dump($aNationality); ?>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nationality</label>
+                            <select class="form-control" name="nationality">
+                              <option value="">Select Nationality</option>
+                              @if( $aNationality->count() > 0 )
+                                @foreach( $aNationality AS $oN )
+                                  <option value="{{ $oN->id }}" <?php if(isset($aSearch['nationality'])) { if ($aSearch['nationality'] == $oN->id){echo "selected"; } } ?> >{{ $oN->name }}</option>
+                                @endforeach
+                              @endif
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Religion</label>
+                            <select class="form-control" name="religion">
+                              <option value="">Select Religion</option>
+                              @if( $aReligion->count() > 0 )
+                                @foreach( $aReligion AS $oR )
+                                  <option value="{{ $oR->id }}" <?php if(isset($aSearch['religion'])) { if ($aSearch['religion'] == $oR->id){echo "selected"; } } ?>>{{ $oR->name }}</option>
+                                @endforeach
+                              @endif  
+                            </select>
+                        </div>
+                        <!-- <div class="checkbox">
+                          <label>
+                            <input type="checkbox" value="">
+                            Has photo
+                          </label>
+                        </div> -->
+                         <div class="form-group">
+                            <label for="exampleInputEmail1">Hourly rate</label><br>
+                            <div class="form-inline">
+                                <div class="form-group col-xs-6">
+                                    <label for="exampleInputName2">From</label>
+                                    <input type="text" class="form-control" style="width: 50%;" name="from_rate">
+                                </div>
+                                <div class="form-group col-xs-6">
+                                    <label for="exampleInputName2">To</label>
+                                    <input type="text" class="form-control" style="width: 50%;" name="to_rate">
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <p>Add keywords to filter the terms found in a job search</p>
+                        <!-- <input type="button" class="green_btn btn btn-md btn-block" value="Search"> -->
+                        <input type="submit" name="search" class="green_btn btn btn-md btn-block" value="Search">
+                        <div class="clearfix"></div><br>
+                    </form>
+                    <div class="addImg">
+                        <img src="../images/advrt_1.jpg" alt="" class="img-responsive"><br>
+                        <img src="../images/advrt_2.jpg" alt="" class="img-responsive"><br>
+                    </div>
+                </div>
+            </div>
+                <div class="col-sm-8 col-lg-9">
+			            <h1>Babysitters/Nannies</h1>
 			            <br><br>
 
 			            <div class="Babysitters_sub_header">
 			              <h5><span class="total-baby-sitters">{{ $iTotal }}</span> Babysitters Found</h5>
 			              <img src="http://placehold.it/450x60" alt="" class="img-responsive">
 			            </div>
-			            <div class="babysitter-container">
+			            <!-- <div class="babysitter-container"> -->
 			            	@include('front.sub_babysitters')	
-			            </div>
+			            <!-- </div> -->
+			            <div class="clearfix"></div>
+
+			            <!-- Load More... -->
+			            <div class="row">
+					      <div class="">
+					        <div class="bottom_advrt" align="center">
+					            <a href="#" class="btn btn-md red_btn">
+					            <span class="glyphicon glyphicon-refresh"></span>
+					            Load More</a>
+					            <div class="clearfix"></div><br>
+					          <!-- <img class="img-responsive" alt="" src="http://placehold.it/1170x160"> -->
+					        </div>
+					      </div>
+					    </div>
+			            <!-- Load More... -->
+
 			            <input type="hidden" name="offset" class="offset" value="{{ $iOffset }}">
 			            <input type="hidden" name="limit" class="limit" value="{{ $iLimit }}">
 			           	<div class="clearfix"></div>
@@ -72,8 +182,8 @@
 						    </div>
 						@endif
       					</div>
-    				</div>
- 				 </div>
+    			</div>
+ 				</div>
 			</div>
 		</div>
 <script>

@@ -4,9 +4,9 @@
             <div class="categories_sidebar">
                 <h2>Categories</h2>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="{{ ( !$cat_id ) ? 'active' : '' }}" role="presentation"><a href="{{route('search.categories.index')}}?type=deals">All Deals</a></li>
+                    <li class="{{ ( !$cat_id ) ? 'active' : '' }}" role="presentation"><a class="linkcolor" href="{{route('search.categories.index')}}?type=deals">All Deals</a></li>
                     @foreach( $subcategories AS $category )
-                        <li role="presentation" class="{{ ( $cat_id == $category->id ) ? 'active' : '' }}"><a href="{{ route('search.categories.show',[ $category->id ]) }}?type=deals">{{$category->name}}</a></li>
+                        <li role="presentation" class="{{ ( $cat_id == $category->id ) ? 'active' : '' }}"><a class="linkcolor" href="{{ route('search.categories.show',[ $category->id ]) }}?type=deals">{{$category->name}}</a></li>
                     @endforeach
                 </ul>
             </div>
@@ -14,9 +14,9 @@
             <div class="categories_sidebar">
                 <h2>Categories</h2>
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="{{ ( !$cat_id ) ? 'active' : '' }}" role="presentation"><a href="{{route('search.categories.index')}}?type=classified">All classified</a></li>
+                    <li class="{{ ( !$cat_id ) ? 'active' : '' }}" role="presentation"><a class="linkcolor" href="{{route('search.categories.index')}}?type=classified">All classified</a></li>
                     @foreach( $subcategories AS $category )
-                        <li role="presentation" class="{{ ( $cat_id == $category->id ) ? 'active' : '' }}"><a href="{{ route('search.categories.show',[ $category->id ]) }}?type=classified">{{$category->name}}</a></li>
+                        <li role="presentation" class="{{ ( $cat_id == $category->id ) ? 'active' : '' }}"><a class="linkcolor" href="{{ route('search.categories.show',[ $category->id ]) }}?type=classified">{{$category->name}}</a></li>
                     @endforeach
                 </ul>
             </div>

@@ -19,7 +19,7 @@ class CreateAvailabilityTable extends Migration {
 			$table->boolean('available_to_provide_daytime_care_during_summer_months')->nullable()->default(0);
 			$table->boolean('available_before_school_care')->nullable()->default(0);
 			$table->boolean('available_after_school_care')->nullable()->default(0);
-			$table->date('schedule_valid_until')->nullable()->default(0);
+			$table->date('schedule_valid_until');
 			$table->softDeletes();
 			$table->timeStamps();
 		});

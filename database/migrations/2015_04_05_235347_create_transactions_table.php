@@ -19,9 +19,9 @@ class CreateTransactionsTable extends Migration {
 			$table->string('txn_id')->nullable()->default(null);
 			$table->float('amount')->nullable()->default(null);
 			$table->string('currency')->nullable()->default('USD');
-			$table->string('invoice_number')->nullable()->default(null);
 			$table->nullableTimestamps();
 			$table->softDeletes();
+			$table->string('invoice_number')->nullable()->default(null);
 		});
 	}
 

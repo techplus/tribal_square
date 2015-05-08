@@ -46,7 +46,7 @@
                         <div style="position: absolute;opacity:0;width:100%;height:100%;z-index:1030;"></div>                                      
     @else
         <div class="page-wrap">
-            <div class="row header_wrap">
+            <div class="row header_wrap new_header_wrap">
                 @include('layouts.front_navbar')
     @endif
             <div class="page-content">

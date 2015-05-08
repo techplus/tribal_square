@@ -7,7 +7,7 @@
         <a href="{{url('/')}}">
           <img src="{{asset('/images/logo1.jpg')}}" alt="" class="img-responsive">
         </a>
-        <span>...For Africans by Africans</span>
+        <span>...Connecting Africans abroad to African goods and services</span>
       </div>
       <div class="pull-right">
         <div class="topbtn col-sm-6 col-lg-12 col-xs-12">
@@ -58,32 +58,32 @@
 
 <div class="row deals_holder">
     <div class="container">
-      <div class="col-xs-12 col-sm-6 col-lg-4">
+      <div class="col-xs-12 col-sm-6 col-lg-4 box">
         <a href="{{URL('search/deals')}}">
           <div class="deal_holder_info holder_1">
-            <div>
+            <div class="boxup">
               <p>African Deals</p>
-              <!-- <span>Discounted deals on African items and services</span> -->
+              <span class="boxspan">Discounted deals on African items and services</span>
             </div>
-          </div>
+            </div>
         </a>
       </div>
-      <div class="col-xs-12 col-sm-6 col-lg-4">
+      <div class="col-xs-12 col-sm-6 col-lg-4 box">
         <a href="{{URL('search/babysitters')}}">
           <div class="deal_holder_info holder_2">
-            <div>
+            <div class="boxup">
               <p>African Sitters &amp; House Help</p>
-              <!-- <span>Find African Nannies, baby sitters, and house help</span> -->
+              <span class="boxspan">Find African Nannies, baby sitters, and house help</span>
             </div>
           </div>
         </a>
       </div>
-      <div class="col-xs-12 col-sm-6 col-lg-4">
+      <div class="col-xs-12 col-sm-6 col-lg-4 box">
         <a href="{{URL('search/classified')}}">
           <div class="deal_holder_info holder_3">
-            <div>
+            <div class="boxup">
               <p>African Listings</p>
-              <!-- <span>Advertise African foods, Services, or Post your needs</span> -->
+              <span class="boxspan">Advertise African foods, Services, or Post your needs</span>
             </div>
           </div>
         </a>
