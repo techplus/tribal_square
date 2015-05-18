@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="page-wrap">
-    <div class="row header_wrap">
+    <div class="row header_wrap new_header_wrap">
         @include('layouts.front_navbar')
                    <div class="row">
                 <div class="container">
@@ -58,6 +58,10 @@
                                 <div class="form-group col-sm-11 col-xs-12">
                                     <input type="password" class="form-control login_input" placeholder="Confirm Password" name="password_confirmation">
                                 </div>
+                                <div style="display:none;" class="paypalid form-group col-sm-11 col-xs-12 {{$errors->has('password') ? 'has-error' : '' }}">
+                                    <input type="text" class="form-control login_input" placeholder="Paypal ID" name="paypalid">
+                                    @if( $errors->has('paypalid') ) <p class="help-block">{{$errors->first('paypalid')}}</p> @endif
+                                </div>
                                 <div class="form-group col-sm-11 col-xs-12">
                                     {!! app('captcha')->display(); !!}
                                 </div>
@@ -88,4 +92,17 @@
         </div>
     </div>
     </div>
+    <script>
+        $(document).ready(function(){
+            $('.signup_radio_btn input:radio[name="user_type"]').change(function(){
+                if($(this).val() == '4'){
+                  $('.paypalid').show();
+                }
+                else
+                {
+                    $('.paypalid').hide();
+                }
+            });
+        });
+     </script>
 @endsection

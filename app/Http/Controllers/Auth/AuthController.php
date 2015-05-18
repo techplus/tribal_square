@@ -13,6 +13,7 @@ use Facebook\FacebookRedirectLoginHelper;
 use Facebook\FacebookRequest;
 use Facebook\FacebookRequestException;
 use Facebook\GraphUser;
+
 class AuthController extends Controller {
 	protected $redirectPath;
 	/*
@@ -120,7 +121,7 @@ class AuthController extends Controller {
 			$oUsr->save();
 
 			$oUser = $this->auth->user()->UserTypes()->first();										
-
+			
 			if( $oUser->name )
 			{								
 				if( $oUser->name == "SuperAdmin" )

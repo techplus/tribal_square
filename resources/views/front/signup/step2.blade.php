@@ -8,7 +8,7 @@
         }
     </style>
     <div class="page-wrap">
-    <div class="row header_wrap">
+    <div class="row header_wrap new_header_wrap">
         @include('layouts.front_navbar')
         <div class="row">
             <div class="container">

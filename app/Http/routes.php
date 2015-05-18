@@ -50,8 +50,8 @@ Route::group(['middleware'=>['auth.babysitters','payment']],function(){
 	Route::controller('baby-sitters','Users\BabySittersController');
 });
 
-Route::group(['middleware'=>['auth.salesagnet','payment']],function(){
-	Route::resource('sales-agents','Users\SalesAgentController',['only'=>['index']]);
+Route::group(['middleware'=>['auth.salesagnet']],function(){
+	Route::resource('sales-agents','Users\SalesAgentController',['only'=>['index','update']]);
 });
 
 Route::group( ['middleware' => ['guest'] ], function() {

@@ -6,7 +6,7 @@ use App\Models\ListingCategory;
 use App\Models\ClassifiedImage;
 use Auth;
 use Request;
-
+use Mail;
 class PostsController extends Controller
 {
 	/**
@@ -56,8 +56,26 @@ class PostsController extends Controller
 			else
 				$aQuery['can_text'] = 1;
 			$oClassified = Classified::create ( $aQuery );
-			if ( $oClassified )
+
+			$firstname = Auth::user()->firstname; 
+			$lastname = Auth::user()->lastname;
+			$Uemail = Auth::user()->email;
+
+			if( $oClassified )
+			{
+				Mail::send('emails.listingwelcome',
+		        array(
+		            'firstname' => $firstname,
+		            'lastname' => $lastname,
+		            'email' => $Uemail
+		        ), function($message) use ($Uemail)
+				{
+					// sitter@tribalsquare.com
+				    $message->from('info@techplussoftware.com', 'Tribal Square');
+			  		$message->to($Uemail)->subject('Welcome Email');
+				});
 				return response ()->json ( $oClassified->toArray () );
+			}
 		}
 
 		return response ()->json ( $aResp , 500 );
