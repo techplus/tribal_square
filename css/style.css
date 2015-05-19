@@ -52,6 +52,68 @@
          url('../fonts/HelveticaNeueRoman.ttf') format('truetype'),
          url('../fonts/HelveticaNeueRoman.svg#HelveticaNeueRoman') format('svg');
 }
+/*Terms and condition css*/
+.terms_content_wrap h1,
+.refund_policy_content_wrap h1,
+.privacy_content_wrap h1{
+  text-align: center;
+  border: none;
+  margin: 5px;
+  padding: 10px;
+  width: 100%;
+  margin: 0 auto;
+}
+/*terms and condition css ends*/
+
+
+.questions_top_btn {
+  background-image: -moz-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(51,51,51) 100%);
+  background-image: -webkit-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(51,51,51) 100%);
+  background-image: -ms-linear-gradient( 90deg, rgb(0,0,0) 0%, rgb(51,51,51) 100%);
+  color: #fff;
+  margin-top: 10px;
+}
+.questions_top_btn div{
+  font-size: 19px;
+}
+
+/*.questions_top_btn {
+    background-image: -moz-linear-gradient(90deg, rgb(0, 0, 0) 0%, rgb(51, 51, 51) 100%);
+    color: #fff;
+    margin-top: 10px;
+    background: #000 !important;
+}*/
+
+
+.questions_top_btn:hover, .questions_top_btn:focus {
+    color: #fff;
+    text-decoration: none;
+}
+.info_wrapper .view_deal {
+  position: absolute;
+  top: 30%;
+  right: 20px;
+}
+.banner_info h4 {
+  color: white;
+}
+.banner_info div .pricing {
+  font-size: 18px;
+  color: #5CB85C;
+}
+.banner_wrapper .banner_info {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 5px 20px;
+  color: white;
+}
+.strike_through {
+  text-decoration: line-through;
+}
+
 .categories_sidebar .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover
 {
   background-color: #AC1919 !important; 
@@ -860,8 +922,10 @@ textarea:focus, input:focus{ outline: none !important; }
 }
 .col-item .btn-add
 {
-    width: 50%;
-    float: left;
+  width: 73%;
+  float: left;
+  font-size: larger;
+  font-weight: bold;
 }
 
 .col-item .btn-add

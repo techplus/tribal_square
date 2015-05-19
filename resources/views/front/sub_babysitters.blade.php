@@ -5,14 +5,14 @@
 	        <div class="col-sm-7 user-details"> 
 	            <div class="row coralbg white">
 	                <div class="col-sm-12 col-md-6 no-pad">
-	                    <div class="user-image">
+	                    <div class="user-image" style="padding-bottom:0">
                         	<img src="{{ Image::url(( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png'),275,275) }}" class="img-responsive thumbnail">
                     	</div>
 	                </div>
 	                <div class="col-sm-6 no-pad">
 	                    <div class="user-pad">
-	                        <h3><a href="{{ action('BabySittersController@show', [ $oBabySitter->id ]) }}" style="color:#000;">{{ ucFirst($oBabySitter->firstname)." ".ucFirst($oBabySitter->lastname)}}</a></h3>
-	                        <?php echo ( $oBabySitter->Bio ) ? '<p>'.( ( strlen( $oBabySitter->Bio->title ) > 40 ) ? substr($oBabySitter->Bio->title,0,39)."...</p>"  : '<p>'.$oBabySitter->Bio->title.'</p>' ) : ''; ?>
+	                        <h3><a href="{{ action('BabySittersController@show', [ $oBabySitter->id ]) }}" style="color:#000;">{{ ucFirst($oBabySitter->firstname)." ".ucfirst(substr($oBabySitter->lastname,0,1))."."}}</a></h3>
+	                        <?php echo ( $oBabySitter->Bio ) ? '<p style="clear:both">'.( ( strlen( $oBabySitter->Bio->title ) > 40 ) ? substr($oBabySitter->Bio->title,0,39)."...</p>"  : '<p style="clear:both">'.$oBabySitter->Bio->title.'</p>' ) : ''; ?>
 	                        <?php echo ( $oBabySitter->Account ) ? ' <h5 class="white"><i class="glyphicon glyphicon-heart"></i> Age : '.$oBabySitter->Account->age.'</h5>' : ''; ?>
 	                        <?php echo ( $oBabySitter->Bio ) ?  '<h5 class="white"><i class="glyphicon glyphicon-map-marker"></i> Less than  '.$oBabySitter->Bio->miles_from_home.' mile </h5>' : ''; ?>
 	                        <h5 class="white"><i class="glyphicon glyphicon-lock"></i> Last 
