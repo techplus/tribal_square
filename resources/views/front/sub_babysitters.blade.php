@@ -1,6 +1,6 @@
 @if( !empty($aBabySitters) )
 @foreach( $aBabySitters as $oBabySitter )	
-    <div class="clearfix"></div>
+    <!-- <div class="clearfix"></div> -->
     	<div class="row user-menu-container square">
 	        <div class="col-sm-7 user-details"> 
 	            <div class="row coralbg white">

@@ -100,7 +100,17 @@
             </div>
         </div>
 
+    <div class="push"></div>
     </div>
+
     </div>
+   
     </div>
 @endsection
+<style type="text/css">
+#wrapper {
+  min-height: 97%;
+  height: auto !important;
+  height: 100%;
+}
+</style>

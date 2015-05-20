@@ -1840,7 +1840,7 @@ div.user-menu div.user-menu-content:not(.active){
           clear: left;
         }
         .pagination_wrap {
-          height: 97px;
+          /*height: 97px;*/
         }
         .BabySitter_pageinfo {
           float: left;

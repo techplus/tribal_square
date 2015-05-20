@@ -29,6 +29,7 @@ Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 	Route::resource('admin/posts','Admin\PostsController',['only'=>['index','update','destroy','show']]);
 	Route::resource('admin/babysitters','Admin\BabySittersController',['only'=>['index','update','destroy','show']]);
 	Route::resource('admin/administrators','Admin\AdminsController');
+	Route::resource('admin/settings','Admin\SettingController',['only'=>['index','update']] );
 });
 
 Route::group(['middleware'=>['auth.providers','payment']],function(){

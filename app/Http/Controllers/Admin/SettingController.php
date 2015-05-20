@@ -4,11 +4,13 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Http\Requests\AddAdminRequest;
 use App\Models\UserType;
+use App\Models\SubscriptionPlan;
 use Validator;
 use Request;
 use Mail;
+use Session;
 
-class AdminsController extends Controller {
+class SettingController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -17,10 +19,11 @@ class AdminsController extends Controller {
 	 */
 	public function index()
 	{
-		$this->data['admins'] = User::whereHas('UserTypes',function($q){
-			$q->where('name','Admin');
-		})->get();
-		return $this->renderView('admin.admins.index');
+		$this->data['aSubscriptionplan'] = SubscriptionPlan::all();
+
+		//var_dump($this->data['aSubscriptionplan']);
+
+		return $this->renderView('admin.admins.setting');
 	}
 
 	/**
@@ -38,18 +41,9 @@ class AdminsController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(AddAdminRequest $request)
+	public function store()
 	{
-		$data = $request->all();
-		$user = User::create($data);
-		$role = UserType::where('name','Admin')->first();
-		$user->UserTypes()->attach($role->id);
-		//send email to user
-		Mail::send('emails.admin.admin_added', $data, function($message) use($data)
-		{
-			$message->to($data['email'],$data['firstname']." ".$data['lastname'])->subject('Welcome!');
-		});
-		return redirect()->route('admin.administrators.index')->with('success','Admin Added Successfully');
+		
 	}
 
 	/**
@@ -85,16 +79,13 @@ class AdminsController extends Controller {
 	 */
 	public function update($id)
 	{
-		$rules = [
-			'password'=> 'required|confirmed'
-		];
-		$validator = Validator::make(Request::all(),$rules);
-		if( $validator->fails() )
-			return redirect()->back()->withErrors($validator)->withInput(Request::all());
-		$user = User::find($id);
-		$user->password = Request::input('password');
-		$user->save();
-		return redirect()->route('admin.administrators.index')->with('success','Password changed successfully!');
+		SubscriptionPlan::where('id',$id)->update(Request::all());
+		
+		$aResp[ 'success' ] = true;
+		Session::put('success','Subscription Plan update successfully');
+		//unset( $aResp[ 'msg' ] );
+
+		return response()->json(SubscriptionPlan::find($id));
 	}
 
 	/**
