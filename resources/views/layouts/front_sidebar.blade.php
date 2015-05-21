@@ -27,7 +27,7 @@
     @if( Request::segment(2) == "deals" OR Request::segment(1) == "deals" )
         <div class="publish_deal_box">
             <p>Grow Your BUSINESS with <br>
-                <strong>TRIBAL SQUARE</strong>
+                <strong>TRIBALSQUARE</strong>
             </p>
             <span>Publish your great deal and get audience instantly.</span>
             <div class="clearfix"></div>

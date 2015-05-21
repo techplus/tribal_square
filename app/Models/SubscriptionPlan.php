@@ -5,4 +5,6 @@ class SubscriptionPlan extends Model{
 	use SoftDeletes;
 	protected $table = "subscription_plans";
 	protected $guarded = array( 'id' );
+
+	
 }

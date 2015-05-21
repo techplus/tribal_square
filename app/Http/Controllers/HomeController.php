@@ -42,4 +42,18 @@ class HomeController extends Controller {
 		return $this->renderView('front.home');
 	}
 
+	public function getTerms()
+	{
+		return $this->renderView('front.terms');
+	}
+
+	public function getRefundpolicy()
+	{
+		return $this->renderView('front.refundpolicy');
+	}
+	public function getPrivacypolicy()
+	{
+		return $this->renderView('front.privacypolicy');
+	}
+
 }

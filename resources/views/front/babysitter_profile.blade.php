@@ -108,10 +108,7 @@
 				                        @if( $oBabySitter->Bio )
 							                <div class="BabySitter_profile_info">
 							                    <h3>Preferred Rates</h3>
-							                    <h5><strong>Preferred Rate</strong></h5>
 							                    <h4 class="green"><i class="glyphicon glyphicon-usd"></i>{{ $oBabySitter->Bio->average_rate_from }}-${{ $oBabySitter->Bio->average_rate_to }} per hour</h4>
-							                    <h5><strong>For each additional child</strong></h5>
-							                    <p>${{ $oBabySitter->Bio->increase_rate_for_each_child }} per hour</p>
 							                </div>
 						                @endif
 				                    </div>
@@ -122,7 +119,7 @@
 				                	<div role="tabpanel">
 				                		<!-- Nav tabs -->
 					                    <ul class="nav nav-tabs custom_nav_tabs" role="tablist">
-					                      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Bio</a></li>
+					                      <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">{{ ucfirst($oBabySitter->firstname) }}'s Bio</a></li>
 					                      <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Experience</a></li>
 					                      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Availability</a></li>
 					                      <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Skills &amp; Abilities</a></li>
@@ -189,7 +186,7 @@
                         					</div>
                         					<div role="tabpanel" class="tab-pane custom_tab_pane" id="messages">
                         						@if( $oBabySitter->Availability )				                    	
-						                    		<h3 id="availability">Availability</h3>
+						                    		<h3 id="availability">{{ ucfirst($oBabySitter->firstname) }}'s Availability</h3>
 								                    <h5>My availability calendar is valid through {{ date('m/d/Y',strtotime($oBabySitter->Availability->schedule_valid_until)) }}
 							                        	<span class="pull-right">
 								                        <i class="green_dot">&nbsp;&nbsp;&nbsp;&nbsp;</i>
@@ -228,7 +225,8 @@
 					                			@endif
                         					</div>
                         					<div role="tabpanel" class="tab-pane custom_tab_pane" id="settings">
-                        						<div class="col-sm-4">
+                        					<h3 id="availability">{{ ucfirst($oBabySitter->firstname) }}'s Skills & Availabilities</h3>	
+                        					<div class="col-sm-4">
 					                    	@if( $oBabySitter->Skill->languages_spoken != "" )
 					                        <h5>Languages Spoken:</h5>
 					                        <ul>
@@ -280,7 +278,7 @@
 
                         					<div role="tabpanel" class="tab-pane custom_tab_pane" id="references">
 						                        @if( $oBabySitter->Skill->reference_name != "" OR  $oBabySitter->Skill->reference_name2 != "" ) 
-					                    			<h3>References</h3>				                 
+					                    			<h3> {{ ucfirst($oBabySitter->firstname) }}'s References</h3>				                 
 					                    		@endif   
 					                    		@if( $oBabySitter->Skill->reference_name != "" )				                    
 					                    			<div class="col-sm-4">{{ ucfirst($oBabySitter->Skill->reference_name) }} is a reference for {{ ucfirst($oBabySitter->firstname)." ".ucfirst(substr($oBabySitter->lastname,0,1))."." }}</div>

@@ -80,7 +80,7 @@
 			      </div>
 		      </form>
 		    </div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->
+	</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 	<div class="modal fade" id="modal-delete-category">
 		  <div class="modal-dialog">

@@ -1,7 +1,7 @@
 @extends('layouts.front')
-@section('content')	
+@section('content') 
 <style>
-	.spin {
+  .spin {
     -webkit-animation: spin .5s infinite linear;
     -moz-animation: spin .5s infinite linear;
     -o-animation: spin .5s infinite linear;
@@ -9,53 +9,53 @@
     -webkit-transform-origin: 50% 58%;
     transform-origin:50% 58%;
     -ms-transform-origin:50% 58%; /* IE 9 */
-	}
-	@-moz-keyframes spin {
-	  from {
-	    -moz-transform: rotate(0deg);
-	  }
-	  to {
-	    -moz-transform: rotate(360deg);
-	  }
-	}
+  }
+  @-moz-keyframes spin {
+    from {
+      -moz-transform: rotate(0deg);
+    }
+    to {
+      -moz-transform: rotate(360deg);
+    }
+  }
 
-	@-webkit-keyframes spin {
-	  from {
-	    -webkit-transform: rotate(0deg);
-	  }
-	  to {
-	    -webkit-transform: rotate(360deg);
-	  }
-	}
+  @-webkit-keyframes spin {
+    from {
+      -webkit-transform: rotate(0deg);
+    }
+    to {
+      -webkit-transform: rotate(360deg);
+    }
+  }
 
-	@keyframes spin {
-	  from {
-	    transform: rotate(0deg);
-	  }
-	  to {
-	    transform: rotate(360deg);
-	  }
-	}
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 </style>
-	<div class="page-wrap">
-		<div id="page-content-wrapper">
-			<div class="row header_wrap new_header_wrap">
-				@include('layouts.front_navbar')
-			 	<!-- Keep all page content within the page-content inset div! -->
-			      	<!-- breadcumbs -->
-			      	<div class="page-content">
-				      	<div class="pagination_wrap">
-	            			<div class="col-sm-12 col-xs-12" style="padding-left: 0;">
-	                		<ol class="breadcrumb custom_breadcrumb" style="background-color: transparent; margin-top: 6px;">
-	                    		<li><a href="#">Home</a></li>
-	                    		<li class="active">BabySitter</li>
-	                		</ol>
-	                		<div class="clearfix"></div>
-	            		</div>
-        			</div>	
-			        <!-- breadcumbs -->
-			        <div class="row">
-			        	<div class="col-sm-4 col-lg-3">
+  <div class="page-wrap">
+    <div id="page-content-wrapper">
+      <div class="row header_wrap new_header_wrap">
+        @include('layouts.front_navbar')
+        <!-- Keep all page content within the page-content inset div! -->
+              <!-- breadcumbs -->
+              <div class="page-content" style="clear: both;">
+                <div class="pagination_wrap">
+                    <div class="col-sm-12 col-xs-12" style="padding-left: 0;">
+                      <ol class="breadcrumb custom_breadcrumb" style="background-color: transparent; margin-top: 6px;">
+                          <li><a href="#">Home</a></li>
+                          <li class="active">BabySitter</li>
+                      </ol>
+                      <div class="clearfix"></div>
+                  </div>
+              </div>  
+              <!-- breadcumbs -->
+              <div class="row">
+                <div class="col-sm-4 col-lg-3">
                 <div class="refine_result_wrap">
                     <h3>Refine Results</h3>
                     <form action="{{route('search.store')}}" method="post">
@@ -139,53 +139,42 @@
                 </div>
             </div>
                 <div class="col-sm-8 col-lg-9">
-			            <h1>Babysitters/Nannies</h1>
-			            <br><br>
+                  <h1>Babysitters/Nannies</h1>
+                  <br><br>
 
-			            <div class="Babysitters_sub_header">
-			              <h5><span class="total-baby-sitters">{{ $iTotal }}</span> Babysitters Found</h5>
-			              <img src="http://placehold.it/450x60" alt="" class="img-responsive">
-			            </div>
-			            <!-- <div class="babysitter-container"> -->
-			            	@include('front.sub_babysitters')	
-			            <!-- </div> -->
-			            <div class="clearfix"></div>
+                  <div class="Babysitters_sub_header">
+                    <h5><span class="total-baby-sitters">{{ $iTotal }}</span> Babysitters Found</h5>
+                    <img src="http://placehold.it/450x60" alt="" class="img-responsive">
+                  </div>
+                  <div class="clearfix hidden-xs"></div>
+                  <div class="babysitter-container"> 
+                    @include('front.sub_babysitters') 
+                  </div>
+                  <!-- <div class="clearfix"></div> -->
 
-			            <!-- Load More... -->
-			            <div class="row">
-					      <div class="">
-					        <div class="bottom_advrt" align="center">
-					            <a href="#" class="btn btn-md red_btn">
-					            <span class="glyphicon glyphicon-refresh"></span>
-					            Load More</a>
-					            <div class="clearfix"></div><br>
-					          <!-- <img class="img-responsive" alt="" src="http://placehold.it/1170x160"> -->
-					        </div>
-					      </div>
-					    </div>
-			            <!-- Load More... -->
-
-			            <input type="hidden" name="offset" class="offset" value="{{ $iOffset }}">
-			            <input type="hidden" name="limit" class="limit" value="{{ $iLimit }}">
-			           	<div class="clearfix"></div>
-			           	@if( $iOffset < $iTotal )
-						    <div class="row load-more-parent">
-						      <div class="container">
-						        <div class="bottom_advrt" align="center">
-						            <a href="javascript:;" class="btn btn-md custome_blue_btn load-more">
-						            <span class="glyphicon glyphicon-refresh"></span>
-						            Load More</a>
-						            <div class="clearfix"></div><br>
-						          <img class="img-responsive" alt="" src="http://placehold.it/1170x160">
-						        </div>
-						      </div>
-						    </div>
-						@endif
-      					</div>
-    			</div>
- 				</div>
-			</div>
-		</div>
+                  <!-- Load More... -->
+                  <input type="hidden" name="offset" class="offset" value="{{ $iOffset }}">
+                  <input type="hidden" name="limit" class="limit" value="{{ $iLimit }}">
+                  <!-- <div class="clearfix"></div> -->
+                  @if( $iOffset < $iTotal )
+                    <div class="row load-more-parent">
+                      <!-- <div class="container"> -->
+                        <div class="bottom_advrt" align="center">
+                            <a href="javascript:;" class="btn btn-md custome_blue_btn load-more">
+                            <span class="glyphicon glyphicon-refresh"></span>
+                            Load More</a>
+                            <div class="clearfix"></div><br>
+                          <img class="img-responsive" alt="" src="http://placehold.it/1170x160">
+                        </div>
+                      <!-- </div> -->
+                    </div>
+                  @endif
+                  <!-- Load More... -->
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
 <script>
  $(document).ready(function() {
     var $btnSets = $('#responsive'),
@@ -214,40 +203,40 @@ $( document ).ready(function() {
     ); 
    
    $('.load-more').on('click',function(){
-   		var iOffset = $('.offset').val();
-   		var iLimit = $('.limit').val();
-   		var total = $('.total-baby-sitters').html();
-   		
-   		if( parseInt(iOffset) <= parseInt(total) )
-   		{
-	   		$.ajax({
-	   			beforeSend: function(){
-	   				$('.load-more').find('span').addClass('spin');
-	   			},
-	   			url : '{{ url("search/babysitters/paginated-baby-sitters") }}',
-	   			data : {offset:iOffset,limit:iLimit},
-	   			type : "post",
-	   			dataType : "json",
-	   			success : function(resp)
-	   			{
-	   				if( resp.html )
-	   				{	
-	   					$('.babysitter-container').append(resp.html);	   					
-	   					if( parseInt(resp.iOffset)  >= parseInt(resp.iTotal) )
-	   					{
-	   						$('.load-more-parent').hide();
-	   					}
-	   				}
-	   				$('.offset').val(resp.iOffset);	   				
-	   				$('.total-baby-sitters').val(resp.iTotal);
-	   			},
-	   			complete:function()
-	   			{
-	   				if( $('.load-more').length > 0 ) 
-	   					$('.load-more').find('span').removeClass('spin');
-	   			}
-	   		});
-   		}
+      var iOffset = $('.offset').val();
+      var iLimit = $('.limit').val();
+      var total = $('.total-baby-sitters').html();
+      
+      if( parseInt(iOffset) <= parseInt(total) )
+      {
+        $.ajax({
+          beforeSend: function(){
+            $('.load-more').find('span').addClass('spin');
+          },
+          url : '{{ url("search/babysitters/paginated-baby-sitters") }}',
+          data : {offset:iOffset,limit:iLimit},
+          type : "post",
+          dataType : "json",
+          success : function(resp)
+          {
+            if( resp.html )
+            { 
+              $('.babysitter-container').append(resp.html);             
+              if( parseInt(resp.iOffset)  >= parseInt(resp.iTotal) )
+              {
+                $('.load-more-parent').hide();
+              }
+            }
+            $('.offset').val(resp.iOffset);           
+            $('.total-baby-sitters').val(resp.iTotal);
+          },
+          complete:function()
+          {
+            if( $('.load-more').length > 0 ) 
+              $('.load-more').find('span').removeClass('spin');
+          }
+        });
+      }
    });   
 });
 </script>

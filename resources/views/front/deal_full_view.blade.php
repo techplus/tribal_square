@@ -45,7 +45,7 @@
             <div class="page-content">
                 <div class="row">
                     <div class="col-sm-12">
-                        <h1 style="font-size:26px;font-weight:bold;">{{$deal->title}}
+                        <h1 style="font-size:26px;">{{$deal->title}}
                             <div class="Discount_Tag">
                                 <span class="glyphicon glyphicon-tag"></span>
                                 {{$deal->discount_percentage}}% Discount

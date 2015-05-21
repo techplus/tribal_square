@@ -10,7 +10,7 @@
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <span class="m-r-sm text-muted welcome-message">Welcome to Tribal Square.</span>
+                <span class="m-r-sm text-muted welcome-message">Welcome, {{ Auth::user()->firstname }} {{ Auth::user()->lastname}} <br> {{ Auth::user()->email }}.</span>
             </li>
             <!-- <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">

@@ -100,9 +100,9 @@
   <div class="container">
     <div class="footer_links">
       <a href="#">Contact</a> |
-      <a href="#">Privacy Policy</a> |
-      <a href="#">Terms and Services</a> |
-      <a href="#">Refund Policy</a> |
+      <a href="{{action('HomeController@getPrivacypolicy')}}">Privacy Policy</a> |
+      <a href="{{action('HomeController@getTerms')}}">Terms and Services</a> |
+      <a href="{{action('HomeController@getRefundpolicy')}}">Refund Policy</a> |
       <a href="#">Blog</a> |
       <a href="#">Advertise with us</a>
     </div>
@@ -115,11 +115,12 @@
  <div class="row footer_wrap"> 
   <div class="footer">
     <div class="footer_nav">
-        <a href="#">Contact</a> |
-        <a href="#">Terms and Service</a> |
-        <a href="#">About Us</a> |
-        <a href="#">Blog</a> |
-        <a href="#">Advertise with us</a>
+      <a href="#">Contact</a> |
+      <a href="{{action('HomeController@getPrivacypolicy')}}">Privacy Policy</a> |
+      <a href="{{action('HomeController@getTerms')}}">Terms and Services</a> |
+      <a href="{{action('HomeController@getRefundpolicy')}}">Refund Policy</a> |
+      <a href="#">Blog</a> |
+      <a href="#">Advertise with us</a>
       </div>
       <p>@2015 TribalSquare All rights reserved.</p>
   </div>  

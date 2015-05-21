@@ -146,7 +146,7 @@
 	                                        </div>
 	                                    </div>
 	                                    <div class="form-group">
-	                                        <label class="control-label col-lg-4">Available Stock *</label>
+	                                        <label class="control-label col-lg-4">Quantity available *</label>
 	                                        <div class="col-lg-8">
 	                                            <input type="text" name="available_stock" id="available_stock" value="{{$oDeal->available_stock}}" class="required form-control">
 	                                        </div>
@@ -479,9 +479,11 @@
           var discount = 0;
           if( orig_price >= 1 )
           {
-            discount = ( new_price * 100 ) / orig_price ;  
+            new_price1 = orig_price - new_price;
+            discount = ( new_price1 * 100 ) / orig_price ;  
             discount = discount.toFixed(2);
-          }          
+          }
+          alert(discount);          
            $('#discount_percentage').val(discount);
         }
         $(document).ready(function(){  

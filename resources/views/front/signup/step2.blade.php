@@ -8,7 +8,7 @@
         }
     </style>
     <div class="page-wrap">
-    <div class="row header_wrap">
+    <div class="row header_wrap new_header_wrap">
         @include('layouts.front_navbar')
         <div class="row">
             <div class="container">
@@ -100,7 +100,17 @@
             </div>
         </div>
 
+    <div class="push"></div>
     </div>
+
     </div>
+   
     </div>
 @endsection
+<style type="text/css">
+#wrapper {
+  min-height: 97%;
+  height: auto !important;
+  height: 100%;
+}
+</style>

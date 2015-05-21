@@ -12,7 +12,11 @@
             @elseif(Request::segment(2) == "classified")  
             <a href="{{url('/')}}">
                 <img src="{{asset('/images/TSListings_Logo.jpg')}}" height="41" alt="" class="img-responsive">
-            </a>  
+            </a>
+            @else
+              <a href="{{url('/')}}">
+                 <img src="{{asset('/images/logo1.jpg')}}" height="41" alt="" class="img-responsive">
+              </a>
             @endif
             
         </div>
@@ -71,9 +75,10 @@
             <input type="hidden" name="cat" value="{{ ( !empty($aSearch) ) ? $aSearch['cat'] : '' }}">                
         </form>         
         <div class="login_subnav" style="{{ (  Request::segment(2) == "deals" OR Request::segment(1) == "shopping-cart"  ) ? 'margin-top:5px;' : '' }}">
-            <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'deals' ) ? 'link-active' : '' }}" data-type="deals">View All Deals</a>
-            <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'classified' ) ? 'link-active' : '' }}" data-type="classified">Tribal Classifieds</a>
-            <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'babysitters' ) ? 'link-active' : '' }}" data-type="baby_sitter">View Baby Sitters </a>
+            <a href="{{ url('/') }}">Home</a>
+            <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'deals' ) ? 'link-active' : '' }}" data-type="deals">Deals</a>
+            <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'babysitters' ) ? 'link-active' : '' }}" data-type="baby_sitter">Nannies/Babysitter </a>
+            <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'classified' ) ? 'link-active' : '' }}" data-type="classified">Listings</a>
         </div>
 
         @if( Request::segment(2) == "deals" OR Request::segment(1) == "shopping-cart" )

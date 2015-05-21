@@ -24,8 +24,11 @@
             </li>            
             @if( $oUser->type == "Providers" )
                 <li {{ ( Request::segment(1) == "posts" ) ? 'class=active' : '' }}>
-                    <a href="{{ route('posts.index') }}" ><i class="fa fa-edit"></i> <span class="nav-label">Posting</span></a>               
+                    <a href="{{ route('posts.index') }}" ><i class="fa fa-edit"></i> <span class="nav-label">Your Listings</span></a>               
                 </li>
+                <li {{ ( Request::segment(1) == "deals" ) ? 'class=active' : '' }}>
+                    <a href="{{ route('deals.index') }}"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Your Deals</span></a>               
+                </li> 
                 <?php /* <li>
                     <a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">Drafts</span></a>               
                 </li> */ ?>
@@ -38,9 +41,7 @@
                 <li>
                     <a href="#"><i class="fa fa-list-alt"></i> <span class="nav-label">Billing</span></a>               
                 </li>
-                <li {{ ( Request::segment(1) == "deals" ) ? 'class=active' : '' }}>
-                    <a href="{{ route('deals.index') }}"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Deals</span></a>               
-                </li> 
+                
                 {{--<li>--}}
                     {{--<a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Posted Deals</span></a>               --}}
                 {{--</li>    --}}
@@ -49,7 +50,13 @@
                      <li class="{{ ( $section == $sMenu ) ? 'active' : '' }}">
                         <a href="{{ ( $key <= $last_step ) ? action('Users\BabySittersController@getIndex').'/index/'.$sMenu : '#' }}" >{{ $aMenuLables[ $key ] }}</span></a>               
                      </li>                       
-                 @endforeach                  
+                 @endforeach
+                
+                @elseif( $oUser->type == "SalesAgent" )      
+                 <li {{ ( Request::segment(1) == "sales-agents" ) ? 'class=active' : '' }}>
+                    <a href="{{ route('sales-agents.index') }}"><i class="fa fa-cog"></i> <span class="nav-label">Settings</span></a>
+                </li>
+                                        
             @endif          
         </ul>
 
