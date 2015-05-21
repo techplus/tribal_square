@@ -77,6 +77,7 @@
 														                   					                 
 					                    <tr>
 					                        <td>   </td>
+                                            <td>   </td>
 					                        <td>   </td>
 					                        <td>   </td>
 					                        <td><h5>Subtotal</h5></td>
@@ -84,6 +85,7 @@
 					                    </tr>
 					                    <tr>
 					                        <td>   </td>
+                                            <td>   </td>
 					                        <td>   </td>
 					                        <td>   </td>
 					                        <td><h5>Estimated shipping</h5></td>
@@ -91,6 +93,7 @@
 					                    </tr>
 					                    <tr>
 					                        <td>   </td>
+                                            <td>   </td>
 					                        <td>   </td>
 					                        <td>   </td>
 					                        <td><h3>Total</h3></td>
@@ -108,6 +111,7 @@
 					                        <a href="{{ url('search/deals') }}"><button type="button" class="btn btn-md custome_blue_btn">
 					                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
 					                        </button></a></td>
+                                            <td>   </td>
 					                        <td>   </td>
 					                        <td>   </td>
 					                        <td>   </td>
