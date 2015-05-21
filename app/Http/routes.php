@@ -29,6 +29,7 @@ Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 	Route::resource('admin/posts','Admin\PostsController',['only'=>['index','update','destroy','show']]);
 	Route::resource('admin/babysitters','Admin\BabySittersController',['only'=>['index','update','destroy','show']]);
 	Route::resource('admin/administrators','Admin\AdminsController');
+	Route::resource('admin/settings','Admin\SettingController',['only'=>['index','update']] );
 });
 
 Route::group(['middleware'=>['auth.providers','payment']],function(){
@@ -50,8 +51,8 @@ Route::group(['middleware'=>['auth.babysitters','payment']],function(){
 	Route::controller('baby-sitters','Users\BabySittersController');
 });
 
-Route::group(['middleware'=>['auth.salesagnet','payment']],function(){
-	Route::resource('sales-agents','Users\SalesAgentController',['only'=>['index']]);
+Route::group(['middleware'=>['auth.salesagnet']],function(){
+	Route::resource('sales-agents','Users\SalesAgentController',['only'=>['index','update']]);
 });
 
 Route::group( ['middleware' => ['guest'] ], function() {
@@ -65,4 +66,7 @@ Route::group( ['middleware' => ['guest'] ], function() {
 	Route::post('search/babysitters/paginated-baby-sitters','BabySittersController@postPaginatedBabySitters');
 	Route::controller('shopping-cart','ShoppingCartsController');
 	Route::controller('/','HomeController');
+	//Route::get('/terms', 'HomeController@terms');
 });
+
+
