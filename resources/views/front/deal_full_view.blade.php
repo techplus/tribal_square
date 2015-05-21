@@ -124,8 +124,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-4 control-label" style="text-align: left;">Refferel code</label>
-                                            <div class="col-sm-8">
+                                            <label class="col-sm-6 col-md-6 control-label" style="text-align: left;">Refferel code</label>
+                                            <div class="col-sm-6 col-md-6">
                                                 <input type="text" name="refferel_code" id="refferel_code" class="form-control required">
                                             </div>
                                             <div class="col-sm-12 error-refferel" style="display: none;color:#ff0000;">
