@@ -33,7 +33,7 @@
                         <tbody>
                             @foreach($aSubscriptionplan as $oSub )
                                 <tr data-id="{{ $oSub->id }}" data-name="{{ $oSub->name }}">
-                                    <td><?php if($oSub->name == "Standard Baby Sitter") { echo "Babysitter Subscription Fee";}else{ echo "Provider Subscription Fee"; } ?></td>
+                                    <td><?php if($oSub->name == "Standard Baby Sitter") { echo "Babysitter Subscription Fee";}else if($oSub->name == "Standard Providers"){ echo "Provider Subscription Fee"; }else if($oSub->name == "Sales Agent Commission"){ echo "Sales Agent Commission (%)"; } ?></td>
                                     <td><input type="text" name="amount" id="amount" class="plan-amount form-control required" value="{{ $oSub->amount }}"></td>
                                     <td>
                                         <a href="javascript:;" class="edit-category">Save</a> 
