@@ -41,6 +41,11 @@
         <div class="page-wrap">
             <div class="row header_wrap new_header_wrap">
                 @include('layouts.front_navbar')
+                <style>
+                    .error{
+                        border:1px solid #ff0000;
+                    }
+                </style>
     @endif
             <div class="page-content">
                 <div class="row">
@@ -117,7 +122,16 @@
                                                     <option>5</option>
                                                 </select>
                                             </div>
-                                        </div><br>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-4 control-label" style="text-align: left;">Refferel code</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" name="refferel_code" id="refferel_code" class="form-control required">
+                                            </div>
+                                            <div class="col-sm-12 error-refferel" style="display: none;color:#ff0000;">
+                                                <span class="pull-right"></span>
+                                            </div>
+                                        </div>
                                         <div class="form-group">
                                             <button type="button" class="btn btn-lg custome_blue_btn btn-block buy-now" aria-label="Left Align" {{ (Auth::check()) ? 'disabled' : '' }}>
                                                 <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Buy Now
@@ -237,7 +251,7 @@
 
         }, 1000);
     </script>
-    <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+   {{-- <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>--}}
     <script type="text/javascript">
         function onSuccess($id,$sStatus)
         {
@@ -272,6 +286,8 @@
                 $.ajax({
                     beforeSend : function()
                     {
+                        $('.error-refferel').hide();
+                        $('#refferel_code').removeClass('error');
                         $this.prop('disabled','disabled');                        
                     },
                     url : "{{ url('shopping-cart/set-session') }}",
@@ -280,17 +296,28 @@
                     dataType : "json",
                     success : function(json)
                     { 
-                       window.location.href = '{{ url("shopping-cart") }}';
+                        window.location.href = '{{ url("shopping-cart") }}';
                     },
                     error : function(xhr, status, error)                         
                     {
-                        alert(xhr.responseText);
+                        var obj = JSON.parse(xhr.responseText);
+                        if( obj.error == "Sorry, the code isn't exist" ) {
+                            $('#refferel_code').addClass('error');
+                            $('.error-refferel').find('span').html(obj.error);
+                            $('.error-refferel').show();
+                        }
+                        else
+                            alert(obj.error );
                     },
                     complete : function()
                     {
                         $this.removeAttr('disabled'); 
                     }
                 });
+            });
+            $('#refferel_code').on('keypress',function(){
+                $('.error-refferel').hide();
+                $('#refferel_code').removeClass('error');
             });
             @if( Auth::check() )
                @include('admin.deals.scripts')
