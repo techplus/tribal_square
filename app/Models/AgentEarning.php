@@ -11,4 +11,9 @@ class AgentEarning extends Model{
 	protected $table = "agent_earnings";
 	protected $guarded = array('id');
 
+	public function User()
+	{
+		return $this->belongsTo( 'App\Models\User' , 'agent_id' );
+	}
+
 }

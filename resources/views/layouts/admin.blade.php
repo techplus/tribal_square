@@ -73,6 +73,9 @@
                             })->get()->count() > 0)
                                 <li class="{{Request::segment(2) == 'administrators' ? 'active' : ''}}"><a href="{{route('admin.administrators.index')}}">Admin Users</a></li>
                             @endif
+                            <li class="{{ ( Request::segment(2) == "sales-agents" ) ? 'active' : ''  }}" data-toggle="collapse" data-target="#submenu1" aria-expanded="true">
+                                <a href="{{route('admin.sales-agents.index')}}">Sales Agents</a>
+                            </li>
 							<li data-toggle="collapse" data-target="#submenu1" aria-expanded="true">
 								<a href="#">Categories</a>							
 								<ul class="nav collapse in sub-menu" id="submenu1" role="menu" aria-labelledby="btn-1" aria-expanded="true">

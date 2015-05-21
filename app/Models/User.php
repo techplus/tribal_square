@@ -80,6 +80,11 @@ class User extends Model implements AuthenticatableContract , CanResetPasswordCo
 		return $this->belongsToMany( 'App\Models\Shift' , 'day_shifts' , 'user_id' , 'shift_id' );
 	}
 
+	public function AgentEarnings()
+	{
+		return $this->hasMany( 'App\Models\AgentEarning' , 'agent_id' );
+	}
+
 	public function scopeApprovedstate( $query , $state = "All" , $type = "BabySitters" )
 	{
 		return $query->whereHas( 'UserTypes' , function ( $q ) use ( $state , $type ) {
@@ -268,7 +273,15 @@ class User extends Model implements AuthenticatableContract , CanResetPasswordCo
 	public function scopeHasRefferel( $query , $sCode )
 	{
 		return $query->whereHas( 'UserTypes' , function ( $q1 ) use ( $sCode ) {
-			$q1->whereRaw( ' BINARY `refferal_code` LIKE "'.$sCode.'"' );
+			$q1->whereRaw( ' BINARY `refferal_code` LIKE "' . $sCode . '"' );
 		} );
 	}
+
+	public function scopeIsAgent( $query )
+	{
+		return $query->whereHas( 'UserTypes' , function ( $q1 ) {
+			$q1->where( 'name' , 'SalesAgent' );
+		} );
+	}
+
 }
