@@ -10,7 +10,6 @@
                         <div class="clearfix"></div>
                         @include('front.getimage')
                         <div class="col-sm-12 all_deal_box_wrap remove_clearfix">
-                            <h1>Recommended Deals for you</h1>
                             @if( $oDeals->isEmpty() )
                                 <h3>No deal found!</h3>
                             @else
@@ -20,20 +19,17 @@
                                     @if( $counter == 0 )
                                         <?php $counter ++; ?>
                                         @if( $deal->DealImages->count() > 0 )
+                                         <h1>Recommended Deals for you</h1>
                                             <div class="col-xs-12 banner_wrapper">
-                                                <img src="{{Image::url($deal->DealImages->first()->image_path,981,300)}}"
-                                                     alt="" class="img-responsive">
-
+                                                <img src="{{Image::url($deal->DealImages->first()->image_path,981,300)}}" alt="" class="img-responsive">
                                                 <div class="banner_info">
                                                     <div class="info_wrapper col-xs-12">
                                                         <h4 class="title">{{$oDeals->first()->title}} </h4>
-
-                                                        <p class="city"><span
-                                                                    class="glyphicon glyphicon-map-marker"></span> {{$oDeals->first()->city}}
+                                                        <p class="city">
+                                                            <span class="glyphicon glyphicon-map-marker"></span> {{$oDeals->first()->city}}
                                                         </p>
-
-                                                        <p class="pricing"><span
-                                                                    class="strike_through">${{$oDeals->first()->original_price}}</span>
+                                                        <p class="pricing">
+                                                            <span class="strike_through">${{$oDeals->first()->original_price}}</span>
                                                             From ${{$oDeals->first()->new_price}}</p>
                                                         <a class="btn btn-lg custome_blue_btn view_deal"
                                                            href="{{route('search.deals.show',[$oDeals->first()->id])}}">View
@@ -58,10 +54,10 @@
                                 @endforeach
                             @endif
                         </div>
+
                         @if( !$oDeals->isEmpty() )
                         <div class="col-sm-12 all_deal_box_wrap">
                             <h1>New Deals</h1>
-
                             <div class="col-sm-12 all_deal_box_wrap" style="margin-top:10px;">
                                 <div class="row remove_clearfix">
                                     <div class="col-sm-12"></div>
@@ -112,6 +108,8 @@
                             </div>
 
                         </div>
+                       
+                        
                         <div class="col-sm-12 all_deal_box_wrap">
                                <h1>More Recommendations</h1>
                                <div class="col-sm-12 all_deal_box_wrap" style="margin-top:10px;">
@@ -159,6 +157,7 @@
                                 </div>
 
                         </div>
+                       
                         @endforeach
                         
                         @endif

@@ -57,7 +57,7 @@
                             </div>
                         </h1>
 
-                        <div class="clearfix"></div>
+                        <!-- <div class="clearfix"></div> -->
 
                         <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="margin-top:20px;">
                             <div class="col-sm-7 col-md-7 col-lg-8">
