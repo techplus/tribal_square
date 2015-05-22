@@ -50,7 +50,8 @@ class ClassifiedsController extends Controller {
 		$aViewData = array();
 		foreach( $classifieds AS $classified)
 		{
-			$aViewData[$classified->ListingCategory->name][] = $classified;
+			if( $classified->ListingCategory )
+				$aViewData[$classified->ListingCategory->name][] = $classified;
 		}
 		$this->data['classifieds'] = $aViewData;
 		return $this->renderView('front.search_classified');
