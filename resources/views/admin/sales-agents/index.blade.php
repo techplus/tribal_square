@@ -6,6 +6,16 @@
         </div>
         <div class="panel-body">
             <div class="col-md-12">
+                @if( session('success') )
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if( session('error') )
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="table-responsive">
                     <table class="vTable table table-stripped">
                         <thead>

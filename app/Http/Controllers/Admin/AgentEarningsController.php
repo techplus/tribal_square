@@ -5,12 +5,12 @@ use App\Http\Controllers\Controller;
 use App\Models\AgentEarning;
 use App\Models\User;
 use DB;
+use Session;
 use Illuminate\Http\Request;
-use App\Repositories\PaypalRest\PaypalRestInterface;
+
 
 class AgentEarningsController extends Controller
 {
-	private $paypal;
 
 	/**
 	 * Display a listing of the resource.
@@ -25,16 +25,10 @@ class AgentEarningsController extends Controller
 	}
 
 	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int $id
-	 * @return Response
+	 * @param $id
+	 * @param int $year
+	 * @return \Illuminate\View\View|void
 	 */
-	public function update( $id )
-	{
-
-	}
-
 	public function getShowEarnings( $id , $year = 0 )
 	{
 		if ( $year == 0 )
@@ -56,6 +50,12 @@ class AgentEarningsController extends Controller
 		return $this->renderView( 'admin.sales-agents.show' );
 	}
 
+	/**
+	 * @param $id
+	 * @param int $year
+	 * @param int $month
+	 * @return \Illuminate\View\View|void
+	 */
 	public function getShowEarningsMonthly( $id , $year = 0 , $month = 0 )
 	{
 		if ( $year == 0 )
@@ -83,6 +83,12 @@ class AgentEarningsController extends Controller
 		return $this->renderView( 'admin.sales-agents.show_earnings' );
 	}
 
+	/**
+	 * @param $id
+	 * @param $year
+	 * @param $month
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
 	public function getUpdateEarning( $id , $year , $month )
 	{
 
@@ -91,9 +97,9 @@ class AgentEarningsController extends Controller
 				->whereRaw( 'YEAR(created_at) = "' . $year . '"' )
 				->where( 'has_paid_out' , 0 )
 				->update( [ 'has_paid_out' => 1 ] );
-			return redirect()->action( 'Admin\AgentEarningsController@getShowEarnings' , [ $id , $year ] )->with( 'message' , 'Payment updated successfully' );
+			return redirect()->action( 'Admin\AgentEarningsController@getShowEarnings' , [ $id , $year ] )->with('success','Payment mark as read successfully');
 		}
 
-		return redirect()->action( 'Admin\AgentEarningsController' , [ $id ] )->with( 'message' , 'Some error occured , try again' );
+		return redirect()->action( 'Admin\AgentEarningsController' , [ $id ] )->with('error','Some error occured , try again');
 	}
 }

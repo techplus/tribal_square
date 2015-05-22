@@ -2,7 +2,7 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            Earnings of {{ $year }}
+            {{ ucfirst($oSalesAgent->firstname)." ".ucfirst($oSalesAgent->lastname) }} earnings of {{ $year }}
             <div class="pull-right" style="margin-top:-6px;">
                 <select class="form-control earningYear">
                     <?php for($i = date('Y');$i>=2000;$i--){  ?>
@@ -13,6 +13,16 @@
         </div>
         <div class="panel-body">
             <div class="col-md-12">
+                @if( session('success') )
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if( session('error') )
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="table-responsive">
                     <table class="vTable table table-stripped">
                         <thead>

@@ -2,7 +2,7 @@
 @section('content')
     <div class="panel panel-default">
         <div class="panel-heading">
-            Earnings of {{ (($monthName) ? $monthName : '').' '.(($year) ? $year : '') }}
+            {{ ucfirst($oSalesAgent->firstname)." ".ucfirst($oSalesAgent->lastname) }} earnings of {{ (($monthName) ? $monthName : '').' '.(($year) ? $year : '') }}
             <div class="pull-right" style="margin-top:-6px;">
                 <select class="form-control earningYear">
                     <?php for($i = date('Y');$i>=2000;$i--){  ?>
