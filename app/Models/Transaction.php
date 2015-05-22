@@ -9,4 +9,8 @@ class Transaction extends Eloquent
 	{
 		return $this->hasMany('App\Models\Purchases','order_id');
 	}
+	public function AgentEarning()
+	{
+		return $this->belongsTo( 'App\Models\AgentEarning' , 'buyer_id' );
+	}
 }

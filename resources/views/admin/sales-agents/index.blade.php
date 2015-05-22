@@ -6,18 +6,32 @@
         </div>
         <div class="panel-body">
             <div class="col-md-12">
+                @if( session('success') )
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if( session('error') )
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
                 <div class="table-responsive">
                     <table class="vTable table table-stripped">
                         <thead>
-                        <th>Name</th>
-                        <th>Action</th>
+                        <th style="width: 30%;">Name</th>
+                        <th style="width: 30%;">Email</th>
+                        <th style="width: 20%;">Code</th>
+                        <th style="width: 10%;text-align: center;">Action</th>
                         </thead>
                         <tbody>
                         @if( $aSalesAgents->count() > 0 )
-                            @foreach( $aSalesAgents AS $aSalesAgent )
-                                <tr data-id="{{ $aSalesAgent->id }}">
-                                    <td>{{ ucfirst($aSalesAgent->firstname)." ".ucfirst($aSalesAgent->lastname) }}</td>
-                                    <td><a href="{{ action('Admin\AgentEarningsController@getShowEarnings',[$aSalesAgent->id,date('Y')]) }}">[Manage Payment]</a></td>
+                            @foreach( $aSalesAgents AS $oSalesAgent )
+                                <tr data-id="{{ $oSalesAgent->id }}">
+                                    <td>{{ ucfirst($oSalesAgent->firstname)." ".ucfirst($oSalesAgent->lastname) }}</td>
+                                    <td>{{ $oSalesAgent->email }}</td>
+                                    <td>{{ ($oSalesAgent->UserTypes()->first()) ? $oSalesAgent->UserTypes()->first()->pivot->refferal_code : "" }}</td>
+                                    <td><a href="{{ action('Admin\AgentEarningsController@getShowEarnings',[$oSalesAgent->id,date('Y')]) }}">[Manage Payment]</a></td>
                                 </tr>
                             @endforeach
                         @endif

@@ -5,12 +5,12 @@ use App\Http\Controllers\Controller;
 use App\Models\AgentEarning;
 use App\Models\User;
 use DB;
+use Session;
 use Illuminate\Http\Request;
-use App\Repositories\PaypalRest\PaypalRestInterface;
+
 
 class AgentEarningsController extends Controller
 {
-	private $paypal;
 
 	/**
 	 * Display a listing of the resource.
@@ -19,33 +19,16 @@ class AgentEarningsController extends Controller
 	 */
 	public function index()
 	{
-		$this->data[ 'aSalesAgents' ] = User::IsAgent()->get();
+		$this->data[ 'aSalesAgents' ] = User::with('UserTypes')->IsAgent()->get();
 
 		return $this->renderView( 'admin.sales-agents.index' );
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int $id
-	 * @return Response
+	 * @param $id
+	 * @param int $year
+	 * @return \Illuminate\View\View|void
 	 */
-	public function edit( $id )
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int $id
-	 * @return Response
-	 */
-	public function update( $id )
-	{
-		//
-	}
-
 	public function getShowEarnings( $id , $year = 0 )
 	{
 		if ( $year == 0 )
@@ -62,10 +45,17 @@ class AgentEarningsController extends Controller
 			->groupby( [ DB::Raw( 'MONTH(`created_at`)' ) ] )
 			->get();
 
+		$this->data[ 'id' ] = $id;
 		$this->data[ 'year' ] = $year;
 		return $this->renderView( 'admin.sales-agents.show' );
 	}
 
+	/**
+	 * @param $id
+	 * @param int $year
+	 * @param int $month
+	 * @return \Illuminate\View\View|void
+	 */
 	public function getShowEarningsMonthly( $id , $year = 0 , $month = 0 )
 	{
 		if ( $year == 0 )
@@ -82,26 +72,34 @@ class AgentEarningsController extends Controller
 		$this->data[ 'monthName' ] = date( 'F' , mktime( 0 , 0 , 0 , $monthNum , 10 ) ); // March
 
 		$this->data[ 'oSalesAgent' ] = $oSalesAgent;
-		$this->data[ 'aAgentEarnings' ] = AgentEarning::with( 'Deal' )->whereRaw( ' YEAR(`created_at`) = "' . $year . '"' )
+		$this->data[ 'aAgentEarnings' ] = AgentEarning::with( 'Deal' , 'Transaction' )->whereRaw( ' YEAR(`created_at`) = "' . $year . '"' )
 			->where( 'agent_id' , $oSalesAgent->id )
 			->whereRaw( ' MONTH(`created_at`) = "' . $month . '"' )
 			->get();
 
-		/*if ( $this->data[ 'aAgentEarnings' ] ) {
-			foreach ( $this->data[ 'aAgentEarnings' ] as $oAgentEarning ) {
-				$buyer_name = "";
-				if ( $oAgentEarning->buyer_id != 0 ) {
-					$oPurchase
-					$oBuyer = $this->paypal->getPayment( $oAgentEarning->buyer_id );
-					if( $oBuyer )
-						$buyer_name =  $oBuyer;
-				}
-				$this->data[ 'aAgentEarnings' ][ 'buyer_name' ]  = $buyer_name;
-			}
-		}*/
-
+		$this->data[ 'id' ] = $id;
 		$this->data[ 'month' ] = $month;
 		$this->data[ 'year' ] = $year;
 		return $this->renderView( 'admin.sales-agents.show_earnings' );
+	}
+
+	/**
+	 * @param $id
+	 * @param $year
+	 * @param $month
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function getUpdateEarning( $id , $year , $month )
+	{
+
+		if( $year and $month ) {
+			AgentEarning::whereRaw( 'MONTH(created_at) = "' . $month . '"' )
+				->whereRaw( 'YEAR(created_at) = "' . $year . '"' )
+				->where( 'has_paid_out' , 0 )
+				->update( [ 'has_paid_out' => 1 ] );
+			return redirect()->action( 'Admin\AgentEarningsController@getShowEarnings' , [ $id , $year ] )->with('success','Payment mark as read successfully');
+		}
+
+		return redirect()->action( 'Admin\AgentEarningsController' , [ $id ] )->with('error','Some error occured , try again');
 	}
 }
