@@ -34,7 +34,7 @@
             <span>Discount : {{ $oDeal->discount_percentage }}%</span>
           </a>
         @endforeach  
-       <!--  <a href="#">
+       <?php /*  <a href="#">
           <p>Tony Saccos Coal Oven Pizza</p>
           <span>20% Off on Coal Oven Pizza</span>
         </a>
@@ -45,7 +45,7 @@
         <a href="#">
           <p>Tony Saccos Coal Oven Pizza</p>
           <span>20% Off on Coal Oven Pizza</span>
-        </a> -->
+        </a> */ ?>
       </div>
       @endif
       <div class="col-sm-8 deal_banner_wrap">
@@ -58,37 +58,40 @@
 
 <div class="row deals_holder">
     <div class="container">
-      <div class="col-xs-12 col-sm-6 col-lg-4 box">
-        <a href="{{URL('search/deals')}}">
-          <div class="deal_holder_info holder_1">
-            <div class="boxup">
-              <p>African Deals</p>
-              <span class="boxspan">Discounted deals on African items and services</span>
-            </div>
-            </div>
-        </a>
-      </div>
-      <div class="col-xs-12 col-sm-6 col-lg-4 box">
-        <a href="{{URL('search/babysitters')}}">
-          <div class="deal_holder_info holder_2">
-            <div class="boxup">
-              <p>African Sitters &amp; House Help</p>
-              <span class="boxspan">Find African Nannies, baby sitters, and house help</span>
-            </div>
-          </div>
-        </a>
-      </div>
-      <div class="col-xs-12 col-sm-6 col-lg-4 box">
-        <a href="{{URL('search/classified')}}">
-          <div class="deal_holder_info holder_3">
-            <div class="boxup">
-              <p>African Listings</p>
-              <span class="boxspan">Advertise African foods, Services, or Post your needs</span>
-            </div>
-          </div>
-        </a>
-      </div>
-    <!--   <div class="col-xs-12 col-sm-6 col-lg-4">
+        <form name="frmSearch" id="frmSearch" class="form-horizontal" method="post" action="{{ route('search.store') }}">
+              <div class="col-xs-12 col-sm-6 col-lg-4 box">
+                <a href="javascript:;" data-type="deals" class="searchType">
+                  <div class="deal_holder_info holder_1">
+                    <div class="boxup">
+                      <p>African Deals</p>
+                      <span class="boxspan">Discounted deals on African items and services</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-lg-4 box">
+                <a href="javascript:;" data-type="baby_sitter" class="searchType">
+                  <div class="deal_holder_info holder_2">
+                    <div class="boxup">
+                      <p>African Sitters &amp; House Help</p>
+                      <span class="boxspan">Find African Nannies, baby sitters, and house help</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-xs-12 col-sm-6 col-lg-4 box">
+                <a href="javascript:;" data-type="classified" class="searchType">
+                  <div class="deal_holder_info holder_3">
+                    <div class="boxup">
+                      <p>African Listings</p>
+                      <span class="boxspan">Advertise African foods, Services, or Post your needs</span>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <input type="hidden" name="type" id="searchTyp" value="">
+        </form>
+    <?php /*  <div class="col-xs-12 col-sm-6 col-lg-4">
         <div class="deal_holder_info holder_4">
           <div>
             <p>African Forum</p>
@@ -107,7 +110,7 @@
       </div>
       <div class="col-xs-12 col-sm-6 col-lg-4">
         <div class="advert"></div>
-      </div> -->
+      </div> */ ?>
       <div class="col-xs-12" style="color:#ac1919;font-weight:bold;"> 5% of our profit supports 
         <a href="https://www.selfless4afric.org" target="_blank"> www.selfless4afric.org </a>
         ..S4A inspiring change in Africa  </div>
@@ -119,7 +122,7 @@
 <div class="push"></div> <!-- Add for Sticky Footer -->
 </div> <!-- Wrapper End -->
 
-<!-- <div class="page-wrap">
+<?php /* <div class="page-wrap">
         <div class="row header_wrap">
               <div class="container">
                 <div class="col-xs-12">
@@ -177,21 +180,28 @@
                 </div>
               </div>
             </div>
-</div> -->
-@stop
+</div> */ ?>
 <script type="text/javascript">
-function imagePath($this)
-{
-  var imgPath = $this;
-  $(this).data('link');
+    function imagePath($this)
+    {
+        var imgPath = $this;
+        $(this).data('link');
 
-  $('.deal_banner_wrap img').attr('src', imgPath);
-}
+        $('.deal_banner_wrap img').attr('src', imgPath);
+    }
+    $(document).ready(function(){
+        $('.searchType').on('click',function() {
+            var type = $(this).data('type');
+            $('#searchTyp').val(type);
+            $('#frmSearch').submit();
+        });
+    });
 </script>
 <style type="text/css">
-.wrapper {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-}
+    .wrapper {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+    }
 </style>
+@stop
