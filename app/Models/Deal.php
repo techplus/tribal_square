@@ -26,6 +26,10 @@ class Deal extends Model{
 	{
 		return $this->hasMany('App\Models\Purchase','item_id');
 	}
+	public function AgentEarning()
+	{
+		return $this->belongsTo( 'App\Models\AgentEarning' , 'deal_id' );
+	}
 	public function scopeApproved($query)
 	{
 		return $query->where('is_approved_by_admin',1);
@@ -45,5 +49,5 @@ class Deal extends Model{
 				$q->where('name','LIKE','%'.$term."%");
 			});
 		});
-	}	
+	}
 }

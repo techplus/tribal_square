@@ -9,19 +9,19 @@
                 <div class="table-responsive">
                     <table class="vTable table table-stripped">
                         <thead>
-                        <th>Deal Name</th>
-                        <th>Buyer name</th>
-                        <th>Actual Purchase</th>
-                        <th>Amount Earned</th>
+                        <th style="width:50%">Deal Name</th>
+                        <th style="width:30%">Buyer name</th>
+                        <th style="width:10%">Actual Purchase</th>
+                        <th style="width:10%;">Amount Earned</th>
                         </thead>
                         <tbody>
                         @if( $aAgentEarnings )
                             @foreach( $aAgentEarnings AS $aAgentEarning )
                                 <tr data-id="{{ $oSalesAgent->id }}">
-                                   <td></td>
+                                    <td>{{ ($aAgentEarning->Deal) ? $aAgentEarning->Deal->title : '' }}</td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td style="text-align:center;">${{ number_format($aAgentEarning->actual_purchase_price,2) }}</td>
+                                    <td style="text-align:center;">${{ number_format($aAgentEarning->amount_earned,2) }}</td>
                                 </tr>
                             @endforeach
                         @endif

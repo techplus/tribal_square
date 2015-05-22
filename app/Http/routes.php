@@ -22,7 +22,7 @@ Route::controllers([
 Route::resource('languages','LanguagesController');
 Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 	Route::get('admin/sales-agents/show-earnings/{id}/{year?}','Admin\AgentEarningsController@getShowEarnings');
-	///Route::get('admin/sales-agents/show-earnings-monthly/{id}/{year?}/{month?}','Admin\AgentEarningsController@getShowEarningsMonthly');
+	Route::get('admin/sales-agents/show-earnings-monthly/{id}/{year?}/{month?}','Admin\AgentEarningsController@getShowEarningsMonthly');
 	Route::resource( 'category.sub-category' , 'Admin\SubCategoryController',['only'=>['index','store','update','destroy']] );
 	Route::get('category/{name}/export','Admin\SubCategoryController@exportCategory');
 	Route::post('cateogry/{name}/import','Admin\SubCategoryController@postImportCategory');

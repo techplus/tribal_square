@@ -15,4 +15,9 @@ class Purchase extends Eloquent
 	{
 		return $this->belongsTo('App\Models\Deal','item_id');
 	}
+
+	public function AgentEarning()
+	{
+		return $this->belongsTo( 'App\Models\AgentEarning' , 'buyer_id' );
+	}
 }

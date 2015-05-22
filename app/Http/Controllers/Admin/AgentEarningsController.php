@@ -6,9 +6,11 @@ use App\Models\AgentEarning;
 use App\Models\User;
 use DB;
 use Illuminate\Http\Request;
+use App\Repositories\PaypalRest\PaypalRestInterface;
 
 class AgentEarningsController extends Controller
 {
+	private $paypal;
 
 	/**
 	 * Display a listing of the resource.
@@ -76,16 +78,30 @@ class AgentEarningsController extends Controller
 		if ( !$oSalesAgent )
 			return abort( '404' );
 
+		$monthNum = $month;
+		$this->data[ 'monthName' ] = date( 'F' , mktime( 0 , 0 , 0 , $monthNum , 10 ) ); // March
+
 		$this->data[ 'oSalesAgent' ] = $oSalesAgent;
 		$this->data[ 'aAgentEarnings' ] = AgentEarning::with( 'Deal' )->whereRaw( ' YEAR(`created_at`) = "' . $year . '"' )
 			->where( 'agent_id' , $oSalesAgent->id )
 			->whereRaw( ' MONTH(`created_at`) = "' . $month . '"' )
 			->get();
 
+		/*if ( $this->data[ 'aAgentEarnings' ] ) {
+			foreach ( $this->data[ 'aAgentEarnings' ] as $oAgentEarning ) {
+				$buyer_name = "";
+				if ( $oAgentEarning->buyer_id != 0 ) {
+					$oPurchase
+					$oBuyer = $this->paypal->getPayment( $oAgentEarning->buyer_id );
+					if( $oBuyer )
+						$buyer_name =  $oBuyer;
+				}
+				$this->data[ 'aAgentEarnings' ][ 'buyer_name' ]  = $buyer_name;
+			}
+		}*/
 
-		//dd(DB::getQueryLog());
-
+		$this->data[ 'month' ] = $month;
 		$this->data[ 'year' ] = $year;
-		return $this->renderView( 'admin.sales-agents.show' );
+		return $this->renderView( 'admin.sales-agents.show_earnings' );
 	}
 }
