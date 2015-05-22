@@ -65,7 +65,7 @@
                  </div>
             @endif
         @endif
-        @if( Request::segment(2) == "deals" OR Request::segment(1) == "deals" )
+        <!-- @if( Request::segment(2) == "deals" OR Request::segment(1) == "deals" )
              @if( $aLatestDeals->count() > 0 )
                 <div class="current_deals_box">
                     <h2>Current Deals</h2>
@@ -89,7 +89,7 @@
                     </ul>
                 </div>
              @endif
-        @endif
+        @endif -->
 
                 
         
