@@ -25,6 +25,7 @@
 					                <thead>
 					                    <tr>
 					                        <th>Product</th>
+                                            <th>Refferel Code</th>
 					                        <th>Quantity</th>
 					                        <th> </th>
 					                        <th class="text-center">Price</th>
@@ -38,9 +39,9 @@
 					                			$sub_total = 0;
 					                			$estimated_shipping = 12;
 					                		?>
-					                		@foreach( $aProducts as $key => $aProduct )					                			
+					                		@foreach( $aProducts as $key => $aProduct )
 					                			<tr class="products" data-id="{{ $aProduct['id'] }}" data-key="{{ $key }}" data-quantity="{{ $aProduct['quantity'] }}">
-							                        <td class="col-sm-8 col-md-8">
+							                        <td class="col-sm-6 col-md-6">
 							                        <div class="media">
 							                            <a class="thumbnail pull-left" href="http://localhost/tribal_square/search/deals/{{ $aProduct['id'] }}"> <img class="media-object" src="{{ $aProduct['image_path'] }}" style="width: 72px; height: 72px;"> </a>
 							                            <div class="media-body">
@@ -49,6 +50,9 @@
 							                                <!-- <span>Status: </span><span class="text-success"><strong>In Stock</strong></span> -->
 							                            </div>
 							                        </div></td>
+                                                    <td class="col-sm-2 col-md-2">
+                                                        {{ isset($aProduct['refferel_code']) ? $aProduct['refferel_code'] : '-' }}
+                                                    </td>
 							                        <td class="col-sm-1 col-md-1" style="text-align: center">
 							                        	<input type="text" class="form-control quantity" value="{{ $aProduct['quantity'] }}" style="margin-top:0;">							                        	
 							                        </td>
@@ -73,6 +77,7 @@
 														                   					                 
 					                    <tr>
 					                        <td>   </td>
+                                            <td>   </td>
 					                        <td>   </td>
 					                        <td>   </td>
 					                        <td><h5>Subtotal</h5></td>
@@ -80,6 +85,7 @@
 					                    </tr>
 					                    <tr>
 					                        <td>   </td>
+                                            <td>   </td>
 					                        <td>   </td>
 					                        <td>   </td>
 					                        <td><h5>Estimated shipping</h5></td>
@@ -87,6 +93,7 @@
 					                    </tr>
 					                    <tr>
 					                        <td>   </td>
+                                            <td>   </td>
 					                        <td>   </td>
 					                        <td>   </td>
 					                        <td><h3>Total</h3></td>
@@ -104,6 +111,7 @@
 					                        <a href="{{ url('search/deals') }}"><button type="button" class="btn btn-md custome_blue_btn">
 					                            <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
 					                        </button></a></td>
+                                            <td>   </td>
 					                        <td>   </td>
 					                        <td>   </td>
 					                        <td>   </td>
