@@ -27,6 +27,7 @@
                 <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg red_btn">Signup</a>
                 <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg red_btn">Login</a>
             @else
+                <?php echo "Welcome ".Auth::user()->firstname. " ".Auth::user()->lastname ; ?> 
                 <a href="{{action('Auth\AuthController@getLogout')}}" class="btn btn-lg red_btn">Logout</a>
             @endif
         </div> 

@@ -124,7 +124,7 @@ class AuthController extends Controller {
 			
 			if( $oUser->name )
 			{								
-				if( $oUser->name == "SuperAdmin" )
+				if( $oUser->name == "SuperAdmin" || $oUser->name == "Admin" )
 				{		
 					$aCats = Config::get('categories');
 					$name = reset( $aCats );
@@ -140,7 +140,7 @@ class AuthController extends Controller {
 				}
 				else if( $oUser->name == 'SalesAgent')
 				{
-
+					$redirectPath = action( 'Users\SalesAgentController@index' );
 				}
 			}	
 			return redirect()->intended($redirectPath);

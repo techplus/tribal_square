@@ -59,7 +59,7 @@ Route::group(['middleware'=>['auth.salesagnet']],function(){
 	Route::resource('sales-agents','Users\SalesAgentController',['only'=>['index','update']]);
 });
 
-Route::group( ['middleware' => ['guest'] ], function() {
+// Route::group( ['middleware' => ['guest'] ], function() {
 	
 	Route::resource('search','SearchController',['only'=>'store']);
 	Route::resource('search/classified','ClassifiedsController');
@@ -71,6 +71,6 @@ Route::group( ['middleware' => ['guest'] ], function() {
 	Route::controller('shopping-cart','ShoppingCartsController');
 	Route::controller('/','HomeController');
 	//Route::get('/terms', 'HomeController@terms');
-});
+// });
 
 

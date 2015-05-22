@@ -86,11 +86,9 @@
   </head>
   <body class="{{$body_class or 'signin_body'}}">
     @if( Auth::check() && ( Request::url() != url('auth/select-user-type') || Request::url() != url('login/select-user-type') ) )
-        <div class="active" id="wrapper">
+        <div class="active" id="wrapper1">
     @endif
-
             @yield('content')
-
     @if( Auth::check() )
         </div>
     @endif
