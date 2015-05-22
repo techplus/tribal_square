@@ -25,17 +25,6 @@ class AgentEarningsController extends Controller
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int $id
-	 * @return Response
-	 */
-	public function edit( $id )
-	{
-		//
-	}
-
-	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  int $id
@@ -43,7 +32,7 @@ class AgentEarningsController extends Controller
 	 */
 	public function update( $id )
 	{
-		//
+
 	}
 
 	public function getShowEarnings( $id , $year = 0 )
@@ -62,6 +51,7 @@ class AgentEarningsController extends Controller
 			->groupby( [ DB::Raw( 'MONTH(`created_at`)' ) ] )
 			->get();
 
+		$this->data[ 'id' ] = $id;
 		$this->data[ 'year' ] = $year;
 		return $this->renderView( 'admin.sales-agents.show' );
 	}
@@ -82,26 +72,28 @@ class AgentEarningsController extends Controller
 		$this->data[ 'monthName' ] = date( 'F' , mktime( 0 , 0 , 0 , $monthNum , 10 ) ); // March
 
 		$this->data[ 'oSalesAgent' ] = $oSalesAgent;
-		$this->data[ 'aAgentEarnings' ] = AgentEarning::with( 'Deal' )->whereRaw( ' YEAR(`created_at`) = "' . $year . '"' )
+		$this->data[ 'aAgentEarnings' ] = AgentEarning::with( 'Deal' , 'Transaction' )->whereRaw( ' YEAR(`created_at`) = "' . $year . '"' )
 			->where( 'agent_id' , $oSalesAgent->id )
 			->whereRaw( ' MONTH(`created_at`) = "' . $month . '"' )
 			->get();
 
-		/*if ( $this->data[ 'aAgentEarnings' ] ) {
-			foreach ( $this->data[ 'aAgentEarnings' ] as $oAgentEarning ) {
-				$buyer_name = "";
-				if ( $oAgentEarning->buyer_id != 0 ) {
-					$oPurchase
-					$oBuyer = $this->paypal->getPayment( $oAgentEarning->buyer_id );
-					if( $oBuyer )
-						$buyer_name =  $oBuyer;
-				}
-				$this->data[ 'aAgentEarnings' ][ 'buyer_name' ]  = $buyer_name;
-			}
-		}*/
-
+		$this->data[ 'id' ] = $id;
 		$this->data[ 'month' ] = $month;
 		$this->data[ 'year' ] = $year;
 		return $this->renderView( 'admin.sales-agents.show_earnings' );
+	}
+
+	public function getUpdateEarning( $id , $year , $month )
+	{
+
+		if( $year and $month ) {
+			AgentEarning::whereRaw( 'MONTH(created_at) = "' . $month . '"' )
+				->whereRaw( 'YEAR(created_at) = "' . $year . '"' )
+				->where( 'has_paid_out' , 0 )
+				->update( [ 'has_paid_out' => 1 ] );
+			return redirect()->action( 'Admin\AgentEarningsController@getShowEarnings' , [ $id , $year ] )->with( 'message' , 'Payment updated successfully' );
+		}
+
+		return redirect()->action( 'Admin\AgentEarningsController' , [ $id ] )->with( 'message' , 'Some error occured , try again' );
 	}
 }

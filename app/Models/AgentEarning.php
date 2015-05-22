@@ -21,8 +21,8 @@ class AgentEarning extends Model{
 		return $this->belongsTo( 'App\Models\Deal' , 'deal_id' );
 	}
 
-	public function Purchase()
+	public function Transaction()
 	{
-		return $this->belongsTo( 'App\Models\Purchase' , 'buyer_id' );
+		return $this->belongsTo( 'App\Models\Transaction' , 'buyer_id' );
 	}
 }
