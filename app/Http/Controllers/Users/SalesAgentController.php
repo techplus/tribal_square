@@ -6,6 +6,9 @@ use App\Models\UserType;
 use App\Http\Requests\SalesagentRequest;
 use Request;
 use Auth;
+use App\Http\Requests\ProfileRequest;
+
+
 
 
 class SalesAgentController extends Controller
@@ -14,11 +17,11 @@ class SalesAgentController extends Controller
 	{
 		$this->data[ 'oUser' ] = Auth::user();
 
-		$$oUser = Auth::user()->UserTypes()->where('user_usertypes.user_id' , '=' , $this->data['oUser']->id )->first();
+		$oUserType = Auth::user()->UserTypes()->where('user_usertypes.user_id' , '=' , $this->data['oUser']->id )->first();
 
-		if( $$oUser )
+		if( $oUserType )
 		{
-		 	$this->data[ '$oUser' ] = $$oUser;
+		 	$this->data[ 'oUserType' ] = $oUserType;
 		}	
 		return $this->renderView('agents.index');
 	}
@@ -26,9 +29,25 @@ class SalesAgentController extends Controller
 	public function update(SalesagentRequest $request, $id)
 	{
 		$id = Auth::user()->id;
+		if( $request->hasFile('profile') )
+		{
+			@unlink(base_path('profile_pictures/'.$id.".png"));
+			@unlink(base_path('profile_pictures/'.$id.".jpg"));
+			@unlink(base_path('profile_pictures/'.$id.".jpeg"));
+			$file = $request->file('profile');
+			$file->move(base_path('profile_pictures'),$id.".".$file->getClientOriginalExtension());
+		}
+		$user = User::find($id);
+		$user->firstname = $request->input('firstname');
+		$user->lastname = $request->input('lastname');
+		$user->email = $request->input('email');
+		$password = $request->input('password');
+		if( !empty( $password ) )
+			$user->password = $request->input('password');
+		$user->save();
+
 		
 		$paypal = $request->input('paypalid');
-		
 		if( Request::has ( 'paypalid' ) )
 		{
 			$update = Auth::user()->find($id); 
@@ -37,7 +56,6 @@ class SalesAgentController extends Controller
 			$update_imei->pivot->save();
 
 		}
-		
-		return redirect()->back()->with('success','Paypal ID updated successfully');
+		return redirect()->back()->with('success','Settings updated successfully');
 	}
 }

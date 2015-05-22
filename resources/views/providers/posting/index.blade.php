@@ -3,6 +3,8 @@
     <!-- Data Tables -->
     <link href="{{ asset('inspinia/css/plugins/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('inspinia/css/plugins/dataTables/dataTables.responsive.css') }}" rel="stylesheet">
+   
+    
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
@@ -26,6 +28,14 @@
                     @endif
                 <div class="col-sm-12">
                     <a href="{{ route('posts.create') }}"><button class="btn btn-primary pull-right">Add New</button></a>
+                    <div class="col-sm-3 pull-right">
+                        <select class="form-control filter_status">
+                            <option value="">All</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Archived">Archived</option>
+                            <option value="Declined">Declined</option>
+                        </select>
+                    </div>
                 </div>
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                     <thead>
@@ -81,11 +91,52 @@
     <script src="{{ asset('inspinia/js/plugins/dataTables/dataTables.responsive.js') }}"></script>
 
     <script>
+    var dataTable;
         $(document).ready(function(){
-             $('.dataTables-example').dataTable({
-                responsive: true
-            });
+
+             dataTable = $('.dataTables-example').dataTable({
+                            responsive: true
+                         });
+              $('.filter_status' ).on('change',function(){
+                dataTable.fnFilter($(this ).val());
+            })
+
+            //  $('.dataTables-example').dataTable({
+            // "aoColumnDefs": [{"bSortable": false, "aTargets": [1]}]
+            //     }).columnFilter({
+            //         sPlaceHolder: "head:after",
+            //         aoColumns: [
+            //             {type: "select", values: ['Approved', 'Declined', 'Archived']},
+            //             null
+            //         ]
+            //     });
+
+            // $('.dataTables-example').dataTable({
+            //     "aoColumnDefs": [{"bSortable": false, "aTargets": [1]}]
+            // })
+            // .columnFilter({
+            //     sPlaceHolder: "head:before",
+            // aoColumns: [ null,
+            //          null,
+            //         { type: "select",values: ['Approved', 'Declined', 'Archived'] }
+            //     ]
+
+            // });
+
+        //     $('.dataTables-example').dataTable()
+        //   .columnFilter({   sPlaceHolder: "head:before",
+        //             aoColumns: [    null,
+        //                         null,
+        //                         { type: "select",values: ['Approved', 'Declined', 'Archived'] }
+        //                 ]
+
+        // });
+
         });
+
+        
+
+        
 
         function removePost(id)
         {

@@ -2,7 +2,7 @@
 
 @section('content')
     <?php 
-       // dd($oUser);
+       //dd($oUser);
        // echo $oUserType->pivot->refferal_code;
     ?>
     <div class="row">
@@ -38,9 +38,47 @@
                     <form action="{{route('sales-agents.update',[Auth::user()->id])}}" method="post" enctype="multipart/form-data">
                         <input type="hidden" value="put" name="_method">
                         <div class="col-sm-6" style="padding-left: 0;">
+                            <div class="form-group {{$errors->has('firstname') ? 'has-error' : ''}}">
+                                <label class="control-label">First Name:</label>
+                                <input type="text" class="form-control" name="firstname" value="{{ $errors->has('firstname') ? old('firstname') : Auth::user()->firstname }}">
+                            </div>
+                        </div>
+                        <div class="col-sm-6" style="padding-right: 0;">
+                            <div class="form-group {{$errors->has('lastname') ? 'has-error' : ''}}">
+                                <label class="control-label">Last Name:</label>
+                                <input type="text" class="form-control" name="lastname" value="{{$errors->has('lastname') ? old('lastname') : Auth::user()->lastname }}">
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group {{$errors->has('email') ? 'has-error' : ''}}">
+                            <label class="control-label">Email</label>
+                            <input type="text" class="form-control" name="email" value="{{$errors->has('email') ? old('email') :Auth::user()->email }}">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Password</label>
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                        <div class="form-group {{$errors->has('profile') ? 'has-error' : ''}}">
+                            <label class="control-label">Profile Picture</label>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-12" style="padding-left: 0;">
+                                <?php
+                                    $profile_picture = url('images/no_image.png');
+                                    if( file_exists(base_path('profile_pictures/'.Auth::user()->id.".png")))
+                                        $profile_picture = url('profile_pictures/'.Auth::user()->id.".png");
+                                    if( file_exists(base_path('profile_pictures/'.Auth::user()->id.".jpg")))
+                                        $profile_picture = url('profile_pictures/'.Auth::user()->id.".jpg");
+                                    if( file_exists(base_path('profile_pictures/'.Auth::user()->id.".jpeg")))
+                                        $profile_picture = url('profile_pictures/'.Auth::user()->id.".jpeg");
+                                ?>
+                                <img style="max-width: 250px;" id="profile_image" class="img-responsive" src="{{$profile_picture}}">
+                                <input type="file" id="profile" name="profile">
+                            </div>
+                        </div>
+                        <div class="col-sm-6" style="padding-left: 0;">
                             <div class="form-group {{$errors->has('paypalid') ? 'has-error' : ''}}">
                                 <label class="control-label">Paypal ID:</label>
-                                <input type="text" class="form-control" name="paypalid" value="{{$oUserType->pivot->paypalid}}">
+                                <input type="text" class="form-control" name="paypalid" value="{{$errors->has('paypalid') ? old('paypalid') : $oUserType->pivot->paypalid}}">
                             </div>
                         </div>
                         <div class="clearfix"></div>

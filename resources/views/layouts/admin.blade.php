@@ -107,7 +107,16 @@
 									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Declined" ) ? "active" : "" ) : "" }}'><a href="{{ route(  'admin.deals.index' ,['status'=>'declined'] ) }}">Declined</a></li>
 									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Archived" ) ? "active" : "" ) : "" }}'><a href="{{ route( 'admin.deals.index' ,['status'=>'archived'] ) }}">Archived</a></li>
 								</ul>
-							</li>							
+							</li>
+							<!-- <li data-toggle="collapse" data-target="#submenu4" aria-expanded="true">
+								<a href="#">Content</a>							
+								<ul class="nav collapse in sub-menu" id="submenu4" role="menu" aria-labelledby="btn-1" aria-expanded="true">									
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Pending" ) ? "active" : "" ) : "" }}'><a href="{{ route( 'admin.deals.index' , [ 'status'=>'pending' ] ) }}">Pending</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Approved" ) ? "active" : "" ) : "" }}'><a href="{{ route( 'admin.deals.index' , ['status'=>'approved'] ) }}">Approved</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Declined" ) ? "active" : "" ) : "" }}'><a href="{{ route(  'admin.deals.index' ,['status'=>'declined'] ) }}">Declined</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Archived" ) ? "active" : "" ) : "" }}'><a href="{{ route( 'admin.deals.index' ,['status'=>'archived'] ) }}">Archived</a></li>
+								</ul>
+							</li>	 -->						
 						</ul>
 					</nav>				
 		</nav>

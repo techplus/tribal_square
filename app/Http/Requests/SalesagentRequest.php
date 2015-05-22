@@ -21,6 +21,10 @@ class SalesagentRequest extends Request {
 	public function rules()
 	{
 		return [
+			'firstname' =>  'required',
+		    'lastname'  =>  'required',
+		    'email'     =>  'required|email|unique:users,email,'.Auth::user()->id,
+		    'profile'   =>  'image|mimes:jpg,png,jpeg',
 			'paypalid' =>  'required'
 		];
 	}

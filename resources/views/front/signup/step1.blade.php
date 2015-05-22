@@ -22,19 +22,19 @@
                                 <div class="signup_radio_btn">
                                     <div class="radio" style="margin-top:-5px;">
                                         <label>
-                                            <input type="radio" name="user_type" id="optionsRadios1" value="2" checked>
+                                            <input type="radio" name="user_type" id="optionsRadios1" value="2" checked <?php if(Input::old('user_type')== "2") { echo 'checked="checked"'; } ?>>
                                             Service Provider
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="user_type" id="optionsRadios2" value="4">
+                                            <input type="radio" name="user_type" id="optionsRadios2" value="4" <?php if(Input::old('user_type')== "4") { echo 'checked="checked"'; } ?>>
                                             Sales Agent
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="user_type" id="optionsRadios3" value="3">
+                                            <input type="radio" name="user_type" id="optionsRadios3" value="3" <?php if(Input::old('user_type')== "3") { echo 'checked="checked"'; } ?>>
                                             Baby Sitter
                                         </label>
                                     </div>
@@ -94,6 +94,16 @@
     </div>
     <script>
         $(document).ready(function(){
+            if($('.signup_radio_btn input:radio[name="user_type"]:checked').val() == 4)
+            {
+              $('.paypalid').show();
+            }
+            else
+            {
+                $('.paypalid').hide();
+            }   
+
+
             $('.signup_radio_btn input:radio[name="user_type"]').change(function(){
                 if($(this).val() == '4'){
                   $('.paypalid').show();

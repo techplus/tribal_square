@@ -9,7 +9,7 @@
                     <div class="demo col-xs-12 col-sm-12 col-md-9 col-lg-9 pull-right">
                         <div class="clearfix"></div>
                             @include('front.getimage')
-                            <div class="col-sm-12 all_deal_box_wrap">
+                            <div class="col-sm-12 all_deal_box_wrap remove_clearfix">
                                 <h1>Recommended Deals for you</h1>
                                 @if( $oDeals->isEmpty() )
                                 <h3>No deal found!</h3>
@@ -56,7 +56,7 @@
                                     @foreach( $oDeals AS $oDeal )  
                                         <!-- @if( $counter++ == 0 ) <?php //continue; ?> @endif -->                                                                                                          
                                         @if( $counter == 0 ) <?php continue; ?> @endif
-                                    <div class="col-sm-3 col-xs-6">
+                                    <div class="col-sm-4 col-lg-3 col-md-4 col-xs-6">
                                 <div class="col-item">
                                     <div class="photo">
                                         <a href="{{route('search.deals.show',[$oDeal->id])}}" style="margin-left:0;width:100%;">                                         
@@ -71,7 +71,7 @@
                                             <?php
                                                     $oDealsImages = $oDeal->DealImages(); 
                                                     ?>
-                                            <img alt="{{$oDeal->title}}" class="img-responsive" src="{{Image::url(( $oDeal->DealImages->count() > 0 ) ? $oDeal->DealImages->first()->image_path : ( $oDealsImages->count()  ? $oDealsImages->first()->image_path : url('images/no_image.png')),350,185)}}">
+                                            <img alt="{{$oDeal->title}}" style="height:185px;" class="img-responsive" src="{{Image::url(( $oDeal->DealImages->count() > 0 ) ? $oDeal->DealImages->first()->image_path : ( $oDealsImages->count()  ? $oDealsImages->first()->image_path : url('images/no_image.png')),350,185)}}">
                                         </a>
                                     </div>
                                     <div class="info custom_info">
