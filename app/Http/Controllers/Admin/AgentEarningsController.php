@@ -19,7 +19,7 @@ class AgentEarningsController extends Controller
 	 */
 	public function index()
 	{
-		$this->data[ 'aSalesAgents' ] = User::IsAgent()->get();
+		$this->data[ 'aSalesAgents' ] = User::with('UserTypes')->IsAgent()->get();
 
 		return $this->renderView( 'admin.sales-agents.index' );
 	}
