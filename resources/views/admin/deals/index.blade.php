@@ -94,6 +94,10 @@
                         msg = "deal is removed from deal of the day!";
 
                     alert(msg);
+                }).error(function(resp){
+                    obj = $.parseJSON(resp.responseText);
+                    $this.attr('checked',false);
+                    alert(obj.error);
                 });
             });
         });
