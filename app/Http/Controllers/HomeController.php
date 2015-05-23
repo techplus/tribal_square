@@ -36,7 +36,7 @@ class HomeController extends Controller {
 	 */
 	public function getIndex()
 	{
-		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->approved()->future()->orderBy('updated_at','DESC')->take(4)->get();
+		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->approved()->future()->orderBy('is_deal_of_the_day','DESC')->orderBy('updated_at','DESC')->take(4)->get();
 
 		$this->data['body_class'] = 'home_page_body';
 		return $this->renderView('front.home');

@@ -27,11 +27,11 @@
                     <a href="{{ route('deals.create') }}"><button class="btn btn-primary pull-right">Add New</button></a>
                     <div class="col-sm-3 pull-right">
                         <select class="form-control filter_status">
-                            <option value="">All Deals</option>
-                            <option value="Approved">Approved Deals</option>
-                            <option value="Archived">Archived Deals</option>
-                            <option value="Declined">Declined Deals</option>
-                            <option value="Expired">Expired Deals</option>
+                            <option value="">All</option>
+                            <option value="Approved">Approved</option>
+                            <option value="Declined">Declined</option>
+                            <!-- <option value="Archived">Archived Deals</option> -->
+                            <option value="Expired">Expired</option>
                         </select>
                     </div>
                 </div>

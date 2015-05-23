@@ -53,7 +53,7 @@ function time_elapsed_string($ptime)
 	                <div class="col-sm-6 no-pad">
 	                    <div class="user-pad">
 	                        <h3><a href="{{ action('BabySittersController@show', [ $oBabySitter->id ]) }}" style="color:#000;">{{ ucFirst($oBabySitter->firstname)." ".ucfirst(substr($oBabySitter->lastname,0,1))."."}}</a></h3>
-	                        <?php echo ( $oBabySitter->Bio ) ? '<p style="clear:both">'.( ( strlen( $oBabySitter->Bio->title ) > 30 ) ? substr($oBabySitter->Bio->title,0,29)."...</p>"  : '<p style="clear:both">'.$oBabySitter->Bio->title.'</p>' ) : ''; ?>
+	                        <?php echo ( $oBabySitter->Bio ) ? '<p style="clear:both">'.( ( strlen( $oBabySitter->Bio->title ) > 25 ) ? substr($oBabySitter->Bio->title,0,24)."...</p>"  : '<p style="clear:both">'.$oBabySitter->Bio->title.'</p>' ) : ''; ?>
 	                        <?php echo ( $oBabySitter->Account ) ? ' <h5 class="white"><i class="glyphicon glyphicon-heart"></i> Age : '.$oBabySitter->Account->age.'</h5>' : ''; ?>
 	                        <?php echo ( $oBabySitter->Bio ) ?  '<h5 class="white"><i class="glyphicon glyphicon-map-marker"></i> Less than  '.$oBabySitter->Bio->miles_from_home.' mile </h5>' : ''; ?>
 	                        <h5 class="white"><i class="glyphicon glyphicon-lock"></i> Last 

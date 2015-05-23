@@ -7,7 +7,7 @@
             interval: false
         });
     </script>
-    @if( Auth::check() )
+    @if(  Auth::check() )
         <link href="{{asset('/css/style.css')}}" rel="stylesheet">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -30,7 +30,8 @@
                         <button class="btn btn-success action" data-status="approved" data-id="{{$deal->id}}">Approve</button>&nbsp;
                         <button class="btn btn-danger action" data-status="pending" data-id="{{$deal->id}}">Move To Pending</button>
                         <button class="btn btn-danger action" data-status="archived" data-id="{{$deal->id}}">Archive</button>                    
-                    @endif                  
+                    @endif
+
                 </div>      
             </div>
             <div class="panel-body">                

@@ -39,7 +39,7 @@
           ?><br>
           <a href="{{ $dashBoardLink }}" class="">My Dashboard</a> |
             <a href="{{action('Auth\AuthController@getLogout')}}" class="">Logout</a>
-          </div>  
+          </div> 
         @endif
       </div>    
       <a href="#" class="col-sm-4 col-lg-3 col-xs-12 pull-right text-center questions_top_btn">
