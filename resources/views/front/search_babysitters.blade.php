@@ -164,11 +164,16 @@
                             <span class="glyphicon glyphicon-refresh"></span>
                             Load More</a>
                             <div class="clearfix"></div><br>
-                          <img class="img-responsive" alt="" src="http://placehold.it/1170x160">
+                          <!-- <img class="img-responsive" alt="" src="http://placehold.it/1170x160"> -->
                         </div>
                       <!-- </div> -->
                     </div>
                   @endif
+                  <div class="row">
+                        <div class="bottom_advrt" align="center">
+                          <img class="img-responsive" alt="" src="http://placehold.it/1170x160">
+                        </div>
+                    </div>
                   <!-- Load More... -->
                 </div>
           </div>

@@ -2,12 +2,7 @@
 @section('content')		
 	@if( Auth::check() )
 		<link href="{{asset('/css/style.css')}}" rel="stylesheet">
-		<!-- <style>
-			.user-image{      
-			    background: #e8e8e8;
-			    border: 1px solid #ccc;			   
-			}  
-		</style> -->
+		 @if(Request::segment(1) != "search") 
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Baby Sitters
@@ -36,7 +31,12 @@
 				<div class="row">															
 					<div style="position:relative;width:100%;height:100%;">
 						<div style="position: absolute;opacity:0;width:100%;height:100%;z-index:1030;"></div>
-
+		@endif
+		@if(Request::segment(1) == "search")
+        <div class="row header_wrap new_header_wrap">    
+            @include('layouts.front_navbar')
+        </div>    
+        @endif    					
 	@else
 		<div class="page-wrap">
 			<div id="page-content-wrapper">	
@@ -56,7 +56,16 @@
 					                  <li><a href="{{ route('search.babysitters.index') }}">BabySitter</a></li>
 					                  <li class="active">{{ ucfirst($oBabySitter->firstname)." ".ucfirst(substr($oBabySitter->lastname,0,1))."." }}</li>
 					                </ol>
+					                @else
+					                @if(Request::segment(1) == "search")
+					                <ol class="breadcrumb custom_breadcrumb" style="background-color: transparent; margin-top: 6px;">
+					                  <li><a href="{{ url('/') }}">Home</a></li>
+					                  <li><a href="{{ route('search.babysitters.index') }}">BabySitter</a></li>
+					                  <li class="active">{{ ucfirst($oBabySitter->firstname)." ".ucfirst(substr($oBabySitter->lastname,0,1))."." }}</li>
+					                </ol>
 					                @endif
+					                @endif
+
                                     <div class="clearfix"></div>
                 				</div>
                 				<div class="col-sm-3 col-xs-12">
@@ -70,6 +79,17 @@
 				                    		</button>
 				                    	</a>	
 				                	</div>
+				                	@else
+				                	@if(Request::segment(1) == "search")
+				                	<div class="BabySitter_pageinfo">				                
+				                    	Profile {{ $iSequenceId }} out of {{ $iTotal }}
+				                    	<a href="{{ action('BabySittersController@show', [ $iNextId ])  }}">
+				                    		<button class="btn btn-default btn-sm" type="button">
+				                    			<span aria-hidden="true" class="glyphicon glyphicon-menu-right"></span>
+				                    		</button>
+				                    	</a>	
+				                	</div>
+				                	@endif
 				                	@endif
 
 				                  	
@@ -350,7 +370,8 @@
 					            @endif
 
 				                <div class="BabySitter_sidebar">
-				                    <h3>About Paula</h3>
+
+				                    <h3>About {{  ( (strlen($oBabySitter->firstname) > 10 )  ? substr(ucfirst($oBabySitter->firstname),0,9).'...' : ucfirst($oBabySitter->firstname) ) }}  </h3>
 				                    <ul>
 				                    	@if( $oBabySitter->Bio ) 
 				                        <li>
@@ -382,7 +403,12 @@
 				                        @if( $oBabySitter->Availability && $oBabySitter->Availability->available_to_provide_daytime_care_during_summer_months == 1 )
 				                        <li>
 				                            <span class="glyphicon glyphicon-ok"></span>
-				                            Daytime care availability during summer months
+				                            <?php
+				                            	$dayTimestring = "Daytime care availability during summer months";
+				                            	if(strlen($dayTimestring) > 30){ $careAvail = substr($dayTimestring,0,29)."..."; }
+	                        					else{$careAvail = $dayTimestring;}
+	                        					echo $careAvail;
+	                        				?>
 				                        </li>
 				                        @endif 
 
@@ -484,6 +510,7 @@
 				        </div>
 				    </div>
 				    @if( Auth::check() )
+				    	@if(Request::segment(1) != "search")
 					    <div class="pull-right">
 							@if( $sStatus == "Archived" )
 		                        <button class="btn btn-success action" data-status="approved" data-id="{{$oBabySitter->id}}">Approve</button>&nbsp;
@@ -503,7 +530,8 @@
 		                        <button class="btn btn-danger action" data-status="pending" data-id="{{$oBabySitter->id}}">Move To Pending</button>
 		                        <button class="btn btn-danger action" data-status="archived" data-id="{{$oBabySitter->id}}">Archive</button>                    
 		                    @endif                      
-	                	</div>	
+	                	</div>
+	                	@endif	
 						<!-- Modal -->
 					    <div class="modal fade" id="confirmation_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					        <div class="modal-dialog">

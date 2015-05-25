@@ -73,7 +73,7 @@
                                 <div class="col-sm-11 col-xs-12 signup_chkbox {{ $errors->has('agreement') ? 'has-error' : '' }}">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="agreement" value="1"> I agree to the <a href="#"> Terms of Use </a> and <a href="#"> Privacy Statement.</a>
+                                            <input type="checkbox" name="agreement" value="1"> I agree to the <a href="{{action('HomeController@getTerms')}}"> Terms of Use </a> and <a href="{{action('HomeController@getPrivacypolicy')}}"> Privacy Statement.</a>
                                         </label>
                                     </div>
                                 </div>

@@ -20,15 +20,36 @@
             @endif
             
         </div>
-        <div class="header_btns_wrap">
+        <div class="header_btns_wrap" style="margin-top: 5px;font-weight: bold;">
             @if( Request::url() == action('Auth\AuthController@getIndex' ) )
                 <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg red_btn">Signup</a>
             @elseif( ! Auth::check() )
                 <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg red_btn">Signup</a>
                 <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg red_btn">Login</a>
             @else
-                <?php echo "Welcome ".Auth::user()->firstname. " ".Auth::user()->lastname ; ?> 
-                <a href="{{action('Auth\AuthController@getLogout')}}" class="btn btn-lg red_btn">Logout</a>
+            <?php echo "Welcome ".Auth::user()->firstname. " ".Auth::user()->lastname ; ?>
+            <?php $oUser = Auth::user()->UserTypes()->first(); 
+            $userType = $oUser->name;
+            if($userType == 'Providers')
+            {
+              $dashBoardLink = action('Users\PostsController@index');
+            }
+            elseif($userType == 'BabySitters')
+            {
+              $dashBoardLink = action('Users\BabySittersController@getIndex');
+            }
+            elseif($userType == 'SalesAgent')
+            {
+              $dashBoardLink = action('Users\SalesAgentController@index'); 
+            }
+            elseif($userType == 'SuperAdmin' || $userType == 'Admin')
+            {
+              $dashBoardLink = action('Admin\PostsController@index');  
+            }
+          ?><br>
+          <a href="{{ $dashBoardLink }}" class="">My Dashboard</a> | 
+                <!-- <a href="{{action('Auth\AuthController@getLogout')}}" class="btn btn-lg red_btn">Logout</a> -->
+                <a href="{{action('Auth\AuthController@getLogout')}}" class="">Logout</a>
             @endif
         </div> 
         <div class="header_search">

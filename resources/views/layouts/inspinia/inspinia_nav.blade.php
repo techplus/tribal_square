@@ -21,7 +21,7 @@
                     </ul> -->
                 
                 <div class="logo-element">
-                    IN+
+                    <!-- IN+ -->
                 </div>
             </li>            
             @if( $oUser->type == "Providers" )

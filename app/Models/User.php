@@ -163,8 +163,11 @@ class User extends Model implements AuthenticatableContract , CanResetPasswordCo
 			} )->whereHas( 'Bio' , function ( $t ) use ( $from_rate , $to_rate ) {
 				if ( !empty( $from_rate ) || !empty( $to_rate ) )
 					$t->where( function ( $t1 ) use ( $from_rate , $to_rate ) {
-						$t1->where( 'average_rate_from' , '>=' , $from_rate )
-							->where( 'average_rate_to' , '<=' , $to_rate );
+						$t1->whereBetween('average_rate_from', [$from_rate, $to_rate])
+							->whereBetween('average_rate_to', [$from_rate, $to_rate]);
+						
+						// $t1->where( 'average_rate_from' , '>=' , $from_rate )
+						// 	->where( 'average_rate_to' , '<=' , $to_rate );
 					} );
 
 			} );

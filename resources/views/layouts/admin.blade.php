@@ -115,6 +115,14 @@
 									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Archived" ) ? "active" : "" ) : "" }}'><a href="{{ route( 'admin.deals.index' ,['status'=>'archived'] ) }}">Archived</a></li>
 								</ul>
 							</li>
+							<li data-toggle="collapse" data-target="#submenu4" aria-expanded="true">
+								<a href="#">Contents</a>							
+								<ul class="nav collapse in sub-menu" id="submenu4" role="menu" aria-labelledby="btn-1" aria-expanded="true">									
+									<li><a href="{{ route('admin.privacy-policy.index') }}">Privacy Policy</a></li>
+									<li><a href="{{ route('admin.terms.index') }}">Terms</a></li>
+									<li><a href="{{ route( 'admin.refund-policy.index')}}">Refund Policy</a></li>
+								</ul>
+							</li>
 						</ul>
 					</nav>				
 		</nav>

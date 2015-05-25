@@ -1,22 +1,23 @@
 @extends($layout)
 @section('content')
-    <script>
-        // Stop carousel
-        $('.carousel').carousel({
-            interval: false
-        });
-    </script>
-    <style>
-        .highlight {
-            padding:10px;
-            background: #FAFAFA;
-            border: 1px solid #DFDFDF;
-            border-radius: 4px;
-        }
-    </style>
+<script>
+// Stop carousel
+$('.carousel').carousel({
+    interval: false
+});
+</script>
+<style>
+.highlight {
+    padding:10px;
+    background: #FAFAFA;
+    border: 1px solid #DFDFDF;
+    border-radius: 4px;
+}
+</style>
     @if( Auth::check() )
-        <link href="{{asset('/css/style.css')}}" rel="stylesheet">
-        <div class="panel panel-default">
+        @if(Request::segment(1) != "search") 
+            <link href="{{asset('/css/style.css')}}" rel="stylesheet">
+            <div class="panel panel-default">
             <div class="panel-heading">
                 Posts
                 <div class="pull-right" style="margin-top:-7px;">
@@ -44,10 +45,18 @@
                 <div class="row"> 
                     <div style="position:relative;width:100%;height:100%;">
                         <div style="position: absolute;opacity:0;width:100%;height:100%;z-index:1030;"></div>                                      
+        @endif 
+        @if(Request::segment(1) == "search")
+        <div class="row header_wrap new_header_wrap">    
+            @include('layouts.front_navbar')
+        </div>    
+        @endif                           
     @else
         <div class="page-wrap">
+            @if(Request::segment(1) == "search")
             <div class="row header_wrap new_header_wrap">
                 @include('layouts.front_navbar')
+            @endif    
     @endif
             <div class="page-content">
                 <div class="row">
@@ -145,12 +154,15 @@
 
                             </div>
 
-
-
-
                         </div>
                         
+                        @if(  Auth::check() )
+                            @if(Request::segment(1) == "search") 
+                                @include('layouts.front_sidebar')
+                            @endif    
+                        @else
                             @include('layouts.front_sidebar')
+                        @endif    
                         
 
                     </div>
@@ -159,6 +171,7 @@
         </div>        
         @if( Auth::check() )
             </div>
+            @if(Request::segment(1) != "search")
             <div class="row">
                 <div class="pull-right" style="margin-top:-7px;">
                     @if( $sStatus == "Archived" )
@@ -199,6 +212,7 @@
                     </div>           
                 </div>      
             </div>
+             @endif  
         @endif 
     </div>
     <div class="modal fade" id="contact_details">

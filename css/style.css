@@ -33,6 +33,11 @@
     src: url('../fonts/HelveticaNeueRoman.eot');
     src: url('../fonts/HelveticaNeueRoman.eot') format('embedded-opentype'), url('../fonts/HelveticaNeueRoman.woff2') format('woff2'), url('../fonts/HelveticaNeueRoman.woff') format('woff'), url('../fonts/HelveticaNeueRoman.ttf') format('truetype'), url('../fonts/HelveticaNeueRoman.svg#HelveticaNeueRoman') format('svg');
 }
+.categories_sidebar ul li a:hover
+{
+    background-color: #000 !important;
+    color: #fff !important;
+}
 /*Terms and condition css*/
 
 .terms_content_wrap h1,

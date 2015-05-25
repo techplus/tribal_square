@@ -139,7 +139,7 @@
         <div class="advert"></div>
       </div> */ ?>
       <div class="col-xs-12" style="color:#ac1919;font-weight:bold;"> 5% of our profit supports 
-        <a href="https://www.selfless4afric.org" target="_blank"> www.selfless4afric.org </a>
+        <a href="http://www.selfless4africa.org/" target="_blank">www.selfless4africa.org</a>
         ..S4A inspiring change in Africa  </div>
     </div>
 

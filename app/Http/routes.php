@@ -34,6 +34,9 @@ Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 	Route::resource('admin/administrators','Admin\AdminsController');
 	Route::resource('admin/settings','Admin\SettingController',['only'=>['index','update']] );
 	Route::resource('admin/sales-agents','Admin\AgentEarningsController');
+	Route::resource('admin/privacy-policy','Admin\PrivacypolicyController',['only'=>['index','update']] );
+	Route::resource('admin/terms','Admin\TermsController',['only'=>['index','update']] );
+	Route::resource('admin/refund-policy','Admin\RefundpolicyController',['only'=>['index','update']] );
 	//Route::controller('admin/sales-agents','Admin\AgentEarningsController');
 });
 

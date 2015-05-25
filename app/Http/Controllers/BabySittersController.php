@@ -39,7 +39,7 @@ class BabySittersController extends Controller {
 
 		$aSearch = session('search');
 		
-		$iLimit = 3;
+		$iLimit = 5;
 		$iOffset = 0;
 		
 		$aResp = $this->getBabysitters($iLimit,$iOffset,$aSearch);	

@@ -1,5 +1,4 @@
 @extends($layout)
-
 @section('content')
         <script>
             // Stop carousel
@@ -7,7 +6,9 @@
             interval: false
         });
     </script>
+
     @if(  Auth::check() )
+        @if(Request::segment(1) != "search") 
         <link href="{{asset('/css/style.css')}}" rel="stylesheet">
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -38,10 +39,20 @@
                 <div class="row"> 
                     <div style="position:relative;width:100%;height:100%;">
                         <div style="position: absolute;opacity:0;width:100%;height:100%;z-index:1030;"></div>                                       
+        @endif
+        @if(Request::segment(1) == "search")
+        <div class="row header_wrap new_header_wrap">    
+            @include('layouts.front_navbar')
+        </div>    
+        @endif    
     @else
         <div class="page-wrap">
+            @if(Request::segment(1) == "search")
             <div class="row header_wrap new_header_wrap">
                 @include('layouts.front_navbar')
+
+            @endif   
+            <!--    @include('layouts.front_navbar') -->
                 <style>
                     .error{
                         border:1px solid #ff0000;
@@ -164,18 +175,24 @@
                                 </div>
                             </div>
                         </div>
-
-                        @include('layouts.front_sidebar')
-
-
+                        @if(  Auth::check() )
+                            @if(Request::segment(1) == "search") 
+                                @include('layouts.front_sidebar')
+                            @endif    
+                        @else
+                            @include('layouts.front_sidebar')
+                        @endif    
 
                     </div>                 
                 </div>                  
-            </div>             
+            </div> 
+
         </div>
         @if( Auth::check() )
             </div>
+
             <div class="row">
+            @if(Request::segment(1) != "search")     
                 <div class="pull-right">
                             @if( $sStatus == "Archived" )
                                 <button class="btn btn-success action" data-status="approved" data-id="{{$deal->id}}">Approve</button>&nbsp;
@@ -214,6 +231,7 @@
                                 </div>
                             </div>                  
                 </div>
+            @endif    
             </div>
         @endif 
     </div>
