@@ -8,11 +8,11 @@
     <title>Tribal Square :: Home</title>
     <link href="{{asset('/css/bootstrap.min.css')}}" rel="stylesheet">
 
-    @if(Request::url() == url('/'))
-     
+    @if(Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy'))
+      <link href="{{asset('/css/style.css')}}" rel="stylesheet">
       <link href="{{asset('/css/style_home.css')}}" rel="stylesheet"> 
-    @else
       
+    @else
       <link href="{{asset('/css/style.css')}}" rel="stylesheet">
     @endif
     
@@ -93,14 +93,34 @@
         </div>
     @endif
 
-@if(Request::url() == url('/'))
+
+@if(Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') )
 <div class="row footer_wrap">
   <div class="container">
     <div class="footer_links">
       <a href="#">Contact</a> |
-      <a href="{{action('HomeController@getPrivacypolicy')}}">Privacy Policy</a> |
-      <a href="{{action('HomeController@getTerms')}}">Terms and Services</a> |
-      <a href="{{action('HomeController@getRefundpolicy')}}">Refund Policy</a> |
+      <?php
+      foreach( $aFooterData AS $fLink ) 
+      {    
+          if($fLink->id == '1')
+          {
+            $dashBoardLink = action('HomeController@getPrivacypolicy');
+          }
+          elseif($fLink->id == '2')
+          {
+            $dashBoardLink = action('HomeController@getTerms');
+          }
+          elseif($fLink->id == '3')
+          {
+            $dashBoardLink = action('HomeController@getRefundpolicy');
+          }
+         echo "<a href=$dashBoardLink>$fLink->content_title</a> | ";  
+      }
+      ?>
+      
+      <!-- <a href="{{action('HomeController@getTerms')}}">Terms and Services</a> |
+      <a href="{{action('HomeController@getRefundpolicy')}}">Refund Policy</a> | -->
+
       <a href="#">Blog</a> |
       <a href="#">Advertise with us</a>
     </div>

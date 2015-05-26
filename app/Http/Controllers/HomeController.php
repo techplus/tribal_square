@@ -4,6 +4,7 @@ use App\Models\ListingCategory;
 use Request;
 use DB;
 use App\Models\Deal;
+use App\Models\Content;
 use Image;
 
 class HomeController extends Controller {
@@ -27,6 +28,7 @@ class HomeController extends Controller {
 	public function __construct()
 	{		
 //		$this->middleware('auth');
+		$this->data['aFooterData'] = Content::all();
 	}
 
 	/**
@@ -36,6 +38,8 @@ class HomeController extends Controller {
 	 */
 	public function getIndex()
 	{
+		$this->data['aFooterData'] = Content::all();
+
 		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->approved()->future()->orderBy('is_deal_of_the_day','DESC')->orderBy('updated_at','DESC')->take(4)->get();
 
 		$this->data['body_class'] = 'home_page_body';
@@ -44,15 +48,27 @@ class HomeController extends Controller {
 
 	public function getTerms()
 	{
+		$this->data['aFooterData'] = Content::all();
+
+		$this->data['aFooterTerms'] = Content::find(2);
+
 		return $this->renderView('front.terms');
 	}
 
 	public function getRefundpolicy()
 	{
+		$this->data['aFooterData'] = Content::all();
+
+		$this->data['aFooterRefund'] = Content::find(3);
+
 		return $this->renderView('front.refundpolicy');
 	}
 	public function getPrivacypolicy()
 	{
+		$this->data['aFooterData'] = Content::all();
+
+		$this->data['aFooterPrivacy'] = Content::find(1);
+
 		return $this->renderView('front.privacypolicy');
 	}
 

@@ -43,7 +43,10 @@
          url('../fonts/HelveticaNeueLTComTh_0.ttf') format('truetype'),
          url('../fonts/HelveticaNeueLTComTh_0.svg#HelveticaNeueLTComTh_0') format('svg');
 }
+/*----- New -----------------*/
 
+
+/*----- New -----------------*/
 
 .privacy_content_wrap h1, .refund_policy_content_wrap h1, .terms_content_wrap h1 {
     color: #ac1919;

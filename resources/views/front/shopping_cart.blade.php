@@ -2,7 +2,7 @@
 @section('content')
 	<div class="page-wrap">
 		<div id="page-content-wrapper">
-			<div class="row header_wrap">
+			<div class="row header_wrap new_header_wrap">
 				@include('layouts.front_navbar')
 				<!-- Keep all page content within the page-content inset div! -->
 			      <div class="page-content">

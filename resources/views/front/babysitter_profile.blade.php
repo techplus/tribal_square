@@ -70,6 +70,7 @@
                 				</div>
                 				<div class="col-sm-3 col-xs-12">
 				                  <!-- Profile Pagination -->
+				                   
 				                  	@if( ! Auth::check() )
 				                	<div class="BabySitter_pageinfo">				                
 				                    	Profile {{ $iSequenceId }} out of {{ $iTotal }}
@@ -206,7 +207,7 @@
                         					</div>
                         					<div role="tabpanel" class="tab-pane custom_tab_pane" id="messages">
                         						@if( $oBabySitter->Availability )				                    	
-						                    		<h3 id="availability">{{ ucfirst($oBabySitter->firstname) }}'s Availability</h3>
+						                    		<h4 id="availability">{{ ucfirst($oBabySitter->firstname) }}'s Availability</h4>
 								                    <h5>My availability calendar is valid through {{ date('m/d/Y',strtotime($oBabySitter->Availability->schedule_valid_until)) }}
 							                        	<span class="pull-right">
 								                        <i class="green_dot">&nbsp;&nbsp;&nbsp;&nbsp;</i>
@@ -245,7 +246,7 @@
 					                			@endif
                         					</div>
                         					<div role="tabpanel" class="tab-pane custom_tab_pane" id="settings">
-                        					<h3 id="availability">{{ ucfirst($oBabySitter->firstname) }}'s Skills & Availabilities</h3>	
+                        					<h4 id="availability">{{ ucfirst($oBabySitter->firstname) }}'s Skills & Availabilities</h4>	
                         					<div class="col-sm-4">
 					                    	@if( $oBabySitter->Skill->languages_spoken != "" )
 					                        <h5>Languages Spoken:</h5>
@@ -298,7 +299,7 @@
 
                         					<div role="tabpanel" class="tab-pane custom_tab_pane" id="references">
 						                        @if( $oBabySitter->Skill->reference_name != "" OR  $oBabySitter->Skill->reference_name2 != "" ) 
-					                    			<h3> {{ ucfirst($oBabySitter->firstname) }}'s References</h3>				                 
+					                    			<h4> {{ ucfirst($oBabySitter->firstname) }}'s References</h4>				                 
 					                    		@endif   
 					                    		@if( $oBabySitter->Skill->reference_name != "" )				                    
 					                    			<div class="col-sm-4">{{ ucfirst($oBabySitter->Skill->reference_name) }} is a reference for {{ ucfirst($oBabySitter->firstname)." ".ucfirst(substr($oBabySitter->lastname,0,1))."." }}</div>

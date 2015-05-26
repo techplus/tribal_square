@@ -21,6 +21,7 @@ class Authenticate {
 	public function __construct(Guard $auth)
 	{		
 		$this->auth = $auth;
+
 	}
 
 	/**
@@ -32,6 +33,7 @@ class Authenticate {
 	 */
 	public function handle($request, Closure $next)
 	{
+		
 		if ($this->auth->guest())
 		{
 			if ($request->ajax())

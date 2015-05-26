@@ -5,6 +5,7 @@ use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use App\Models\User;
+use App\Models\Content;
 use Illuminate\Http\Request;
 
 class PasswordController extends Controller {
@@ -35,20 +36,27 @@ class PasswordController extends Controller {
 		$this->passwords = $passwords;
 
 		$this->middleware('guest');
+		
 	}
 
 	public function getIndex()
 	{
-		return $this->getEmail();
+		$this->data['aFooterData'] = Content::all();
+		
+		//return $this->getEmail();
+		return $this->renderView('auth.password');
 	}
 
 	public function postEmail(Request $request)
 	{
+		$this->data['aFooterData'] = Content::all();
+
 		$this->validate($request, ['email' => 'required|email']);
 
 		$user = User::where('email',$request->input('email'))->first();
 		$response = $this->passwords->sendResetLink($request->only('email'), function($m) use($user)
 		{
+			$this->data['aFooterData'] = Content::all();
 			$m->subject( ucfirst($user->firstname).", link to reset your TribalSquare password");
 		});
 

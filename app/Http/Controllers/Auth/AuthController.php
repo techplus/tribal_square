@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Config;
 use App\Models\User;
+use App\Models\Content;
 use Mail;
 use Hash;
 use Facebook\FacebookSession;
@@ -38,6 +39,8 @@ class AuthController extends Controller {
 	 */
 	public function __construct(Guard $auth, Registrar $registrar)
 	{
+		$this->data['aFooterData'] = Content::all();
+		
 		$this->auth = $auth;
 		$this->registrar = $registrar;
 			

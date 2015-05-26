@@ -11,6 +11,10 @@
 <script type="text/javascript" src="{{ asset('/js/admin/jquery-1.3.2.js') }}"></script>
 <link rel="stylesheet" href="{{ asset('/js/admin/jquery.wysiwyg.css') }}" type="text/css" />
 <script type="text/javascript" src="{{ asset('/js/admin/jquery.wysiwyg.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('/js/admin/wysiwyg.image.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/admin/wysiwyg.link.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/admin/wysiwyg.table.js') }}"></script>
   
     <div class="form-group alert alert-success" style="{{ (Session::has('success')) ? '' : 'display:none;' }}">  
         {{ Session::pull('success') }}
@@ -42,14 +46,14 @@
                     <div class="form-group inputwrap">
                         <label class="col-sm-4 control-label" style="text-align: left;">Title</label>
                         <div class="col-sm-8">
-                            <input type="text" name="content_title" id="content_title" class="cat-name form-control required" aria-required="true" value="{{ $aContentPrivacy['content_title'] }}">
+                            <input type="text" name="content_title" id="content_title" class="cat-name form-control required" aria-required="true" value="{{ $aContentPrivacy['content_title'] }}" readonly>
                         </div>
                     </div>
 
                     <div class="form-group inputwrap">
                         <label class="col-sm-4 control-label" style="text-align: left;">Description</label>
                         <div class="col-sm-8">
-                             <textarea class="form-control wysiwyg" rows="5" name="descriptions" id="descriptions">
+                             <textarea class="form-control wysiwyg" rows="5" name="descriptions" id="wysiwyg">
                                 {{ $aContentPrivacy['descriptions'] }}
                              </textarea>
                         </div>
@@ -118,18 +122,94 @@
             </div><!-- /.modal-content -->
 </div>
 
-<script>
+<script type="text/javascript">
 function hideSuccess($this)
 {
     $this.parents('.form-group').hide();
 }
-$(document).ready(function(){
-    $('.wysiwyg').wysiwyg();
+</script>
 
-    
-           
-});
-    </script>
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function() {
+        $('#wysiwyg').wysiwyg({
+          controls: {
+            bold          : { visible : true },
+            italic        : { visible : true },
+            underline     : { visible : true },
+            strikeThrough : { visible : true },
+            
+            justifyLeft   : { visible : true },
+            justifyCenter : { visible : true },
+            justifyRight  : { visible : true },
+            justifyFull   : { visible : true },
+
+            indent  : { visible : true },
+            outdent : { visible : true },
+
+            subscript   : { visible : true },
+            superscript : { visible : true },
+            
+            undo : { visible : true },
+            redo : { visible : true },
+            
+            insertOrderedList    : { visible : true },
+            insertUnorderedList  : { visible : true },
+            insertHorizontalRule : { visible : true },
+
+            h4: {
+                visible: true,
+                className: 'h4',
+                command: ($.browser.msie || $.browser.safari) ? 'formatBlock' : 'heading',
+                arguments: ($.browser.msie || $.browser.safari) ? '<h4>' : 'h4',
+                tags: ['h4'],
+                tooltip: 'Header 4'
+            },
+            h5: {
+                visible: true,
+                className: 'h5',
+                command: ($.browser.msie || $.browser.safari) ? 'formatBlock' : 'heading',
+                arguments: ($.browser.msie || $.browser.safari) ? '<h5>' : 'h5',
+                tags: ['h5'],
+                tooltip: 'Header 5'
+            },
+            h6: {
+                visible: true,
+                className: 'h6',
+                command: ($.browser.msie || $.browser.safari) ? 'formatBlock' : 'heading',
+                arguments: ($.browser.msie || $.browser.safari) ? '<h6>' : 'h6',
+                tags: ['h6'],
+                tooltip: 'Header 6'
+            },
+            
+            cut   : { visible : true },
+            copy  : { visible : true },
+            paste : { visible : true },
+            html  : { visible: true },
+            increaseFontSize : { visible : true },
+            decreaseFontSize : { visible : true },
+            exam_html: {
+                exec: function() {
+                    this.insertHtml('<abbr title="exam">Jam</abbr>');
+                    return true;
+                },
+                visible: true
+            }
+          },
+          events: {
+            click: function(event) {
+                if ($("#click-inform:checked").length > 0) {
+                    event.preventDefault();
+                    alert("You have clicked jWysiwyg content!");
+                }
+            }
+          }
+        });
+
+        $('#wysiwyg').wysiwyg("insertHtml", "");
+    });
+})(jQuery);
+</script>
     
   
 @endsection

@@ -276,7 +276,7 @@ input:focus {
 }
 
 .home_page_body {
-    background: url(../images/home_bg.jpg) no-repeat center 0;
+    /*background: url(../images/home_bg.jpg) no-repeat center 0;*/
     background-size: cover;
 }
 

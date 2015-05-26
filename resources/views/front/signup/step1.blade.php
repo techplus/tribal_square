@@ -1,10 +1,58 @@
 @extends('layouts.front')
-
 @section('content')
+ <div class="wrapper"> 
+  <div class="row">
+    <div class="container">
+      <div class="pull-left logo">
+        <a href="{{url('/')}}">
+          <img src="{{asset('/images/logo1.jpg')}}" alt="" class="img-responsive">
+        </a>
+        <span>...Connecting Africans abroad to African goods and services</span>
+      </div>
+      <div class="pull-right">
+        @if( ! Auth::check() )
+        <div class="topbtn col-sm-6 col-lg-12 col-xs-12">
+              <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg red_btn">Signup</a>
+              <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg red_btn">Login</a>
+        </div>
+        @else
+          <div class="topbtn col-sm-6 col-lg-12 col-xs-12" style="margin-top: 20px;font-weight: bold;">
+          <?php echo "Welcome ".Auth::user()->firstname. " ".Auth::user()->lastname ; ?> 
+          <?php $oUser = Auth::user()->UserTypes()->first(); 
+            $userType = $oUser->name;
+            if($userType == 'Providers')
+            {
+              $dashBoardLink = action('Users\PostsController@index');
+            }
+            elseif($userType == 'BabySitters')
+            {
+              $dashBoardLink = action('Users\BabySittersController@getIndex');
+            }
+            elseif($userType == 'SalesAgent')
+            {
+              $dashBoardLink = action('Users\SalesAgentController@index'); 
+            }
+            elseif($userType == 'SuperAdmin' || $userType == 'Admin')
+            {
+              $dashBoardLink = action('Admin\PostsController@index');  
+            }
+          ?><br>
+          <a href="{{ $dashBoardLink }}" class="">My Dashboard</a> |
+            <a href="{{action('Auth\AuthController@getLogout')}}" class="">Logout</a>
+          </div> 
+        @endif
+      </div>    
+      <a href="#" class="col-sm-4 col-lg-3 col-xs-12 pull-right text-center questions_top_btn">
+        <div>Discuss all things</div>
+        <p>Africa in the Forum</p>
+      </a>
+    </div>
+  </div> 
+
     <div class="page-wrap">
-    <div class="row header_wrap new_header_wrap">
-        @include('layouts.front_navbar')
-                   <div class="row">
+        <div class="row header_wrap new_header_wrap">
+            <!--  @include('layouts.front_navbar') -->
+            <div class="row">
                 <div class="container">
                     <div class="signin_box">
                         <h1>Sign up</h1>
@@ -73,7 +121,7 @@
                                 <div class="col-sm-11 col-xs-12 signup_chkbox {{ $errors->has('agreement') ? 'has-error' : '' }}">
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox" name="agreement" value="1"> I agree to the <a href="{{action('HomeController@getTerms')}}"> Terms of Use </a> and <a href="{{action('HomeController@getPrivacypolicy')}}"> Privacy Statement.</a>
+                                            <input type="checkbox" name="agreement" value="1"> I agree to the <a href="{{action('HomeController@getTerms')}}" target="_blank"> Terms of Use </a> and <a target="_blank" href="{{action('HomeController@getPrivacypolicy')}}"> Privacy Statement.</a>
                                         </label>
                                     </div>
                                 </div>
@@ -91,28 +139,42 @@
 
         </div>
     </div>
-    </div>
-    <script>
-        $(document).ready(function(){
-            if($('.signup_radio_btn input:radio[name="user_type"]:checked').val() == 4)
-            {
-              $('.paypalid').show();
-            }
-            else
-            {
-                $('.paypalid').hide();
-            }   
+<div class="push"></div>
+</div>
+<style type="text/css">
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+}
+.footer_wrap
+{
+    width: 100%;
+    float: left;
+}
 
+</style>
+    
+<script>
+$(document).ready(function(){
+    if($('.signup_radio_btn input:radio[name="user_type"]:checked').val() == 4)
+    {
+      $('.paypalid').show();
+    }
+    else
+    {
+        $('.paypalid').hide();
+    }   
 
-            $('.signup_radio_btn input:radio[name="user_type"]').change(function(){
-                if($(this).val() == '4'){
-                  $('.paypalid').show();
-                }
-                else
-                {
-                    $('.paypalid').hide();
-                }
-            });
-        });
-     </script>
+    $('.signup_radio_btn input:radio[name="user_type"]').change(function(){
+        if($(this).val() == '4'){
+          $('.paypalid').show();
+        }
+        else
+        {
+            $('.paypalid').hide();
+        }
+    });
+});
+ </script>
 @endsection

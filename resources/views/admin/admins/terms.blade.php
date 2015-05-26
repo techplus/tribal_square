@@ -11,11 +11,11 @@
 <link rel="stylesheet" href="{{ asset('/js/admin/jquery.wysiwyg.css') }}" type="text/css" />
 <script type="text/javascript" src="{{ asset('/js/admin/jquery.wysiwyg.js') }}"></script>
 
-    <script type="text/javascript">
-      $(function(){
-          $('.wysiwyg').wysiwyg();
-      });
-    </script>
+<script type="text/javascript" src="{{ asset('/js/admin/wysiwyg.image.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/admin/wysiwyg.link.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/admin/wysiwyg.table.js') }}"></script>
+
+
     <div class="form-group alert alert-success" style="{{ (Session::has('success')) ? '' : 'display:none;' }}">  
         {{ Session::pull('success') }}
         <span class="glyphicon glyphicon-remove pull-right" onclick="hideSuccess($(this));" style="cursor:pointer;"></span>     
@@ -46,14 +46,14 @@
                     <div class="form-group inputwrap">
                         <label class="col-sm-4 control-label" style="text-align: left;">Title</label>
                         <div class="col-sm-8">
-                            <input type="text" name="content_title" id="content_title" class="cat-name form-control required" aria-required="true" value="{{ $aContentTerms['content_title'] }}">
+                            <input type="text" name="content_title" id="content_title" class="cat-name form-control required" aria-required="true" value="{{ $aContentTerms['content_title'] }}" readonly>
                         </div>
                     </div>
 
                     <div class="form-group inputwrap">
                         <label class="col-sm-4 control-label" style="text-align: left;">Description</label>
                         <div class="col-sm-8">
-                             <textarea class="form-control wysiwyg" rows="5" name="descriptions" id="descriptions">
+                             <textarea class="form-control wysiwyg" rows="5" name="descriptions" id="wysiwyg">
                                 {{ $aContentTerms['descriptions'] }}
                              </textarea>
                         </div>
@@ -127,84 +127,88 @@ function hideSuccess($this)
 {
     $this.parents('.form-group').hide();
 }
-$(document).ready(function(){
-    $('.edit-category').on('click',function()
-    {  
-        var $this = $(this);
-        var id = $this.parents('tr').data('id');
-        var plan_name = $this.parents('tr').data('name');
-        var plan_amount = $(this).parents('tr').find('.plan-amount').val();
+</script>
 
-        if(plan_amount == "" || !$.isNumeric(plan_amount))
-        {
-          $(this).parents('tr').find('.plan-amount').css("border","1px solid #f00");
-          return false;
-        }
-        
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function() {
+        $('#wysiwyg').wysiwyg({
+          controls: {
+            bold          : { visible : true },
+            italic        : { visible : true },
+            underline     : { visible : true },
+            strikeThrough : { visible : true },
+            
+            justifyLeft   : { visible : true },
+            justifyCenter : { visible : true },
+            justifyRight  : { visible : true },
+            justifyFull   : { visible : true },
 
-       // alert(id);
-       // alert(plan_amount);
-        // $('#modal-plan').find('.plan-id').val(id);
-        // $('#modal-plan').find('.plan-amount').val(plan_amount);
-        // $('#modal-plan').find('h4').html('Edit ' + plan_name + ' Plan Amount');
-        // $('#modal-plan').find('.control-label').html('Amount');
-        // $('#modal-plan').modal('show');
-        $.ajax({
-                url : "{{ url('admin/settings') }}" + "/" + $this.parents('tr').data('id'),
-                type : "put",
-                data : {'id':id,'amount':plan_amount},
-               // dataType : "json",
-                success : function  (resp) {
-                       // console.log(resp.id);
-                        if( resp.id )
-                        {
-                           window.location.reload();
-                          // $('#modal-plan').modal('hide');   
-                        }
-                        else
-                        {
-                            
-                        }
+            indent  : { visible : true },
+            outdent : { visible : true },
+
+            subscript   : { visible : true },
+            superscript : { visible : true },
+            
+            undo : { visible : true },
+            redo : { visible : true },
+            
+            insertOrderedList    : { visible : true },
+            insertUnorderedList  : { visible : true },
+            insertHorizontalRule : { visible : true },
+
+            h4: {
+                visible: true,
+                className: 'h4',
+                command: ($.browser.msie || $.browser.safari) ? 'formatBlock' : 'heading',
+                arguments: ($.browser.msie || $.browser.safari) ? '<h4>' : 'h4',
+                tags: ['h4'],
+                tooltip: 'Header 4'
+            },
+            h5: {
+                visible: true,
+                className: 'h5',
+                command: ($.browser.msie || $.browser.safari) ? 'formatBlock' : 'heading',
+                arguments: ($.browser.msie || $.browser.safari) ? '<h5>' : 'h5',
+                tags: ['h5'],
+                tooltip: 'Header 5'
+            },
+            h6: {
+                visible: true,
+                className: 'h6',
+                command: ($.browser.msie || $.browser.safari) ? 'formatBlock' : 'heading',
+                arguments: ($.browser.msie || $.browser.safari) ? '<h6>' : 'h6',
+                tags: ['h6'],
+                tooltip: 'Header 6'
+            },
+            
+            cut   : { visible : true },
+            copy  : { visible : true },
+            paste : { visible : true },
+            html  : { visible: true },
+            increaseFontSize : { visible : true },
+            decreaseFontSize : { visible : true },
+            exam_html: {
+                exec: function() {
+                    this.insertHtml('<abbr title="exam">Jam</abbr>');
+                    return true;
+                },
+                visible: true
+            }
+          },
+          events: {
+            click: function(event) {
+                if ($("#click-inform:checked").length > 0) {
+                    event.preventDefault();
+                    alert("You have clicked jWysiwyg content!");
                 }
-            });
-        
+            }
+          }
+        });
 
+        $('#wysiwyg').wysiwyg("insertHtml", "");
     });
-    $('#frmPlan').on('submit',function(e){
-                e.preventDefault();
-    })
-
-    $('#frmPlan').validate({
-                rules:{},
-                submitHandler:function()
-                {
-                    if( $('#modal-plan').find('.plan-id').val().length > 0 )
-                    {
-                        $.ajax({
-                            url : "{{ url('admin/settings') }}" + "/" + $('#modal-plan').find('.plan-id').val(),
-                            type : "put",
-                            data : $('#frmPlan').serialize(),
-                            dataType : "json",
-                            success : function  (resp) {
-                                    console.log(resp.id);
-                                    if( resp.id )
-                                    {
-                                       window.location.reload();
-                                       $('#modal-plan').modal('hide');   
-                                    }
-                                    else
-                                    {
-                                        
-                                    }
-                            }
-                        });
-                    }
-                    return false;
-                }
-            });
-           
-});
-    </script>
-    
+})(jQuery);
+</script>
   
 @endsection

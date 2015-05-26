@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use App\Models\SubscriptionPlan;
 use App\Models\User;
+use App\Models\Content;
 use Auth;
 use Facebook\FacebookRedirectLoginHelper;
 use Facebook\FacebookSession;
@@ -14,6 +15,8 @@ class RegisterController extends Controller
 {
 	public function __construct()
 	{
+		$this->data['aFooterData'] = Content::all();
+
 		$this->middleware('auth',['except'=>['getIndex','postIndex']]);
 
 		session_start ();

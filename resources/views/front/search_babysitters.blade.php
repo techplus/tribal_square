@@ -170,7 +170,7 @@
                     </div>
                   @endif
                   <div class="row">
-                        <div class="bottom_advrt" align="center">
+                        <div class="bottom_advrt" align="center" style="margin-top: 50px;">
                           <img class="img-responsive" alt="" src="http://placehold.it/1170x160">
                         </div>
                     </div>

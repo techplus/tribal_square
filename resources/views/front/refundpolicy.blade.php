@@ -7,26 +7,53 @@
         <a href="{{url('/')}}">
           <img src="{{asset('/images/logo1.jpg')}}" alt="" class="img-responsive">
         </a>
+        <span>...Connecting Africans abroad to African goods and services</span>
       </div>
-      
+      <div class="pull-right">
+        @if( ! Auth::check() )
+        <div class="topbtn col-sm-6 col-lg-12 col-xs-12">
+              <a href="{{action('Auth\RegisterController@getIndex')}}" class="btn btn-lg red_btn">Signup</a>
+              <a href="{{action('Auth\AuthController@getIndex')}}" class="btn btn-lg red_btn">Login</a>
+        </div>
+        @else
+          <div class="topbtn col-sm-6 col-lg-12 col-xs-12" style="margin-top: 20px;font-weight: bold;">
+          <?php echo "Welcome ".Auth::user()->firstname. " ".Auth::user()->lastname ; ?> 
+          <?php $oUser = Auth::user()->UserTypes()->first(); 
+            $userType = $oUser->name;
+            if($userType == 'Providers')
+            {
+              $dashBoardLink = action('Users\PostsController@index');
+            }
+            elseif($userType == 'BabySitters')
+            {
+              $dashBoardLink = action('Users\BabySittersController@getIndex');
+            }
+            elseif($userType == 'SalesAgent')
+            {
+              $dashBoardLink = action('Users\SalesAgentController@index'); 
+            }
+            elseif($userType == 'SuperAdmin' || $userType == 'Admin')
+            {
+              $dashBoardLink = action('Admin\PostsController@index');  
+            }
+          ?><br>
+          <a href="{{ $dashBoardLink }}" class="">My Dashboard</a> |
+            <a href="{{action('Auth\AuthController@getLogout')}}" class="">Logout</a>
+          </div> 
+        @endif
+      </div>    
       <a href="#" class="col-sm-4 col-lg-3 col-xs-12 pull-right text-center questions_top_btn">
         <div>Discuss all things</div>
         <p>Africa in the Forum</p>
       </a>
     </div>
-</div>  
+</div> 
 
-<div class="row refund_policy_content_wrap">
-        <h1>Refund Policy</h1>
-        <h3 class="col-xs-10 col-xs-offset-1">Membership Subcriptions</h3>
-        <p class="col-xs-10 col-xs-offset-1">
-            There are no refunds on membership subscriptions, application fees or program fees. Once TribalSquare has received payment for a subscription term, you are granted full access to either the TribalDeals, TribalListings and TribalSitter sites, based on your selection and term. Paid subscriptions cannot be put on hold and "banked" for use at a later time. If you deactivate your profile or cancel your account, your subscription term will still expire based on the number of consecutive calendar days from the date your most recent subscription or renewal term took effect. TribalSquare does not provide a pro-rated refund for unused subscription terms. Membership subscriptions, application fees and program fees are final.
-        </p>
-        <h3 class="col-xs-10 col-xs-offset-1">TribalDeals</h3>
-        <p class="col-xs-10 col-xs-offset-1">
-            If you used a Local TribalDeal voucher or coupon before its promotional value expired, and were disappointed by your experience, contact us within fourteen days of your voucher or coupon use, and tell us about it. We’ll work with you to make it right.
-        </p>
-    </div>
+<?php 
+//echo $aFooterPrivacy['content_title'];
+echo $aFooterRefund['descriptions'];
+    
+?>
 
 <div class="push"></div> <!-- Add for Sticky Footer -->
 </div> <!-- Wrapper End -->

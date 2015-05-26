@@ -94,7 +94,7 @@
                                                 </div>
                                                 <div class="separator">
                                                     <p class="btn-add strike_through"><span
-                                                                style="float:left; text-transform:none;">{{ ( strlen( $oDeal->city ) > 30 ) ? substr($oDeal->city,0,30)."..." : $oDeal->city }}</span>${{$oDeal->original_price}}
+                                                                style="float:left; text-transform:none;">{{ ( strlen( $oDeal->city ) > 10 ) ? substr($oDeal->city,0,9)."..." : $oDeal->city }}</span>${{$oDeal->original_price}}
                                                     </p>
 
                                                     <p class="btn-details">${{$oDeal->new_price}}
@@ -151,7 +151,7 @@
                                             <div class="clearfix"></div>
                                         </div>
                                         <div class="separator">
-                                            <p class="btn-add strike_through"><span style="float:left; text-transform:none;">{{ ( strlen( $oDeal->city ) > 30 ) ? substr($oDeal->city,0,30)."..." : $oDeal->city }}</span>${{$oDeal->original_price}}</p>
+                                            <p class="btn-add strike_through"><span style="float:left; text-transform:none;">{{ ( strlen( $oDeal->city ) > 10 ) ? substr($oDeal->city,0,9)."..." : $oDeal->city }}</span>${{$oDeal->original_price}}</p>
                                             <p class="btn-details">${{$oDeal->new_price}} <!-- -{{$oDeal->discount_percentage}}% --></p>
                                         </div>
                                         <div class="clearfix">
