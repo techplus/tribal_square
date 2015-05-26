@@ -1,7 +1,7 @@
 {{--<div class="container">--}}
     <div class="col-xs-12">
         <div class="logo">
-            @if( Request::segment(2) == "deals" )
+            @if( Request::segment(2) == "deals" || Request::segment(1) == "shopping-cart")
                 <a href="{{url('/')}}">
                     <img src="{{asset('/images/TSDeals_Logo.jpg')}}" height="41" alt="" class="img-responsive">
                 </a>
