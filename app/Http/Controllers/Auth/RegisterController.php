@@ -62,8 +62,11 @@ class RegisterController extends Controller
 		}
 		
 		//$aRegisterData['password'] = Hash::make($aRegisterData['password']); removed because added in user model
+		$aRegisterData['verfication_code'] = str_random(100);
 		$oUser = User::create($aRegisterData);
-
+		Mail::send('emails.verification',['user'=>$oUser],function($message) use($oUser){
+			$message->to($oUser->email,$oUser->firstname." ".$oUser->lastname);
+		});
 		if($request->input('user_type') != 4)
 		{
 			$oUser->UserTypes()->attach($request->input('user_type'));
@@ -131,6 +134,14 @@ class RegisterController extends Controller
 
 	public function getStep2()
 	{
+		if( Request::has('code') )
+		{
+			if( Auth::user()->verfication_code == Request::input('code') )
+			{
+				Auth::user()->verification_code = null;
+				User::where('id',Auth::user()->id)->update(['verfication_code'=>null]);
+			}
+		}
 		$this->data['plan'] = SubscriptionPlan::where('role_id',Auth::user()->UserTypes()->first()->id)->where('post_type','monthly')->first();
 		return $this->renderView('front.signup.step2');
 	}
