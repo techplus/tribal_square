@@ -118,7 +118,7 @@ class AuthController extends Controller {
 			$oUser->verfication_code = $code;
 			User::where('id',$oUser->id)->update(['verfication_code'=>$code]);
 			Mail::send('emails.verification',['user'=>$oUser],function($message) use($oUser){
-				$message->to($oUser->email,$oUser->firstname." ".$oUser->lastname);
+				$message->to($oUser->email,$oUser->firstname." ".$oUser->lastname)->subject('Verification Link Tribal square');
 			});
 		}
 		return redirect()->action('Auth\RegisterController@getStep2')->with('success','Link sent successfully!');
