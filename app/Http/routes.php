@@ -61,7 +61,10 @@ Route::group(['middleware'=>['auth.babysitters','payment']],function(){
 
 Route::group(['middleware'=>['auth.salesagnet']],function(){
 	Route::resource('sales-agents','Users\SalesAgentController',['only'=>['index','update']]);
+	Route::controller('sales-agents','Users\SalesAgentController');
 });
+
+
 
 // Route::group( ['middleware' => ['guest'] ], function() {
 	
