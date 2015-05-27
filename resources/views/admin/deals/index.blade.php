@@ -78,6 +78,7 @@
              $('tr[data-id='+$id+']').remove();
              $('#confirmation_modal' ).modal('hide');
         }
+
         $(document).ready(function(){
             @include('admin.deals.scripts')
             $('.deal_of_the_day' ).on('change',function(){

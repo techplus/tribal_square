@@ -118,11 +118,11 @@
                             <div class="form-inline">
                                 <div class="form-group col-xs-6">
                                     <label for="exampleInputName2">From</label>
-                                    <input type="text" class="form-control" style="width: 50%;" name="from_rate">
+                                    <input type="text" class="form-control" style="width: 50%;" name="from_rate" value="<?php if(isset($aSearch['from_rate'])) { echo $aSearch['from_rate']; }  ?>">
                                 </div>
                                 <div class="form-group col-xs-6">
                                     <label for="exampleInputName2">To</label>
-                                    <input type="text" class="form-control" style="width: 50%;" name="to_rate">
+                                    <input type="text" class="form-control" style="width: 50%;" name="to_rate" value="<?php if(isset($aSearch['to_rate'])) { echo $aSearch['to_rate']; }  ?>">
                                 </div>
                                 <div class="clearfix"></div>
                             </div>

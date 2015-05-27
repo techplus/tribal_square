@@ -34,6 +34,10 @@ class Deal extends Model{
 	{
 		return $query->where('is_approved_by_admin',1);
 	}
+	public function scopeDealoftheday($query)
+	{
+		return $query->where('is_deal_of_the_day',1);
+	}
 	public function scopeFuture($query)
 	{
 		return $query->where('end_date','>',date('Y-m-d'));

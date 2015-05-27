@@ -5,101 +5,122 @@
     <div class="page-wrap">
         <div class="row header_wrap new_header_wrap">
             @include('layouts.front_navbar')
-            <div class="page-content">
-                <div class="row">
-                    <div class="clasiffied_top">
-                        <div class="col-sm-12">
-                            <a href="#" class="btn btn-sm custome_blue_btn">
-                                <span class="glyphicon glyphicon-floppy-disk" style="color:#fff; font-size:12px;"></span> Save Search
-                            </a>
-                            <a href="#" class="btn btn-sm custome_blue_btn">
-                                <span class="glyphicon glyphicon-envelope" style="color:#fff; font-size:12px;"></span> E-mail Alert
-                            </a>
-                            <form class="form-inline">
-                                <div class="form-group">
-                                    <input type="text" class="form-control col-sm-12" placeholder="Search">
-                                </div>
-                                <button type="submit" class="btn btn-default">Submit</button>
-                            </form>
-                        </div>
-                        @forelse( $classifieds AS $category=>$items)
-                        <div class="row">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <h3 style="float:left;">{{$category}}</h3>
-                                    <!-- Controls -->
-                                    <div class="controls pull-right" style="margin-bottom: 10px;">
-                                        <a style="margin:0;" class="left glyphicon glyphicon-triangle-right btn btn-success" href="#{{$category}}"
-                                           data-slide="prev"></a>
-                                        <a style="margin:0;" class="right glyphicon glyphicon-triangle-left btn btn-success" href="#{{$category}}"
-                                           data-slide="next"></a>
-                                    </div>
-                                </div>
+            
+            <?php $search = session('search'); ?>
+            @if( $search['cat'] == '' )
+                
+            <div class="row all_service_wrap">
+                <h1 class="col-xs-12 custom_heading_top">Category</h1>
+                @if( isset( $subcategories ) AND $subcategories->count() > 0 )
+                    @foreach($subcategories as $category)
+                    <?php
+                        if($category->name == 'African Restaurants')
+                          {
+                            $imgLink = url('images/restaurant.png');
+                          }
+                          elseif($category->name == 'African Caterers')
+                          {
+                            $imgLink = url('images/catering.png');
+                          }
+                          elseif($category->name == 'African Entertainers/dj')
+                          {
+                             $imgLink = url('images/entertainers.png');
+                          }
+                          elseif($category->name == 'African tailors')
+                          {
+                             $imgLink = url('images/restaurant.png');
+                          }
+                          elseif($category->name == 'Hair Braiding')
+                          {
+                             $imgLink = url('images/img-5.png');
+                          }
+                          elseif($category->name == 'Fashion Jewellery')
+                          {
+                             $imgLink = url('images/img-6.png');
+                          }
+                          elseif($category->name == 'African Store')
+                          {
+                             $imgLink = url('images/img-7.png');
+                          }
+                          elseif($category->name == 'Churches / Groups')
+                          {
+                             $imgLink = url('images/img-8.png');
+                          }
+                          elseif($category->name == 'Upcoming African Events')
+                          {
+                             $imgLink = url('images/img-9.png');
+                          }
+                          elseif($category->name == 'Import / Export Shipping')
+                          {
+                             $imgLink = url('images/img-10.png');
+                          }
+                          elseif($category->name == 'Immigration Lawyers')
+                          {
+                             $imgLink = url('images/img-11.png');
+                          }
+                          elseif($category->name == 'Arts & Crafts')
+                          {
+                             $imgLink = url('images/img-12.png');
+                          }
+                          else
+                          {
+                            $imgLink = url('images/restaurant.png');
+                          }
+                    ?>
+                    <div class="col-xs-6 col-sm-4 service-wrapper">
+                        <a class="linkcolor" href="{{ route('search.categories.show',[ $category->id ]) }}?type=classified">
+                        <!-- <a class="linkcolor" href="{{ route('search.classified.show',[ $category->id ]) }}?type=classified"> -->
+                        <img class="img-responsive" src="{{$imgLink}}">
+                            <div class="description">
+                                <h4>{{ $category->name }}</h4>  
                             </div>
-                            <div id="{{$category}}" class="carousel slide" data-ride="carousel">
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner">
-                                    <?php $counter = 1; ?>
-                                    @foreach( array_chunk($items,4) as $key=>$chunk)
-                                    <div class="item {{$counter++ == 1 ? 'active' : ''}}">
-                                        <div class="row">
-                                            @foreach( $chunk AS $key=>$item )
-                                                
-                                            <div class="col-sm-3 col-xs-6">
-                                                <div class="col-item">
-                                                    <div class="photo">
-                                                        <a href="{{route('search.classified.show',[$item->id])}}" style="margin-left:0;width:100%;">                                                            
-                                                            <?php /*<div class="user-image" style="height:260px;width:364px;position:relative;">                                                                
-                                                                <?php
-                                                                    $oItemImages = $item->ClassifiedImages();
-                                                                    $image = ( $item->ClassifiedImages->count() > 0 ) ? $item->ClassifiedImages->first()->image_path : ( $oItemImages->count() ? $oItemImages->first()->image_path : url('images/no_imgae.png'));
-                                                                    $path =  ( $item->ClassifiedImages->count() > 0 ) ? base_path('uploads/'.pathinfo($item->ClassifiedImages->first()->image_path,PATHINFO_BASENAME)) : ( $oItemImages->count() ? base_path('uploads/'.pathinfo($oItemImages->first()->image_path,PATHINFO_BASENAME)) : base_path('images/no_image.png') );
-                                                                    echo getImage($image,364,260,$path,true);
-                                                                ?>
-                                                            </div>*/ ?>
-                                                            <?php
-                                                                    $oItemImages = $item->ClassifiedImages();
-                                                            ?>
-                                                            <img style="max-width:350px;height: 260px;" src="{{ Image::url(( $item->ClassifiedImages->count() > 0 ) ? $item->ClassifiedImages->first()->image_path : ( $oItemImages->count() ? $oItemImages->first()->image_path : url('images/no_imgae.png')),350,260) }}" class="img-responsive" alt="{{$item->title}}" />
-                                                        </a>
-                                                    </div>
-                                                    <div class="info" style="text-align: left;">
-                                                        <div class="row">
-                                                            <div class="price col-md-12" style="height:40px;">
-                                                                <a href="{{route('search.classified.show',[$item->id])}}" style="margin-left:0;width:100%;">
-                                                                    <h5 class="pro_title" style="text-indent: 0;">                                                                    
-                                                                            {{ ( strlen( $item->title ) > 50 ) ? substr($item->title,0,50)."..." : $item->title }}                                                                    
-                                                                    </h5>
-                                                                </a>
-                                                            </div>
-                                                            <div class="price col-md-7">
-                                                                <h5 class="price-text-color clasiffied_price" style="text-indent: 0;">${{$item->price}}</h5>
-                                                            </div>
-                                                            <div class="rating col-md-5">
-                                                                <i class="price-text-color glyphicon glyphicon-star"></i><i class="price-text-color glyphicon glyphicon-star">
-                                                                </i><i class="price-text-color glyphicon glyphicon-star"></i><i class="price-text-color glyphicon glyphicon-star">
-                                                                </i><i class="glyphicon glyphicon-star"></i>
-                                                            </div>
-                                                        </div>
-                                                        <div class="clearfix">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                               
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                            @empty
-                                <h1 class="text-center">No matching classified found!</h1>
-                        @endforelse
+                        </a>
+                    </div>
+                   @endforeach
+                @endif   
+            </div>
+            
+            <div class="row post_need_container" align="center">
+                <div class="col-xs-12 col-sm-4 col-sm-offset-4 service-wrapper">
+                    <img src="{{url('images/banner.png')}}" class="img-responsive">
+                    <div class="description">
+                      <a href="#"><h4>post your need</h4></a>  
                     </div>
                 </div>
             </div>
+            <div class="row post_need_container profit_content">
+                5% of our profit supports <a href="http://www.selfless4africa.org/" target="_blank">www.selfless4africa.org</a> ..S4A inspiring change in Africa
+            </div> 
+           
+            @else
+                
+                @include('front.search_classified_items')
+
+            @endif                
+            
+            
+
         </div>
     </div>
 @stop
+
+<style>
+    html, body {
+        height: 100%;
+    }
+    .page-wrap {
+      min-height: 100%;
+      /* equal to footer height */
+        margin-bottom: -49px; 
+    }
+    .page-wrap:after {
+      content: "";
+      display: block;
+    }
+    .footer_wrap, .page-wrap:after {
+        height: 49px; 
+    }
+    .footer_wrap {
+      background: orange;
+    }
+</style>

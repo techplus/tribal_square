@@ -118,9 +118,9 @@
 							<li data-toggle="collapse" data-target="#submenu4" aria-expanded="true">
 								<a href="#">Contents</a>							
 								<ul class="nav collapse in sub-menu" id="submenu4" role="menu" aria-labelledby="btn-1" aria-expanded="true">									
-									<li><a href="{{ route('admin.privacy-policy.index') }}">Privacy Policy</a></li>
-									<li><a href="{{ route('admin.terms.index') }}">Terms</a></li>
-									<li><a href="{{ route( 'admin.refund-policy.index')}}">Refund Policy</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "privacy-policy" ) ? "active" : "" }}'><a href="{{ route('admin.privacy-policy.index') }}">Privacy Policy</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "terms" ) ? "active" : "" }}'><a href="{{ route('admin.terms.index') }}">Terms</a></li>
+									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "refund-policy" ) ? "active" : "" }}'><a href="{{ route( 'admin.refund-policy.index')}}">Refund Policy</a></li>
 								</ul>
 							</li>
 						</ul>

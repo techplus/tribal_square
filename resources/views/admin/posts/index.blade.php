@@ -14,7 +14,7 @@
                             <th style="width:35%;text-align:center;">Actions</th>
 						</thead>
 						<tbody>
-							@foreach( $aPosts AS $oPost )
+                            @foreach( $aPosts AS $oPost )
 								<tr data-id="{{ $oPost->id }}">
 									<td><a href="{{ route('admin.posts.show',[ $oPost->id ]) }}">{{ $oPost->title }}</a></td>
 									<td>{{ $oPost->ListingCategory->name }}</td>

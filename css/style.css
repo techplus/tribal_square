@@ -1924,6 +1924,98 @@ div.user-menu div.user-menu-content:not(.active) {
 .nav-tabs li a {
     text-align: center;
 }
+
+/*==  African deals and service css  ==*/
+
+.search_bar_control{
+    border:1px solid gray;
+}
+.m-top-20{
+    margin-top:20px; 
+}
+.m-none{
+    margin: 0;
+}
+.p-tb-2_lr-5{
+    padding: 2px 5px;
+}
+
+.search_bar .col-xs-2{
+    padding: 0px 5px;
+    vertical-align: center;
+}
+
+button#search_need{
+    width: 100% !important;
+    height: 100%;
+    background-color: #AB1919;
+    color: white;
+    border: none;
+    padding: 12px;
+}
+input#need{
+    border-right:1px solid gray !important;
+    border-radius: 0;
+}
+input#need,
+input#location{
+    margin: 0;
+    padding: 5px 0;
+    background:transparent;
+    border: none;
+    box-shadow: none;
+}
+
+h1.custom_heading_top{
+  border:none; 
+}
+.all_service_wrap.row,
+.post_need_container.row{
+    padding: 15px;
+}
+
+.service-wrapper {
+    max-width: 100%;
+}
+
+.service-wrapper img {
+    width: 100%;
+}
+
+.description {
+    background-color: #E8E7E3;
+    text-transform: uppercase;
+    border:1px solid #cfcabe;
+}
+.description h4{
+    margin: 0;
+    padding: 20px;
+    font-family: 'HelveticaNeueLTComTh_0';
+}
+.post_need_container .description{
+    background-color: #AB1919;
+    border:1px solid #cfcabe;
+    text-align: center;
+}
+.description a{
+    text-decoration: none;
+}
+.description a h4{
+    color: white;
+    padding: 10px;
+    font-family: 'HelveticaNeueLTStdMd';
+}
+.service-wrapper.col-xs-6,
+.service-wrapper.col-sm-4,
+.post_need_container.col-sm-4,
+.post_need_container.col-xs-12 {
+    padding: 15px;
+}
+.profit_content{
+    font-size: 18px;
+    color: #AB1919;
+    padding: 10px 20px;
+}
 /* ================================================== */
 /* #Media Queries */
 /* ================================================== */
@@ -1949,6 +2041,9 @@ div.user-menu div.user-menu-content:not(.active) {
         position: relative;
         float: left;
         margin: 10px 0;
+    }
+    .description h4 {
+        font-size: 18px;
     }
 }
 
@@ -1986,6 +2081,9 @@ div.user-menu div.user-menu-content:not(.active) {
     h1 {
         font-size: 30px;
     }
+    .description h4 {
+        font-size: 15px;
+    }
 }
 
 @media only screen and (max-width: 990px) {
@@ -2005,6 +2103,9 @@ div.user-menu div.user-menu-content:not(.active) {
     }
     .custom_price h5 {
         font-size: 15px !important;
+    }
+    .description h4 {
+        font-size: 12px;
     }
 }
 
@@ -2148,6 +2249,9 @@ div.user-menu div.user-menu-content:not(.active) {
     .remove_clearfix {
         float: left;
     }
+    .description h4 {
+        font-size: 14px;
+    }
 }
 
 @media only screen and (max-width: 634px) {
@@ -2187,6 +2291,10 @@ div.user-menu div.user-menu-content:not(.active) {
         font-size: 14px;
         padding: 2px 5px;
         right: 0;
+    }
+    .description h4 {
+        font-size: 12px;
+        padding: 20px 5px;
     }
 }
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
@@ -2262,6 +2370,25 @@ div.user-menu div.user-menu-content:not(.active) {
     } 
     .col-xs-6 {
         width: 100%;
+    }
+    .description h4 {
+        font-size: 14px;
+        padding: 20px;
+    }
+    input#need{
+        border-right:none!important;
+        border-bottom : 1px solid gray;
+    }
+    .search_bar_control{
+        width: 100%;
+    }
+    .search_need_wrapper{
+        width: 100%;
+    }
+    button#search_need{
+        margin-top: 10px;
+        width: 20% !important;
+        margin-left: 40%;
     }
 }
 

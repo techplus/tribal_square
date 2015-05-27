@@ -72,7 +72,8 @@
 				                  <!-- Profile Pagination -->
 				                   
 				                  	@if( ! Auth::check() )
-				                	<div class="BabySitter_pageinfo">				                
+				                	<div class="BabySitter_pageinfo">
+				                					                
 				                    	Profile {{ $iSequenceId }} out of {{ $iTotal }}
 				                    	<a href="{{ action('BabySittersController@show', [ $iNextId ])  }}">
 				                    		<button class="btn btn-default btn-sm" type="button">
@@ -82,8 +83,8 @@
 				                	</div>
 				                	@else
 				                	@if(Request::segment(1) == "search")
-				                	<div class="BabySitter_pageinfo">				                
-				                    	Profile {{ $iSequenceId }} out of {{ $iTotal }}
+				                	<div class="BabySitter_pageinfo">
+				                		Profile {{ $iSequenceId }} out of {{ $iTotal }}
 				                    	<a href="{{ action('BabySittersController@show', [ $iNextId ])  }}">
 				                    		<button class="btn btn-default btn-sm" type="button">
 				                    			<span aria-hidden="true" class="glyphicon glyphicon-menu-right"></span>

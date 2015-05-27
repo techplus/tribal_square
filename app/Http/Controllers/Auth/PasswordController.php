@@ -49,7 +49,7 @@ class PasswordController extends Controller {
 
 	public function postEmail(Request $request)
 	{
-		$this->data['aFooterData'] = Content::all();
+		//$this->data['aFooterData'] = Content::all();
 
 		$this->validate($request, ['email' => 'required|email']);
 

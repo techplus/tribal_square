@@ -76,9 +76,15 @@
       </div>
       @endif
       <div class="col-sm-8 deal_banner_wrap">
-        <a href="#">
+        <a class="dealLink" href="#">
           <img src="images/deal_banner.jpg" alt="" class="img-responsive">
         </a>
+        <div class="banner_info" style="bottom: 50px; position: absolute;right: 0;"> 
+          <div class="info_wrapper col-xs-12 view_dealbtn">
+              <a class="btn btn-lg custome_blue_btn view_deal" href="http://localhost/tribal_square/search/deals/50">View
+                  Deal</a>
+          </div>
+        </div>
       </div>
     </div>
 </div>
@@ -214,7 +220,9 @@
         var imgPath = $this;
         $(this).data('link');
 
+        var btnLink = $('.dealLink').attr('href');
         $('.deal_banner_wrap img').attr('src', imgPath);
+        $('.view_deal').attr('href', btnLink);
     }
     $(document).ready(function(){
         $('.searchType').on('click',function() {

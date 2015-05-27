@@ -9,34 +9,37 @@
                     <div class="demo col-xs-12 col-sm-12 col-md-9 col-lg-9 pull-right">
                         <div class="clearfix"></div>
                         @include('front.getimage')
+                        
+                        <?php // dd($aLatestDealsoftheDay); ?>
+                        
+                        <!-- Latest Deal of the Day  -->
+
                         <div class="col-sm-12 all_deal_box_wrap remove_clearfix">
+                             @if( $aLatestDealsoftheDay->count() <= 0 )
+                                
+                             @else    
                             <h1>Recommended Deals for you</h1>
-                            @if( $oDeals->isEmpty() )
-                                <h3>No deal found!</h3>
-                            @else
-                                <?php $counter = 0; ?>
-                                @foreach( $oDeals AS $deal )
-                                    @if( $counter == 1 ) <?php break; ?> @endif
-                                    @if( $counter == 0 )
-                                        <?php $counter ++; ?>
-                                        @if( $deal->DealImages->count() > 0 )
+                                @foreach( $aLatestDealsoftheDay as $oDeal )
+                               
+                                   
+                                        @if( $oDeal->DealImages->count() > 0 )
                                             <div class="col-xs-12 banner_wrapper">
-                                                <img src="{{Image::url($deal->DealImages->first()->image_path,981,300)}}"
+                                                <img src="{{Image::url($oDeal->CoverPic->first()->image_path,981,300)}}"
                                                      alt="" class="img-responsive">
 
                                                 <div class="banner_info">
                                                     <div class="info_wrapper col-xs-12">
-                                                        <h4 class="title">{{$oDeals->first()->title}} </h4>
+                                                        <h4 class="title">{{$oDeal->title}} </h4>
 
                                                         <p class="city"><span
-                                                                    class="glyphicon glyphicon-map-marker"></span> {{$oDeals->first()->city}}
+                                                                    class="glyphicon glyphicon-map-marker"></span> {{$oDeal->city}}
                                                         </p>
 
                                                         <p class="pricing"><span
-                                                                    class="strike_through">${{$oDeals->first()->original_price}}</span>
-                                                            From ${{$oDeals->first()->new_price}}</p>
+                                                                    class="strike_through">${{$oDeal->original_price}}</span>
+                                                            From ${{$oDeal->new_price}}</p>
                                                         <a class="btn btn-lg custome_blue_btn view_deal"
-                                                           href="{{route('search.deals.show',[$oDeals->first()->id])}}">View
+                                                           href="{{route('search.deals.show',[$oDeal->id])}}">View
                                                             Deal</a>
                                                     </div>
                                                 </div>
@@ -54,10 +57,14 @@
                                                 </div>
                                             </div>
                                         @endif
-                                    @endif
+                                   
                                 @endforeach
                             @endif
                         </div>
+                        
+                        <!-- Latest Deal of the Day  -->
+
+
                         @if( !$oDeals->isEmpty() )
                         <div class="col-sm-12 all_deal_box_wrap">
                             <h1>New Deals</h1>
@@ -67,8 +74,9 @@
                                 </div>
                                 <?php $counter = 0; ?>
                                 @foreach( $oDeals AS $oDeal )
-                                    @if( $counter++ == 0 ) <?php continue; ?> @endif
-                                        @if( $counter == 6 ) <?php break; ?> @endif
+                                    <!-- @if( $counter == 1 ) <?php //break; ?> @endif
+                                    @if( $counter++ == 0 ) <?php //continue; ?> @endif -->
+                                        @if( $counter == 5 ) <?php break; ?> @endif
                                     <div class="col-sm-4 col-lg-3 col-md-4 col-xs-6">
                                         <div class="col-item">
                                             <div class="photo">
@@ -87,7 +95,7 @@
                                                     <div class="price custom_price">
                                                         <a href="{{route('search.deals.show',[$oDeal->id])}}"
                                                            style="width:100%;" align="left">
-                                                            <h5 style="text-indent: 0;font-size: 15px;">{{ ( strlen( $oDeal->title ) > 20 ) ? substr($oDeal->title,0,20)."..." : $oDeal->title }}</h5>
+                                                            <h5 style="text-indent: 0;font-size: 15px;">{{ ( strlen( $oDeal->title ) > 15 ) ? substr($oDeal->title,0,14)."..." : $oDeal->title }}</h5>
                                                         </a>
                                                     </div>
                                                     <div class="clearfix"></div>
@@ -145,7 +153,7 @@
                                         <div class="row" style="float:left; height:28px;">
                                             <div class="price custom_price">
                                                 <a href="{{route('search.deals.show',[$oDeal->id])}}" style="width:100%;" align="left">
-                                                    <h5 style="text-indent: 0;font-size: 15px;">{{ ( strlen( $oDeal->title ) > 20 ) ? substr($oDeal->title,0,20)."..." : $oDeal->title }}</h5>
+                                                    <h5 style="text-indent: 0;font-size: 15px;">{{ ( strlen( $oDeal->title ) > 15 ) ? substr($oDeal->title,0,14)."..." : $oDeal->title }}</h5>
                                                 </a>
                                             </div>
                                             <div class="clearfix"></div>
