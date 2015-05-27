@@ -10,6 +10,11 @@
     click the link below to validate your email and you'll be automatically signed in to your new account. If you have completed all the steps of the registration process your profile will be active and searchable.
     <br><br>
     Use this link to validate your email Address: <br>
-    <a href="{{ action('Auth\RegisterController@getStep2')."?code=".$user->verfication_code  }}">Click here</a>
+    <a href="{{ action('Auth\RegisterController@getStep2')."?code=".$user->verfication_code  }}">Click here</a><br><br>
+    We look forward to to help you.<br><br>
+
+    Regards,<br>
+    Support Team<br>
+    Tribal Square
 </div>
 
