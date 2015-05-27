@@ -126,7 +126,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group col-sm-11 col-xs-12">
-                                    <input type="submit" class="btn btn-lg btn-block custome_blue_btn" value="Proceed to Next Step">
+                                    <input type="submit" class="btn btn-lg btn-block custome_blue_btn" value="Sign Up">
                                 </div>
                                 <div class="col-sm-11 col-xs-12">
                                     <a href="{{action('Auth\AuthController@getIndex')}}" class="signup_link text-center">Already a member ?</a>

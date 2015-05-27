@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Content;
 use Mail;
 use Hash;
+use Auth;
 use Facebook\FacebookSession;
 use Facebook\FacebookRedirectLoginHelper;
 use Facebook\FacebookRequest;
@@ -44,7 +45,7 @@ class AuthController extends Controller {
 		$this->auth = $auth;
 		$this->registrar = $registrar;
 			
-		$this->middleware('guest', ['except' => ['getLogout','getSelectUserType','postSelectUserType']]);
+		$this->middleware('guest', ['except' => ['getLogout','getSelectUserType','postSelectUserType','getVerificationLink']]);
 
 		session_start ();
 
@@ -106,6 +107,21 @@ class AuthController extends Controller {
 			return response()->redirectTo(url('/'));
 		}
 		return $this->renderView('auth.login');
+	}
+
+	public function getVerificationLink()
+	{
+		if( Auth::user() )
+		{
+			$oUser = Auth::user();
+			$code = str_random(100);
+			$oUser->verfication_code = $code;
+			User::where('id',$oUser->id)->update(['verfication_code'=>$code]);
+			Mail::send('emails.verification',['user'=>$oUser],function($message) use($oUser){
+				$message->to($oUser->email,$oUser->firstname." ".$oUser->lastname);
+			});
+		}
+		return redirect()->action('Auth\RegisterController@getStep2')->with('success','Link sent successfully!');
 	}
 
 	public function postLogin(Request $request)
