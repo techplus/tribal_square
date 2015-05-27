@@ -17,7 +17,7 @@ class RegisterController extends Controller
 	{
 		$this->data['aFooterData'] = Content::all();
 
-		$this->middleware('auth',['except'=>['getIndex','postIndex']]);
+		$this->middleware('auth',['except'=>['getIndex','postIndex','getStep2']]);
 
 		session_start ();
 
@@ -65,7 +65,7 @@ class RegisterController extends Controller
 		$aRegisterData['verfication_code'] = str_random(100);
 		$oUser = User::create($aRegisterData);
 		Mail::send('emails.verification',['user'=>$oUser],function($message) use($oUser){
-			$message->to($oUser->email,$oUser->firstname." ".$oUser->lastname);
+			$message->to($oUser->email,$oUser->firstname." ".$oUser->lastname)->subject('Verification Link Tribal square');
 		});
 		if($request->input('user_type') != 4)
 		{
@@ -141,9 +141,14 @@ class RegisterController extends Controller
 				Auth::user()->verification_code = null;
 				User::where('id',Auth::user()->id)->update(['verfication_code'=>null]);
 			}
+			return redirect()->action('Auth\RegisterController@getStep2');
 		}
-		$this->data['plan'] = SubscriptionPlan::where('role_id',Auth::user()->UserTypes()->first()->id)->where('post_type','monthly')->first();
-		return $this->renderView('front.signup.step2');
+		else if( Auth::user() ) {
+			$this->data[ 'plan' ] = SubscriptionPlan::where( 'role_id' , Auth::user()->UserTypes()->first()->id )->where( 'post_type' , 'monthly' )->first();
+
+			return $this->renderView( 'front.signup.step2' );
+		}
+		return redirect()->action('Auth\AuthController@getIndex');
 	}
 
 	public function getPaypalSubscription(PaypalRestInterface $paypal)
