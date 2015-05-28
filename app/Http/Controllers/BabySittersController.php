@@ -125,20 +125,34 @@ class BabySittersController extends Controller {
 		{	
 			$oBabySitter = $oQuery->get();
 			$aArray = $oBabySitter->toArray();
-			
+
 			foreach ($aArray as $key=>$object) {
 				if( $id == $object['id'] )
 				{
+					
 					$aResp['sequence_id'] = $key+1;
-
 					if( $key == (count($aArray) - 1) )
-						$aResp['next_id'] = $aArray[0]['id'];					
+					{
+						$aResp['next_id'] = $aArray[0]['id'];
+					}
 					else
-						$aResp['next_id'] = $aArray[$key+1]['id'];									
+					{
+						if($key == (count($aArray)))
+						{
+							$aResp['prev_id'] = $aArray[$key-1]['id'];
+						 	break;
+					 	}
+					    else
+					    {
+					    		$aResp['next_id'] = $aArray[$key+1]['id'];
+					    }
+					}
+					if(isset($aArray[$key-1]))
+						$aResp['prev_id'] = $aArray[$key-1]['id'];	
 					break;
 				}
-			}
 
+			}
 			$aResp['oBabySitter'] = $oBabySitter->filter(function($q) use($id){
 				return $q->id == $id;
 			})->first();					
@@ -251,6 +265,8 @@ class BabySittersController extends Controller {
 		$aResponse = $this->getBabysitters ( 0 , 0 , $aSearch , 1 , $user_id );
 		$this->data['oBabySitter'] = $aResponse[ 'oBabySitter' ];		
 		$this->data['iSequenceId'] = ( isset($aResponse['sequence_id']) ) ? $aResponse['sequence_id']  : 1;
+		
+		$this->data['iPrevId'] = ( isset($aResponse['prev_id']) ) ? $aResponse['prev_id']  : $user_id;
 		$this->data['iNextId'] = ( isset($aResponse['next_id']) ) ? $aResponse['next_id']  : $user_id;
 		$this->data['iTotal'] = $aResponse['iTotal'];
 

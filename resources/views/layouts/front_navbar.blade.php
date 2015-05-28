@@ -100,7 +100,7 @@
             <a href="{{ url('/') }}">Home</a>
             <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'deals' ) ? 'link-active' : '' }}" data-type="deals">Deals</a>
             <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'babysitters' ) ? 'link-active' : '' }}" data-type="baby_sitter">Nannies/Babysitter </a>
-            <a href="javascript:;" class="menu-links {{ ( Request::segment(2) == 'classified' ) ? 'link-active' : '' }}" data-type="classified">Listings</a>
+            <a href="{{route('search.categories.index')}}?type=classified" class="menu-links {{ ( Request::segment(2) == 'classified' ) ? 'link-active' : '' }}" data-type="classified">Listings</a>
         </div>
 
         @if( Request::segment(2) == "deals" OR Request::segment(1) == "shopping-cart" )

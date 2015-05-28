@@ -60,8 +60,6 @@
                 </li>
                 <li {{ ( Request::segment(2) == "show-earnings" ) ? 'class=active' : '' }}>
                     <a href="{{ action('Users\SalesAgentController@getShowEarnings',[$oUser->id,date('Y')]) }}"><i class="fa fa-cog"></i> <span class="nav-label">Billing</span></a>
-                
-
                 </li>
                                         
             @endif          

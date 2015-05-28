@@ -71,15 +71,23 @@
                 				<div class="col-sm-3 col-xs-12">
 				                  <!-- Profile Pagination -->
 				                   
-				                  	@if( ! Auth::check() )
+				                  	@if( Auth::check()  || ! Auth::check())
 				                	<div class="BabySitter_pageinfo">
-				                					                
+				                		@if($iSequenceId > 1)
+				                		<a href="{{ action('BabySittersController@show', [ $iPrevId ])  }}">
+				                    		<button class="btn btn-default btn-sm" type="button">
+				                    			<span aria-hidden="true" class="glyphicon glyphicon-menu-left"></span>
+				                    		</button>
+				                    	</a>			                
+				                    	@endif
 				                    	Profile {{ $iSequenceId }} out of {{ $iTotal }}
+				                    	<?php if($iSequenceId != $iTotal) { ?>
 				                    	<a href="{{ action('BabySittersController@show', [ $iNextId ])  }}">
 				                    		<button class="btn btn-default btn-sm" type="button">
 				                    			<span aria-hidden="true" class="glyphicon glyphicon-menu-right"></span>
 				                    		</button>
 				                    	</a>	
+				                    	<?php } ?>
 				                	</div>
 				                	@else
 				                	@if(Request::segment(1) == "search")

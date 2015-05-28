@@ -49,12 +49,9 @@
     </div>
   </div>  
 
-<?php 
-//echo $aFooterPrivacy['content_title'];
-echo $aFooterPrivacy['descriptions'];
-    
-?>
-
+<div class="container">
+<?php echo $aFooterPrivacy['descriptions']; ?>
+</div>
 
 <div class="push"></div> <!-- Add for Sticky Footer -->
 </div> <!-- Wrapper End -->

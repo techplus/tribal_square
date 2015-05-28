@@ -144,9 +144,9 @@
       <div class="col-xs-12 col-sm-6 col-lg-4">
         <div class="advert"></div>
       </div> */ ?>
-      <div class="col-xs-12" style="color:#ac1919;font-weight:bold;"> 5% of our profit supports 
+      <!-- <div class="col-xs-12" style="color:#ac1919;font-weight:bold;"> 5% of our profit supports 
         <a href="http://www.selfless4africa.org/" target="_blank">www.selfless4africa.org</a>
-        ..S4A inspiring change in Africa  </div>
+        ..S4A inspiring change in Africa  </div> -->
     </div>
 
   </div>
