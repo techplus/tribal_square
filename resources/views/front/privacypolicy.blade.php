@@ -53,6 +53,7 @@
 <?php echo $aFooterPrivacy['descriptions']; ?>
 </div>
 
+
 <div class="push"></div> <!-- Add for Sticky Footer -->
 </div> <!-- Wrapper End -->
 
@@ -65,8 +66,23 @@
   height: 100%;
 }
 .footer_wrap {
- 
+  background-color: #000;
+  padding: 5px 0;
+  font-family: 'arial';
   float: left;
   width: 100%;
+}
+.privacy_content_wrap h1
+{
+  width: 100% !important;
+  border: none !important;
+  word-wrap:break-word;
+
+}
+.privacy_content_wrap p {
+  text-align: justify;
+}
+.privacy_content_wrap a{
+  word-wrap:break-word;
 }
 </style>

@@ -43,16 +43,7 @@
          url('../fonts/HelveticaNeueLTComTh_0.ttf') format('truetype'),
          url('../fonts/HelveticaNeueLTComTh_0.svg#HelveticaNeueLTComTh_0') format('svg');
 }
-/*----- New -----------------*/
 
-
-/*----- New -----------------*/
-
-.privacy_content_wrap h1, .refund_policy_content_wrap h1, .terms_content_wrap h1 {
-    color: #ac1919;
-    font-family: "ProximaNovaCondensedSemibold";
-    text-align: center;
-}
 .row {
   margin-right: 0px;
   margin-left: 0px;
@@ -262,7 +253,7 @@ body {
     .active_slide::after {
       border-width: 33px;
       margin-left: -24px;
-      margin-top: -28px;
+     /* margin-top: -28px;*/
     }
   }
 
@@ -335,6 +326,9 @@ body {
     }
     .deal_banner_wrap {
       padding: 0;
+    }
+    .logo span {
+      display: none !important;
     }
   }
 
