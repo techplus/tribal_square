@@ -53,26 +53,15 @@
     <div class="container">
       @if( $aLatestDeals->count() > 0 )
       <div class="banner_left col-sm-4">
+          <?php $counter = 0; ?>
         @foreach( $aLatestDeals as $oDeal )
           <?php $oDealImagesSidebar = ( $oDeal->CoverPic->count() ) ? $oDeal->CoverPic : $oDeal->DealImages(); ?>
-          <a href="#" class="dealTitle" data-link="{{ route('search.deals.show' , [ $oDeal->id ] ) }}" data-path="{{ $oDeal->title }}" onclick="imagePath('{{ $oDeal->CoverPic->count() ? Image::url($oDeal->CoverPic->first()->image_path,769,344) : ( $oDealImagesSidebar->count() > 0 ? Image::url($oDealImagesSidebar->first()->image_path,769,344) : Image::url(url('images/no_image.png'),769,344)) }}')">
-          <!-- <a href="#" class="dealTitle" data-link="{{ route('search.deals.show' , [ $oDeal->id ] ) }}" data-path="{{ $oDeal->title }}" onclick="imagePath('{{ $oDeal->CoverPic->count() ? $oDeal->CoverPic->first()->image_path : ( $oDealImagesSidebar->count() > 0 ? $oDealImagesSidebar->first()->image_path : url('images/no_image.png')) }}')"> -->
+          <img src="{{ $oDeal->CoverPic->count() ? Image::url($oDeal->CoverPic->first()->image_path,769,344) : ( $oDealImagesSidebar->count() > 0 ? Image::url($oDealImagesSidebar->first()->image_path,769,344) : Image::url(url('images/no_image.png'),769,344)) }}" style="display: none;">
+          <a onclick="updateImage({{$counter++}})" href="#" class="dealTitle" data-link="{{ route('search.deals.show' , [ $oDeal->id ] ) }}" data-image="{{ $oDeal->CoverPic->count() ? Image::url($oDeal->CoverPic->first()->image_path,769,344) : ( $oDealImagesSidebar->count() > 0 ? Image::url($oDealImagesSidebar->first()->image_path,769,344) : Image::url(url('images/no_image.png'),769,344)) }}" data-path="{{ $oDeal->title }}" >
             <p>{{ ( strlen( $oDeal->title ) > 35 ) ? substr( $oDeal->title , 0 , 35 )."..." :  $oDeal->title }}</p>
             <span>Discount : {{ $oDeal->discount_percentage }}%</span>
           </a>
-        @endforeach  
-       <?php /*  <a href="#">
-          <p>Tony Saccos Coal Oven Pizza</p>
-          <span>20% Off on Coal Oven Pizza</span>
-        </a>
-        <a href="#">
-          <p>Sehaj boutique – Canton</p>
-          <span>25% Off on Indian Dresses</span>
-        </a>
-        <a href="#">
-          <p>Tony Saccos Coal Oven Pizza</p>
-          <span>20% Off on Coal Oven Pizza</span>
-        </a> */ ?>
+        @endforeach
       </div>
       @endif
       <div class="col-sm-8 deal_banner_wrap">
@@ -215,14 +204,18 @@
             </div>
 </div> */ ?>
 <script type="text/javascript">
-    function imagePath($this)
-    {
-        var imgPath = $this;
-        $(this).data('link');
-
-        var btnLink = $('.dealLink').attr('href');
+    var index;
+    function updateImage(i) {
+        var imgPath = $('.dealTitle:eq('+i+')').data('image');
+        var link = $('.dealTitle:eq('+i+')').data('link');
+        $(".dealTitle").removeClass('active_slide');
+        $('.dealTitle:eq('+i+')').addClass('active_slide');
+        index = i;
+        //console.log($('.dealTitle' ).length);
+        //var btnLink = $('.dealLink').attr('href');
         $('.deal_banner_wrap img').attr('src', imgPath);
-        $('.view_deal').attr('href', btnLink);
+        $('.view_deal').attr('href', link);
+        $('.deal_banner_wrap a').attr('href', link);
     }
     $(document).ready(function(){
         $('.searchType').on('click',function() {
@@ -230,16 +223,26 @@
             $('#searchTyp').val(type);
             $('#frmSearch').submit();
         });
-        var index = $('.active_slide' ).index();
-        $('.banner_left' ).find('a.dealTitle' ).click(function(){
-            if( index != $(this ).index() )
-                index = $(this ).index();
-        })
-        setInterval(function(){
-            if( ++index == 4 )
-                index = 0;
-            $('.banner_left' ).find('a.dealTitle:eq('+(index)+')' ).click();
-        },4000);
+//        $('a.dealTitle' ).on('click',function(){
+//            var imgPath = $(this ).data('image');
+//            var link = $(this).data('link');
+//            $(".dealTitle").removeClass('active_slide');
+//            $(this).addClass('active_slide');
+//            console.log($(this ).prevAll().length);
+//            //console.log($('.dealTitle' ).length);
+//            //var btnLink = $('.dealLink').attr('href');
+//            $('.deal_banner_wrap img').attr('src', imgPath);
+//            $('.view_deal').attr('href', link);
+//            $('.deal_banner_wrap a').attr('href', link);
+//        });
+
+        $('a.dealTitle' ).first().click();
+
+            setInterval(function(){
+                if( ++index >= 4 )
+                    index = 0;
+                $('.banner_left' ).find('a.dealTitle:eq('+(index)+')' ).click();
+            },4000);
     });
 </script>
 <style type="text/css">
