@@ -2,7 +2,7 @@
 
 @section('content')
     <style>
-        #wrapper.active {
+        #wrapper1.active {
             padding-left: 0;
             height: auto;
         }
@@ -178,8 +178,8 @@
     </div>
 @endsection
 <style type="text/css">
-    #wrapper {
-        min-height: 97%;
+    #wrapper1 {
+        min-height: 92%;
         height: auto !important;
         height: 100%;
     }

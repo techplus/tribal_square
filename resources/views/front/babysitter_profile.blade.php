@@ -131,7 +131,7 @@
 				                        <h5 class="white"><i class="glyphicon glyphicon-lock"></i> Last 
 				                        signed in: {{ date('m/d/Y h:i a',strtotime($oBabySitter->last_logged_in)) }}</h5>
 				                        {!! ( $oBabySitter->Account ) ? '<h5 class="white"><i class="glyphicon glyphicon-ok"></i> Babysitter in '.ucfirst($oBabySitter->Account->city).",".$oBabySitter->Account->state." ".$oBabySitter->Account->pin.'</h5>' : '' !!}
-				                        {!! ( $oBabySitter->Account ) ? '<h5 class="white"><i class="glyphicon glyphicon-user"></i>'.$oBabySitter->Account->gender.'</h5>' : '' !!}
+				                        {!! ( $oBabySitter->Account ) ? '<h5 class="white"><i class="glyphicon glyphicon-user"></i> '.$oBabySitter->Account->gender.'</h5>' : '' !!}
 				                        @if( Auth::check() )
 				                        @if(  $oBabySitter->Account && $oBabySitter->Account->display_phone_on_profile == 1 )
 				                        	<h5 class="white"><i class="glyphicon glyphicon-phone-alt"></i> {{ $oBabySitter->Account->phone }}</h5>
