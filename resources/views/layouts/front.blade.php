@@ -126,8 +126,6 @@
       
       <!-- <a href="{{action('HomeController@getTerms')}}">Terms and Services</a> |
       <a href="{{action('HomeController@getRefundpolicy')}}">Refund Policy</a> | -->
-
-      <a href="#">Blog</a> |
       <a href="#">Advertise with us</a>
     </div>
     <div class="copyright">
@@ -143,7 +141,7 @@
       <a href="{{action('HomeController@getPrivacypolicy')}}">Privacy Policy</a> |
       <a href="{{action('HomeController@getTerms')}}">Terms and Services</a> |
       <a href="{{action('HomeController@getRefundpolicy')}}">Refund Policy</a> |
-      <a href="#">Blog</a> |
+      
       <a href="#">Advertise with us</a>
       </div>
       <p>@2015 TribalSquare All rights reserved.</p>

@@ -8,7 +8,7 @@
 			      <div class="page-content">
 			        <div class="row">
 			          <div class="col-sm-12"> 
-			            <h1>Shopping Carts
+			            <h1>Shopping Cart
 			            @if( !empty( $aProducts ) )
 			            	<span class="pull-right">
 			              		<a href="{{action('ShoppingCartsController@getPaypalCheckOut')}}" class="paypal"><img src="{{ url('images/paypal_btn.png') }}" alt="" class="img-resposnsive"></a>
