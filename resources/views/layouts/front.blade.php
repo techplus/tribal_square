@@ -104,7 +104,7 @@
 <div class="row footer_wrap">
   <div class="container">
     <div class="footer_links">
-      <a href="#">Contact</a> |
+      <a href="{{action('HomeController@getContactUs')}}">Contact</a> |
       <?php
       foreach( $aFooterData AS $fLink ) 
       {    
