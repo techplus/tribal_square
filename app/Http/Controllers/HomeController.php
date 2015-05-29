@@ -6,7 +6,8 @@ use DB;
 use App\Models\Deal;
 use App\Models\Content;
 use Image;
-
+use App\Http\Requests\ContactUsRequest;
+use Mail;
 class HomeController extends Controller {
 
 	/*
@@ -70,6 +71,20 @@ class HomeController extends Controller {
 		$this->data['aFooterPrivacy'] = Content::find(1);
 
 		return $this->renderView('front.privacypolicy');
+	}
+
+	public function getContactUs()
+	{
+		return $this->renderView('front.contact_us');
+	}
+
+	public function postContactUs(ContactUsRequest $request)
+	{
+		Mail::send('emails.contact_us',$request->all(),function($message){
+			$message->to('sam.coolone70@gmail.com','sagar rabadiya')->subject('Contact Request');
+		});
+
+		return redirect()->back()->with('success','Your request has been submitted, we will get back to you soon');
 	}
 
 }
