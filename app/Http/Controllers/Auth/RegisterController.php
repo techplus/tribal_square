@@ -78,68 +78,74 @@ class RegisterController extends Controller
 		Auth::login($oUser);
 		Auth::user()->last_logged_in = date('Y-m-d H:i:s');				
 		Auth::user()->save();
+		return response()->redirectToAction('Auth\RegisterController@getStep2');
+	}
 
+	protected function sendWelcomeEmail($user)
+	{
 		// Service provider = 2
 		// Baby sitter = 3
 		// Sales Agent = 4
-
-		if($request->input('user_type') == 3)
+		$role = $user->UserTypes()->first();
+		if($role->id == 3)
 		{
 			Mail::send('emails.sitterwelcome',
-		        array(
-		            'firstname' => $request->get('firstname'),
-		            'lastname' => $request->get('lastname'),
-		            'email' => $request->get('email')
-		        ), function($message) use ($userMail)
-			{
-				// sitter@tribalsquare.com 
-			    $message->from('sitter@tribalsquare.compact(varname)', 'Tribal Square');
-		  		$message->to($userMail)->subject('Welcome Email');
-			});
+				array(
+					'firstname' => $user->firstname,
+					'lastname' => $user->lastname,
+					'email' => $user->email
+				), function($message) use ($user)
+				{
+					// sitter@tribalsquare.com
+					$message->from('sitter@tribalsquare.compact(varname)', 'Tribal Square');
+					$message->to($user->email)->subject('Welcome Email');
+				});
 			return response()->redirectToAction('Auth\RegisterController@getStep2');
 		}
-		else if($request->input('user_type') == 2)
+		else if($role->id == 2)
 		{
 			Mail::send('emails.providerwelcome',
-		        array(
-		            'firstname' => $request->get('firstname'),
-		            'lastname' => $request->get('lastname'),
-		            'email' => $request->get('email')
-		        ), function($message) use ($userMail)
-			{
-				// deals@tribalsquare.com
-			    $message->from('deals@tribalsquare.com', 'Tribal Square');
-		  		$message->to($userMail)->subject('Welcome Email');
-			});
+				array(
+					'firstname' => $user->firstname,
+					'lastname' => $user->lastname,
+					'email' => $user->email
+				), function($message) use ($user)
+				{
+					// deals@tribalsquare.com
+					$message->from('deals@tribalsquare.com', 'Tribal Square');
+					$message->to($user->email)->subject('Welcome Email');
+				});
 			return response()->redirectToAction('Auth\RegisterController@getStep2');
 		}
-		else if($request->input('user_type') == 4)
+		else if($role->id == 4)
 		{
 			Mail::send('emails.agentwelcome',
-		        array(
-		            'firstname' => $request->get('firstname'),
-		            'lastname' => $request->get('lastname'),
-		            'email' => $request->get('email')
-		        ), function($message) use ($userMail)
-			{
-			    $message->from('agent@tribalsquare.com', 'Tribal Square');
-		  		$message->to($userMail)->subject('Welcome Email');
-			});
+				array(
+					'firstname' => $user->firstname,
+					'lastname' => $user->lastname,
+					'email' => $user->email
+				), function($message) use ($user)
+				{
+					$message->from('agent@tribalsquare.com', 'Tribal Square');
+					$message->to($user->email)->subject('Welcome Email');
+				});
 			//return response()->redirectToAction('Users\SalesAgentController@index');
 			return redirect()->action('Users\SalesAgentController@index');//$this->renderView ( 'agents.index' );
 		}
-									
-		//return response()->redirectToAction('Auth\RegisterController@getStep2');
 	}
 
 	public function getStep2()
 	{
 		if( Request::has('code') )
 		{
-			if( Auth::user()->verfication_code == Request::input('code') )
+			$code = Request::input('code');
+			$user = User::where('verfication_code',$code)->first();
+			if( $user )
 			{
+				Auth::login($user);
 				Auth::user()->verification_code = null;
 				User::where('id',Auth::user()->id)->update(['verfication_code'=>null]);
+				return $this->sendWelcomeEmail(Auth::user());
 			}
 			return redirect()->action('Auth\RegisterController@getStep2');
 		}
