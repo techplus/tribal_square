@@ -94,7 +94,7 @@
     @endif
 
 
-@if(Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') || Request::url() == url('/register/step2') )
+@if( Request::url() == url('contact-us') || Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') || Request::url() == url('/register/step2') )
       <div class="container">
         <div class="col-xs-12" style="color:#ac1919;font-weight:bold;margin-bottom:15px;"> 5% of our profit supports 
           <a href="http://www.selfless4africa.org/" target="_blank">www.selfless4africa.org</a> ..S4A inspiring change in Africa  
@@ -104,7 +104,7 @@
 <div class="row footer_wrap">
   <div class="container">
     <div class="footer_links">
-      <a href="#">Contact</a> |
+      <a href="{{action('HomeController@getContactUs')}}">Contact</a> |
       <?php
       foreach( $aFooterData AS $fLink ) 
       {    
@@ -137,7 +137,7 @@
  <div class="row footer_wrap"> 
   <div class="footer">
     <div class="footer_nav">
-      <a href="#">Contact</a> |
+      <a href="{{action('HomeController@getContactUs')}}">Contact</a> |
       <a href="{{action('HomeController@getPrivacypolicy')}}">Privacy Policy</a> |
       <a href="{{action('HomeController@getTerms')}}">Terms and Services</a> |
       <a href="{{action('HomeController@getRefundpolicy')}}">Refund Policy</a> |

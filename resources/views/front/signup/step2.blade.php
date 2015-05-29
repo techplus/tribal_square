@@ -154,6 +154,7 @@
                             </div>
 
                         </div>--}}
+                        </div>
                             @else
                                 <div class="signin_box">
                                     <h1>Please activate your Tribal Square account by clicking on the link we have forwarded you in email.
@@ -167,7 +168,6 @@
                                     <a href="{{action('Auth\AuthController@getVerificationLink')}}">Resend Verification Link</a>
                                 </div>
                             @endif
-                        </div>
                 </div>
 
                 <div class="push"></div>
