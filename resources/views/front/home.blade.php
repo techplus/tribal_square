@@ -230,6 +230,16 @@
             $('#searchTyp').val(type);
             $('#frmSearch').submit();
         });
+        var index = $('.active_slide' ).index();
+        $('.banner_left' ).find('a.dealTitle' ).click(function(){
+            if( index != $(this ).index() )
+                index = $(this ).index();
+        })
+        setInterval(function(){
+            if( ++index == 4 )
+                index = 0;
+            $('.banner_left' ).find('a.dealTitle:eq('+(index)+')' ).click();
+        },4000);
     });
 </script>
 <style type="text/css">
