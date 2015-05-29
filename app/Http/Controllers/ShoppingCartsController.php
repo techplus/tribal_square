@@ -163,7 +163,7 @@ Class ShoppingCartsController extends Controller
 		}
 
 		//to add shipping tax and subtotal
-		$shipping = 12;
+		$shipping = 0;
 		$tax = 0;
 		$this->paypal->addDetails( $shipping , $tax , $total );
 

@@ -37,7 +37,7 @@
 					                		<?php
 					                			$p_total = 0;
 					                			$sub_total = 0;
-					                			$estimated_shipping = 12;
+					                			$estimated_shipping = 0;
 					                		?>
 					                		@foreach( $aProducts as $key => $aProduct )
 					                			<tr class="products" data-id="{{ $aProduct['id'] }}" data-key="{{ $key }}" data-quantity="{{ $aProduct['quantity'] }}">
@@ -83,14 +83,14 @@
 					                        <td><h5>Subtotal</h5></td>
 					                        <td class="text-right"><h5><strong>$<span  class="sub_total">{{ $sub_total }}</span></strong></h5></td>
 					                    </tr>
-					                    <tr>
+					                    {{--<tr>
 					                        <td>   </td>
                                             <td>   </td>
 					                        <td>   </td>
 					                        <td>   </td>
 					                        <td><h5>Estimated shipping</h5></td>
 					                        <td class="text-right"><h5><strong>$<span class="estimated_shipping">{{ $estimated_shipping }}</span></strong></h5></td>
-					                    </tr>
+					                    </tr>--}}
 					                    <tr>
 					                        <td>   </td>
                                             <td>   </td>
