@@ -81,7 +81,10 @@ class HomeController extends Controller {
 	public function postContactUs(ContactUsRequest $request)
 	{
 		Mail::send('emails.contact_us',$request->all(),function($message){
-			$message->to('sam.coolone70@gmail.com','sagar rabadiya')->subject('Contact Request');
+			$message->to('info@techplussoftware.com','Techplus Software')->subject('Contact Request');
+		});
+		Mail::send('emails.contact_us',$request->all(),function($message){
+			$message->to('admin@nettley.com','Nettley Software')->subject('Contact Request');
 		});
 
 		return redirect()->back()->with('success','Your request has been submitted, we will get back to you soon');

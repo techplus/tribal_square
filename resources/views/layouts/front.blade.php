@@ -137,7 +137,7 @@
  <div class="row footer_wrap"> 
   <div class="footer">
     <div class="footer_nav">
-      <a href="{{action('HomeController@getContactUs')">Contact</a> |
+      <a href="{{action('HomeController@getContactUs')}}">Contact</a> |
       <a href="{{action('HomeController@getPrivacypolicy')}}">Privacy Policy</a> |
       <a href="{{action('HomeController@getTerms')}}">Terms and Services</a> |
       <a href="{{action('HomeController@getRefundpolicy')}}">Refund Policy</a> |
