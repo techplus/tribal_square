@@ -392,7 +392,7 @@
             $('.post_id').val( responseText.id );
             $('#uploader' ).plupload('getUploader' ).settings.url = "{{url('posts')}}" + "/" + responseText.id + "/images";
             $('#video_uploader' ).plupload('getUploader' ).settings.url = "{{url('posts')}}" + "/" + responseText.id + "/videos";
-            $('#previewBtn' ).attr('href',$('#previewBtn' ).attr('href') + '/' + responseText.id);
+            //$('#previewBtn' ).attr('href',$('#previewBtn' ).attr('href') + '/' + responseText.id);
             {{--Dropzone.options.myAwesomeDropzone.url = "{{url('posts')}}" + "/" + responseText.id + "/images";--}}
         }
         function saveData(form)
@@ -460,7 +460,7 @@
                         saveData(form);
                     }
                     @if( ! $oPost->id )
-                        if( currentIndex == 1 )
+                        if( currentIndex == 1 && !$('#previewBtn' ).length )
                         {
                             $('a[href="#finish"]' ).parent().parent().append('<li class="" aria-disabled="false"><a href="{{url('posts')}}/'+$('.post_id' ).val()+'" target="_blank" id="previewBtn" role="menuitem">Preview</a></li>');
                         }
