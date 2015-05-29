@@ -392,6 +392,7 @@
             $('.post_id').val( responseText.id );
             $('#uploader' ).plupload('getUploader' ).settings.url = "{{url('posts')}}" + "/" + responseText.id + "/images";
             $('#video_uploader' ).plupload('getUploader' ).settings.url = "{{url('posts')}}" + "/" + responseText.id + "/videos";
+            $('#previewBtn' ).attr('href',$('#previewBtn' ).attr('href') + '/' + responseText.id);
             {{--Dropzone.options.myAwesomeDropzone.url = "{{url('posts')}}" + "/" + responseText.id + "/images";--}}
         }
         function saveData(form)
@@ -458,10 +459,12 @@
                     {
                         saveData(form);
                     }
-                    /*if( currentIndex == 2 && !bValid )
-                    {
-                        $('<div class="alert alert-danger"><p>Please select atleast one image as cover</div>' ).insertBefore('#post_images');
-                    }*/
+                    @if( ! $oPost->id )
+                        if( currentIndex == 1 )
+                        {
+                            $('a[href="#finish"]' ).parent().parent().append('<li class="" aria-disabled="false"><a href="{{url('posts')}}/'+$('.post_id' ).val()+'" target="_blank" id="previewBtn" role="menuitem">Preview</a></li>');
+                        }
+                    @endif
                     return bValid;
                 },
                 onStepChanged: function (event, currentIndex, priorIndex)
@@ -555,7 +558,9 @@
             $('#description,#fineprint').summernote({
                 height: 200
             });
-
+            @if( $oPost->id )
+                $('a[href="#finish"]' ).parent().parent().append('<li class="" aria-disabled="false"><a href="{{route('posts.show',[$oPost->id])}}" target="_blank" id="previewBtn" role="menuitem">Preview</a></li>');
+            @endif
                 // Setup html5 version
             uploader = $("#uploader,#video_uploader").plupload({
                 // General settings
