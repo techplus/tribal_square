@@ -7,6 +7,7 @@ use App\Models\ClassifiedImage;
 use Auth;
 use Request;
 use Mail;
+use App\Repositories\PaypalRest\PaypalRestInterface;
 class PostsController extends Controller
 {
 	/**
@@ -14,8 +15,10 @@ class PostsController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function index ()
+	public function index (PaypalRestInterface $paypal)
 	{
+
+//		dd($paypal->getTransactions('I-T3E46F8URBDC'));
 		$this->data[ 'aPostings' ] = Classified::withTrashed()->with ( [ 'Listingcategory' ] )->where ( 'user_id' , '=' , $this->data[ 'oUser' ]->id )->get ();
 		return $this->renderView ( 'providers.posting.index' );
 	}

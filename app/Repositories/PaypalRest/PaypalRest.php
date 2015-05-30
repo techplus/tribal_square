@@ -265,4 +265,10 @@ class PaypalRest implements PaypalRestInterface
 	{
 		return Agreement::get($id,$this->apiContext);
 	}
+
+	public function getTransactions($subscriptionId)
+	{
+		$params = array('start_date' => date('Y-m-d', strtotime('-15 years')), 'end_date' => date('Y-m-d', strtotime('+5 days')));
+		return Agreement::searchTransactions($subscriptionId,$params,$this->apiContext);
+	}
 }
