@@ -97,8 +97,8 @@ class RegisterController extends Controller
 				), function($message) use ($user)
 				{
 					// sitter@tribalsquare.com
-					$message->from('sitter@tribalsquare.compact(varname)', 'Tribal Square');
-					$message->to($user->email)->subject('Welcome Email');
+					$message->from('sitter@tribalsquare.com', 'Tribal Square');
+					$message->to($user->email,$user->firstname." ".$user->lastname)->subject('Welcome Email');
 				});
 			return response()->redirectToAction('Auth\RegisterController@getStep2');
 		}
@@ -113,7 +113,7 @@ class RegisterController extends Controller
 				{
 					// deals@tribalsquare.com
 					$message->from('deals@tribalsquare.com', 'Tribal Square');
-					$message->to($user->email)->subject('Welcome Email');
+					$message->to($user->email,$user->firstname." ".$user->lastname)->subject('Welcome Email');
 				});
 			return response()->redirectToAction('Auth\RegisterController@getStep2');
 		}
@@ -127,7 +127,7 @@ class RegisterController extends Controller
 				), function($message) use ($user)
 				{
 					$message->from('agent@tribalsquare.com', 'Tribal Square');
-					$message->to($user->email)->subject('Welcome Email');
+					$message->to($user->email,$user->firstname." ".$user->lastname)->subject('Welcome Email');
 				});
 			//return response()->redirectToAction('Users\SalesAgentController@index');
 			return redirect()->action('Users\SalesAgentController@index');//$this->renderView ( 'agents.index' );

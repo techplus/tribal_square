@@ -203,11 +203,11 @@
   							$this.parents('tr').remove();					
   							var sub_total = parseFloat( $('.sub_total').html() ).toFixed(2);
   							sub_total -= parseFloat(old_total);  							  							
-  							$('.sub_total').html(sub_total);
+  							$('.sub_total').html(sub_total.toFixed(2));
   							if( $('tr.products').length > 0 )
   							{  				
   								$('.no_of_items').html(' My Cart ( '+ $('tr.products').length +' Items )');				
-  								$('.main_total').html( sub_total + parseFloat( $('.estimated_shipping').html() ) );
+  								$('.main_total').html( sub_total.toFixed(2) );// + parseFloat( $('.estimated_shipping').html() ) );
   							}  	
   							else
   							{
