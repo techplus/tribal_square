@@ -145,11 +145,11 @@
 
   			$('.refresh-product').on('click',function(){
   				var send_call = 1;
-  				if( $(this).parents('tr').data('quantity') == $(this).parents('tr').find('.quantity').val() )
-  				{
-  					send_call = 0;
-  					alert( "Product is already with updated deatils" );
-  				}
+//  				if( $(this).parents('tr').data('quantity') == $(this).parents('tr').find('.quantity').val() )
+//  				{
+//  					send_call = 0;
+//  					alert( "Product is already with updated deatils" );
+//  				}
   				if( $(this).parents('tr').find('.quantity').val().length <= 0 )
   				{
   					send_call = 0;
@@ -175,7 +175,7 @@
   							var sub_total = parseFloat( $('.sub_total').html() );  							  						
   							sub_total -= parseFloat(old_total);
   							sub_total += p_total;
-  							var main_total = sub_total + parseFloat( $('.estimated_shipping').html() );
+  							var main_total = sub_total;// + parseFloat( $('.estimated_shipping').html() );
   							
   							$this.parents('tr').find('.product_total').html( p_total );
   							$('.sub_total').html(sub_total);  							

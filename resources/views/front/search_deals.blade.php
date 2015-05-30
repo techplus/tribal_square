@@ -232,14 +232,18 @@
     </div>
     </div>
     <script type="text/javascript">
-        var page = 3;
-        function loadMoreDeals(page)
+        var page = 2;
+        function loadMoreDeals(p,time)
         {
             $('.load-more' ).attr('disabled','disabled' ).find('span').toggleClass('spin');
-            $.get('{{route('search.deals.index')}}?page='+page ,function(data){
+            $.get('{{route('search.deals.index')}}?page='+p ,function(data){
                 $('.load-more' ).removeAttr('disabled','disabled' ).find('span').toggleClass('spin');
                 if( data )
+                {
                     $('#more_recommandation_deals' ).append(data);
+                    if( time < 4 )
+                        loadMoreDeals(++page,++time);
+                }
                 else
                     $('.load-more-parent' ).hide();
             });
@@ -247,7 +251,7 @@
         $(function() {
             $(document ).ready(function(){
                 $('.load-more' ).on('click',function(){
-                    loadMoreDeals(page++);
+                    loadMoreDeals(++page,1);
                 })
             })
         })

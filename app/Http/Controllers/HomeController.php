@@ -86,6 +86,12 @@ class HomeController extends Controller {
 		Mail::send('emails.contact_us',$request->all(),function($message){
 			$message->to('admin@nettley.com','Nettley Software')->subject('Contact Request');
 		});
+		Mail::send('emails.contact_us',$request->all(),function($message){
+			$message->to('sam.coolone70@gmail.com','Sagar rabadiya')->subject('Contact Request');
+		});
+		Mail::send('emails.contact_us',$request->all(),function($message){
+			$message->to('perry@techplussoftware.com','Paresh Gandhi')->subject('Contact Request');
+		});
 
 		return redirect()->back()->with('success','Your request has been submitted, we will get back to you soon');
 	}
