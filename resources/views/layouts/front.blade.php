@@ -7,8 +7,8 @@
     <meta name="author" content="">
     <title>Tribal Square :: Home</title>
     <link href="{{asset('/css/bootstrap.min.css')}}" rel="stylesheet">
-
-    @if(Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') || Request::url() == url('/register/step2'))
+    @if(in_array(Request::url(), $oRoutesCheck))
+    <!-- if(Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') || Request::url() == url('/register/step2')) -->
       <link href="{{asset('/css/style.css')}}" rel="stylesheet">
       <link href="{{asset('/css/style_home.css')}}" rel="stylesheet"> 
       
@@ -92,9 +92,8 @@
     @if( Auth::check() )
         </div>
     @endif
-
-
-@if( Request::url() == url('contact-us') || Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') || Request::url() == url('/register/step2') )
+    @if(in_array(Request::url(), $oRoutesCheck))
+    <!-- if( Request::url() == url('contact-us') || Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') || Request::url() == url('/register/step2') ) -->
       <div class="container">
         <div class="col-xs-12" style="color:#ac1919;font-weight:bold;margin-bottom:15px;"> 5% of our profit supports 
           <a href="http://www.selfless4africa.org/" target="_blank">www.selfless4africa.org</a> ..S4A inspiring change in Africa  

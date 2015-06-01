@@ -31,6 +31,9 @@ Class DealsController extends Controller{
 			case "pending":
 				$oDeal = $oDeal->where('is_approved_by_admin',0);
 				break;
+			case "expired" :
+				$oDeal = $oDeal->expired();
+				break;	
 		}
 		$this->data['aDeals'] = $oDeal->get();
 		$this->data['sStatus'] = ucfirst($status);

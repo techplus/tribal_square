@@ -23,6 +23,17 @@ class Controller extends BaseController {
 	}
 	public function renderView( $sViewName )
 	{
+		$routeArray = [	url('/'), 
+						url('/auth'),
+						url('/register'),
+						url('/password'),
+						url('/privacypolicy'),
+						url('/terms'),
+						url('/refundpolicy'),
+						url('/register/step2')
+				];	
+		$this->data['oRoutesCheck'] = $routeArray;
+
 		return view( $sViewName , $this->data );
 	}
 }
