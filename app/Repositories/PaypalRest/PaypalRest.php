@@ -26,6 +26,7 @@ use PayPal\Common\PayPalModel;
 
 //agreement dependency
 use PayPal\Api\Agreement;
+use PayPal\Api\AgreementStateDescriptor;
 
 
 
@@ -173,11 +174,11 @@ class PaypalRest implements PaypalRestInterface
 	public function createPlan($title,$description,$price)
 	{
 		$plan = new Plan();
-		$plan->setName($title)->setDescription($description)->setType('fixed');
+		$plan->setName($title)->setDescription($description)->setType('INFINITE');
 
 		$paymentDefinitions = new PaymentDefinition();
 		$paymentDefinitions->setName('Subscription Payment')->setType('REGULAR')
-				->setFrequency('Month')->setCycles('12')->setFrequencyInterval("2")
+				->setFrequency('Month')->setCycles('0')->setFrequencyInterval("1")
 				->setAmount(new Currency(['value'=>$price,'currency'=>config('paypal.currency')]));
 
 		$charge = new ChargeModel();
@@ -239,6 +240,7 @@ class PaypalRest implements PaypalRestInterface
 		$agreement->setName($name)->setDescription($description)->setStartDate(Carbon::now('Asia/Kolkata')->addMonth()->toIso8601String());
 		$merchant = new MerchantPreferences();
 		$merchant->setReturnUrl(action('Users\PaymentsController@getPaymentDone'))
+			//->setNotifyUrl(action('Users\PaymentsController@anyPaymentReceived'))
 			->setCancelUrl(action('Users\PaymentsController@getPaymentCancel'));
 		$agreement->setOverrideMerchantPreferences($merchant);
 		$payer = new Payer();
@@ -264,6 +266,23 @@ class PaypalRest implements PaypalRestInterface
 	public function getSubscription($id)
 	{
 		return Agreement::get($id,$this->apiContext);
+	}
+
+	public function suspendAgreement($id)
+	{
+		$agreement = $this->getSubscription($id);
+		$agreementStateDescriptor = new AgreementStateDescriptor();
+		$agreementStateDescriptor->setNote("Suspending the agreement");
+		$agreement->suspend($agreementStateDescriptor,$this->apiContext);
+		return $agreement;
+	}
+
+	public function reActiveAgreement($id)
+	{
+		$agreement = $this->getSubscription($id);
+		$agreementStateDescriptor = new AgreementStateDescriptor();
+		$agreementStateDescriptor->setNote("Reactivating the agreement");
+		$agreement->reActivate($agreementStateDescriptor,$this->apiContext);
 	}
 
 	public function getTransactions($subscriptionId)
