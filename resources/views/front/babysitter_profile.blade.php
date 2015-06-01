@@ -80,7 +80,7 @@
 				                    		</button>
 				                    	</a>			                
 				                    	@endif
-				                    	Profile {{ $iSequenceId }} out of {{ $iTotal }}
+				                    	{{ $iSequenceId > 0 ? 'Profile '.$iSequenceId.' out of '.$iTotal : '' }}
 				                    	<?php if($iSequenceId != $iTotal) { ?>
 				                    	<a href="{{ action('BabySittersController@show', [ $iNextId ])  }}">
 				                    		<button class="btn btn-default btn-sm" type="button">
