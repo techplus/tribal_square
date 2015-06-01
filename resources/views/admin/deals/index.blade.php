@@ -16,7 +16,10 @@
                             @endif
                             @if( strtolower($sStatus) != 'expired' )
                             <th style="width:35%;text-align:center;">Actions</th>
+                            @else
+                            <th style="width:35%;text-align:center;">Expired Date</th>
                             @endif
+
 						</thead>
 						<tbody>
 							@foreach( $aDeals AS $oDeal )
@@ -47,6 +50,11 @@
                                             <button class="btn btn-danger action" data-status="deleted" data-id="{{$oDeal->id}}">Delete Forever</button>
                                         @endif
 									</td>
+                                    @else
+                                    <td style="text-align:center;">
+                                        {{ date('d-m-Y',strtotime($oDeal->end_date)) }}
+                                    </td>    
+
                                     @endif
 								</tr>
 							@endforeach
