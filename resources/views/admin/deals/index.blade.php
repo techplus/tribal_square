@@ -14,7 +14,9 @@
                             @if( strtolower($sStatus) == 'approved' )
                                 <th class="text-center">Deal Of The Day</th>
                             @endif
+                            @if( strtolower($sStatus) != 'expired' )
                             <th style="width:35%;text-align:center;">Actions</th>
+                            @endif
 						</thead>
 						<tbody>
 							@foreach( $aDeals AS $oDeal )
@@ -24,7 +26,8 @@
                                     @if( strtolower($sStatus) == 'approved' )
                                         <td class="text-center"><input type="checkbox" class="deal_of_the_day" data-id="{{$oDeal->id}}" value="1" {{ $oDeal->is_deal_of_the_day ? 'checked=""' : '' }}> </td>
                                     @endif
-									<td style="text-align:center;">
+									@if( strtolower($sStatus) != 'expired' )
+                                    <td style="text-align:center;">
                                         @if( $sStatus == "Pending" )
                                             <button class="btn btn-success action" data-status="approved" data-id="{{$oDeal->id}}">Approve</button>&nbsp;
                                             <button class="btn btn-danger action" data-status="declined" data-id="{{$oDeal->id}}">Decline</button>
@@ -44,6 +47,7 @@
                                             <button class="btn btn-danger action" data-status="deleted" data-id="{{$oDeal->id}}">Delete Forever</button>
                                         @endif
 									</td>
+                                    @endif
 								</tr>
 							@endforeach
 						</tbody>
