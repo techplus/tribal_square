@@ -63,7 +63,6 @@
 
             <div class="row">
                 <div class="container">
-
                     @if( empty( Auth::user()->verfication_code ) )
                         <div class="signin_box">
                             <h1>${{$plan->amount}} / Month

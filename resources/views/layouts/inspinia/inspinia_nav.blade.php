@@ -40,8 +40,8 @@
                 <li class="{{Request::url() == route('providers.show',[Auth::user()->id]) ? 'active' : ''}}">
                     <a href="{{route('providers.show',[Auth::user()->id])}}"><i class="fa fa-cog"></i> <span class="nav-label">Settings</span></a>
                 </li>
-                <li>
-                    <a href="#"><i class="fa fa-list-alt"></i> <span class="nav-label">Billing</span></a>               
+                <li class="{{Request::url() == route('billing.index') ? 'active' : ''}}">
+                    <a href="{{route('billings.index')}}"><i class="fa fa-list-alt"></i> <span class="nav-label">Billing</span></a>
                 </li>
                 
                 {{--<li>--}}

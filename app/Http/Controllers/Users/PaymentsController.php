@@ -8,17 +8,15 @@ use Request;
 use App\Repositories\PaypalRest\PaypalRestInterface;
 use Carbon\Carbon;
 use Auth;
+use Log;
 class PaymentsController extends Controller
 {
 	//to create plan one time call only
 //	public function getCreatePlans(PaypalRestInterface $paypal)
 //	{
-//		$plan = $paypal->createPlan('Standar Providers','Subscription Plan For standard provider',500);
+//		$plan = $paypal->createPlan('Standard Providers test','Subscription Plan For standard provider',5);
 //		$plan = $paypal->activatePlan($plan->getId());
-//		var_dump($plan->getId());
-//		$plan = $paypal->createPlan('Standar BabySitters','Subscription Plan For standard baby sitters',500);
-//		$plan = $paypal->activatePlan($plan->getId());
-//		dd($plan->getId());
+//		dd($plan);
 //	}
 	public function getPaymentDone(PaypalRestInterface $paypal)
 	{
@@ -37,6 +35,11 @@ class PaymentsController extends Controller
 		Auth::user()->subscription_end_at = $newDate;
 		session(['payment_successfull'=>true]);
 		return redirect()->to(url('/'));
+	}
+
+	public function anyPaymentReceived()
+	{
+		Log::info(json_encode(Request::all()));
 	}
 
 	public function getPaymentCancel(PaypalRestInterface $paypal)
