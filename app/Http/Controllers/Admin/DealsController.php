@@ -20,7 +20,7 @@ Class DealsController extends Controller{
 		switch( $status )
 		{
 			case "approved" :
-				$oDeal = $oDeal->where('is_approved_by_admin',1);
+				$oDeal = $oDeal->where('is_approved_by_admin',1)->future();
 				break;
 			case "declined":
 				$oDeal = $oDeal->where('is_approved_by_admin',2);
