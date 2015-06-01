@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Deal;
 use Request;
 use App\Models\UserType;
 use App\Models\Account;
@@ -37,13 +38,14 @@ class BabySittersController extends Controller {
 		$this->data['aNationality'] = Nationality::all();
 		$this->data['aReligion'] = Religion::all();
 
-		$aSearch = session('search');
+        $aSearch = session('search');
 		
 		$iLimit = 5;
 		$iOffset = 0;
 		
-		$aResp = $this->getBabysitters($iLimit,$iOffset,$aSearch);	
-		$aBabySitters = $aResp['aBabySitters'];
+		$aResp = $this->getBabysitters($iLimit,$iOffset,$aSearch);
+
+        $aBabySitters = $aResp['aBabySitters'];
 
 		$this->data['iTotal'] = $aResp['iTotal'];
 		$this->data['aBabySitters'] = $aBabySitters;

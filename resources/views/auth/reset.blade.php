@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="page-wrap">
-        <div class="row header_wrap">
+        <div class="row header_wrap new_header_wrap">
             <div class="container">
                 <div class="col-xs-12">
                     <div class="logo">
                         <a href="{{url('/')}}">
-                            <img src="{{asset('/images/logo.png')}}" alt="" class="img-responsive">
+                            <img src="{{asset('/images/logo1.jpg')}}" alt="" class="img-responsive">
                         </a>
                     </div>
 
