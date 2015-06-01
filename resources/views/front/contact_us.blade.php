@@ -91,7 +91,10 @@
                             </form>
                         </div>
                         <div class="col-sm-6 login_box_right">
+                            <h3>Location: {{$content['location'] ? $content['location']->descriptions : ''}}</h3>
 
+                            <div class="clearfix"></div>
+                            <h3>Phone: {{$content['phone'] ? $content['phone']->descriptions : ''}}</h3>
                         </div>
                     </div>
                 </div>

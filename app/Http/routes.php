@@ -37,6 +37,7 @@ Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 	Route::resource('admin/privacy-policy','Admin\PrivacypolicyController',['only'=>['index','update']] );
 	Route::resource('admin/terms','Admin\TermsController',['only'=>['index','update']] );
 	Route::resource('admin/refund-policy','Admin\RefundpolicyController',['only'=>['index','update']] );
+	Route::resource('admin/contact-us','Admin\ContactUsController',['only'=>['index','store']] );
 	//Route::controller('admin/sales-agents','Admin\AgentEarningsController');
 });
 
@@ -53,12 +54,12 @@ Route::group(['middleware'=>['auth.providers','payment']],function(){
 		Session::put('success_deal','Your Deal details have been successfully posted to Admin. It will go live soon.');			
 		return response()->json([]);
 	});
-	Route::resource('billings','Users\BillingsController');
+	Route::resource('provider/billings','Users\BillingsController');
 });
 Route::group(['middleware'=>['auth.babysitters','payment']],function(){
 	//Route::resource('baby-sitters','Users\BabySittersController',['only'=>['index']]);
 	Route::controller('baby-sitters','Users\BabySittersController');
-	Route::resource('billing','Users\BillingsController');
+	Route::resource('baby-sitter/billings','Users\BillingsController');
 });
 
 Route::group(['middleware'=>['auth.salesagnet']],function(){

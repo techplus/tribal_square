@@ -122,6 +122,7 @@
 									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "privacy-policy" ) ? "active" : "" }}'><a href="{{ route('admin.privacy-policy.index') }}">Privacy Policy</a></li>
 									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "terms" ) ? "active" : "" }}'><a href="{{ route('admin.terms.index') }}">Terms</a></li>
 									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "refund-policy" ) ? "active" : "" }}'><a href="{{ route( 'admin.refund-policy.index')}}">Refund Policy</a></li>
+                                    <li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "contact-us" ) ? "active" : "" }}'><a href="{{ route( 'admin.contact-us.index')}}">Contact Us</a></li>
 								</ul>
 							</li>
 						</ul>
