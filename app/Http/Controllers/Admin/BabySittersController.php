@@ -102,6 +102,8 @@ Class BabySittersController extends Controller{
         $this->data['sStatus'] = ucfirst($this->data['sStatus']);
 
 		$this->data['aDayShifts'] = $aDayShifts;
+		$this->data['iSequenceId'] = 0;
+		$this->data['iTotal'] = 0;
 		$this->data['layout'] = 'layouts.admin';
 		return $this->renderView( 'front.babysitter_profile' );
 	}
