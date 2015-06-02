@@ -281,9 +281,9 @@
                                 <div class="col-lg-12">
                                 	<div class="col-lg-6">
 	                                	<div class="form-group">
-	                                            <label class="col-lg-4 control-label">Website *</label>
+	                                            <label class="col-lg-4 control-label">Website</label>
 	                                            <div class="col-lg-8">
-	                                                <input id="website" name="website" type="text" value="{{$oDeal->website}}" class="form-control required">
+	                                                <input id="website" name="website" type="text" value="{{$oDeal->website}}" class="form-control">
 	                                            </div>
 	                                    </div>                                   	                            		
 	                                    <div class="form-group">
