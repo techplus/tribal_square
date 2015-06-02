@@ -1,4 +1,4 @@
-@extends('layouts.front')
+  @extends('layouts.front')
 
 @section('content')
  @include('front.getimage')
@@ -72,7 +72,7 @@
                         <!-- <a class="linkcolor" href="{{ route('search.classified.show',[ $category->id ]) }}?type=classified"> -->
                         <img class="img-responsive" src="{{$imgLink}}">
                             <div class="description">
-                                <h4>{{ $category->name }}</h4>  
+                                <h5>{{ $category->name }}</h5>  
                             </div>
                         </a>
                     </div>
