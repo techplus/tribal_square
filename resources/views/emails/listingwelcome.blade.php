@@ -12,7 +12,7 @@
             <tr>
             <td>
                 <h3 style="color:#ffffff;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:15px;font-weight:300;line-height:150%;margin:0;padding:15px 15px;text-align:right">
-                    <img src="{{asset('/images/TSSittersLogo.jpg')}}" height="41" alt="" class="img-responsive"><br>
+                    <img src="{{asset('/images/TSListings_Logo.jpg')}}" height="41" alt="" class="img-responsive"><br>
                     Deals :: Sitters :: Listings <br>
                     Date : {{ date("d-m-Y") }}</h3>
             </td>

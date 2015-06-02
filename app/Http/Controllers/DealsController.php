@@ -57,7 +57,6 @@ class DealsController extends Controller {
 		$this->data['aLatestDeals'] = $oLatestDealsBuilder->with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
 
 		$this->data['aLatestDealsoftheDay'] = Deal::with( [ 'CoverPic' ] )->approved()->future()->dealoftheday()->orderBy('is_deal_of_the_day','ASC')->take(1)->get();
-		
 		return $this->renderView('front.search_deals');
 	}
 

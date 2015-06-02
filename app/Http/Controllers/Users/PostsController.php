@@ -74,7 +74,7 @@ class PostsController extends Controller
 		        ), function($message) use ($Uemail)
 				{
 					// sitter@tribalsquare.com
-				    $message->from('info@techplussoftware.com', 'Tribal Square');
+				    $message->from('listings@tribalsquare.com', 'Tribal Square');
 			  		$message->to($Uemail)->subject('Welcome Email');
 				});
 				return response ()->json ( $oClassified->toArray () );
