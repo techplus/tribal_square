@@ -90,11 +90,11 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="col-sm-6 login_box_right">
-                            <h3>Location: {{$content['location'] ? $content['location']->descriptions : ''}}</h3>
-
+                        <div class="col-sm-6 login_box_right" style="border-left: none;">
+                            <h6>Location: {{$content['location'] ? $content['location']->descriptions : ''}}</h6>
+                            <div id="map_canvas" style="width:100%;height:200px;float:left"></div>
                             <div class="clearfix"></div>
-                            <h3>Phone: {{$content['phone'] ? $content['phone']->descriptions : ''}}</h3>
+                            <h4>Phone: {{$content['phone'] ? $content['phone']->descriptions : ''}}</h4>
                         </div>
                     </div>
                 </div>
@@ -117,4 +117,33 @@
 }
 
 </style>
+    <script type="text/javascript">
+        function initialize() {
+            // Create the autocomplete object, restricting the search
+            // to geographical location types.
+            var myLatlong   =   new google.maps.LatLng(-33.924868,18.424055);
+            var myOptions   =   {
+                zoom:8,
+                center:myLatlong,
+                mapTypeId:google.maps.MapTypeId.ROADMAP
+            };
+            map          =   new google.maps.Map(document.getElementById('map_canvas'),myOptions);
+            geocoder      =   new google.maps.Geocoder();
+            var address = '{{$content['location']->descriptions}}';
+            if( address.length ) {
+                geocoder.geocode( { 'address' : address } , function ( results , status ) {
+                    if ( status == google.maps.GeocoderStatus.OK ) {
+                        map.setCenter( results[ 0 ].geometry.location );
+                        var marker = new google.maps.Marker( {
+                            map      : map ,
+                            position : results[ 0 ].geometry.location
+                        } );
+                    } else {
+                        alert( "Geocode was not successful for the following reason: " + status );
+                    }
+                } );
+            }
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
 @endsection
