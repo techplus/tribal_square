@@ -19,8 +19,17 @@ class ProvidersMiddleware {
 
 		$oUser = Auth::user()->UserTypes()->first();
 		if( $oUser->name != 'Providers' )
-			return response()->redirectToAction('HomeController@getIndex');
-
+		{
+			if( $oUser->name == "SuperAdmin" OR $oUser->name == 'Admin' )
+			{
+				return $next($request);
+			}
+			else
+			{
+				return response()->redirectToAction('HomeController@getIndex');	
+			}			
+			
+		}	
 		return $next($request);
 	}
 

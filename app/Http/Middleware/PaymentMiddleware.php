@@ -14,7 +14,19 @@ class PaymentMiddleware {
 	public function handle($request, Closure $next)
 	{
 		if( empty( Auth::user()->subscription_end_at) OR strtotime(Auth::user()->subscription_end_at ) < time() )
-			return response()->redirectToAction('Auth\RegisterController@getStep2');
+		{
+			$oUser = Auth::user()->UserTypes()->first();
+			if( $oUser->name == "SuperAdmin" OR $oUser->name == 'Admin' )
+			{
+				return $next($request);
+			}
+			else
+			{
+				return response()->redirectToAction('Auth\RegisterController@getStep2');	
+			}
+		}
+			
+			
 
 		return $next($request);
 	}

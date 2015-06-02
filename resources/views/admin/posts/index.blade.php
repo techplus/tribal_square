@@ -20,10 +20,12 @@
 									<td>{{ $oPost->ListingCategory->name }}</td>
 									<td>
                                         @if( $sStatus == "Pending" )
-											<button class="btn btn-success action" data-status="approved" data-id="{{$oPost->id}}">Approve</button>&nbsp;
+											<a target="_blank" href="{{route('posts.edit',[$oPost->id])}}" class="btn btn-primary">edit</a>
+                                            <button class="btn btn-success action" data-status="approved" data-id="{{$oPost->id}}">Approve</button>&nbsp;
 										    <button class="btn btn-danger action" data-status="declined" data-id="{{$oPost->id}}">Decline</button>
                                             <button class="btn btn-danger action" data-status="archived" data-id="{{$oPost->id}}">Archive</button>
                                         @elseif( $sStatus == 'Approved' )
+                                            <a target="_blank" href="{{route('posts.edit',[$oPost->id])}}" class="btn btn-primary">edit</a>
                                             <button class="btn btn-success action" data-status="pending" data-id="{{$oPost->id}}">Move To Pending</button>&nbsp;
                                             <button class="btn btn-danger action" data-status="declined" data-id="{{$oPost->id}}">Decline</button>
                                             <button class="btn btn-danger action" data-status="archived" data-id="{{$oPost->id}}">Archive</button>
