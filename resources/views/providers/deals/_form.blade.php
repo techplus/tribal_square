@@ -483,7 +483,7 @@
             discount = ( new_price1 * 100 ) / orig_price ;  
             discount = discount.toFixed(2);
           }
-          alert(discount);          
+          //alert(discount);          
            $('#discount_percentage').val(discount);
         }
         $(document).ready(function(){  
