@@ -29,7 +29,7 @@ class HomeController extends Controller {
 	public function __construct()
 	{		
 //		$this->middleware('auth');
-		$this->data['aFooterData'] = Content::all();
+		$this->data['aFooterData'] = Content::whereNotIn('id', [4, 5])->get();;
 	}
 
 	/**
@@ -39,7 +39,7 @@ class HomeController extends Controller {
 	 */
 	public function getIndex()
 	{
-		$this->data['aFooterData'] = Content::all();
+		$this->data['aFooterData'] = Content::whereNotIn('id', [4, 5])->get();;
 
 		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->approved()->future()->orderBy('is_deal_of_the_day','DESC')->orderBy('updated_at','DESC')->take(4)->get();
 
@@ -49,7 +49,7 @@ class HomeController extends Controller {
 
 	public function getTerms()
 	{
-		$this->data['aFooterData'] = Content::all();
+		$this->data['aFooterData'] = Content::whereNotIn('id', [4, 5])->get();;
 
 		$this->data['aFooterTerms'] = Content::find(2);
 
@@ -58,7 +58,7 @@ class HomeController extends Controller {
 
 	public function getRefundpolicy()
 	{
-		$this->data['aFooterData'] = Content::all();
+		$this->data['aFooterData'] = Content::whereNotIn('id', [4, 5])->get();;
 
 		$this->data['aFooterRefund'] = Content::find(3);
 
@@ -66,7 +66,7 @@ class HomeController extends Controller {
 	}
 	public function getPrivacypolicy()
 	{
-		$this->data['aFooterData'] = Content::all();
+		$this->data['aFooterData'] = Content::whereNotIn('id', [4, 5])->get();;
 
 		$this->data['aFooterPrivacy'] = Content::find(1);
 

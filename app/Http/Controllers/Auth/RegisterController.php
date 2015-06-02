@@ -15,7 +15,7 @@ class RegisterController extends Controller
 {
 	public function __construct()
 	{
-		$this->data['aFooterData'] = Content::all();
+		$this->data['aFooterData'] = Content::whereNotIn('id', [4, 5])->get();
 
 		$this->middleware('auth',['except'=>['getIndex','postIndex','getStep2']]);
 
