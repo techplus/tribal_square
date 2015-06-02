@@ -40,8 +40,8 @@
                 <li class="{{Request::url() == route('providers.show',[Auth::user()->id]) ? 'active' : ''}}">
                     <a href="{{route('providers.show',[Auth::user()->id])}}"><i class="fa fa-cog"></i> <span class="nav-label">Settings</span></a>
                 </li>
-                <li class="{{Request::url() == route('billing.index') ? 'active' : ''}}">
-                    <a href="{{route('billings.index')}}"><i class="fa fa-list-alt"></i> <span class="nav-label">Billing</span></a>
+                <li class="{{Request::url() == route('provider.billings.index') ? 'active' : ''}}">
+                    <a href="{{route('provider.billings.index')}}"><i class="fa fa-list-alt"></i> <span class="nav-label">Billing</span></a>
                 </li>
                 
                 {{--<li>--}}
@@ -53,6 +53,9 @@
                         <a href="{{ ( $key <= $last_step ) ? action('Users\BabySittersController@getIndex').'/index/'.$sMenu : '#' }}" >{{ $aMenuLables[ $key ] }}</span></a>               
                      </li>                       
                  @endforeach
+                 <li class="{{Request::url() == route('baby-sitter.billings.index') ? 'active' : ''}}">
+                     <a href="{{route('baby-sitter.billings.index')}}"><i class="fa fa-list-alt"></i> <span class="nav-label">Billing</span></a>
+                 </li>
                 
                 @elseif( $oUser->type == "SalesAgent" )      
                 <li {{ ( Request::segment(1) == "sales-agents" ) ? 'class=active' : '' }}>

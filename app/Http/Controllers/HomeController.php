@@ -75,6 +75,8 @@ class HomeController extends Controller {
 
 	public function getContactUs()
 	{
+		$this->data['content']['phone'] = Content::where('content_title','contact_us_phone')->first();
+		$this->data['content']['location'] = Content::where('content_title','contact_us_location')->first();
 		return $this->renderView('front.contact_us');
 	}
 

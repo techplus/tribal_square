@@ -26,18 +26,19 @@
                      </div>
                     @endif
                     <div class="col-sm-8">
-                        <h3 style="margin-bottom: 30px;">Your Active Subscription: ${{$plan->amount}} / Month</h3>
+                        <h3 style="margin-bottom: 30px;">{{ isset($agreement) ? 'Your Active Subscription: $'.$plan->amount.' / Month' : 'You have no active subscription'}}</h3>
                     </div>
                     <div class="col-sm-4">
-                        @if( $agreement->getState() == 'Active' )
-                            <form action="{{route('billings.update',[Auth::user()->id])}}" method="post">
+                        <?php $prefix = Auth::user()->UserTypes()->first()->name == 'Providers' ? 'provider' : 'baby-sitter';  ?>
+                        @if( isset($agreement) && $agreement->getState() == 'Active' )
+                            <form action="{{route($prefix.'.billings.update',[Auth::user()->id])}}" method="post">
                                 <input type="hidden" value="{{csrf_token()}}" name="_token">
                                 <input type="hidden" value="PUT" name="_method">
                                 <input type="hidden" value="suspend" name="_action">
                                 <button class="btn btn-danger pull-right">Cancel My Subscription</button>
                             </form>
-                        @elseif( $agreement->getState() == 'Suspended' )
-                            <form action="{{route('billings.update',[Auth::user()->id])}}" method="post">
+                        @elseif( isset($agreement) && $agreement->getState() == 'Suspended' )
+                            <form action="{{route($prefix.'.billings.update',[Auth::user()->id])}}" method="post">
                                 <input type="hidden" value="{{csrf_token()}}" name="_token">
                                 <input type="hidden" value="PUT" name="_method">
                                 <input type="hidden" value="re-active" name="_action">
@@ -55,7 +56,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @if( count($transactions) > 0 )
+                        @if( isset($transaction) && count($transactions) > 0 )
                             @foreach( $transactions as $transaction )
                                 @if( $transaction->getPayerEmail() )
                                 <tr>
