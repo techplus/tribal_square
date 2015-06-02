@@ -70,8 +70,7 @@
         </a>
         <div class="banner_info" style="bottom: 50px; position: absolute;right: 0;"> 
           <div class="info_wrapper col-xs-12 view_dealbtn">
-              <a class="btn btn-lg custome_blue_btn view_deal" href="http://localhost/tribal_square/search/deals/50">View
-                  Deal</a>
+              <a class="btn btn-lg custome_blue_btn view_deal" href="http://localhost/tribal_square/search/deals/50">Details</a>
           </div>
         </div>
       </div>
