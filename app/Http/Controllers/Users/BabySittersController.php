@@ -17,6 +17,8 @@ use Validator;
 use DB;
 use Hash;
 use File;
+use Session;
+use Config;
 
 class BabySittersController extends Controller
 {
@@ -35,7 +37,25 @@ class BabySittersController extends Controller
 			'4' => 'Experience',
 			'5' => 'Availability',
 			'6' => 'Skill and Abilities'
-	);	
+	);
+
+	public function __construct()
+	{
+		if( Auth::check() )
+		{
+			$oUser = Auth::user();
+			$oType = $oUser->UserTypes()->first();
+			$oUser->type = $oType ? $oType->name : null;
+			if( $oUser->type == "Admin" OR $oUser->type == "SuperAdmin" ) {
+				$id = Session::get('babysitter');
+				$oUser = User::find($id);
+				$oType = $oUser->UserTypes()->first();
+				$oUser->type = $oType ? $oType->name : null;
+			}
+			$this->data['oUser'] = $oUser;
+		}
+		$this->data['categories'] = Config::get('categories');
+	}
 
 	public function getIndex( $section = null )
 	{				
@@ -135,7 +155,7 @@ class BabySittersController extends Controller
 	public function postStore()
 	{
 		$section = Request::input('section');
-		$oUser = Auth::user();
+		$oUser = $this->data['oUser'];
 		$nextSection = "account1";	
 
 		if( $section == "account1" )
@@ -370,8 +390,28 @@ class BabySittersController extends Controller
 				$aData[ 'user_id' ] = $oUser->id;
 				$oSkill = Skill::create($aData);				
 			}	
-			/*if( $oSkill )		
-				$this->__setLastStep(6); 	*/			
+			/*if( $oSkill )
+				$this->__setLastStep(6); 	*/
+			$oUser = Auth::user();
+			$oType = $oUser->UserTypes()->first();
+			$oUser->type = $oType ? $oType->name : null;
+			if( $oUser->type == "Admin" OR $oUser->type == "SuperAdmin" ) {
+				$oBabysitter = $this->data['oUser'];
+				$oType = $oBabysitter->UserTypes()->first();
+				if( $oType )
+				{
+					if( $oBabysitter->trashed() )
+						return redirect()->to(route('admin.babysitters.index')."?status=archived");
+					else if( $oType->pivot->is_approved_by_admin == 0 )
+						return redirect()->to(route('admin.babysitters.index')."?status=pending");
+					else if( $oType->pivot->is_approved_by_admin == 1 )
+						return redirect()->to(route('admin.babysitters.index')."?status=approved");
+					else if( $oType->pivot->is_approved_by_admin == 2 )
+						return redirect()->to(route('admin.babysitters.index')."?status=declined");
+
+
+				}
+			}
 		}
 		
 		return redirect()->to( 'baby-sitters/index/'.$nextSection );
@@ -379,7 +419,7 @@ class BabySittersController extends Controller
 
 	private function __setLastStep( $step )
 	{
-		$oUser = Auth::user();
+		$oUser = $this->data['oUser'];
 		$oUserType = DB::table('user_usertypes')->where( 'user_id' , '=' , $oUser->id )->first();
 		if( $oUserType )
 		{
@@ -388,7 +428,14 @@ class BabySittersController extends Controller
 				unset($oUser->type);
 				$oUser->last_step = $step;
 				$oUser->save();				
-				Auth::user()->last_step = $step;
+
+				if( $oUser->type == "BabySitters" )
+				{
+					Auth::user()->last_step = $step;
+				}
+
+				$this->data['oUser']->last_step = $step;
+
 				DB::table('user_usertypes')->where( 'user_id' , '=' , $oUser->id )->update( [ 'last_step' => $step ] );
 				return $step;
 			}

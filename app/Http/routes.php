@@ -10,8 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-//
-//dd(app());
+
 Route::controllers([
 	'login' => 'Auth\AuthController',
 	'auth'	=>	'Auth\AuthController',
@@ -31,7 +30,7 @@ Route::group( [ 'middleware' => [ 'auth.admin'] ] , function() {
 	Route::get('cat-type','Admin\SubCategoryController@getCatType');
 	Route::resource('admin/deals','Admin\DealsController',['only'=>['index','update','destroy','show']]);
 	Route::resource('admin/posts','Admin\PostsController',['only'=>['index','update','destroy','show']]);
-	Route::resource('admin/babysitters','Admin\BabySittersController',['only'=>['index','update','destroy','show']]);
+	Route::resource('admin/babysitters','Admin\BabySittersController',['only'=>['index','update','destroy','show','edit']]);
 	Route::resource('admin/administrators','Admin\AdminsController');
 	Route::resource('admin/settings','Admin\SettingController',['only'=>['index','update']] );
 	Route::resource('admin/sales-agents','Admin\AgentEarningsController');
@@ -39,12 +38,9 @@ Route::group( [ 'middleware' => [ 'auth.admin'] ] , function() {
 	Route::resource('admin/terms','Admin\TermsController',['only'=>['index','update']] );
 	Route::resource('admin/refund-policy','Admin\RefundpolicyController',['only'=>['index','update']] );
 	Route::resource('admin/contact-us','Admin\ContactUsController',['only'=>['index','store']] );
+
 	Route::controller('baby-sitters','Users\BabySittersController');
 	Route::resource('baby-sitter/billings','Users\BillingsController');
-	//Route::controller('admin/sales-agents','Admin\AgentEarningsController');
-// });
-
-// Route::group(['middleware'=>['auth.providers','payment']],function(){
 	Route::resource('providers','Users\ProvidersController',['only'=>['index','show','update']]);
 	Route::resource('posts','Users\PostsController');
 	Route::resource('posts.images','Users\ImagesController',['only'=>['store','update','destroy']]);
@@ -77,9 +73,7 @@ Route::group(['middleware'=>['auth.providers','payment']],function(){
 });
 
 
-
 Route::group(['middleware'=>['auth.babysitters','payment']],function(){
-	//Route::resource('baby-sitters','Users\BabySittersController',['only'=>['index']]);
 	Route::controller('baby-sitters','Users\BabySittersController');
 	Route::resource('baby-sitter/billings','Users\BillingsController');
 });
@@ -89,20 +83,18 @@ Route::group(['middleware'=>['auth.salesagnet']],function(){
 	Route::controller('sales-agents','Users\SalesAgentController');
 });
 
+Route::resource('search','SearchController',['only'=>'store']);
+Route::resource('search/classified','ClassifiedsController');
+Route::resource('search/babysitters','BabySittersController',[ 'only' => [ 'index' , 'show' ] ]);
+Route::resource('search/deals','DealsController');
+Route::resource('search/categories','CategoriesController');
+Route::post('search/babysitters/paginated-baby-sitters','BabySittersController@postPaginatedBabySitters');
+Route::controller('shopping-cart','ShoppingCartsController');
+Route::controller('/','HomeController');
 
-
-// Route::group( ['middleware' => ['guest'] ], function() {
+// Route::group( ['middleware' => ['guest'] ], function() {});
 	
-	Route::resource('search','SearchController',['only'=>'store']);
-	Route::resource('search/classified','ClassifiedsController');
-	Route::resource('search/babysitters','BabySittersController',[ 'only' => [ 'index' , 'show' ] ]);
-	//Route::get('search/babysitters/show/{user_id}','BabySittersController@show');
-	Route::resource('search/deals','DealsController');
-	Route::resource('search/categories','CategoriesController');
-	Route::post('search/babysitters/paginated-baby-sitters','BabySittersController@postPaginatedBabySitters');
-	Route::controller('shopping-cart','ShoppingCartsController');
-	Route::controller('/','HomeController');
-	//Route::get('/terms', 'HomeController@terms');
-// });
+
+
 
 

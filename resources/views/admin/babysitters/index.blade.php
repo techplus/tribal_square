@@ -23,10 +23,12 @@
                                         <td>{{ ( $oUser->Account ) ? $oUser->Account->country : '-' }}</td>
     									<td>
                                             @if( $sStatus == "Pending" )
+                                                <a href="{{ route('admin.babysitters.edit',[ $oUser->id ]) }}" target="_blank"><button class="btn btn-primary">Edit</button></a>&nbsp;
     											<button class="btn btn-success action" data-status="approved" data-id="{{$oUser->id}}">Approve</button>&nbsp;
     										    <button class="btn btn-danger action" data-status="declined" data-id="{{$oUser->id}}">Decline</button>
                                                 <button class="btn btn-danger action" data-status="archived" data-id="{{$oUser->id}}">Archive</button>
                                             @elseif( $sStatus == 'Approved' )
+                                                <a href="{{ route('admin.babysitters.edit',[ $oUser->id ]) }}" target="_blank"><button class="btn btn-primary">Edit</button></a>&nbsp;
                                                 <button class="btn btn-success action" data-status="pending" data-id="{{$oUser->id}}">Move To Pending</button>&nbsp;
                                                 <button class="btn btn-danger action" data-status="declined" data-id="{{$oUser->id}}">Decline</button>
                                                 <button class="btn btn-danger action" data-status="archived" data-id="{{$oUser->id}}">Archive</button>

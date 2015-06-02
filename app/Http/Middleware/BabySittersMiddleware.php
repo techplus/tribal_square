@@ -2,6 +2,7 @@
 
 use Closure;
 use Auth;
+use Illuminate\Support\Facades\Session;
 
 class BabySittersMiddleware {
 
@@ -18,7 +19,7 @@ class BabySittersMiddleware {
 			return redirect()->action('Users\BabySittersController@getIndex');
 
 		$oUser = Auth::user()->UserTypes()->first();
-		if( $oUser->name != 'BabySitters' )
+		if( $oUser->name != 'BabySitters' AND $oUser->name != "Admin" AND $oUser->name != "SuperAdmin" )
 			return response()->redirectToAction('HomeController@getIndex');
 
 		return $next($request);
