@@ -41,7 +41,7 @@ class PasswordController extends Controller {
 
 	public function getIndex()
 	{
-		$this->data['aFooterData'] = Content::all();
+		$this->data['aFooterData'] = Content::whereNotIn('id', [4, 5])->get();
 		
 		//return $this->getEmail();
 		return $this->renderView('auth.password');

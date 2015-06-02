@@ -40,7 +40,7 @@ class AuthController extends Controller {
 	 */
 	public function __construct(Guard $auth, Registrar $registrar)
 	{
-		$this->data['aFooterData'] = Content::all();
+		$this->data['aFooterData'] = Content::whereNotIn('id', [4, 5])->get();
 		
 		$this->auth = $auth;
 		$this->registrar = $registrar;
