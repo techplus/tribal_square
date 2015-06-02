@@ -72,7 +72,7 @@
                 geocoder.geocode( { 'address' : address } , function ( results , status ) {
                     if ( status == google.maps.GeocoderStatus.OK ) {
                         map.setCenter( results[ 0 ].geometry.location );
-                        var marker = new google.maps.Marker( {
+                        marker = new google.maps.Marker( {
                             map      : map ,
                             position : results[ 0 ].geometry.location
                         } );
@@ -87,6 +87,8 @@
             var place = autocomplete1.getPlace();
             place.geometry.location.lat();
             var location    =   new google.maps.LatLng(place.geometry.location.lat(),place.geometry.location.lng());
+            if( marker )
+                marker.setMap(null);
             marker          =   new google.maps.Marker({
                 map:map,
                 draggable:true
