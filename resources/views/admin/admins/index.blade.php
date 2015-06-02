@@ -17,10 +17,14 @@
                     </div>
                 @endif
                 <div class="table-responsive">
+                    <?php $userType = Auth::user()->UserTypes()->first() ?>
                     <table class="vTable table table-stripped">
                         <thead>
                         <th>Email</th>
                         <th>Action</th>
+                        @if( $userType->name == 'SuperAdmin' )
+                        <th></th>
+                        @endif
                         </thead>
                         <tbody>
                         @if( $admins->count() > 0 )
@@ -28,6 +32,9 @@
                                 <tr data-id="{{ $user->id }}">
                                     <td>{{$user->email}}</td>
                                     <td><a href="{{route('admin.administrators.edit',[$user->id])}}">Change Password</a> </td>
+                                    @if( $userType->name == 'SuperAdmin' )
+                                    <td><button onclick="deleteAdmin({{$user->id}})" class="btn btn-danger">Delete</button> </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         @endif
@@ -58,13 +65,25 @@
     </div>
     <script>
         var status,id;
-        function onSuccess($id,$sStatus)
+        function deleteAdmin(i)
+        {
+            id = i
+            $('#confirmation_modal' ).modal('show');
+        }
+        function onSuccess($id)
         {
             $('tr[data-id='+$id+']').remove();
             $('#confirmation_modal' ).modal('hide');
         }
         $(document).ready(function(){
-            @include('admin.babysitters.scripts')
+            $('#confirm_btn' ).on('click',function(){
+                $.ajax({
+                    url: '{{url('admin/administrators')}}' + '/' +id,
+                    type: 'delete'
+                } ).success(function(data){
+                    onSuccess(id);
+                })
+            });
         });
     </script>
 @endsection
