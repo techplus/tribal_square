@@ -270,7 +270,7 @@
 
         }, 1000);
     </script>
-   {{-- <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>--}}
+   <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
     <script type="text/javascript">
         function onSuccess($id,$sStatus)
         {
