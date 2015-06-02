@@ -20,7 +20,8 @@ Route::controllers([
     'payments'  => 'Users\PaymentsController'
 ]);
 Route::resource('languages','LanguagesController');
-Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
+Route::group( [ 'middleware' => [ 'auth.admin'] ] , function() {
+
 	Route::get('admin/sales-agents/show-earnings/{id}/{year?}','Admin\AgentEarningsController@getShowEarnings');
 	Route::get('admin/sales-agents/show-earnings-monthly/{id}/{year?}/{month?}','Admin\AgentEarningsController@getShowEarningsMonthly');
 	Route::get('admin/sales-agents/update-earning/{id}/{year?}/{month?}','Admin\AgentEarningsController@getUpdateEarning');
@@ -41,6 +42,22 @@ Route::group( [ 'middleware' => [ 'auth.admin' ] ] , function() {
 	Route::controller('baby-sitters','Users\BabySittersController');
 	Route::resource('baby-sitter/billings','Users\BillingsController');
 	//Route::controller('admin/sales-agents','Admin\AgentEarningsController');
+// });
+
+// Route::group(['middleware'=>['auth.providers','payment']],function(){
+	Route::resource('providers','Users\ProvidersController',['only'=>['index','show','update']]);
+	Route::resource('posts','Users\PostsController');
+	Route::resource('posts.images','Users\ImagesController',['only'=>['store','update','destroy']]);
+	Route::resource('posts.videos','Users\VideosController',['only'=>['store','update','destroy']]);
+	Route::resource('deals','Users\DealsController');	
+	Route::resource('deals.images','Users\ImagesController',['only'=>['store','update','destroy']]);
+	Route::resource('deals.videos','Users\VideosController',['only'=>['store','update','destroy']]);	
+	Route::controller('deals','Users\DealsController');	
+	Route::get('set-success-session-deal',function(){		
+		Session::put('success_deal','Your Deal details have been successfully posted to Admin. It will go live soon.');			
+		return response()->json([]);
+	});
+	Route::resource('provider/billings','Users\BillingsController');
 });
 
 Route::group(['middleware'=>['auth.providers','payment']],function(){
@@ -58,6 +75,9 @@ Route::group(['middleware'=>['auth.providers','payment']],function(){
 	});
 	Route::resource('provider/billings','Users\BillingsController');
 });
+
+
+
 Route::group(['middleware'=>['auth.babysitters','payment']],function(){
 	//Route::resource('baby-sitters','Users\BabySittersController',['only'=>['index']]);
 	Route::controller('baby-sitters','Users\BabySittersController');

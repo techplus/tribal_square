@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Http\Requests\AddAdminRequest;
 use App\Models\UserType;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use Request;
 use Mail;
@@ -105,7 +106,12 @@ class AdminsController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$user = User::find($id);
+		if( $user )
+		{
+			$user->forceDelete();
+			DB::table('user_usertypes')->where('user_id',$id)->delete();
+		}
 	}
 
 	/**

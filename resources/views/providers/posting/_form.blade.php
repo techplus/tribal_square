@@ -502,9 +502,8 @@
                         });
                     }
                     else
-                        window.location.href = "{{ route('posts.index') }}";
-
-                   //form.submit(form);
+                        window.location.href = "{{ route('posts.index') }}"; 
+                        //form.submit(form);
                 }
             }).validate({
                         errorPlacement: function (error, element)

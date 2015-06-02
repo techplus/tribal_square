@@ -72,9 +72,7 @@
 		<nav class="navbar navbar-default navbar-stacked">			
 					<nav>
 						<ul class="nav">
-                            @if( Auth::user()->whereHas('UserTypes',function($q){
-                                $q->where('name','SuperAdmin');
-                            })->get()->count() > 0)
+                            @if( Auth::user()->UserTypes()->first()->name == 'SuperAdmin')
                                 <li class="{{Request::segment(2) == 'administrators' ? 'active' : ''}}"><a href="{{route('admin.administrators.index')}}">Admin Users</a></li>
                             @endif
                             <li class="{{ ( Request::segment(2) == "sales-agents" ) ? 'active' : ''  }}" data-toggle="collapse" data-target="#submenu1" aria-expanded="true">
