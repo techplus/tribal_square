@@ -127,7 +127,6 @@
                                 <div class="clearfix"></div>
                             </div>
                         </div>
-                        <p>Add keywords to filter the terms found in a job search</p>
                         <!-- <input type="button" class="green_btn btn btn-md btn-block" value="Search"> -->
                         <input type="submit" name="search" class="green_btn btn btn-md btn-block" value="Search">
                         <div class="clearfix"></div><br>
