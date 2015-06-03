@@ -635,12 +635,48 @@
                             dataType:'json'
                         } ).success(function(data){
                             setSession(); 
-                            window.location.href = "{{ route('deals.index') }}";
+                            // redirect if superadmin or admin
+                            <?php
+                            $oUser = Auth::user()->UserTypes()->first(); 
+                            $userType = $oUser->name;
+                            if($userType == 'SuperAdmin' || $userType == 'Admin'){
+                              if($oDeal->is_approved_by_admin == 0)
+                              { ?>
+                                window.location.href = "{{ route( 'admin.deals.index' ) }}?status=pending";
+                              <?php }
+                              elseif($oDeal->is_approved_by_admin == 1)
+                              { ?>
+                                 window.location.href = "{{ route( 'admin.deals.index' ) }}?status=approved"; 
+                              <?php }
+                            }
+                            else
+                            { ?>
+                             window.location.href = "{{ route('deals.index') }}";  
+                            <?php } ?>
+                            // redirect if superadmin or admin
                         });
                     }
                     else{
                         setSession();
-                        window.location.href = "{{ route('deals.index') }}";
+                        // redirect if superadmin or admin
+                        <?php
+                          $oUser = Auth::user()->UserTypes()->first(); 
+                          $userType = $oUser->name;
+                          if($userType == 'SuperAdmin' || $userType == 'Admin'){
+                            if($oDeal->is_approved_by_admin == 0)
+                            { ?>
+                              window.location.href = "{{ route( 'admin.deals.index' ) }}?status=pending";
+                            <?php }
+                            elseif($oDeal->is_approved_by_admin == 1)
+                            { ?>
+                               window.location.href = "{{ route( 'admin.deals.index' ) }}?status=approved"; 
+                            <?php }
+                          }
+                          else
+                          { ?>
+                           window.location.href = "{{ route('deals.index') }}";  
+                          <?php } ?>
+                          // redirect if superadmin or admin
                     }
                    //form.submit(form);
                 }

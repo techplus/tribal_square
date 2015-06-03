@@ -498,11 +498,50 @@
                             type:"post",
                             dataType:'json'
                         } ).success(function(data){
-                            window.location.href = "{{ route('posts.index') }}";
+                            // redirect if superadmin or admin
+                            <?php
+                            $oUser = Auth::user()->UserTypes()->first(); 
+                            $userType = $oUser->name;
+                            if($userType == 'SuperAdmin' || $userType == 'Admin'){
+                              if($oPost->is_approved_by_admin == 0)
+                              { ?>
+                                window.location.href = "{{ route( 'admin.posts.index' ) }}?status=pending";
+                              <?php }
+                              elseif($oPost->is_approved_by_admin == 1)
+                              { ?>
+                                 window.location.href = "{{ route( 'admin.posts.index' ) }}?status=approved"; 
+                              <?php }
+                            }
+                            else
+                            { ?>
+                             window.location.href = "{{ route('posts.index') }}";  
+                            <?php } ?>
+                            // redirect if superadmin or admin
                         });
                     }
                     else
-                        window.location.href = "{{ route('posts.index') }}"; 
+                    {
+                        // redirect if superadmin or admin
+                        <?php
+                            $oUser = Auth::user()->UserTypes()->first(); 
+                            $userType = $oUser->name;
+                            if($userType == 'SuperAdmin' || $userType == 'Admin'){
+                              if($oPost->is_approved_by_admin == 0)
+                              { ?>
+                                window.location.href = "{{ route( 'admin.posts.index' ) }}?status=pending";
+                              <?php }
+                              elseif($oPost->is_approved_by_admin == 1)
+                              { ?>
+                                 window.location.href = "{{ route( 'admin.posts.index' ) }}?status=approved"; 
+                              <?php }
+                            }
+                            else
+                            { ?>
+                             window.location.href = "{{ route('posts.index') }}";  
+                            <?php } ?>
+                            // redirect if superadmin or admin
+                    }    
+                        //window.location.href = "{{ route('posts.index') }}"; 
                         //form.submit(form);
                 }
             }).validate({
