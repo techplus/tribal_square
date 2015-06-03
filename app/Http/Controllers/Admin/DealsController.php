@@ -37,6 +37,7 @@ Class DealsController extends Controller{
 		}
 		$this->data['aDeals'] = $oDeal->get();
 		$this->data['sStatus'] = ucfirst($status);
+
 		return $this->renderView('admin.deals.index');
 	}
 	public function update($id)

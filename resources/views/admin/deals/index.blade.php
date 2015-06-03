@@ -4,6 +4,7 @@
 		<div class="panel-heading">
 			{{ $sStatus }} Deals			
 		</div>
+    
 		<div class="panel-body">
 			<div class="row">
 				<div class="table-responsive">
@@ -25,7 +26,7 @@
 							@foreach( $aDeals AS $oDeal )
 								<tr data-id="{{ $oDeal->id }}">
 									<td><a href="{{ route('admin.deals.show',[ $oDeal->id ]) }}">{{ $oDeal->title }}</a></td>
-									<td>{{ $oDeal->ListingCategory->name }}</td>
+									<td>{{ ($oDeal->ListingCategory) ? $oDeal->ListingCategory->name : ""}}</td>
                                     @if( strtolower($sStatus) == 'approved' )
                                         <td class="text-center"><input type="checkbox" class="deal_of_the_day" data-id="{{$oDeal->id}}" value="1" {{ $oDeal->is_deal_of_the_day ? 'checked=""' : '' }}> </td>
                                     @endif

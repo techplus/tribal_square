@@ -17,7 +17,7 @@
                             @foreach( $aPosts AS $oPost )
 								<tr data-id="{{ $oPost->id }}">
 									<td><a href="{{ route('admin.posts.show',[ $oPost->id ]) }}">{{ $oPost->title }}</a></td>
-									<td>{{ $oPost->ListingCategory->name }}</td>
+									<td>{{ ($oPost->ListingCategory) ? $oPost->ListingCategory->name : "" }}</td>
 									<td>
                                         @if( $sStatus == "Pending" )
 											<a target="_blank" href="{{route('posts.edit',[$oPost->id])}}" class="btn btn-primary">edit</a>
