@@ -3,6 +3,7 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			{{ $sStatus }} Baby Sitters
+            <button class="btn btn-success pull-right" style="margin-top:-7px;" onclick="addBabysitter();">+ Add Babysitter</button>
 		</div>
 		<div class="panel-body">
 			<div class="row">
@@ -10,7 +11,7 @@
 					<table class="vTable table table-stripped">					
 						<thead>
                             <th style="width:20%;">Name</th>
-                            <th style="width:%;">Title</th>
+                            <th style="width:20%;">Title</th>
                             <th style="width:15%;">Location</th>
                             <th style="width:30%;text-align:center;">Actions</th>
 						</thead>
@@ -71,12 +72,38 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Add Babysitter -->
+    <div class="modal fade" id="modal_add_babysitter" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+            </div>
+        </div>
+    </div>
 <script>
     var status,id;
     function onSuccess($id,$sStatus)
     {
         $('tr[data-id='+$id+']').remove();
         $('#confirmation_modal' ).modal('hide');
+    }
+    function addBabysitter()
+    {
+        $.ajax({
+            url : "{{ route('admin.babysitters.create') }}",
+            data : {},
+            type : "get",
+            success : function(data)
+            {
+                $('#modal_add_babysitter').find('.modal-body').html(data);
+            },
+            error : function(err)
+            {
+                obj = $.parseJson(err);
+                console.log(obj);
+            }
+        });
     }
 	$(document).ready(function(){
         @include('admin.babysitters.scripts')      

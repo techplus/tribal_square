@@ -34,6 +34,15 @@
             margin-left:0;
             margin-right: 0;
         }
+        .help-block{
+            color:#ff0000;
+        }
+        .error{
+            border:1px solid #ff0000;
+        }
+        .valid{
+            border:1px solid #008855;
+        }
 	</style>
 </head>
 <body>
