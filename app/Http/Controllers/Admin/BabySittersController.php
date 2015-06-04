@@ -114,4 +114,16 @@ Class BabySittersController extends Controller
 		Session::put( 'babysitter',$id );
 		return redirect()->to( 'baby-sitters' );
 	}
+
+	public function  create()
+	{
+		$oType = UserType::where('name','=','Babysitters')->first();
+
+		if( !$oType )
+			return response()->json(['error'=>'Something is wrong, try again',500]);
+
+		$this->data['title'] = "Add Baby Sitter";
+		$this->data['type'] = $oType->id;
+		return view('admin.modals.addUser',$this->data);
+	}
 }
