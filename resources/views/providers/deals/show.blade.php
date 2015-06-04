@@ -170,7 +170,16 @@
                                 </div>
                                 <div class="pay_info">
                                     <div>You pay : <strong>${{$deal->new_price}}</strong></div>
-                                    <span>Sold : {{ ($deal->is_approved_by_admin == 1) ? $deal->Purchases->count() : "0"  }}</span>
+                                    <?php $qty = 0; 
+                                        if($deal->Purchases->count() > 0)
+                                        {
+                                            foreach( $deal->Purchases as $purchase )
+                                            {
+                                                $qty += $purchase->quantity;
+                                            }
+                                        }
+                                     ?>
+                                    <span>Sold :  {{ ($deal->is_approved_by_admin == 1) ? $deal->Purchases->count() : "0"  }}</span>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="quantity">

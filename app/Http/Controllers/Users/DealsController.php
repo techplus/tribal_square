@@ -69,6 +69,7 @@ class DealsController extends Controller {
 
 		$this->data['deal'] = $deal;
 
+		//dd($this->data['deal']);
 		return $this->renderView('providers.deals.show');
 	}
 

@@ -274,7 +274,10 @@
     <script type="text/javascript">
         function onSuccess($id,$sStatus)
         {
-             window.location = "{{ route('admin.deals.index') }}?status="+$sStatus;
+            console.log("sdf"+$sStatus);
+            if($sStatus)
+
+            //window.location = "{{ route('admin.deals.index') }}?status="+$sStatus;
         }
         $(document).ready(function () {
             // Define the latitude and longitude positions
