@@ -8,21 +8,22 @@ use Request;
 
 class BillingsController extends Controller
 {
-	private $aMenu = array(
-		'1' => 'account1',
-		'2' => 'account2',
-		'3' => 'bio',
-		'4' => 'experience',
-		'5' => 'availability',
-		'6' => 'skill'
-	);
-	private $aMenuLabels = array(
-		'1' => 'Account Basics',
-		'2' => 'Account Info',
-		'3' => 'Bio & Preferences',
-		'4' => 'Experience',
-		'5' => 'Availability',
-		'6' => 'Skill and Abilities'
+	private $aMenu = array(		
+			'1' => 'account1',
+			'2' => 'account2',
+			'3' => 'bio',
+			'4' => 'experience',
+			'5' => 'availability',
+			'6' => 'skill'
+			
+	);	
+	private $aMenuLabels = array(		
+			'1' => 'Account Basics',
+			'2' => 'Account Info',
+			'3' => 'Bio & Preferences',
+			'4' => 'Experience',
+			'5' => 'Availability',
+			'6' => 'Skill and Abilities'
 	);
 
 	public function index(PaypalRestInterface $paypal)

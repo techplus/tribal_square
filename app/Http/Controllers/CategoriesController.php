@@ -21,11 +21,13 @@ class CategoriesController extends Controller {
 		{
 			$aSearch = Session::get('search');
 			
-			$aSearch['term'] = "";
-			$aSearch['location'] = "";
-			
+				// $aSearch['term'] = "";
+				// $aSearch['location'] = "";
+					
 			$aSearch['type'] = Request::get('type','deals');
 			$aSearch['cat'] = "";
+
+			//dd($aSearch);
 			Session::put( 'search' , $aSearch );
 		}		
 

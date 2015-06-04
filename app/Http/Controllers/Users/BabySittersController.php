@@ -29,6 +29,7 @@ class BabySittersController extends Controller
 			'4' => 'experience',
 			'5' => 'availability',
 			'6' => 'skill'
+			
 	);	
 	private $aMenuLabels = array(		
 			'1' => 'Account Basics',

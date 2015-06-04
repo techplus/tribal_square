@@ -20,7 +20,7 @@
                         <button class="btn btn-danger action" data-status="Pending" data-id="{{$deal->id}}">Move To Pending</button>
                         <button class="btn btn-danger action" data-status="deleted" data-id="{{$deal->id}}">Delete Forever</button>
                     @elseif( $sStatus == "Pending" )
-                        <button class="btn btn-success action" data-status="approved" data-id="{{$deal->id}}">Approve</button>&nbsp;
+                        <button class="btn btn-success action" data-status="approved" data-email="{{$deal->email}}" data-firstname="{{$deal->Owner->firstname}}" data-lastname="{{$deal->Owner->lastname}}" data-id="{{$deal->id}}">Approve</button>&nbsp;
                         <button class="btn btn-danger action" data-status="declined" data-id="{{$deal->id}}">Decline</button>
                         <button class="btn btn-danger action" data-status="archived" data-id="{{$deal->id}}">Archive</button>
                     @elseif( $sStatus == "Approved" )
@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="pay_info">
                                     <div>You pay : <strong>${{$deal->new_price}}</strong></div>
-                                    <span>Sold : 7</span>
+                                    <span>Sold : {{ ($deal->is_approved_by_admin == 1) ? $deal->Purchases->count() : "0"  }} </span>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="quantity">
@@ -200,7 +200,7 @@
                                 <button class="btn btn-danger action" data-status="Pending" data-id="{{$deal->id}}">Move To Pending</button>
                                 <button class="btn btn-danger action" data-status="deleted" data-id="{{$deal->id}}">Delete Forever</button>
                             @elseif( $sStatus == "Pending" )
-                                <button class="btn btn-success action" data-status="approved" data-id="{{$deal->id}}">Approve</button>&nbsp;
+                                <button class="btn btn-success action" data-status="approved" data-email="{{$deal->email}}" data-firstname="{{$deal->Owner->firstname}}" data-lastname="{{$deal->Owner->lastname}}" data-id="{{$deal->id}}">Approve</button>&nbsp;
                                 <button class="btn btn-danger action" data-status="declined" data-id="{{$deal->id}}">Decline</button>
                                 <button class="btn btn-danger action" data-status="archived" data-id="{{$deal->id}}">Archive</button>
                             @elseif( $sStatus == "Approved" )

@@ -170,7 +170,7 @@
                                 </div>
                                 <div class="pay_info">
                                     <div>You pay : <strong>${{$deal->new_price}}</strong></div>
-                                    <span>Sold : 7</span>
+                                    <span>Sold : {{ ($deal->is_approved_by_admin == 1) ? $deal->Purchases->count() : "0"  }}</span>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="quantity">

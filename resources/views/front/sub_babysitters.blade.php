@@ -1,6 +1,4 @@
 <?php 
-
-
 function time_elapsed_string($ptime)
 {
     $etime = time() - $ptime;
@@ -35,8 +33,6 @@ function time_elapsed_string($ptime)
         }
     }
 }
-
-
 ?>
 
 @if( !empty($aBabySitters) )

@@ -50,7 +50,7 @@
             @elseif( $oUser->type == "BabySitters" )      
                  @foreach( $aMenu as $key => $sMenu )
                      <li class="{{ ( $section == $sMenu ) ? 'active' : '' }}">
-                        <a href="{{ ( $key <= $last_step ) ? action('Users\BabySittersController@getIndex').'/index/'.$sMenu : '#' }}" >{{ $aMenuLables[ $key ] }}</span></a>               
+                        <a href="{{ ( $key <= $last_step ) ? action('Users\BabySittersController@getIndex').'/index/'.$sMenu : action('Users\BabySittersController@getIndex').'/index/'.$sMenu }}" >{{ $aMenuLables[ $key ] }}</span></a>               
                      </li>                       
                  @endforeach
                  <li class="{{Request::url() == route('baby-sitter.billings.index') ? 'active' : ''}}">

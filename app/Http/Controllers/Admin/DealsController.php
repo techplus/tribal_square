@@ -58,17 +58,20 @@ Class DealsController extends Controller{
 			$firstname = Request::input('firstname');
 			$lastname = Request::input('lastname');
 			
-			Mail::send('emails.approveddeal',
-				array(
-					'email' => $email,
-					'firstname' => $firstname,
-					'lastname' => $lastname
-				), function($message) use ($email,$firstname,$lastname)
-				{
-					// deals@tribalsquare.com
-					$message->from('deals@tribalsquare.com', 'TribalSquare Deals');
-					$message->to($email)->subject('TribalSquare Deal Approved');
-				});
+			if(Request::input('is_approved_by_admin') == '1')
+			{
+				Mail::send('emails.approveddeal',
+					array(
+						'email' => $email,
+						'firstname' => $firstname,
+						'lastname' => $lastname
+					), function($message) use ($email,$firstname,$lastname)
+					{
+						// deals@tribalsquare.com
+						$message->from('deals@tribalsquare.com', 'TribalSquare Deals');
+						$message->to($email)->subject('TribalSquare Deal Approved');
+					});
+			}
 		}
 		if( Request::has('status') )
 		{
@@ -107,8 +110,8 @@ Class DealsController extends Controller{
 	 * @return Response
 	 */
 	public function show($id)
-	{
-		$deal = Deal::withTrashed()->with('DealImages')->find($id);
+	{	
+		$deal = Deal::withTrashed()->with(['DealImages','Owner'])->find($id);
 		if( ! $deal )
 			return abort(404);
 

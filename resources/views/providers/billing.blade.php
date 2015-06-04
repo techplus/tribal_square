@@ -3,8 +3,7 @@
     <!-- Data Tables -->
     <link href="{{ asset('inspinia/css/plugins/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('inspinia/css/plugins/dataTables/dataTables.responsive.css') }}" rel="stylesheet">
-
-
+    
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox float-e-margins">

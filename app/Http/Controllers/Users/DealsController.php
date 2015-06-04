@@ -63,11 +63,12 @@ class DealsController extends Controller {
 	 */
 	public function show($id)
 	{
-		$deal = Deal::with('DealImages')->find($id);
+		$deal = Deal::with(['DealImages','Purchases'])->find($id);
 		if( ! $deal )
 			return abort(404);
 
 		$this->data['deal'] = $deal;
+
 		return $this->renderView('providers.deals.show');
 	}
 
