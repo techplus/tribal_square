@@ -88,6 +88,9 @@
                             <li class="{{ ( Request::segment(2) == "sales-agents" ) ? 'active' : ''  }}" data-toggle="collapse" data-target="#submenu1" aria-expanded="true">
                                 <a href="{{route('admin.sales-agents.index')}}">Sales Agents</a>
                             </li>
+                            <li class="{{ ( Request::segment(2) == "providers" ) ? 'active' : ''  }}" data-toggle="collapse" data-target="#submenu1" aria-expanded="true">
+                                <a href="{{route('admin.providers.index')}}">Providers</a>
+                            </li>
 							<li data-toggle="collapse" data-target="#submenu1" aria-expanded="true">
 								<a href="#">Categories</a>							
 								<ul class="nav collapse in sub-menu" id="submenu1" role="menu" aria-labelledby="btn-1" aria-expanded="true">
@@ -124,9 +127,9 @@
 									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "deals" ) ? ( ( $sStatus == "Archived" ) ? "active" : "" ) : "" }}'><a href="{{ route( 'admin.deals.index' ,['status'=>'archived'] ) }}">Archived</a></li>
 								</ul>
 							</li>
-							<li data-toggle="collapse" data-target="#submenu4" aria-expanded="true">
+							<li data-toggle="collapse" data-target="#submenu5" aria-expanded="true">
 								<a href="#">Contents</a>							
-								<ul class="nav collapse in sub-menu" id="submenu4" role="menu" aria-labelledby="btn-1" aria-expanded="true">									
+								<ul class="nav collapse in sub-menu" id="submenu5" role="menu" aria-labelledby="btn-1" aria-expanded="true">
 									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "privacy-policy" ) ? "active" : "" }}'><a href="{{ route('admin.privacy-policy.index') }}">Privacy Policy</a></li>
 									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "terms" ) ? "active" : "" }}'><a href="{{ route('admin.terms.index') }}">Terms</a></li>
 									<li class='{{ ( Request::segment(1) == "admin" AND Request::segment(2) == "refund-policy" ) ? "active" : "" }}'><a href="{{ route( 'admin.refund-policy.index')}}">Refund Policy</a></li>
