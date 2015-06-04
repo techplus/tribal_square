@@ -11,6 +11,7 @@ use Facebook\FacebookSession;
 use App\Repositories\PaypalRest\PaypalRestInterface;
 use Request;
 use Mail;
+use Session;
 
 class RegisterController extends Controller
 {
@@ -77,8 +78,10 @@ class RegisterController extends Controller
 			Auth::user()->save();
 		}
 
-		if ( Request::ajax() )
+		if ( Request::ajax() ) {
+			if( $request->input( 'user_type' ) == 3 ) Session::put('success','Babysitter added successfully');
 			return response()->json( [ 'oUser' => $oUser ] );
+		}
 
 		return response()->redirectToAction( 'Auth\RegisterController@getStep2' );
 	}

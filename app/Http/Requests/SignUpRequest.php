@@ -30,4 +30,14 @@ class SignUpRequest extends Request {
 		];
 	}
 
+	public function response(array $errors)
+	{
+		if ($this->ajax() || $this->wantsJson())
+		{
+			$errors['captcha'] = app('captcha')->display();
+			return response()->json($errors,422);
+		}
+
+	}
+
 }

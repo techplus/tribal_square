@@ -67,13 +67,14 @@
                     $.each(obj,function(key,value){
                         if( key == 'g-recaptcha-response')
                         {
-                            $('<div class="col-sm-11 col-xs-12 g-recaptcha-response-error"><p class="text-danger">Captcha validation failed!</p></div>').insertAfter('.g-recaptcha-response-parent');
+                            $('<div class="col-sm-11 col-xs-12 g-recaptcha-response-error"><p class="text-danger help-block">Captcha validation failed!</p></div>').insertAfter('.g-recaptcha-response-parent');
                         }
                         else if( $('input[name="'+key+'"]').length > 0 ) {
                             $('input[name="' + key + '"]').addClass('error');
                             $('input[name="' + key + '"]').parent().append('<p class="help-block">' + value + '</p>');
                         }
                     });
+                    $('.g-recaptcha-response-parent').html(obj.captcha);
                 }
             });
         });
