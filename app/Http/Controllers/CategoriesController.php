@@ -20,6 +20,10 @@ class CategoriesController extends Controller {
 		if( Session::has('search') )
 		{
 			$aSearch = Session::get('search');
+			
+			$aSearch['term'] = "";
+			$aSearch['location'] = "";
+			
 			$aSearch['type'] = Request::get('type','deals');
 			$aSearch['cat'] = "";
 			Session::put( 'search' , $aSearch );

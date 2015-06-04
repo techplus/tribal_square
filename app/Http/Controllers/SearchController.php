@@ -10,6 +10,7 @@ class SearchController extends Controller
 	{
 		$aLastSearch = session( 'search' );
 		//dd($aLastSearch);
+		
 		$aSearch = [ 'term' => Request::input( 'term' , '' ) ];
 		$aSearch[ 'location' ] = Request::input( 'location' , '' );
 		$aSearch[ 'type' ] = Request::input( 'type' , 'deals' );
@@ -73,6 +74,7 @@ class SearchController extends Controller
 		}
 
 		session( [ 'search' => $aSearch ] );
+		
 		if ( $aSearch[ 'type' ] == 'deals' )
 			return redirect()->route( 'search.deals.index' );
 		if ( $aSearch[ 'type' ] == 'classified' )
