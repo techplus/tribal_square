@@ -179,7 +179,7 @@
                                             }
                                         }
                                      ?>
-                                    <span>Sold :  {{ ($deal->is_approved_by_admin == 1) ? $deal->Purchases->count() : "0"  }}</span>
+                                    <span>Sold : {{ $qty }}</span>
                                 </div>
                                 <div class="clearfix"></div>
                                 <div class="quantity">
