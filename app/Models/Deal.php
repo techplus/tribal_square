@@ -9,6 +9,10 @@ class Deal extends Model{
 	{
 		return $this->belongsTo('App\Models\ListingCategory','category_id');
 	}
+	public function Owner()
+	{
+		return $this->belongsTo('App\Models\User','user_id');
+	}
 	public function DealImages()
 	{
 		return $this->hasMany('App\Models\DealImage','deal_id');

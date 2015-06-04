@@ -2,8 +2,10 @@
 namespace App\Http\Controllers\Admin;
 use App\Models\Deal;
 use App\Models\ListingCategory;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Request;
+use Mail;
 Class DealsController extends Controller{
 
 	public function __construct()
@@ -15,7 +17,7 @@ Class DealsController extends Controller{
 
 	public function index()
 	{
-		$oDeal = Deal::with('ListingCategory');
+		$oDeal = Deal::with(['ListingCategory','Owner']);
 		$status = Request::has('status') ? Request::input('status') : 'pending';
 		switch( $status )
 		{
@@ -49,8 +51,24 @@ Class DealsController extends Controller{
 		if( Request::has('is_approved_by_admin') )
 		{
 			$deal->restore();
+			
 			$deal->is_approved_by_admin = Request::input('is_approved_by_admin');
 			$deal->save();
+			$email = Request::input('email');
+			$firstname = Request::input('firstname');
+			$lastname = Request::input('lastname');
+			
+			Mail::send('emails.approveddeal',
+				array(
+					'email' => $email,
+					'firstname' => $firstname,
+					'lastname' => $lastname
+				), function($message) use ($email,$firstname,$lastname)
+				{
+					// deals@tribalsquare.com
+					$message->from('deals@tribalsquare.com', 'TribalSquare Deals');
+					$message->to($email)->subject('TribalSquare Deal Approved');
+				});
 		}
 		if( Request::has('status') )
 		{

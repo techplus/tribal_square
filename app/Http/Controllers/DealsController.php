@@ -12,7 +12,7 @@ class DealsController extends Controller {
 		parent::__construct();
 
 		$this->data['subcategories'] = ListingCategory::Deals()->get();
-		$this->data['aSearch'] = session('search');
+		//$this->data['aSearch'] = session('search');
 	}
 
 	/**
@@ -48,12 +48,12 @@ class DealsController extends Controller {
 		}
 		
 		$oLatestDealsBuilder = $oDealsBuilder;
-		$this->data['oDeals'] = $oDealsBuilder->paginate(4);
+		$this->data['oDeals'] = $oDealsBuilder->orderBy('created_at','DESC')->paginate(4);
 		if( Request::ajax() )
 		{
 			return $this->renderView('front.single_deal');
 		}
-		$this->data['initialRecommonded'] = $oLatestDealsBuilder->skip(4)->take(4)->get();
+		$this->data['initialRecommonded'] = $oLatestDealsBuilder->skip(4)->take(4)->orderBy('created_at','DESC')->get();
 		$this->data['aLatestDeals'] = $oLatestDealsBuilder->with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
 
 		$this->data['aLatestDealsoftheDay'] = Deal::with( [ 'CoverPic' ] )->approved()->future()->dealoftheday()->orderBy('is_deal_of_the_day','ASC')->take(1)->get();

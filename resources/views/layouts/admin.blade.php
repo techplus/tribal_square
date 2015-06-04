@@ -59,6 +59,7 @@
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ "Welcome ".Auth::user()->firstname }} <span class="caret"></span></a>
 								<ul class="dropdown-menu" role="menu">
 									<li><a href="{{ route('admin.settings.index') }}">Settings</a></li>
+									<li><a href="http://forum.tribalsquare.com/" target="_blank">Go to Forum</a></li>
 									<li><a href="{{ action('Auth\AuthController@getLogout') }}">Logout</a></li>
 								</ul>
 							</li>

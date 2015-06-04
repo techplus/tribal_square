@@ -34,7 +34,7 @@
                                     <td style="text-align:center;">
                                         @if( $sStatus == "Pending" )
                                             <a target="_blank" href="{{route('deals.edit',[$oDeal->id])}}" class="btn btn-primary">edit</a>
-                                            <button class="btn btn-success action" data-status="approved" data-id="{{$oDeal->id}}">Approve</button>&nbsp;
+                                            <button class="btn btn-success action" data-status="approved" data-firstname="{{$oDeal->Owner->firstname}}" data-lastname="{{$oDeal->Owner->lastname}}" data-email="{{$oDeal->email}}" data-id="{{$oDeal->id}}">Approve</button>&nbsp;
                                             <button class="btn btn-danger action" data-status="declined" data-id="{{$oDeal->id}}">Decline</button>
                                             <button class="btn btn-danger action" data-status="archived" data-id="{{$oDeal->id}}">Archive</button>
                                         @elseif( $sStatus == 'Approved' )
@@ -98,7 +98,6 @@
             @include('admin.deals.scripts')
             $('.deal_of_the_day' ).on('change',function(){
                 var id = $(this).data('id');
-                var $this = $(this);
                 $.ajax({
                     url: "{{url('admin/deals')}}/"+id,
                     data:{is_deal_of_the_day:$this.prop('checked') ? '1' : 0},

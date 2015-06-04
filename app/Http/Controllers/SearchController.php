@@ -9,6 +9,7 @@ class SearchController extends Controller
 	public function store()
 	{
 		$aLastSearch = session( 'search' );
+		//dd($aLastSearch);
 		$aSearch = [ 'term' => Request::input( 'term' , '' ) ];
 		$aSearch[ 'location' ] = Request::input( 'location' , '' );
 		$aSearch[ 'type' ] = Request::input( 'type' , 'deals' );
