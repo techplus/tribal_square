@@ -6,6 +6,11 @@
             <button class="btn btn-success pull-right" style="margin-top:-7px;" onclick="addBabysitter();">+ Add Babysitter</button>
 		</div>
 		<div class="panel-body">
+            @if( session('success') )
+                <div class="alert alert-success">
+                    {{ Session::pull('success') }}
+                </div>
+            @endif
 			<div class="row">
 				<div class="table-responsive">
 					<table class="vTable table table-stripped">					
@@ -96,7 +101,8 @@
             type : "get",
             success : function(data)
             {
-                $('#modal_add_babysitter').find('.modal-body').html(data);
+                $('#modal_add_babysitter').find('.modal-content').html(data);
+                $('#modal_add_babysitter').modal('show');
             },
             error : function(err)
             {
