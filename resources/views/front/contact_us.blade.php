@@ -64,7 +64,7 @@
                             @endif
                             <form action="" method="post">
                                 <input type="hidden" value="{{csrf_token()}}" name="_token">
-                                <h4 style="font-size: 18px;">Post your comments or questions in the forum..(with link) or contact us directly by filling out the form below</h4>
+                                <h4 style="font-size: 18px;">Post your comments or questions in the <a href="http://forum.tribalsquare.com/" target="_blank">forum</a> or contact us directly by filling out the form below</h4>
                                 <div class="form-group col-sm-11 col-xs-12 {{$errors->has('name') ? 'has-error' : '' }}">
                                     <input type="text" class="form-control login_input" name="name" placeholder="Name" value="{{old('name')}}">
                                     @if( $errors->has('name') ) <p class="help-block">{{$errors->first('name')}}</p> @endif

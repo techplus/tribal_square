@@ -117,6 +117,20 @@ class User extends Model implements AuthenticatableContract , CanResetPasswordCo
 			$q->where( function ( $t ) use ( $term ) {
 				$t->where( 'firstname' , 'LIKE' , '%' . $term . '%' )
 					->orWhere( 'lastname' , 'LIKE' , '%' . $term . '%' )
+					->orWhereHas( 'Bio' , function ( $b ) use ( $term ) {
+						$b->where( function ( $b1 ) use ( $term ) {
+							$b1->where( 'title' , 'LIKE' , '%' . $term . '%' )
+								->orWhere( 'experience' , 'LIKE' , '%' . $term . '%' );
+						} );
+					} )
+					->orWhereHas( 'Skill' , function ( $s ) use ( $term ) {
+						$s->where( function ( $s1 ) use ( $term ) {
+							$s1->where( 'languages_spoken' , 'LIKE' , '%' . $term . '%' )
+								->orWhere( 'reference_name' , 'LIKE' , '%' . $term . '%' )
+								->orWhere( 'reference_name2' , 'LIKE' , '%' . $term . '%' )
+								->orWhere( 'reference_relationship' , 'LIKE' , '%' . $term . '%' );
+						} );
+					} )
 					->orWhereHas( 'Account' , function ( $x1 ) use ( $term ) {
 						$x1->where( function ( $y1 ) use ( $term ) {
 							$y1->where( 'address' , 'LIKE' , '%' . $term . '%' )
@@ -124,9 +138,11 @@ class User extends Model implements AuthenticatableContract , CanResetPasswordCo
 								->orWhere( 'state' , 'LIKE' , '%' . $term . '%' )
 								->orWhere( 'country' , 'LIKE' , '%' . $term . '%' )
 								->orWhere( 'street' , 'LIKE' , '%' . $term . '%' )
-								->orWhere( 'pin' , 'LIKE' , '%' . $term . '%' );
+								->orWhere( 'pin' , 'LIKE' , '%' . $term . '%' )
+								->orWhere( 'phone' , 'LIKE' , '%' . $term . '%' );
 						} );
 					} );
+					
 
 			} )->whereHas( 'Bio' , function ( $x ) use ( $miles ) {
 				if ( !empty( $miles ) )

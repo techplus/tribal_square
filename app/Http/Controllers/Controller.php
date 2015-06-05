@@ -30,7 +30,8 @@ class Controller extends BaseController {
 						url('/privacypolicy'),
 						url('/terms'),
 						url('/refundpolicy'),
-						url('/register/step2')
+						url('/register/step2'),
+						url('/password/reset')
 				];	
 		$this->data['oRoutesCheck'] = $routeArray;
 
