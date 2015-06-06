@@ -3,5 +3,6 @@
 .env
 /uploads
 /profile_pictures
+/images
 /.idea
 /.idea/*
