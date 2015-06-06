@@ -132,8 +132,12 @@
                         <div class="clearfix"></div><br>
                     </form>
                     <div class="addImg">
-                        <img src="../images/advrt_1.jpg" alt="" class="img-responsive"><br>
-                        <img src="../images/advrt_2.jpg" alt="" class="img-responsive"><br>
+                        <a target="_blank" href="{{$left_ads->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $left_ads->filter(function($q){return preg_match('/1$/',$q->type);})->first()->link : url( '#' ) }}">
+                            <img height="250" width="300" src="{{$left_ads->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $left_ads->filter(function($q){return preg_match('/1$/',$q->type);})->first()->image : url('images/advrt_1.jpg')}}" alt="" class="img-responsive">
+                        </a><br>
+                        <a target="_blank" href="{{$left_ads->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $left_ads->filter(function($q){return preg_match('/2$/',$q->type);})->first()->link : url( '#' ) }}">
+                            <img height="250" width="300" src="{{$left_ads->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $left_ads->filter(function($q){return preg_match('/2$/',$q->type);})->first()->image : url( 'images/advrt_2.jpg' ) }}" alt="" class="img-responsive">
+                        </a><br>
                     </div>
                 </div>
             </div>
@@ -143,7 +147,9 @@
 
                   <div class="Babysitters_sub_header">
                     <h5><span class="total-baby-sitters">{{ $iTotal }}</span> Babysitters Found</h5>
-                    <img src="http://placehold.it/450x60" alt="" class="img-responsive">
+                      <a target="_blank" href="{{$babysitter_ads->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $babysitter_ads->filter(function($q){return preg_match('/1$/',$q->type);})->first()->link : url('#')}}">
+                        <img src="{{$babysitter_ads->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $babysitter_ads->filter(function($q){return preg_match('/1$/',$q->type);})->first()->image : 'http://placehold.it/450x60' }}" alt="" height="60" width="450">
+                      </a>
                   </div>
                   <div class="clearfix hidden-xs"></div>
                   <div class="babysitter-container"> 
@@ -170,7 +176,9 @@
                   @endif
                   <div class="row">
                         <div class="bottom_advrt" align="center" style="margin-top: 50px;">
-                          <img class="img-responsive" alt="" src="http://placehold.it/1170x160">
+                            <a target="_blank" href="{{$babysitter_ads->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $babysitter_ads->filter(function($q){return preg_match('/2$/',$q->type);})->first()->link : url('#')}}">
+                                <img height="160" width="1170" src="{{$babysitter_ads->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $babysitter_ads->filter(function($q){return preg_match('/2$/',$q->type);})->first()->image : 'http://placehold.it/1170x160' }}" alt="">
+                            </a>
                         </div>
                     </div>
                   <!-- Load More... -->

@@ -1,4 +1,11 @@
-<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">   
+<?php
+    $aSideBarAsLeftPages = array(url('search/deals'),url('search/babysitters'));
+    if( in_array(Request::url(),$aSideBarAsLeftPages ) )
+        $typeVar = 'left_ads';
+    else
+        $typeVar = 'right_ads';
+?>
+<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
     @if( isset( $subcategories ) AND $subcategories->count() > 0 )
         @if( Request::segment(2) == "deals" OR Request::segment(1) == "deals" )
             <div class="categories_sidebar">
@@ -37,8 +44,11 @@
         </div>
     @endif
 
+
     <div class="advrt" align="center">
-        <img src="{{url('images/advrt_1.jpg')}}" alt="" class="img-responsive">
+        <a target="_blank" href="{{$$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->first()->link : url( '#' ) }}">
+            <img height="250" width="300" src="{{$$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->first()->image : url('images/advrt_1.jpg')}}" alt="" class="img-responsive">
+        </a>
     </div>
         @if( Request::segment(2) == "classified" OR Request::segment(2) == "posts" )
             @if( $aLatestPosts->count() > 0 ) 
@@ -65,38 +75,10 @@
                  </div>
             @endif
         @endif
-        <!-- @if( Request::segment(2) == "deals" OR Request::segment(1) == "deals" )
-             @if( $aLatestDeals->count() > 0 )
-                <div class="current_deals_box">
-                    <h2>Current Deals</h2>
-                    <a href="{{ route('search.deals.index') }}">See all</a>
-                    <div class="clearfix"></div>
-                    <ul class="media-list">                    
-                        @foreach( $aLatestDeals as $oDeal  )
-                            <li class="media" style="border-top:1px dashed #999;padding-top:5px;">
-                                <div class="media-left">
-                                    <a href="{{ route('search.deals.show' , [ $oDeal->id ] ) }}">
-                                        <?php $oDealImagesSidebar = ( $oDeal->CoverPic->count() ) ? $oDeal->CoverPic : $oDeal->DealImages(); ?>
-                                        <img alt="64x64" data-src="holder.js/64x64" class="media-object" style="width: 64px; height: 64px;" src="{{ $oDeal->CoverPic->count() ? $oDeal->CoverPic->first()->image_path : ( $oDealImagesSidebar->count() > 0 ? $oDealImagesSidebar->first()->image_path : url('images/no_image.png')) }}" data-holder-rendered="true">                            
-                                        <span style="color:#000;">{{ $oDeal->discount_percentage }}%</span>
-                                    </a>
-                                </div>
-                                <div class="media-body">
-                                    <a href="{{ route('search.deals.show' , [ $oDeal->id ] ) }}" style="width:100%;color:#000;"><p>{{ ( strlen( $oDeal->title ) > 75 ) ? substr( $oDeal->title , 0 , 75 )."..." :  $oDeal->title }}<br>${{ $oDeal->new_price }}</p></a>
-                                </div>
-                            </li>
-                        @endforeach                    
-                    </ul>
-                </div>
-             @endif
-        @endif -->
-
-                
-        
-           
-
     <div class="advrt" align="center">
-        <img src="{{ url( 'images/advrt_2.jpg' ) }}" alt="" class="img-responsive">
+        <a target="_blank" href="{{$$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->first()->link : url( '#' ) }}">
+            <img height="250" width="300" src="{{$$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->first()->image : url( 'images/advrt_2.jpg' ) }}" alt="" class="img-responsive">
+        </a>
     </div>
 
 </div>

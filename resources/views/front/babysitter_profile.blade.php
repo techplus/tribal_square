@@ -510,13 +510,18 @@
 					                    <p>${{ $oBabySitter->Bio->increase_rate_for_each_child }} per hour</p>
 					                </div>
 				                @endif -->
-				                <div align="center" class="advrt">
-				                    <img class="img-responsive" alt="" src="{{ url('images/advrt_1.jpg') }}">
-				                </div>
+				                <?php $typeVar = 'right_ads'; ?>
+				                <div class="advrt" align="center">
+							        <a target="_blank" href="{{$$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->first()->link : url( '#' ) }}">
+							            <img height="250" width="300" src="{{$$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->first()->image : url('images/advrt_1.jpg')}}" alt="" class="img-responsive">
+							        </a>
+							    </div>
 
-				                <div align="center" class="advrt">
-				                    <img class="img-responsive" alt="" src="{{ url('images/advrt_1.jpg') }}">
-				                </div>
+				                <div class="advrt" align="center">
+							        <a target="_blank" href="{{$$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->first()->link : url( '#' ) }}">
+							            <img height="250" width="300" src="{{$$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->first()->image : url( 'images/advrt_2.jpg' ) }}" alt="" class="img-responsive">
+							        </a>
+							    </div>
 				            </div>
 
 				        </div>

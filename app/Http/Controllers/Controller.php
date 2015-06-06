@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\Advertise;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -34,6 +35,17 @@ class Controller extends BaseController {
 						url('/password/reset')
 				];	
 		$this->data['oRoutesCheck'] = $routeArray;
+
+		$advertises = Advertise::orderBy('id')->get();
+		$this->data['left_ads'] = $advertises->filter(function($a){
+			return preg_match('/left_sidebar/',$a->type);
+		});
+		$this->data['right_ads'] = $advertises->filter(function($a){
+			return preg_match('/right_sidebar/',$a->type);
+		});
+		$this->data['babysitter_ads'] = $advertises->filter(function($a){
+			return preg_match('/babysitter/',$a->type);
+		});
 
 		return view( $sViewName , $this->data );
 	}

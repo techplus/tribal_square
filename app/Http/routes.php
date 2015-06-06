@@ -42,7 +42,7 @@ Route::group( [ 'middleware' => [ 'auth.admin'] ] , function() {
 	Route::resource('admin/refund-policy','Admin\RefundpolicyController',['only'=>['index','update']] );
 	Route::resource('admin/contact-us','Admin\ContactUsController',['only'=>['index','store']] );
 	Route::resource('admin/providers','Admin\ProvidersController',['only'=>['index','edit','destroy']]);
-
+	Route::controller('admin/advertises/{type}','Admin\AdsController');
 	Route::controller('baby-sitters','Users\BabySittersController');
 	Route::resource('baby-sitter/billings','Users\BillingsController');
 	Route::resource('providers','Users\ProvidersController',['only'=>['index','show','update']]);
