@@ -79,12 +79,20 @@
 		</nav>
 <div class="row">
 	<div class="col-sm-2">
-		<nav class="navbar navbar-default navbar-stacked">			
-					<nav>
+		<nav class="navbar navbar-default navbar-stacked">
+            		<nav>
 						<ul class="nav">
                             @if( Auth::user()->UserTypes()->first()->name == 'SuperAdmin')
                                 <li class="{{Request::segment(2) == 'administrators' ? 'active' : ''}}"><a href="{{route('admin.administrators.index')}}">Admin Users</a></li>
                             @endif
+                            <li data-toggle="collapse" data-target="#submenu1" aria-expanded="true">
+                                <a href="#">Advertises</a>
+                                <ul class="nav collapse in sub-menu" id="submenu1" role="menu" aria-labelledby="btn-1" aria-expanded="true">
+                                    <li class="{{ ( Request::url() == action('Admin\AdsController@getIndex',['left_sidebar']) ) ? 'active' : '' }}"><a href="{{ action('Admin\AdsController@getIndex',['left_sidebar']) }}">Left Sidebar</a></li>
+                                    <li class="{{ ( Request::url() == action('Admin\AdsController@getIndex',['right_sidebar']) ) ? 'active' : '' }}"><a href="{{ action('Admin\AdsController@getIndex',['right_sidebar']) }}">Right Sidebar</a></li>
+                                    <li class="{{ ( Request::url() == action('Admin\AdsController@getIndex',['babysitter']) ) ? 'active' : '' }}"><a href="{{ action('Admin\AdsController@getIndex',['babysitter']) }}">Baby Sitter</a></li>
+                                </ul>
+                            </li>
                             <li class="{{ ( Request::segment(2) == "sales-agents" ) ? 'active' : ''  }}" data-toggle="collapse" data-target="#submenu1" aria-expanded="true">
                                 <a href="{{route('admin.sales-agents.index')}}">Sales Agents</a>
                             </li>
