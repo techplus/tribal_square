@@ -43,7 +43,8 @@ function time_elapsed_string($ptime)
 	            <div class="row coralbg white">
 	                <div class="col-sm-12 col-md-6 no-pad">
 	                    <div class="user-image" style="padding-bottom:0">
-                        	<img src="{{ Image::url(( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png'),275,275) }}" class="img-responsive thumbnail">
+                        	<div class="BabySitterImg" style="background-image: url('{{ Image::url(( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png'),275,275) }}');">
+                        	</div>	
                     	</div>
 	                </div>
 	                <div class="col-sm-6 no-pad">

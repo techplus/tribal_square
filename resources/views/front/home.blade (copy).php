@@ -55,21 +55,22 @@
       <div class="banner_left col-sm-4">
           <?php $counter = 0; ?>
         @foreach( $aLatestDeals as $oDeal )
-          <img src="{{ Image::url($oDeal->image_path,769,344) }}" style="display: none;">
-          <a onclick="updateImage({{$counter++}})" href="#" class="dealTitle" data-link="{{ route('search.deals.show' , [ $oDeal->link ] ) }}" data-image="{{ $oDeal->image_path }}" data-path="{{ $oDeal->slidertitle }}" >
-            <p>{{ ( strlen( $oDeal->slidertitle ) > 35 ) ? substr( $oDeal->slidertitle , 0 , 35 )."..." :  $oDeal->slidertitle }}</p>
-            <span>&nbsp;</span>
+          <?php $oDealImagesSidebar = ( $oDeal->CoverPic->count() ) ? $oDeal->CoverPic : $oDeal->DealImages(); ?>
+          <img src="{{ $oDeal->CoverPic->count() ? Image::url($oDeal->CoverPic->first()->image_path,769,344) : ( $oDealImagesSidebar->count() > 0 ? Image::url($oDealImagesSidebar->first()->image_path,769,344) : Image::url(url('images/no_image.png'),769,344)) }}" style="display: none;">
+          <a onclick="updateImage({{$counter++}})" href="#" class="dealTitle" data-link="{{ route('search.deals.show' , [ $oDeal->id ] ) }}" data-image="{{ $oDeal->CoverPic->count() ? Image::url($oDeal->CoverPic->first()->image_path,769,344) : ( $oDealImagesSidebar->count() > 0 ? Image::url($oDealImagesSidebar->first()->image_path,769,344) : Image::url(url('images/no_image.png'),769,344)) }}" data-path="{{ $oDeal->title }}" >
+            <p>{{ ( strlen( $oDeal->title ) > 35 ) ? substr( $oDeal->title , 0 , 35 )."..." :  $oDeal->title }}</p>
+            <span>Discount : {{ $oDeal->discount_percentage }}%</span>
           </a>
         @endforeach
       </div>
       @endif
       <div class="col-sm-8 deal_banner_wrap">
-        <a target="_blank" class="dealLink" href="#">
+        <a class="dealLink" href="#">
           <img src="images/deal_banner.jpg" alt="" class="img-responsive">
         </a>
         <div class="banner_info" style="bottom: 50px; position: absolute;right: 0;"> 
           <div class="info_wrapper col-xs-12 view_dealbtn">
-              <a target="_blank" class="btn btn-lg custome_blue_btn view_deal" href="http://localhost/tribal_square/search/deals/50">Details</a>
+              <a class="btn btn-lg custome_blue_btn view_deal" href="http://localhost/tribal_square/search/deals/50">Details</a>
           </div>
         </div>
       </div>
@@ -206,8 +207,6 @@
     function updateImage(i) {
         var imgPath = $('.dealTitle:eq('+i+')').data('image');
         var link = $('.dealTitle:eq('+i+')').data('link');
-        console.log(link);
-        
         $(".dealTitle").removeClass('active_slide');
         $('.dealTitle:eq('+i+')').addClass('active_slide');
         index = i;
