@@ -35,6 +35,7 @@
                         <label class="control-label col-sm-3">Link:</label>
                         <div class="col-sm-9">
                             <input type="text" name="link[]" class="form-control" value="{{$images->filter(function($q){ return preg_match('/1$/',$q->type);})->count() ? $images->filter(function($q){ return preg_match('/1$/',$q->type);})->first()->link : ''}}">
+                            <span class="help-block">ex. http://example.com</span>
                         </div>
                     </div>
                     <hr>
@@ -59,6 +60,7 @@
                         <label class="control-label col-sm-3">Link:</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control" name="link[]" value="{{$images->filter(function($q){ return preg_match('/2$/',$q->type);})->count() ? $images->filter(function($q){ return preg_match('/2$/',$q->type);})->first()->link : ''}}">
+                            <span class="help-block">ex. http://example.com</span>
                         </div>
                     </div>
                     <hr>
