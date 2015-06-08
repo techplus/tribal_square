@@ -56,8 +56,8 @@
           <?php $counter = 0; ?>
         @foreach( $aLatestDeals as $oDeal )
           <img src="{{ Image::url($oDeal->image_path,769,344) }}" style="display: none;">
-          <a onclick="updateImage({{$counter++}})" href="#" class="dealTitle" data-link="{{ route('search.deals.show' , [ $oDeal->link ] ) }}" data-image="{{ $oDeal->image_path }}" data-path="{{ $oDeal->slidertitle }}" >
-            <p>{{ ( strlen( $oDeal->slidertitle ) > 35 ) ? substr( $oDeal->slidertitle , 0 , 35 )."..." :  $oDeal->slidertitle }}</p>
+          <a onclick="updateImage({{$counter++}})" href="#" class="dealTitle" data-link="{{ $oDeal->link }}" data-image="{{ $oDeal->image_path }}" data-path="{{ $oDeal->slidertitle }}" >
+            <p {{ (strlen( $oDeal->slidertitle ) > 35 ) ? "class='breakwork'" : "" }}>{{ $oDeal->slidertitle }}</p>
             <span>&nbsp;</span>
           </a>
         @endforeach
@@ -214,6 +214,16 @@
         //console.log($('.dealTitle' ).length);
         //var btnLink = $('.dealLink').attr('href');
         $('.deal_banner_wrap img').attr('src', imgPath);
+        if(link == "")
+        {
+          $('.view_deal').hide();
+          $('.dealLink').attr("onClick", false); 
+          $('.dealLink').removeAttr('target');
+        }
+        else
+        {
+          $('.dealLink').attr('target','_blank');
+        }
         $('.view_deal').attr('href', link);
         $('.deal_banner_wrap a').attr('href', link);
     }
