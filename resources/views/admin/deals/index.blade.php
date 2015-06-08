@@ -7,6 +7,17 @@
     
 		<div class="panel-body">
 			<div class="row">
+                @if( $sStatus == 'Pending' )
+                    <div class="col-sm-3 pull-right">
+                        <select class="form-control" id="category_filter">
+                            <option value="0">All Category</option>
+                            @foreach($subcategories->toArray() AS $category )
+                                <option value="{{$category['id']}}">{{$category['name']}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="clearfix"></div>
+                @endif
 				<div class="table-responsive">
                     <table class="vTable table table-stripped">
 						<thead>
@@ -24,7 +35,7 @@
 						</thead>
 						<tbody>
 							@foreach( $aDeals AS $oDeal )
-								<tr data-id="{{ $oDeal->id }}">
+								<tr data-category_id="{{$oDeal->category_id}}" data-id="{{ $oDeal->id }}">
 									<td><a href="{{ route('admin.deals.show',[ $oDeal->id ]) }}">{{ $oDeal->title }}</a></td>
 									<td>{{ ($oDeal->ListingCategory) ? $oDeal->ListingCategory->name : ""}}</td>
                                     @if( strtolower($sStatus) == 'approved' )
@@ -115,6 +126,16 @@
                     $this.attr('checked',false);
                     alert(obj.error);
                 });
+            });
+            $('#category_filter' ).on('change',function(){
+                if( $(this ).val() == 0 )
+                    $('tbody tr').show();
+                else
+                {
+                    $('tbody tr' ).hide();
+                    $('tbody tr[data-category_id="'+$(this ).val()+'"]' ).show();
+                }
+
             });
         });
     </script>

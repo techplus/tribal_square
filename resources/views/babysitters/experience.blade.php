@@ -5,7 +5,7 @@
         <div class="col-lg-10">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Experience & Qaulifications</h5>
+                    <h5>Experience & Qualifications</h5>
                 </div>
                 <div class="ibox-content">
                     @if( session('payment_successfull') )
