@@ -8,7 +8,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use DB;
 use Hash;
-
+use Carbon\Carbon;
 class User extends Model implements AuthenticatableContract , CanResetPasswordContract
 {
 
@@ -307,4 +307,17 @@ class User extends Model implements AuthenticatableContract , CanResetPasswordCo
 		} );
 	}
 
+	public function isEligibleForTrial()
+	{
+		if( empty( $this->attributes['subscription_end_at'] ) )
+			return true;
+		else{
+			$createdAt = Carbon::createFromFormat('Y-m-d H:i:s',$this->attributes['created_at']);
+			$subscriptionEndsAt = Carbon::createFromFormat('Y-m-d',$this->attributes['subscription_end_at']);
+			if( $subscriptionEndsAt->diffInDays($createdAt) >= 90 )
+				return false;
+		}
+
+		return false;
+	}
 }

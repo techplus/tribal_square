@@ -7,7 +7,7 @@
         <div class="panel-body">
             @if( session('success') )
                 <div class="alert alert-success">
-                    {{ Session::pull('success') }}
+                    {{ session('success') }}
                 </div>
             @endif
             <div class="row">
@@ -16,6 +16,7 @@
                         <thead>
                         <th style="width:20%;">Name</th>
                         <th style="width:20%;">Email</th>
+                        <th>Subscription Ends At</th>
                         <th style="width:30%;text-align:center;">Action</th>
                         </thead>
                         <tbody>
@@ -24,6 +25,7 @@
                                 <tr data-id="{{ $oUser->id }}">
                                     <td>{{ ucfirst($oUser->firstname)." ".ucfirst($oUser->lastname) }}</td>
                                     <td>{{ $oUser->email  }}</td>
+                                    <td>{{$oUser->subscription_end_at}}</td>
                                     <td style="text-align: center;">
                                         <button class="btn btn-primary" onclick="updateProvider({{ $oUser->id }});">Edit</button>
                                         <button class="btn btn-danger action" data-status="{{ ucfirst($oUser->firstname)." ".ucfirst($oUser->lastname) }}" data-id="{{$oUser->id}}">Delete</button>
@@ -61,7 +63,17 @@
     <div class="modal fade" id="modal_edit_provider" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Provider</h4>
+                </div>
+                <div class="modal-body">
 
+                </div>
+                {{--<div class="modal-footer">--}}
+                    {{--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--}}
+                    {{--<button type="button" class="btn btn-primary" id="confirm_btn">Yes</button>--}}
+                {{--</div>--}}
             </div>
         </div>
     </div>
@@ -76,12 +88,12 @@
         function updateProvider(id)
         {
             $.ajax({
-                url : "{{ route('admin.providers.edit') }}"+"/"+id,
+                url : "{{ url('admin/providers') }}"+"/"+id+'/edit',
                 data : {},
                 type : "get",
                 success : function(data)
                 {
-                    $('#modal_edit_provider').find('.modal-content').html(data);
+                    $('#modal_edit_provider').find('.modal-body').html(data);
                     $('#modal_edit_provider').modal('show');
                 },
                 error : function(err)

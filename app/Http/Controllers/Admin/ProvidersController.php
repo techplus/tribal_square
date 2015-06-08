@@ -3,7 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Request;
 
 class ProvidersController extends Controller {
 
@@ -61,7 +61,8 @@ class ProvidersController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$user = User::find($id);
+		return view('admin.providers.edit',['user'=>$user]);
 	}
 
 	/**
@@ -72,7 +73,13 @@ class ProvidersController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		$data = Request::except(['_method']);
+		if( empty($data['password']) )
+			unset($data['password']);
+		else
+			$data['password'] = bcrypt($data['password']);
+		User::where('id',$id)->update($data);
+		return redirect()->back()->with('success','Provider has been updated.');
 	}
 
 	/**

@@ -1,9 +1,7 @@
 <?php namespace App\Http\Controllers;
 
-use App\Models\ListingCategory;
 use Request;
 use DB;
-use App\Models\Deal;
 use App\Models\Homeslider;
 use App\Models\Content;
 use Image;

@@ -1,4 +1,5 @@
 <?php namespace App\Http\Controllers\Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
@@ -151,11 +152,11 @@ class AuthController extends Controller {
 				}
 				else if( $oUser->name == 'Providers' )
 				{
-					$redirectPath = route('providers.index');
+					$redirectPath = action('HomeController@getIndex');
 				}
 				else if( $oUser->name == 'BabySitters' )
 				{
-					$redirectPath = action( 'Users\BabySittersController@getIndex' );
+					$redirectPath = action('HomeController@getIndex');
 				}
 				else if( $oUser->name == 'SalesAgent')
 				{
@@ -175,8 +176,10 @@ class AuthController extends Controller {
 	{
 		if( $request->has('skip') )
 		{
-			$this->auth->user()->subscription_end_at = date('Y-m-d',time() + 3*24*3600);
-			$this->auth->user()->save();			
+			if( empty( $this->auth->user()->subscription_end_at ) ) {
+				$this->auth->user()->subscription_end_at = Carbon::now()->addDays( 90 )->toDateString();
+				$this->auth->user()->save();
+			}
 			return response()->redirectTo(url('/'));
 		}
 
