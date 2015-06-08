@@ -29,7 +29,7 @@ Class PostsController extends Controller{
 				$oClassified = $oClassified->onlyTrashed();
 				break;
 			case "pending":
-				$oClassified = $oClassified->where('is_approved_by_admin',0);
+				$oClassified = $oClassified->where('is_approved_by_admin',0)->orderBy('created_at','desc');
 				break;
 		}
 		$this->data['aPosts'] = $oClassified->get();
