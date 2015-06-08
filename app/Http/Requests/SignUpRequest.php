@@ -37,6 +37,9 @@ class SignUpRequest extends Request {
 			$errors['captcha'] = app('captcha')->display();
 			return response()->json($errors,422);
 		}
+		return redirect()->back()
+			->withInput($this->except($this->dontFlash))
+			->withErrors($errors, $this->errorBag);
 
 	}
 
