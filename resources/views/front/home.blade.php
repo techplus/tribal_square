@@ -57,8 +57,12 @@
         @foreach( $aLatestDeals as $oDeal )
           <img src="{{ Image::url($oDeal->image_path,769,344) }}" style="display: none;">
           <a onclick="updateImage({{$counter++}})" href="#" class="dealTitle" data-link="{{ $oDeal->link }}" data-image="{{ $oDeal->image_path }}" data-path="{{ $oDeal->slidertitle }}" >
-            <p {{ (strlen( $oDeal->slidertitle ) > 35 ) ? "class='breakwork'" : "" }}>{{ $oDeal->slidertitle }}</p>
+            <p>{{ ( strlen( $oDeal->slidertitle ) > 35 ) ? substr( $oDeal->slidertitle , 0 , 35 )."" :  $oDeal->slidertitle }}</p>
+            <?php if( strlen( $oDeal->slidertitle ) > 35 ) { ?>
+            <span>{{ ( strlen( $oDeal->slidertitle ) > 35 ) ? substr( $oDeal->slidertitle , 35 , 80 )."..." :  $oDeal->slidertitle }}</span>
+            <?php } else { ?>
             <span>&nbsp;</span>
+            <?php } ?>
           </a>
         @endforeach
       </div>
