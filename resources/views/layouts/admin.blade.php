@@ -82,8 +82,12 @@
 		<nav class="navbar navbar-default navbar-stacked">
             		<nav>
 						<ul class="nav">
+							@if( Auth::user()->UserTypes()->first()->name == 'SuperAdmin' || Auth::user()->UserTypes()->first()->name == 'Admin')
+							<li class="{{Request::segment(2) == 'home-slider' ? 'active' : ''}}"><a href="{{ route('admin.home-slider.index') }}">Home Slider</a></li>
+							@endif
                             @if( Auth::user()->UserTypes()->first()->name == 'SuperAdmin')
-                                <li class="{{Request::segment(2) == 'administrators' ? 'active' : ''}}"><a href="{{route('admin.administrators.index')}}">Admin Users</a></li>
+                            	
+                                <li class="{{Request::segment(2) == 'administrators' ? 'active' : ''}}"><a href="{{ route('admin.administrators.index') }}">Admin Users</a></li>
                             @endif
                             <li data-toggle="collapse" data-target="#submenu1" aria-expanded="true">
                                 <a href="#">Advertises</a>

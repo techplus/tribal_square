@@ -59,8 +59,11 @@
 
                                     @if( $oDeal->DealImages->count() > 0 )
                                         <div class="col-xs-12 banner_wrapper">
-                                            <img src="{{Image::url($oDeal->CoverPic->first()->image_path,981,300)}}"
-                                                 alt="" class="img-responsive">
+                                             <div class="recommended-img" style="background-image: url('{{Image::url($oDeal->CoverPic->first()->image_path,1120,300)}}');">                            
+                                            </div>
+                                            
+                                            <!-- <img src="{{Image::url($oDeal->CoverPic->first()->image_path,981,300)}}"
+                                                 alt="" class="img-responsive"> -->
 
                                             <div class="banner_info">
                                                 <div class="info_wrapper col-xs-12">

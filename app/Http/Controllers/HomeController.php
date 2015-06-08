@@ -4,6 +4,7 @@ use App\Models\ListingCategory;
 use Request;
 use DB;
 use App\Models\Deal;
+use App\Models\Homeslider;
 use App\Models\Content;
 use Image;
 use App\Http\Requests\ContactUsRequest;
@@ -41,7 +42,10 @@ class HomeController extends Controller {
 	{
 		$this->data['aFooterData'] = Content::whereNotIn('id', [4, 5])->get();;
 
-		$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->approved()->future()->orderBy('is_deal_of_the_day','DESC')->orderBy('updated_at','DESC')->take(4)->get();
+		//$this->data['aLatestDeals'] = Deal::with( [ 'CoverPic' ] )->approved()->future()->orderBy('is_deal_of_the_day','DESC')->orderBy('updated_at','DESC')->take(4)->get();
+		$this->data['aLatestDeals'] = Homeslider::all();
+
+		//dd($this->data['aLatestDeals']);
 
 		$this->data['body_class'] = 'home_page_body';
 		return $this->renderView('front.home');

@@ -98,6 +98,7 @@
             @include('admin.deals.scripts')
             $('.deal_of_the_day' ).on('change',function(){
                 var id = $(this).data('id');
+                var $this = $(this);
                 $.ajax({
                     url: "{{url('admin/deals')}}/"+id,
                     data:{is_deal_of_the_day:$this.prop('checked') ? '1' : 0},
