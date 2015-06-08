@@ -152,11 +152,11 @@ class AuthController extends Controller {
 				}
 				else if( $oUser->name == 'Providers' )
 				{
-					$redirectPath = route('providers.index');
+					$redirectPath = action('HomeController@getIndex');
 				}
 				else if( $oUser->name == 'BabySitters' )
 				{
-					$redirectPath = action( 'Users\BabySittersController@getIndex' );
+					$redirectPath = action('HomeController@getIndex');
 				}
 				else if( $oUser->name == 'SalesAgent')
 				{
