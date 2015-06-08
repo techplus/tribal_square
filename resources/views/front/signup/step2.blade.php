@@ -71,10 +71,11 @@
                                             class="img-responsive paypal_img"></a>
                             </h1>
 
+                            @if( Auth::user()->isEligibleForTrial() )
                             <a style="margin-top: 20px;"
                                href="{{action('Auth\AuthController@getSelectUserType')}}?skip=payment"
                                class="btn btn-primary">Free Trial</a>
-
+                            @endif
                             {{--<div class="col-sm-12" align="center">
                                 <h3>OR</h3>
                                 <br>
