@@ -43,12 +43,15 @@
             </a>
         </div>
     @endif
-
-
+        <?php $firstAd = $$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->first(); ?>
     <div class="advrt" align="center">
-        <a target="_blank" href="{{$$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->first()->link : url( '#' ) }}">
-            <img height="250" width="300" src="{{$$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->first()->image : url('images/advrt_1.jpg')}}" alt="" class="img-responsive">
-        </a>
+        @if( $firstAd && !empty($firstAd->link ) )
+            <a target="_blank" href="{{$firstAd ? $firstAd->link : url( '#' ) }}">
+        @endif
+            <img height="250" width="300" src="{{$firstAd ? $firstAd->image : url('images/advrt_1.jpg')}}" alt="" class="img-responsive">
+        @if( $firstAd && !empty($firstAd->link ) )
+            </a>
+        @endif
     </div>
         @if( Request::segment(2) == "classified" OR Request::segment(2) == "posts" )
             @if( $aLatestPosts->count() > 0 ) 
@@ -75,10 +78,15 @@
                  </div>
             @endif
         @endif
+        <?php $secondAd = $$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->first(); ?>
     <div class="advrt" align="center">
-        <a target="_blank" href="{{$$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->first()->link : url( '#' ) }}">
-            <img height="250" width="300" src="{{$$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->first()->image : url( 'images/advrt_2.jpg' ) }}" alt="" class="img-responsive">
-        </a>
+        @if( $secondAd && !empty( $secondAd->link ) )
+            <a target="_blank" href="{{$secondAd ? $secondAd->link : url( '#' ) }}">
+        @endif
+            <img height="250" width="300" src="{{$secondAd ? $secondAd->image : url( 'images/advrt_2.jpg' ) }}" alt="" class="img-responsive">
+        @if( $secondAd && !empty( $secondAd->link ) )
+            </a>
+        @endif
     </div>
 
 </div>

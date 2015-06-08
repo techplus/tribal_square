@@ -132,12 +132,22 @@
                         <div class="clearfix"></div><br>
                     </form>
                     <div class="addImg">
-                        <a target="_blank" href="{{$left_ads->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $left_ads->filter(function($q){return preg_match('/1$/',$q->type);})->first()->link : url( '#' ) }}">
-                            <img height="250" width="300" src="{{$left_ads->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $left_ads->filter(function($q){return preg_match('/1$/',$q->type);})->first()->image : url('images/advrt_1.jpg')}}" alt="" class="img-responsive">
-                        </a><br>
-                        <a target="_blank" href="{{$left_ads->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $left_ads->filter(function($q){return preg_match('/2$/',$q->type);})->first()->link : url( '#' ) }}">
-                            <img height="250" width="300" src="{{$left_ads->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $left_ads->filter(function($q){return preg_match('/2$/',$q->type);})->first()->image : url( 'images/advrt_2.jpg' ) }}" alt="" class="img-responsive">
-                        </a><br>
+                        <?php $firstAd = $left_ads->filter(function($q){return preg_match('/1$/',$q->type);})->first(); ?>
+                        @if( $firstAd && !empty($firstAd->link ) )
+                            <a target="_blank" href="{{$firstAd ? $firstAd->link : url( '#' ) }}">
+                                @endif
+                                <img height="250" width="300" src="{{$firstAd ? $firstAd->image : url('images/advrt_1.jpg')}}" alt="" class="img-responsive">
+                                @if( $firstAd && !empty($firstAd->link ) )
+                            </a>
+                        @endif<br>
+                            <?php $secondAd = $left_ads->filter(function($q){return preg_match('/2$/',$q->type);})->first(); ?>
+                            @if( $secondAd && !empty( $secondAd->link ) )
+                                <a target="_blank" href="{{$secondAd ? $secondAd->link : url( '#' ) }}">
+                                    @endif
+                                    <img height="250" width="300" src="{{$secondAd ? $secondAd->image : url( 'images/advrt_2.jpg' ) }}" alt="" class="img-responsive">
+                                    @if( $secondAd && !empty( $secondAd->link ) )
+                                </a>
+                            @endif<br>
                     </div>
                 </div>
             </div>
@@ -147,9 +157,14 @@
 
                   <div class="Babysitters_sub_header">
                     <h5><span class="total-baby-sitters">{{ $iTotal }}</span> Babysitters Found</h5>
-                      <a target="_blank" href="{{$babysitter_ads->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $babysitter_ads->filter(function($q){return preg_match('/1$/',$q->type);})->first()->link : url('#')}}">
-                        <img src="{{$babysitter_ads->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $babysitter_ads->filter(function($q){return preg_match('/1$/',$q->type);})->first()->image : 'http://placehold.it/450x60' }}" alt="" height="60" width="450">
-                      </a>
+                      <?php $firstAd = $babysitter_ads->filter(function($q){return preg_match('/1$/',$q->type);})->first(); ?>
+                      @if( $firstAd && !empty($firstAd->link))
+                          <a target="_blank" href="{{$firstAd ? $firstAd->link : url('#')}}">
+                              @endif
+                              <img height="60" width="450" src="{{$firstAd ? $firstAd->image : 'http://placehold.it/1170x160' }}" alt="" class="img-responsive">
+                              @if( $firstAd && !empty($firstAd->link))
+                          </a>
+                      @endif
                   </div>
                   <div class="clearfix hidden-xs"></div>
                   <div class="babysitter-container"> 
@@ -175,10 +190,15 @@
                     </div>
                   @endif
                   <div class="row">
+                      <?php $secondAd = $babysitter_ads->filter(function($q){return preg_match('/2$/',$q->type);})->first(); ?>
                         <div class="bottom_advrt" align="center" style="margin-top: 50px;">
-                            <a target="_blank" href="{{$babysitter_ads->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $babysitter_ads->filter(function($q){return preg_match('/2$/',$q->type);})->first()->link : url('#')}}">
-                                <img height="160" width="1170" src="{{$babysitter_ads->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $babysitter_ads->filter(function($q){return preg_match('/2$/',$q->type);})->first()->image : 'http://placehold.it/1170x160' }}" alt="">
-                            </a>
+                            @if( $secondAd && !empty($secondAd->link))
+                                <a target="_blank" href="{{$secondAd ? $secondAd->link : url('#')}}">
+                            @endif
+                                <img height="160" width="1170" src="{{$secondAd ? $secondAd->image : 'http://placehold.it/1170x160' }}" alt="" class="img-responsive">
+                            @if( $secondAd && !empty($secondAd->link))
+                                </a>
+                            @endif
                         </div>
                     </div>
                   <!-- Load More... -->

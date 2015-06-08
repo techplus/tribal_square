@@ -501,7 +501,8 @@
 				                    <p>Marriage/Relationship Counselor. Teacher/Mentor. DFCS Volunteer. 
 				                    Homeschool exp. Tutor. Etc.</p> -->
 				                </div>
-				               <!--  @if( $oBabySitter->Bio )
+                                <?php /*
+				               @if( $oBabySitter->Bio )
 					                <div class="BabySitter_sidebar">
 					                    <h3>Preferred Rates</h3>
 					                    <h5><strong>Preferred Rate</strong></h5>
@@ -509,18 +510,29 @@
 					                    <h5><strong>For each additional child</strong></h5>
 					                    <p>${{ $oBabySitter->Bio->increase_rate_for_each_child }} per hour</p>
 					                </div>
-				                @endif -->
-				                <?php $typeVar = 'right_ads'; ?>
+				                @endif
+                                */ ?>
+				                <?php $typeVar = 'right_ads';
+                                    $firstAd = $$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->first();
+                                 ?>
 				                <div class="advrt" align="center">
-							        <a target="_blank" href="{{$$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->first()->link : url( '#' ) }}">
-							            <img height="250" width="300" src="{{$$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/1$/',$q->type);})->first()->image : url('images/advrt_1.jpg')}}" alt="" class="img-responsive">
-							        </a>
+                                    @if( $firstAd && ! empty( $firstAd->link ) )
+							            <a target="_blank" href="{{$firstAd ? $firstAd->link : url( '#' ) }}">
+                                    @endif
+							            <img height="250" width="300" src="{{$firstAd ? $firstAd->image : url('images/advrt_1.jpg')}}" alt="" class="img-responsive">
+                                    @if( $firstAd && ! empty( $firstAd->link ) )
+							            </a>
+                                    @endif
 							    </div>
-
+                                <?php $secondAd = $firstAd = $$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->first(); ?>
 				                <div class="advrt" align="center">
-							        <a target="_blank" href="{{$$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->first()->link : url( '#' ) }}">
-							            <img height="250" width="300" src="{{$$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->count() ? $$typeVar->filter(function($q){return preg_match('/2$/',$q->type);})->first()->image : url( 'images/advrt_2.jpg' ) }}" alt="" class="img-responsive">
-							        </a>
+                                    @if( $secondAd && !empty( $secondAd->link ) )
+							            <a target="_blank" href="{{$secondAd ? $secondAd->link : url( '#' ) }}">
+                                    @endif
+							            <img height="250" width="300" src="{{$secondAd ? $secondAd->image : url( 'images/advrt_2.jpg' ) }}" alt="" class="img-responsive">
+                                    @if( $secondAd && !empty( $secondAd->link ) )
+                                        </a>
+                                    @endif
 							    </div>
 				            </div>
 
