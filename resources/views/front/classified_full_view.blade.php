@@ -143,6 +143,7 @@ $('.carousel').carousel({
                                     <div class="google_map">
                                         <div class="img-responsive" id="map" style="height: 300px;"></div>                                        
                                     </div>
+                                    @if( $classified->language_spoken != "")
                                     <h4>Language Spoken</h4>
                                     <ul>
                                         <?php $languages = explode(',',$classified->language_spoken); ?>
@@ -150,6 +151,7 @@ $('.carousel').carousel({
                                             <li>{{$lang}}</li>
                                         @endforeach
                                     </ul>
+                                    @endif
                                 </div>
 
                             </div>
