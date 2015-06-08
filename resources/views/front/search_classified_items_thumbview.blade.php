@@ -18,7 +18,8 @@
                                 <div class="photo">
                                     <a href="{{route('search.classified.show',[$item->id])}}" style="margin-left:0;width:100%;">                                                            
                                         <?php $oItemImages = $item->ClassifiedImages(); ?>
-                                        <img style="max-width:350px;height: 260px;" src="{{ Image::url(( $item->ClassifiedImages->count() > 0 ) ? $item->ClassifiedImages->first()->image_path : ( $oItemImages->count() ? $oItemImages->first()->image_path : url('images/no_imgae.png')),350,260) }}" class="img-responsive" alt="{{$item->title}}" />
+                                        <div class="BabySitterImg" style="margin:0 auto; background-image: url('{{ Image::url(( $item->ClassifiedImages->count() > 0 ) ? $item->ClassifiedImages->first()->image_path : ( $oItemImages->count() ? $oItemImages->first()->image_path : url('images/no_imgae.png')),350,260) }}');">
+                                        </div>
                                     </a>
                                 </div>
                                 <div class="info" style="text-align: left;">

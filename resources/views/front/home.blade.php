@@ -220,15 +220,15 @@
         if(link == "")
         {
           $('.view_deal').hide();
-          $('.dealLink').attr("onClick", false); 
-          $('.dealLink').removeAttr('target');
+          $('.dealLink').removeAttr("href"); 
         }
         else
         {
           $('.dealLink').attr('target','_blank');
+          $('.view_deal').attr('href', link);
+          $('.deal_banner_wrap a').attr('href', link);
         }
-        $('.view_deal').attr('href', link);
-        $('.deal_banner_wrap a').attr('href', link);
+        
     }
     $(document).ready(function(){
         $('.searchType').on('click',function() {

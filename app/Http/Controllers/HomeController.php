@@ -74,7 +74,10 @@ class HomeController extends Controller {
 
 		return $this->renderView('front.privacypolicy');
 	}
-
+	public function getAdvertisewithus()
+	{
+		return $this->renderView('front.advertisewithus');
+	}
 	public function getContactUs()
 	{
 		$this->data['content']['phone'] = Content::where('content_title','contact_us_phone')->first();

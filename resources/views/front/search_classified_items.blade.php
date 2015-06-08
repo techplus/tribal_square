@@ -1,6 +1,6 @@
 <div class="col-xs-12 text-right" style="padding-top:5px;">
   <div class="btn-group groupbtn ">
-    <button type="button" id="list-view" class="btn btn-default pull-right" data-toggle="tooltip" title="" data-original-title="List"><i class="fa fa-th-list"></i></button>
+    <button type="button" selected="selected" id="list-view" class="btn btn-default pull-right" data-toggle="tooltip" title="" data-original-title="List"><i class="fa fa-th-list"></i></button>
     <button type="button" id="grid-view" class="btn btn-default pull-right" data-toggle="tooltip" title="" data-original-title="Grid"><i class="fa fa-th"></i></button>
   </div>
 </div>

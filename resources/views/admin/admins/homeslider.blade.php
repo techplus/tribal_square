@@ -52,8 +52,10 @@ hello
                         <label class="col-sm-2 control-label" style="text-align: left;">Image <?php echo $loop; ?></label>
                         <div class="col-sm-10">
                             <input type="file" name="slider_img_<?php echo $oHome->id; ?>" class="cat-name required" aria-required="true" value="{{ $oHome->image_path }}">
+
                         </div>
                         <div class="col-sm-10" style="margin-top:10px;">
+                            <span class="help-block">Recommended size is 733 X 344</span>
                             <img src="{{ $oHome->image_path }}" width="100" height="100">
                         </div>
                     </div>
@@ -69,6 +71,7 @@ hello
                         <label class="col-sm-2 control-label" style="text-align: left;"></label>
                         <div class="col-sm-10">
                             <input type="text" name="link_<?php echo $oHome->id; ?>" class="cat-name form-control required" aria-required="true" placeholder="Slider Link" value="<?php echo $oHome->link; ?>">
+                            <span class="help-block">ex. http://example.com</span>
                         </div>
                     </div>
                     <div class="col-xs-12"> <hr> </div>

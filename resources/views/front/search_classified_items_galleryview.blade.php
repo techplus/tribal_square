@@ -14,7 +14,7 @@
 		                <div class="user-image" style="padding-bottom:0">
 		                	<a href="{{route('search.classified.show',[$item->id])}}" style="margin-left:0;width:100%;">                                                            
 		                        <?php $oItemImages = $item->ClassifiedImages(); ?>
-		                    	<div class="BabySitterImg" style="background-image: url('{{ Image::url(( $item->ClassifiedImages->count() > 0 ) ? $item->ClassifiedImages->first()->image_path : ( $oItemImages->count() ? $oItemImages->first()->image_path : url('images/no_imgae.png')),350,260) }});">
+		                    	<div class="BabySitterImg" style="background-image: url('{{ Image::url(( $item->ClassifiedImages->count() > 0 ) ? $item->ClassifiedImages->first()->image_path : ( $oItemImages->count() ? $oItemImages->first()->image_path : url('images/no_imgae.png')),350,260) }}');">
 		                		</div>
 		                	</a>
 		            	</div>

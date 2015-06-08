@@ -8,7 +8,7 @@
     <title>Tribal Square :: Home</title>
     <link href="{{asset('/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- if(in_array(Request::url(), $oRoutesCheck)) -->
-    @if(Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') || Request::url() == url('/register/step2'))
+    @if(Request::url() == url('advertisewithus') || Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') || Request::url() == url('/register/step2'))
       <link href="{{asset('/css/style.css')}}" rel="stylesheet">
       <link href="{{asset('/css/style_home.css')}}" rel="stylesheet"> 
       
@@ -54,22 +54,11 @@
     });      
   </script>
   <style>
-    /*.login_subnav .menu-links{
-      text-decoration: none;
-      color: #999;
-    }*/
     .login_subnav .link-active{
         color:#AC1919;
         font-weight: bold;
         /*text-decoration: underline;        */
     }
-    /*.header_btns_wrap{
-        margin-top:3px;
-    }*/
-    /*.header_search{
-        margin-top:10px;
-        width:450px;
-    }*/
      .header_search input{
       width : 44%;
     }
@@ -78,10 +67,6 @@
       width:10%;  
       margin-left:5px;
     }    
-   /* .user-image{      
-      background: #e8e8e8;
-      border: 1px solid #ccc;
-    }  */  
   </style>
   </head>
   <body class="{{$body_class or 'signin_body'}}">
@@ -93,7 +78,7 @@
         </div>
     @endif
     <!-- if(in_array(Request::url(), $oRoutesCheck)) -->
-    @if( Request::url() == url('contact-us') || Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') || Request::url() == url('/register/step2') )
+    @if( Request::url() == url('advertisewithus') || Request::url() == url('contact-us') || Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') || Request::url() == url('/register/step2') )
       <div class="container">
         <div class="col-xs-12" style="color:#ac1919;font-weight:bold;margin-bottom:15px;"> 
         Inspire Change In Africa. Join Us & Support 
@@ -123,10 +108,7 @@
          echo "<a href=$dashBoardLink>$fLink->content_title</a> | ";  
       }
       ?>
-      
-      <!-- <a href="{{action('HomeController@getTerms')}}">Terms and Services</a> |
-      <a href="{{action('HomeController@getRefundpolicy')}}">Refund Policy</a> | -->
-      <a href="#">Advertise with us</a>
+      <a href="{{action('HomeController@getAdvertisewithus')}}">Advertise with us</a>
     </div>
     <div class="copyright">
       @2015 TribalSquare All rights reserved.
@@ -141,8 +123,7 @@
       <a href="{{action('HomeController@getPrivacypolicy')}}">Privacy Policy</a> |
       <a href="{{action('HomeController@getTerms')}}">Terms and Services</a> |
       <a href="{{action('HomeController@getRefundpolicy')}}">Refund Policy</a> |
-      
-      <a href="#">Advertise with us</a>
+      <a href="{{action('HomeController@getAdvertisewithus')}}">Advertise with us</a>
       </div>
       <p>@2015 TribalSquare All rights reserved.</p>
   </div>  
