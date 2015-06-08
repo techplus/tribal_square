@@ -47,7 +47,7 @@
                 {{--<li>--}}
                     {{--<a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Posted Deals</span></a>               --}}
                 {{--</li>    --}}
-                
+
             @elseif( $oUser->type == "BabySitters" )      
                  @foreach( $aMenu as $key => $sMenu )
                      <li class="{{ ( $section == $sMenu ) ? 'active' : '' }}">

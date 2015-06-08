@@ -31,7 +31,7 @@ Class DealsController extends Controller{
 				$oDeal = $oDeal->onlyTrashed();
 				break;
 			case "pending":
-				$oDeal = $oDeal->where('is_approved_by_admin',0);
+				$oDeal = $oDeal->where('is_approved_by_admin',0)->orderBy('created_at','desc');
 				break;
 			case "expired" :
 				$oDeal = $oDeal->expired();
