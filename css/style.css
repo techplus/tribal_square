@@ -33,6 +33,10 @@
     src: url('../fonts/HelveticaNeueRoman.eot');
     src: url('../fonts/HelveticaNeueRoman.eot') format('embedded-opentype'), url('../fonts/HelveticaNeueRoman.woff2') format('woff2'), url('../fonts/HelveticaNeueRoman.woff') format('woff'), url('../fonts/HelveticaNeueRoman.ttf') format('truetype'), url('../fonts/HelveticaNeueRoman.svg#HelveticaNeueRoman') format('svg');
 }
+.breakwork
+{
+   word-wrap: break-word;
+}
 .recommended-img
 {
     background-size: cover;
@@ -45,8 +49,11 @@
 {
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center;width: 230px;
-    height: 215px;
+    background-position: center;
+    /*width: 230px;
+    height: 215px;*/
+    width: 285px;
+    height: 165px;
 }
 .categories_sidebar ul li a:hover
 {
