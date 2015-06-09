@@ -19,6 +19,7 @@ Route::controllers([
     'payments'  => 'Users\PaymentsController'
 ]);
 Route::resource('languages','LanguagesController');
+
 Route::group( [ 'middleware' => [ 'auth.admin'] ] , function() {
 
 	Route::get('admin/sales-agents/show-earnings/{id}/{year?}','Admin\AgentEarningsController@getShowEarnings');
@@ -85,8 +86,9 @@ Route::group(['middleware'=>['auth.babysitters','payment']],function(){
 Route::group(['middleware'=>['auth.salesagnet']],function(){
 	Route::resource('sales-agents','Users\SalesAgentController',['only'=>['index','update']]);
 	Route::controller('sales-agents','Users\SalesAgentController');
-});
 
+});
+Route::resource('ratings','Users\RatingsController',['only'=>'store']);
 Route::resource('search','SearchController',['only'=>'store']);
 Route::resource('search/classified','ClassifiedsController');
 Route::resource('search/babysitters','BabySittersController',[ 'only' => [ 'index' , 'show' ] ]);

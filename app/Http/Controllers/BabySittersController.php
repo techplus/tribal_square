@@ -48,7 +48,9 @@ class BabySittersController extends Controller {
         $aBabySitters = $aResp['aBabySitters'];
 
 		$this->data['iTotal'] = $aResp['iTotal'];
-		$this->data['aBabySitters'] = $aBabySitters;
+		$this->data['aBabySitters'] = $aBabySitters->each(function($q){
+			$q->rating = $q->MyRatings()->avg('score');
+		});
 		$this->data['iLimit'] = $iLimit;
 		$this->data['iOffset'] = $iOffset + $iLimit;
 
@@ -160,7 +162,7 @@ class BabySittersController extends Controller {
 			})->first();					
 		}
 
-		return $aResp;	
+		return $aResp;
 
 		//dd($oQuery);
 		// // $oQuery =  DB::table('users')

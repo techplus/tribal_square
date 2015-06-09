@@ -145,6 +145,7 @@
 							                    <h4 class="green"><i class="glyphicon glyphicon-usd"></i>{{ $oBabySitter->Bio->average_rate_from }}-${{ $oBabySitter->Bio->average_rate_to }} per hour</h4>
 							                </div>
 						                @endif
+                                        <div class="raty" data-readonly="true" data-score="{{$oBabySitter->MyRatings()->avg('score')}}"></div>
 				                    </div>
 				                </div>
 
@@ -346,7 +347,10 @@
                                                     <h4 class="modal-title" id="myModalLabel">Rate {{$oBabySitter->firstname}}</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div class="row">
+                                                    <form id="ratingForm" action="{{action('Users\RatingsController@store')}}" method="post">
+                                                    <input type="hidden" name="rated_by" value="{{Auth::user()->id}}">
+                                                        <input type="hidden" name="rated_to" value="{{$oBabySitter->id}}">
+                                                        <div class="row">
                                                         <div class="col-md-12">
                                                             <div class="raty" data-score="2.5"></div>
                                                         </div>
@@ -354,6 +358,7 @@
                                                             <button type="submit" class="btn btn-success">Submit</button>
                                                         </div>
                                                     </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -640,6 +645,18 @@ function onSuccess($id,$sStatus)
 
 $( document ).ready(function() {
     $("[rel='tooltip']").tooltip();
+    $('#ratingForm' ).on('submit',function(e){
+        e.preventDefault();
+        var that = $(this);
+        $.ajax({
+            url: that.attr('action'),
+            type: 'post',
+            dataType:'json',
+            data:that.serialize()
+        } ).success(function(data){
+            that.parent().html('<div class="alert alert-success">'+data.message+'</div>')
+        })
+    })
     $('div.raty').raty({
         score: function() {
             return $(this).attr('data-score');
@@ -647,6 +664,7 @@ $( document ).ready(function() {
         starHalf: '{{asset('/js/raty/images/star-half.png')}}',
         starOff: '{{asset('/js/raty/images/star-off.png')}}',
         starOn: '{{asset('/js/raty/images/star-on.png')}}',
+        readOnly: $(this ).attr('data-readonly') ? true : false
     });
     $('.view').hover(
         function(){
