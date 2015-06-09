@@ -145,7 +145,7 @@
 							                    <h4 class="green"><i class="glyphicon glyphicon-usd"></i>{{ $oBabySitter->Bio->average_rate_from }}-${{ $oBabySitter->Bio->average_rate_to }} per hour</h4>
 							                </div>
 						                @endif
-                                        <div class="raty" data-readonly="true" data-score="{{$oBabySitter->MyRatings()->avg('score')}}"></div>
+                                        <div class="readonly" data-readonly="true" data-score="{{$oBabySitter->MyRatings()->avg('score')}}"></div>
 				                    </div>
 				                </div>
 
@@ -663,9 +663,17 @@ $( document ).ready(function() {
         },
         starHalf: '{{asset('/js/raty/images/star-half.png')}}',
         starOff: '{{asset('/js/raty/images/star-off.png')}}',
-        starOn: '{{asset('/js/raty/images/star-on.png')}}',
-        readOnly: $(this ).attr('data-readonly') ? true : false
+        starOn: '{{asset('/js/raty/images/star-on.png')}}'
     });
+    $('div.readonly' ).raty({
+        score: function() {
+            return $(this).attr('data-score');
+        },
+        starHalf: '{{asset('/js/raty/images/star-half.png')}}',
+        starOff: '{{asset('/js/raty/images/star-off.png')}}',
+        starOn: '{{asset('/js/raty/images/star-on.png')}}',
+        readOnly: true
+    })
     $('.view').hover(
         function(){
             $(this).find('.caption').slideDown(250); //.fadeIn(250)
