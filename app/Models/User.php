@@ -320,4 +320,9 @@ class User extends Model implements AuthenticatableContract , CanResetPasswordCo
 
 		return false;
 	}
+
+	public function Ratings()
+	{
+		return $this->hasMany('App\Models\Rating','rated_by');
+	}
 }
