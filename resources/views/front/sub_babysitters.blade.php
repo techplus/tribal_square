@@ -64,11 +64,7 @@ function time_elapsed_string($ptime)
 	                        <?php echo ( $oBabySitter->Account ) ? '<h5 class="white"><i class="glyphicon glyphicon-ok"></i> '.$a."</h5>" : ''; ?> 
 	                        <?php echo ( $oBabySitter->Bio ) ? '<h5 class="white"><i class="glyphicon glyphicon-ok"></i> Rate : $'.$oBabySitter->Bio->average_rate_from.' - $'.$oBabySitter->Bio->average_rate_to."</h5>" : ''; ?> 
 	                        <?php echo ( $oBabySitter->nationality ) ? '<h5 class="white"><i class="glyphicon glyphicon-ok"></i> Nationality '.ucfirst($oBabySitter->Account->nationality).".</h5>" : ''; ?> 
-	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
-	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
-	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
-	                        <span class="glyphicon glyphicon-star" style="color: #f38a02;"></span>
-	                        <span class="glyphicon glyphicon-star-empty" style="color: #f38a02;"></span>
+	                        <div class="raty" data-score="{{$oBabySitter->rating}}" data-readonly="true"></div>
 	                    </div>
 	                </div>
 	            </div>

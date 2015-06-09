@@ -1,8 +1,10 @@
 @extends($layout)
-@section('content')		
+@section('content')
 	@if( Auth::check() )
 		<link href="{{asset('/css/style.css')}}" rel="stylesheet">
-		 @if(Request::segment(1) != "search") 
+        <link href="{{asset('/js/raty/jquery.raty.css')}}" rel="stylesheet">
+        <script type="text/javascript" src="{{asset("/js/raty/jquery.raty.js")}}"></script>
+		 @if(Request::segment(1) != "search")
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Baby Sitters
@@ -23,23 +25,23 @@
                     @elseif( $sStatus == "Declined" )
                         <button class="btn btn-success action" data-status="approved" data-id="{{$oBabySitter->id}}">Approve</button>&nbsp;
                         <button class="btn btn-danger action" data-status="pending" data-id="{{$oBabySitter->id}}">Move To Pending</button>
-                        <button class="btn btn-danger action" data-status="archived" data-id="{{$oBabySitter->id}}">Archive</button>                    
-                    @endif                  
-                </div>		
+                        <button class="btn btn-danger action" data-status="archived" data-id="{{$oBabySitter->id}}">Archive</button>
+                    @endif
+                </div>
 			</div>
-			<div class="panel-body">				
-				<div class="row">															
+			<div class="panel-body">
+				<div class="row">
 					<div style="position:relative;width:100%;height:100%;">
 						<div style="position: absolute;opacity:0;width:100%;height:100%;z-index:1030;"></div>
 		@endif
 		@if(Request::segment(1) == "search")
-        <div class="row header_wrap new_header_wrap">    
+        <div class="row header_wrap new_header_wrap">
             @include('layouts.front_navbar')
-        </div>    
-        @endif    					
+        </div>
+        @endif
 	@else
 		<div class="page-wrap">
-			<div id="page-content-wrapper">	
+			<div id="page-content-wrapper">
 				<div class="row header_wrap new_header_wrap">
 					@include('layouts.front_navbar')
 	@endif
@@ -70,7 +72,7 @@
                 				</div>
                 				<div class="col-sm-3 col-xs-12">
 				                  <!-- Profile Pagination -->
-				                   
+
 				                  	@if( Auth::check()  || ! Auth::check())
 				                	<div class="BabySitter_pageinfo">
 				                		@if($iSequenceId > 1)
@@ -78,7 +80,7 @@
 				                    		<button class="btn btn-default btn-sm" type="button">
 				                    			<span aria-hidden="true" class="glyphicon glyphicon-menu-left"></span>
 				                    		</button>
-				                    	</a>			                
+				                    	</a>
 				                    	@endif
 				                    	{{ $iSequenceId > 0 ? 'Profile '.$iSequenceId.' out of '.$iTotal : '' }}
 				                    	<?php if($iSequenceId != $iTotal) { ?>
@@ -86,7 +88,7 @@
 				                    		<button class="btn btn-default btn-sm" type="button">
 				                    			<span aria-hidden="true" class="glyphicon glyphicon-menu-right"></span>
 				                    		</button>
-				                    	</a>	
+				                    	</a>
 				                    	<?php } ?>
 				                	</div>
 				                	@else
@@ -97,18 +99,18 @@
 				                    		<button class="btn btn-default btn-sm" type="button">
 				                    			<span aria-hidden="true" class="glyphicon glyphicon-menu-right"></span>
 				                    		</button>
-				                    	</a>	
+				                    	</a>
 				                	</div>
 				                	@endif
 				                	@endif
 
-				                  	
+
 				                  <!-- Profile Pagination -->
 				                  <div class="clearfix"></div>
 				                </div>
           		    		</div>
 				            <div class="col-sm-9">
-				            	
+
 				                <div class="col-sm-6">
 				                   <?php /* <div class="user-image" align="center" style="height:363px;{{ (!Auth::check() ) ? 'width:539px;':'width:400px;' }}position:relative;">
 				                    	<?php
@@ -128,7 +130,7 @@
 				                        {!! ( $oBabySitter->Bio ) ? "<p>".$oBabySitter->Bio->title."</p>" : '' !!}
 				                        {!! ( $oBabySitter->Account ) ? '<h5 class="white"><i class="glyphicon glyphicon-heart"></i> Age : '.$oBabySitter->Account->age.'</h5>' : '' !!}
 				                        {!! ( $oBabySitter->Bio ) ? '<h5 class="white"><i class="glyphicon glyphicon-map-marker"></i> Will travel '.$oBabySitter->Bio->miles_from_home .' miles </h5>' : '' !!}
-				                        <h5 class="white"><i class="glyphicon glyphicon-lock"></i> Last 
+				                        <h5 class="white"><i class="glyphicon glyphicon-lock"></i> Last
 				                        signed in: {{ date('m/d/Y h:i a',strtotime($oBabySitter->last_logged_in)) }}</h5>
 				                        {!! ( $oBabySitter->Account ) ? '<h5 class="white"><i class="glyphicon glyphicon-ok"></i> Babysitter in '.ucfirst($oBabySitter->Account->city).", ".$oBabySitter->Account->state." ".$oBabySitter->Account->pin.'</h5>' : '' !!}
 				                        {!! ( $oBabySitter->Account ) ? '<h5 class="white"><i class="glyphicon glyphicon-user"></i>  '.$oBabySitter->Account->gender.'</h5>' : '' !!}
@@ -143,6 +145,7 @@
 							                    <h4 class="green"><i class="glyphicon glyphicon-usd"></i>{{ $oBabySitter->Bio->average_rate_from }}-${{ $oBabySitter->Bio->average_rate_to }} per hour</h4>
 							                </div>
 						                @endif
+                                        <div class="readonly" data-readonly="true" data-score="{{$oBabySitter->MyRatings()->avg('score')}}"></div>
 				                    </div>
 				                </div>
 
@@ -159,13 +162,13 @@
 					                    </ul>
 					            	    <!-- Tab panes -->
                     					<div class="tab-content">
-	                    					<?php 
-						                    	$aAgeGroups = Config::get('AgeGroups'); 
-						                    	$aSpecialNeed = Config::get('SpecialNeedServices'); 
-						                    	$aHomeworkHelp = Config::get('HomeworkHelp'); 
-						                    	$aAdditionalService = Config::get('AdditionalServices'); 
+	                    					<?php
+						                    	$aAgeGroups = Config::get('AgeGroups');
+						                    	$aSpecialNeed = Config::get('SpecialNeedServices');
+						                    	$aHomeworkHelp = Config::get('HomeworkHelp');
+						                    	$aAdditionalService = Config::get('AdditionalServices');
 						                	?>
-						                	@if(  $oBabySitter->Bio  )	
+						                	@if(  $oBabySitter->Bio  )
                     						<div role="tabpanel" class="tab-pane custom_tab_pane active" id="home">
 						                        <h4>About {{ ucfirst($oBabySitter->firstname) }}</h4>
 						                        <p>{{ $oBabySitter->Bio->experience }}</p>
@@ -174,12 +177,12 @@
 						                    <div role="tabpanel" class="tab-pane custom_tab_pane" id="profile">
                           						<h4>{{ ucfirst($oBabySitter->firstname) }}'s Experience</h4>
                           						<h5>{{ $oBabySitter->Experience->paid_child_care_experience_years }} years of paid child care experience with:</h5>
-                          						@if( $oBabySitter->Experience->age_groups_experience_with != "" ) 				                    
-					                    			<?php $aExistAgeGroup = explode("," , $oBabySitter->Experience->age_groups_experience_with ); 
+                          						@if( $oBabySitter->Experience->age_groups_experience_with != "" )
+					                    			<?php $aExistAgeGroup = explode("," , $oBabySitter->Experience->age_groups_experience_with );
 					                    				$count = 0;
 					                    			?>
-                          						<ul class="col-sm-4">				                    	
-							                    	@foreach( $aAgeGroups as $key => $sAgeGroup )				                    	
+                          						<ul class="col-sm-4">
+							                    	@foreach( $aAgeGroups as $key => $sAgeGroup )
 							                    		@if( in_array($key,$aExistAgeGroup) )
 							                    			@if( $count % 2 == 0 AND $count != 0 )
 							                    				</ul>
@@ -189,19 +192,19 @@
 							                    			<?php $count++; ?>
 							                    		@endif
 							                    	@endforeach
-							                    </ul>				                    
+							                    </ul>
 							                    @endif
 
 					                          	<div class="clearfix"></div>
                           						<br>
 
 						                        <h5>Special Needs Conditional Experience :</h5>
-                        						 	@if( $oBabySitter->Experience->special_needs_service_experience != "" AND $oBabySitter->Experience->have_special_needs_service_experience == 1 ) 				                    
-				                    				<?php $aExistSpecialNeeds = explode("," , $oBabySitter->Experience->special_needs_service_experience ); 
+                        						 	@if( $oBabySitter->Experience->special_needs_service_experience != "" AND $oBabySitter->Experience->have_special_needs_service_experience == 1 )
+				                    				<?php $aExistSpecialNeeds = explode("," , $oBabySitter->Experience->special_needs_service_experience );
 				                    				$count = 0;
 				                    				?>
-					                    			<ul class="col-sm-4">				                    	
-						                    			@foreach( $aSpecialNeed as $key => $sSpecialNeed )				                    	
+					                    			<ul class="col-sm-4">
+						                    			@foreach( $aSpecialNeed as $key => $sSpecialNeed )
 						                    			@if( in_array($key,$aExistSpecialNeeds) )
 						                    			@if( $count % 4 == 0 AND $count != 0 )
 						                    			</ul>
@@ -211,20 +214,20 @@
 						                    			<?php $count++; ?>
 						                    			@endif
 							                    	@endforeach
-								                    </ul>				                    
+								                    </ul>
 								                    @endif
                           						<div class="clearfix"></div>
                         						<br><br>
                         					</div>
                         					<div role="tabpanel" class="tab-pane custom_tab_pane" id="messages">
-                        						@if( $oBabySitter->Availability )				                    	
+                        						@if( $oBabySitter->Availability )
 						                    		<h4 id="availability">{{ ucfirst($oBabySitter->firstname) }}'s Availability</h4>
 								                    <h5>My availability calendar is valid through {{ date('m/d/Y',strtotime($oBabySitter->Availability->schedule_valid_until)) }}
 							                        	<span class="pull-right">
 								                        <i class="green_dot">&nbsp;&nbsp;&nbsp;&nbsp;</i>
 								                        Available
 						        		                </span>
-						                		    </h5>				                    
+						                		    </h5>
 
 								                    <div class="table-responsive">
 								                        <table class="table table-bordered aShifts">
@@ -237,7 +240,7 @@
 								                            </tr>
 								                          </thead>
 								                          <tbody>
-								                          	@foreach( $aShifts as $oShift )				                          						                          		
+								                          	@foreach( $aShifts as $oShift )
 									                            <tr>
 									                              <th scope="row" style="text-align:center;">{{ str_replace(")","",str_replace("(","",$oShift->time)) }}</th>
 									                              @foreach( $aDays as $oDay )
@@ -247,8 +250,8 @@
 									                              		@else
 									                              			<i class="white_dot">&nbsp;&nbsp;&nbsp;&nbsp;</i>
 									                              		@endif
-									                              	</td>					                              	
-									                              @endforeach				                              
+									                              	</td>
+									                              @endforeach
 									                            </tr>
 								                            @endforeach
 								                          </tbody>
@@ -257,7 +260,7 @@
 					                			@endif
                         					</div>
                         					<div role="tabpanel" class="tab-pane custom_tab_pane" id="settings">
-                        					<h4 id="availability">{{ ucfirst($oBabySitter->firstname) }}'s Skills & Availabilities</h4>	
+                        					<h4 id="availability">{{ ucfirst($oBabySitter->firstname) }}'s Skills & Availabilities</h4>
                         					<div class="col-sm-4">
 					                    	@if( $oBabySitter->Skill->languages_spoken != "" )
 					                        <h5>Languages Spoken:</h5>
@@ -268,11 +271,11 @@
 					                            @endforeach
 					                        </ul>
 					                        @endif
-					                        
-					                        @if( $oBabySitter->Skill->additional_services != "" ) 
+
+					                        @if( $oBabySitter->Skill->additional_services != "" )
 					                        <h5>Additional Services:</h5>
 					                        <ul>
-					                            <?php $aExistAdditionalService = explode("," , $oBabySitter->Skill->homework_help ); ?>						                  		                    
+					                            <?php $aExistAdditionalService = explode("," , $oBabySitter->Skill->homework_help ); ?>
 					                            @foreach( $aAdditionalService as $key => $sAdditionalService )
 					                            	@if( in_array($key,$aExistAdditionalService ) )
 					                            		<li>{{ $sAdditionalService }}</li>
@@ -281,15 +284,15 @@
 					                        </ul>
 					                        @endif
 					                    </div>
-					                   
-			                            @if( $oBabySitter->Skill->homework_help != "" ) 				                    
+
+			                            @if( $oBabySitter->Skill->homework_help != "" )
 			                           	<div class="col-sm-4">
 					                        <h5>Homework Help:</h5>
 					                        <ul>
-						                    	<?php $aExistHomeworkHelp = explode("," , $oBabySitter->Skill->homework_help ); 
+						                    	<?php $aExistHomeworkHelp = explode("," , $oBabySitter->Skill->homework_help );
 						                   		$count = 0;
-						                    	?>						                  		                    
-						                    		@foreach( $aHomeworkHelp as $key => $sHomeworkHelp )				                    	
+						                    	?>
+						                    		@foreach( $aHomeworkHelp as $key => $sHomeworkHelp )
 						                    		@if( in_array($key,$aExistHomeworkHelp) )
 						                    			@if( $count % 5 == 0 AND $count != 0 )
 						                    </ul>
@@ -303,37 +306,68 @@
 						                    	@endif
 						                    	@endforeach
 						                    </ul>
-					                    </div>				                    
-			                    		@endif	
+					                    </div>
+			                    		@endif
                         					</div>
                         					<div class="clearfix"></div>
 
                         					<div role="tabpanel" class="tab-pane custom_tab_pane" id="references">
-						                        @if( $oBabySitter->Skill->reference_name != "" OR  $oBabySitter->Skill->reference_name2 != "" ) 
-					                    			<h4> {{ ucfirst($oBabySitter->firstname) }}'s References</h4>				                 
-					                    		@endif   
-					                    		@if( $oBabySitter->Skill->reference_name != "" )				                    
+						                        @if( $oBabySitter->Skill->reference_name != "" OR  $oBabySitter->Skill->reference_name2 != "" )
+					                    			<h4> {{ ucfirst($oBabySitter->firstname) }}'s References</h4>
+					                    		@endif
+					                    		@if( $oBabySitter->Skill->reference_name != "" )
 					                    			<div class="col-sm-4">{{ ucfirst($oBabySitter->Skill->reference_name) }} is a reference for {{ ucfirst($oBabySitter->firstname)." ".ucfirst(substr($oBabySitter->lastname,0,1))."." }}</div>
 					                    			<div class="col-sm-4">Relationship: {{ ucfirst($oBabySitter->Skill->reference_relationship) }}</div>
-					                    			<div class="clearfix"></div>				                    
+					                    			<div class="clearfix"></div>
 					                    		@endif
-					                    		@if( $oBabySitter->Skill->reference_name2 != "" )				                    
+					                    		@if( $oBabySitter->Skill->reference_name2 != "" )
 					                    			<div class="col-sm-4">{{ ucfirst($oBabySitter->Skill->reference_name2) }} is a reference for {{ ucfirst($oBabySitter->firstname)." ".ucfirst(substr($oBabySitter->lastname,0,1))."." }}</div>
-					                    			<div class="col-sm-4">Relationship: {{ ucfirst($oBabySitter->Skill->reference_relationship2) }}</div>				                    
+					                    			<div class="col-sm-4">Relationship: {{ ucfirst($oBabySitter->Skill->reference_relationship2) }}</div>
 					                    		@endif
-						                    </div>	
+						                    </div>
 
-						                    
+
 						                    @endif
-                    					</div>    
-				                	</div>	
+                    					</div>
+				                	</div>
 				                <!-- Tab panel -->
 				            </div>
 				            <div class="col-sm-3">
 				            	<div class="clearfix"></div><br>
-				                <a href="mailto:{{ $oBabySitter->email }}" class="btn red_btn btn-lg btn-block">
+                                @if( Auth::check() && Auth::user()->Ratings()->where('rated_to',$oBabySitter->id)->count() == 0 )
+                                    <a href="#submitRating" data-toggle="modal" class="btn btn-primary btn-lg btn-block" style="margin-bottom:5px;">
+                                        <span class="glyphicon glyphicon-star"></span> Rate Now
+                                    </a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="submitRating" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">Rate {{$oBabySitter->firstname}}</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form id="ratingForm" action="{{action('Users\RatingsController@store')}}" method="post">
+                                                    <input type="hidden" name="rated_by" value="{{Auth::user()->id}}">
+                                                        <input type="hidden" name="rated_to" value="{{$oBabySitter->id}}">
+                                                        <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="raty" data-score="2.5"></div>
+                                                        </div>
+                                                        <div class="col-md-12" style="margin-top: 10px;">
+                                                            <button type="submit" class="btn btn-success">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                <a href="mailto:{{ $oBabySitter->email }}" class="btn red_btn btn-lg btn-block">
 				                <span class="glyphicon glyphicon-envelope"></span> Contact {{ ucfirst($oBabySitter->firstname) }}</a>
-				                
+
 				                @if( $oBabySitter->Availability )
 					                <a href="#" class="btn black_btn btn-lg btn-block" data-toggle="modal" data-target="#myModal">
 					                <span class="glyphicon glyphicon-calendar"></span> View Avaliability</a>
@@ -358,18 +392,18 @@
 					                            </tr>
 					                          </thead>
 					                          <tbody>
-					                          	@foreach( $aShifts as $oShift )				                          						                          		
+					                          	@foreach( $aShifts as $oShift )
 						                            <tr>
 						                              <th scope="row" style="text-align:center;">{{ str_replace(")","",str_replace("(","",$oShift->time)) }}</th>
 						                              @foreach( $aDays as $oDay )
-						                              	<td style="text-align:center;">						                              		
+						                              	<td style="text-align:center;">
 						                              		@if( $aDayShifts && isset( $aDayShifts[ $oShift->id ][ $oDay->id ]) )
 						                              			<i class="green_dot">&nbsp;&nbsp;&nbsp;&nbsp;</i>
 						                              		@else
 						                              			<i class="white_dot">&nbsp;&nbsp;&nbsp;&nbsp;</i>
 						                              		@endif
-						                              	</td>					                              	
-						                              @endforeach				                              
+						                              	</td>
+						                              @endforeach
 						                            </tr>
 					                            @endforeach
 					                          </tbody>
@@ -385,7 +419,7 @@
 
 				                    <h3>About {{  ( (strlen($oBabySitter->firstname) > 10 )  ? substr(ucfirst($oBabySitter->firstname),0,9).'...' : ucfirst($oBabySitter->firstname) ) }}  </h3>
 				                    <ul>
-				                    	@if( $oBabySitter->Bio ) 
+				                    	@if( $oBabySitter->Bio )
 				                        <li>
 				                            <span class="glyphicon glyphicon-ok"></span>
 				                            Will care for up to {{ $oBabySitter->Bio->no_of_childrens_comfortable_with }} children
@@ -422,14 +456,14 @@
 	                        					echo $careAvail;
 	                        				?>
 				                        </li>
-				                        @endif 
+				                        @endif
 
 				                        @if( $oBabySitter->Availability && $oBabySitter->Availability->available_after_school_care == 1 )
 				                        <li>
 				                            <span class="glyphicon glyphicon-ok"></span>
 				                            After school care availability
 				                        </li>
-				                        @endif 
+				                        @endif
 
 				                        @if( $oBabySitter->Availability && $oBabySitter->Availability->available_before_school_care == 1 )
 				                        <li>
@@ -457,7 +491,7 @@
 				                            <span class="glyphicon glyphicon-ok"></span>
 				                            Experience caring for twins
 				                        </li>
-				                        @endif 
+				                        @endif
 
 				                       	@if( $oBabySitter->Bio && $oBabySitter->Bio->do_smoke == 0 )
 				                        <li>
@@ -478,16 +512,16 @@
 				                            <span class="glyphicon glyphicon-ok"></span>
 				                            Willing to provide sick care
 				                        </li>
-				                        @endif 
+				                        @endif
 
 				                        @if( $oBabySitter->Skill )
 					                        <li>
 					                            <span class="glyphicon glyphicon-ok"></span>
 					                            @if( $oBabySitter->Skill->reference_name != "" AND  $oBabySitter->Skill->reference_name2 != "" )
 					                            	Two references available
-					                            @elseif( $oBabySitter->Skill->reference_name2 != "" ) 	
+					                            @elseif( $oBabySitter->Skill->reference_name2 != "" )
 					                            	One reference available
-					                            @elseif( $oBabySitter->Skill->reference_name != "" ) 	
+					                            @elseif( $oBabySitter->Skill->reference_name != "" )
 					                            	One reference available
 					                            @else
 					                            	No references available
@@ -498,7 +532,7 @@
 				                   <!--  <br>
 				                    <h5><strong>Qualifications include:</strong></h5>
 				                    <p>First Aid Training, CPR Training</p>
-				                    <p>Marriage/Relationship Counselor. Teacher/Mentor. DFCS Volunteer. 
+				                    <p>Marriage/Relationship Counselor. Teacher/Mentor. DFCS Volunteer.
 				                    Homeschool exp. Tutor. Etc.</p> -->
 				                </div>
                                 <?php /*
@@ -557,10 +591,10 @@
 		                    @elseif( $sStatus == "Declined" )
 		                        <button class="btn btn-success action" data-status="approved" data-id="{{$oBabySitter->id}}">Approve</button>&nbsp;
 		                        <button class="btn btn-danger action" data-status="pending" data-id="{{$oBabySitter->id}}">Move To Pending</button>
-		                        <button class="btn btn-danger action" data-status="archived" data-id="{{$oBabySitter->id}}">Archive</button>                    
-		                    @endif                      
+		                        <button class="btn btn-danger action" data-status="archived" data-id="{{$oBabySitter->id}}">Archive</button>
+		                    @endif
 	                	</div>
-	                	@endif	
+	                	@endif
 						<!-- Modal -->
 					    <div class="modal fade" id="confirmation_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					        <div class="modal-dialog">
@@ -578,11 +612,11 @@
 					                </div>
 					            </div>
 					        </div>
-					    </div>	
-                	@endif 
-                	@if( Auth::check() )  
-                	</div>	           
-                	@endif      
+					    </div>
+                	@endif
+                	@if( Auth::check() )
+                	</div>
+                	@endif
     	</div>
   </div>
 <script>
@@ -593,7 +627,7 @@ function onSuccess($id,$sStatus)
  $(document).ready(function() {
     var $btnSets = $('#responsive'),
     $btnLinks = $btnSets.find('a');
- 
+
     $btnLinks.click(function(e) {
         e.preventDefault();
         $(this).siblings('a.active').removeClass("active");
@@ -603,15 +637,43 @@ function onSuccess($id,$sStatus)
         $("div.user-menu>div.user-menu-content").eq(index).addClass("active");
     });
     @if( Auth::check() )
-    	
+
         @include('admin.babysitters.scripts')
-	
+
     @endif
 });
 
 $( document ).ready(function() {
-    $("[rel='tooltip']").tooltip();    
- 
+    $("[rel='tooltip']").tooltip();
+    $('#ratingForm' ).on('submit',function(e){
+        e.preventDefault();
+        var that = $(this);
+        $.ajax({
+            url: that.attr('action'),
+            type: 'post',
+            dataType:'json',
+            data:that.serialize()
+        } ).success(function(data){
+            that.parent().html('<div class="alert alert-success">'+data.message+'</div>')
+        })
+    })
+    $('div.raty').raty({
+        score: function() {
+            return $(this).attr('data-score');
+        },
+        starHalf: '{{asset('/js/raty/images/star-half.png')}}',
+        starOff: '{{asset('/js/raty/images/star-off.png')}}',
+        starOn: '{{asset('/js/raty/images/star-on.png')}}'
+    });
+    $('div.readonly' ).raty({
+        score: function() {
+            return $(this).attr('data-score');
+        },
+        starHalf: '{{asset('/js/raty/images/star-half.png')}}',
+        starOff: '{{asset('/js/raty/images/star-off.png')}}',
+        starOn: '{{asset('/js/raty/images/star-on.png')}}',
+        readOnly: true
+    })
     $('.view').hover(
         function(){
             $(this).find('.caption').slideDown(250); //.fadeIn(250)
@@ -619,7 +681,7 @@ $( document ).ready(function() {
         function(){
             $(this).find('.caption').slideUp(250); //.fadeOut(205)
         }
-    ); 
+    );
 });
 </script>
 

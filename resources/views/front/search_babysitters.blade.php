@@ -37,6 +37,8 @@
     }
   }
 </style>
+<link href="{{asset('/js/raty/jquery.raty.css')}}" rel="stylesheet">
+<script type="text/javascript" src="{{asset("/js/raty/jquery.raty.js")}}"></script>
   <div class="page-wrap">
     <div id="page-content-wrapper">
       <div class="row header_wrap new_header_wrap">
@@ -167,7 +169,7 @@
                       @endif
                   </div>
                   <div class="clearfix hidden-xs"></div>
-                  <div class="babysitter-container"> 
+                  <div class="babysitter-container">
                     @include('front.sub_babysitters') 
                   </div>
                   <!-- <div class="clearfix"></div> -->
@@ -223,8 +225,16 @@
 });
 
 $( document ).ready(function() {
-    $("[rel='tooltip']").tooltip();    
- 
+    $("[rel='tooltip']").tooltip();
+    $('div.raty').raty({
+        score: function() {
+            return $(this).attr('data-score');
+        },
+        starHalf: '{{asset('/js/raty/images/star-half.png')}}',
+        starOff: '{{asset('/js/raty/images/star-off.png')}}',
+        starOn: '{{asset('/js/raty/images/star-on.png')}}',
+        readOnly:true
+    });
     $('.view').hover(
         function(){
             $(this).find('.caption').slideDown(250); //.fadeIn(250)
