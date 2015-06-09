@@ -20,7 +20,7 @@
                         <li><a href="login.html">Logout</a></li>
                     </ul> -->
                 
-                <div class="logo-element">
+                <div class="logo-element"> 
                     <!-- IN+ -->
                 </div>
             </li>            

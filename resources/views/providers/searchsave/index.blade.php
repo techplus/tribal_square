@@ -43,9 +43,16 @@
                                 <td>{{ $oSearch->keyword }}</td>
                                 <td>{{ $oSearch->location }}</td>
                                 <td>{{ ($oSearch->category_id == '0') ? "Show All" : $oSearch->category_id }}</td>
-                                <td><a href="">[ Open in New tab ]</a></td>
+                                <?php 
+                                    $aSearch[ 'term' ]      = $oSearch->keyword ;
+                                    $aSearch[ 'location' ]  = $oSearch->keyword;
+                                    $aSearch = session('search');
+                                ?>
+                                <td><a target="_blank" href="{{route('search.deals.index')}}">[ Open in New tab ]</a></td>
                             </tr>
-                        @endforeach    
+                            
+                        @endforeach 
+
                         @endif    
                     </tbody>
                     <tfoot>

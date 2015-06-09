@@ -60,7 +60,9 @@
                 <input type="text" name="term" class="form-control header_item_search" placeholder="What are you looking for ?" value="">
                 <input type="text" name="location" id="autocomplete1" class="form-control header_location_search" placeholder="Enter your Location" value="{{ ( !empty($aSearch) ) ? $aSearch['location'] : '' }}">               
                 <input type="submit" name="search" class="btn red_btn" value="Go">
+                @if( Auth::check() )
                 <a href="#" class="savesearch_btn" id="savesearch_btn" style="float:right;margin-right: 55px;"> Save Search </a>
+                @endif
                 @if( !empty( $aSearch[ 'type' ] ) )
                     <input type="hidden" name="type" value="{{ $aSearch[ 'type' ] }}">
                 @elseif( Request::segment(2) == "deals" )
