@@ -19,12 +19,12 @@
                             <form method="post" class="form-horizontal" name="frmBabySitter" id="frmBabySitter" action="{{ action('Users\BabySittersController@postStore') }}">
                                 <div class="form-group">
                                     <div class="col-sm-12">
-                                        <label class="control-label">Languages Spoken</label>                                   
+                                        <label class="control-label">Languages Spoken ( Please press enter after additing a language. )</label>                                   
                                     </div>
                                 </div>
                                 <div class="form-group">                                    
                                     <div class="col-sm-12">                                      
-                                        <input name="languages_spoken" id="languages_spoken" value="{{ $oSkill->languages_spoken }}" class="form-control">
+                                        <input name="languages_spoken" id="languages_spoken" value="{{ $oSkill->languages_spoken }}" class="form-control" placeholder="Skill And Language">
                                     </div>
                                 </div>                               
                                 <div class="form-group">
@@ -106,12 +106,12 @@
     <!-- jQuery UI -->
     <script src="{{asset('inspinia/js/plugins/jquery-ui/jquery-ui.min.js')}}"></script>
     <script>
-        $(document).ready(function () {        
+        $(document).ready(function () { 
             $('#languages_spoken' ).tagsInput({
                 autocomplete_url: '{{route('languages.index')}}',
                 'height':'70px',
                 'width':'100%',
-                'defaultText':'Add Languages',
+                'defaultText':'Add language.',
                 'onAddTag':function(tag){
                     console.log(tag);
                     $.ajax({
@@ -141,6 +141,7 @@
                     }                 
                 }
            }); 
+           $('#languages_spoken_tag').css('width','500px');   
         });
     </script>
 @endsection

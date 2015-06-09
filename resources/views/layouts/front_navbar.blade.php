@@ -47,17 +47,20 @@
               $dashBoardLink = action('Admin\PostsController@index');  
             }
           ?><br>
-          <a href="{{ $dashBoardLink }}" class="">My Dashboard</a> | 
+            <a href="{{ $dashBoardLink }}" class="">My Dashboard</a> | 
                 <!-- <a href="{{action('Auth\AuthController@getLogout')}}" class="btn btn-lg red_btn">Logout</a> -->
                 <a href="{{action('Auth\AuthController@getLogout')}}" class="">Logout</a>
             @endif
         </div> 
         <div class="header_search">
-            <form  action="{{ route('search.store') }}" method="post">                
+            <form action="{{ route('search.store') }}" method="post" id="frmSearch" name="frmSearch">                
+                @if( Auth::check() )
+                <input type="hidden" class="user_id" name="user_id" value="{{ Auth::user()->id }}">
+                @endif
                 <input type="text" name="term" class="form-control header_item_search" placeholder="What are you looking for ?" value="">
                 <input type="text" name="location" id="autocomplete1" class="form-control header_location_search" placeholder="Enter your Location" value="{{ ( !empty($aSearch) ) ? $aSearch['location'] : '' }}">               
                 <input type="submit" name="search" class="btn red_btn" value="Go">
-
+                <a href="#" class="savesearch_btn" id="savesearch_btn" style="float:right;margin-right: 55px;"> Save Search </a>
                 @if( !empty( $aSearch[ 'type' ] ) )
                     <input type="hidden" name="type" value="{{ $aSearch[ 'type' ] }}">
                 @elseif( Request::segment(2) == "deals" )
@@ -69,7 +72,7 @@
                 @else
                     <input type="hidden" class="type" name="type" value="">
                 @endif
-                <input type="hidden" name="cat" value="{{ ( !empty($aSearch) ) ? $aSearch['cat'] : '' }}">                
+                <input type="hidden" class="category" name="cat" value="{{ ( !empty($aSearch) ) ? $aSearch['cat'] : '' }}">                
             </form> 
         </div>                
     </div>
@@ -108,3 +111,28 @@
         @endif
     {{--</div>--}}
 </div>
+<script type="text/javascript">
+    
+$(document).ready(function(){
+    $('#savesearch_btn' ).on('click',function(){
+        var user_id     = $('.user_id').val();
+        var keyword     = $('.header_item_search').val();
+        var location    = $('.header_location_search').val();
+        var category_id = $('.category').val();
+        if($('.header_item_search').val() == "" || $('.header_location_search').val() == "")
+        {
+            alert("Sorry, Please enter Keyword or Location.");
+        }
+        else
+        {
+           $.ajax({
+                url : "{{ route('save-search.store') }}",
+                type:"POST",
+                data:{user_id:user_id,keyword:keyword,location:location,category_id:category_id}
+                }).success(function(data){
+                    alert('Search Saved.');
+            })
+        }
+    });
+});
+</script>

@@ -34,8 +34,8 @@
                 <?php /* <li>
                     <a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">Drafts</span></a>               
                 </li> */ ?>
-                <li>
-                    <a href="#"><i class="fa fa-file"></i> <span class="nav-label">Saved Searches</span></a>               
+                <li {{ ( Request::segment(1) == "save-search" ) ? 'class=active' : '' }}>
+                    <a href="{{route('save-search.show',[Auth::user()->id])}}"><i class="fa fa-file"></i> <span class="nav-label">Saved Searches</span></a>               
                 </li>
                 <li class="{{Request::url() == route('providers.show',[Auth::user()->id]) ? 'active' : ''}}">
                     <a href="{{route('providers.show',[Auth::user()->id])}}"><i class="fa fa-cog"></i> <span class="nav-label">Settings</span></a>

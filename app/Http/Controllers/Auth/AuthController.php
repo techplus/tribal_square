@@ -148,7 +148,8 @@ class AuthController extends Controller {
 				{		
 					$aCats = Config::get('categories');
 					$name = reset( $aCats );
-					$redirectPath = route('category.sub-category.index' , [ $name ] );
+					// $redirectPath = route('category.sub-category.index' , [ $name ] );
+					$redirectPath = action('HomeController@getIndex');
 				}
 				else if( $oUser->name == 'Providers' )
 				{

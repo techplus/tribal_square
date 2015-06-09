@@ -73,6 +73,7 @@ Route::group(['middleware'=>['auth.providers','payment']],function(){
 		Session::put('success_deal','Your Deal details have been successfully posted to Admin. It will go live soon.');			
 		return response()->json([]);
 	});
+	Route::resource('save-search','Users\SavesearchController',['only'=>['index','update','destroy','show','edit','create','store']]);
 	Route::resource('provider/billings','Users\BillingsController');
 });
 
