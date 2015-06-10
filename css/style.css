@@ -711,6 +711,10 @@ input:focus {
         width: 170px;
         transition: all .4s ease 0s;
     }
+    .description h4 {
+        font-size: 13px !important;
+        padding: 12px !important
+    }
 }
 
 .menu_sidebar_title a {
@@ -2038,6 +2042,23 @@ h1.custom_heading_top{
     color: #AB1919;
     padding: 10px 20px;
 }
+
+.service-wrapper img
+{
+    max-width: 285px;
+    margin:0 auto;
+}
+.description
+{
+    max-width: 285px;
+    margin: 0 auto;
+    max-height: 45px;
+}
+.description h4
+{
+    padding: 12px;
+}
+
 /* ================================================== */
 /* #Media Queries */
 /* ================================================== */
@@ -2065,7 +2086,8 @@ h1.custom_heading_top{
         margin: 10px 0;
     }
     .description h4 {
-        font-size: 18px;
+        font-size: 15px;
+        padding: 11px;
     }
 }
 
@@ -2104,7 +2126,7 @@ h1.custom_heading_top{
         font-size: 30px;
     }
     .description h4 {
-        font-size: 15px;
+        font-size: 12px;
     }
 }
 
@@ -2126,8 +2148,12 @@ h1.custom_heading_top{
     .custom_price h5 {
         font-size: 15px !important;
     }
-    .description h4 {
+    /*.description h4 {
         font-size: 12px;
+    }*/
+    .description h4 {
+        font-size: 11px;
+        padding: 5px !important;
     }
 }
 
@@ -2453,3 +2479,10 @@ h1.custom_heading_top{
 /* Very Small Mobile devices */
 
 @media only screen and (max-width: 280px) {}
+
+@media only screen and (min-width: 1201px) {
+     .description h4
+    {
+       font-size: 19px;
+    }
+}

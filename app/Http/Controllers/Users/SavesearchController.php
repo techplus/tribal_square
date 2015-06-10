@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Controller;
 use App\Models\Savesearch;
+use App\Models\ListingCategory;
 use Request;
 use Validator;
 
@@ -55,7 +56,7 @@ class SavesearchController extends Controller {
 	 */
 	public function show($id)
 	{
-		$this->data['aSavesearch'] = Savesearch::where('user_id',$id)->get();
+		$this->data['aSavesearch'] = Savesearch::with ( [ 'Listingcategory' ] )->where('user_id',$id)->get();
 
 		if( !$this->data['aSavesearch'] )
 			abort(404);

@@ -12,7 +12,7 @@ class DealsController extends Controller {
 		parent::__construct();
 
 		$this->data['subcategories'] = ListingCategory::Deals()->get();
-		//$this->data['aSearch'] = session('search');
+		$this->data['aSearch'] = session('search');
 	}
 
 	/**

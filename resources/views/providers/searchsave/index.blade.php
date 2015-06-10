@@ -42,7 +42,7 @@
                             <tr role="row" class="odd">
                                 <td>{{ $oSearch->keyword }}</td>
                                 <td>{{ $oSearch->location }}</td>
-                                <td>{{ ($oSearch->category_id == '0') ? "Show All" : $oSearch->category_id }}</td>
+                                <td>{{ ( $oSearch->Listingcategory ) ? $oSearch->Listingcategory->name : "Show All" }}</td>
                                 <?php 
                                     $aSearch[ 'term' ]      = $oSearch->keyword ;
                                     $aSearch[ 'location' ]  = $oSearch->keyword;

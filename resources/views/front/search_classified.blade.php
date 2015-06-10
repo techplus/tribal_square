@@ -15,64 +15,39 @@
                     @foreach($subcategories as $category)
                     <?php
                         if($category->name == 'African Restaurants')
-                          {
                             $imgLink = url('images/restaurant.png');
-                          }
-                          elseif($category->name == 'African Caterers')
-                          {
+                        elseif($category->name == 'African Caterers')
                             $imgLink = url('images/catering.png');
-                          }
-                          elseif($category->name == 'African Entertainers/dj')
-                          {
-                             $imgLink = url('images/entertainers.png');
-                          }
-                          elseif($category->name == 'African tailors')
-                          {
-                             $imgLink = url('images/restaurant.png');
-                          }
-                          elseif($category->name == 'Hair Braiding')
-                          {
-                             $imgLink = url('images/img-5.png');
-                          }
-                          elseif($category->name == 'Fashion Jewellery')
-                          {
-                             $imgLink = url('images/img-6.png');
-                          }
-                          elseif($category->name == 'African Store')
-                          {
-                             $imgLink = url('images/img-7.png');
-                          }
-                          elseif($category->name == 'Churches / Groups')
-                          {
-                             $imgLink = url('images/img-8.png');
-                          }
-                          elseif($category->name == 'Upcoming African Events')
-                          {
-                             $imgLink = url('images/img-9.png');
-                          }
-                          elseif($category->name == 'Import / Export Shipping')
-                          {
-                             $imgLink = url('images/img-10.png');
-                          }
-                          elseif($category->name == 'Immigration Lawyers')
-                          {
-                             $imgLink = url('images/img-11.png');
-                          }
-                          elseif($category->name == 'Arts & Crafts')
-                          {
-                             $imgLink = url('images/img-12.png');
-                          }
-                          else
-                          {
+                        elseif($category->name == 'African Entertainers/dj')
+                            $imgLink = url('images/entertainers.png');
+                        elseif($category->name == 'African tailors')
                             $imgLink = url('images/restaurant.png');
-                          }
+                        elseif($category->name == 'Hair Braiding')
+                            $imgLink = url('images/img-5.png');
+                        elseif($category->name == 'Fashion Jewellery')
+                            $imgLink = url('images/img-6.png');
+                        elseif($category->name == 'African Store')
+                            $imgLink = url('images/img-7.png');
+                        elseif($category->name == 'Churches / Groups')
+                            $imgLink = url('images/img-8.png');
+                        elseif($category->name == 'Upcoming African Events')
+                            $imgLink = url('images/img-9.png');
+                        elseif($category->name == 'Import / Export Shipping')
+                            $imgLink = url('images/img-10.png');
+                        elseif($category->name == 'Immigration Lawyers')
+                            $imgLink = url('images/img-11.png');
+                        elseif($category->name == 'Arts & Crafts')
+                            $imgLink = url('images/img-12.png');
+                        else
+                            $imgLink = url('images/restaurant.png');
                     ?>
-                    <div class="col-xs-6 col-sm-4 service-wrapper">
+                    <div class="col-xs-6 col-sm-3 service-wrapper">
                         <a class="linkcolor" href="{{ route('search.categories.show',[ $category->id ]) }}?type=classified">
-                        <!-- <a class="linkcolor" href="{{ route('search.classified.show',[ $category->id ]) }}?type=classified"> -->
                         <img class="img-responsive" src="{{$imgLink}}">
                             <div class="description">
-                                <h5>{{ $category->name }}</h5>  
+                                <h4>
+                                  {{ ( $category->name ) ? ( (strlen( $category->name ) > 22 ) ? substr( $category->name,0,21)."..." : $category->name ) : '' }}
+                                </h4>  
                             </div>
                         </a>
                     </div>
@@ -91,12 +66,11 @@
             <div class="row post_need_container profit_content">
                 5% of our profit supports <a href="http://www.selfless4africa.org/" target="_blank">www.selfless4africa.org</a> ..S4A inspiring change in Africa
             </div> 
-           
-            @else
-                
-                @include('front.search_classified_items')
+          @else
+               
+              @include('front.search_classified_items')
 
-            @endif                
+          @endif                
             
             
 
