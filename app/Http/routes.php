@@ -76,6 +76,7 @@ Route::group(['middleware'=>['auth.providers','payment']],function(){
 	});
 	Route::resource('save-search','Users\SavesearchController',['only'=>['index','update','destroy','show','edit','create','store']]);
 	Route::resource('provider/billings','Users\BillingsController');
+	Route::get('save-search','Users\SavesearchController@getSearch');
 });
 
 

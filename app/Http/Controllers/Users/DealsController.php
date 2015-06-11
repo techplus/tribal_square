@@ -7,6 +7,7 @@ use Request;
 use App\Models\ListingCategory;
 use App\Models\DealImage;
 use Auth;
+use Mail;
 use Session;
 
 class DealsController extends Controller {
@@ -46,28 +47,27 @@ class DealsController extends Controller {
 			'email' , 'title' , 'original_price' , 'new_price' , 'discount_percentage' , 'start_date' , 'end_date' , 'description' , 'available_stock' , 'fineprint' , 'category_id' , 'location' , 'street1' , 'street2'
 			, 'city' , 'country' , 'state' , 'pin' , 'website' , 'contact' , 'lat' , 'long'
 		] );
-
 		$aData[ 'start_date' ] = preg_replace('/(\d{2})\/(\d{2})\/(\d{4})/','$3-$1-$2', $aData[ 'start_date' ] );
 		$aData[ 'end_date' ] = preg_replace('/(\d{2})\/(\d{2})\/(\d{4})/','$3-$1-$2', $aData[ 'end_date' ] );
 		$aData[ 'user_id' ] = Auth::user()->id;		
 		
-		$aData[ 'firstname' ] = Auth::user()->firstname;
-		$aData[ 'lastname' ] = Auth::user()->lastname;
-		$aData[ 'email' ] = Auth::user()->email;
+		$aUser[ 'firstname' ] = Auth::user()->firstname;
+		$aUser[ 'lastname' ] = Auth::user()->lastname;
+		$aUser[ 'email' ] = Auth::user()->email;
 
 		$oDeal = Deal::create( $aData );
 
 		if( $oDeal )
 		{
-			Mail::send( 'emails.adddeals' ,
+			Mail::send( 'emails.adddeals',
 				array(
-					'firstname' => $aData[ 'firstname' ] ,
-					'lastname' => $aData[ 'lastname' ] ,
-					'email' => $aData[ 'email' ]
-				) , function ( $message ) use ( $aData ) {
+					'firstname' => $aUser[ 'firstname' ] ,
+					'lastname' => $aUser[ 'lastname' ] ,
+					'email' => $aUser[ 'email' ]
+				) , function ( $message ) use ( $aUser ) {
 					// deals@tribalsquare.com
-					$message->from( 'deals@tribalsquare.com' , 'Tribal Square Deal' );
-					$message->to( $aData[ 'email' ] )->subject( 'Welcome Email' );
+					$message->from( 'deals@tribalsquare.com' , 'Tribal Square' );
+					$message->to( $aUser[ 'email' ] )->subject( 'Your Deal successfully added' );
 				} );
 			return response()->json ( $oDeal -> toArray() );
 		}
@@ -88,7 +88,7 @@ class DealsController extends Controller {
 
 		$this->data['deal'] = $deal;
 
-		//dd($this->data['deal']);
+		//dd($this->data['deal']); 
 		return $this->renderView('providers.deals.show');
 	}
 

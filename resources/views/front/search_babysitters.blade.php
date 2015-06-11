@@ -263,7 +263,16 @@ $( document ).ready(function() {
           {
             if( resp.html )
             { 
-              $('.babysitter-container').append(resp.html);             
+              $('.babysitter-container').append(resp.html);   
+              $('div.raty').raty({
+                  score: function() {
+                      return $(this).attr('data-score');
+                  },
+                  starHalf: '{{asset('/js/raty/images/star-half.png')}}',
+                  starOff: '{{asset('/js/raty/images/star-off.png')}}',
+                  starOn: '{{asset('/js/raty/images/star-on.png')}}',
+                  readOnly:true
+              });          
               if( parseInt(resp.iOffset)  >= parseInt(resp.iTotal) )
               {
                 $('.load-more-parent').hide();

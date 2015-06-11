@@ -1,6 +1,6 @@
 @extends('layouts.inspinia.inspinia')
 @section('content')
-	 <!-- Data Tables -->
+     <!-- Data Tables -->
     <link href="{{ asset('inspinia/css/plugins/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('inspinia/css/plugins/dataTables/dataTables.responsive.css') }}" rel="stylesheet">
     <div class="row">
@@ -32,6 +32,7 @@
                     <tr>
                         <th>Keyword</th>
                         <th>Location</th>
+                        <th>Type</th>
                         <th>Category</th>
                         <th>Actions</th>
                     </tr>
@@ -42,13 +43,10 @@
                             <tr role="row" class="odd">
                                 <td>{{ $oSearch->keyword }}</td>
                                 <td>{{ $oSearch->location }}</td>
-                                <td>{{ ( $oSearch->Listingcategory ) ? $oSearch->Listingcategory->name : "Show All" }}</td>
-                                <?php 
-                                    $aSearch[ 'term' ]      = $oSearch->keyword ;
-                                    $aSearch[ 'location' ]  = $oSearch->keyword;
-                                    $aSearch = session('search');
-                                ?>
-                                <td><a target="_blank" href="{{route('search.deals.index')}}">[ Open in New tab ]</a></td>
+                                <td>{{ $oSearch->type }}</td>
+                                <?php if( $oSearch->type  == 'classified') { $value = "-"; }else{ $value = "Show All"; }?>
+                                <td>{{ ( $oSearch->Listingcategory ) ? $oSearch->Listingcategory->name : $value }}</td>
+                                <td><a target="_blank" href="{{ action('Users\SavesearchController@getSearch').'?type='.$oSearch->type.'&cat='.$oSearch->category_id.'&location='.$oSearch->location.'&keyword='.$oSearch->keyword }}">[ Open in New tab ]</a></td>
                             </tr>
                             
                         @endforeach 
@@ -91,18 +89,5 @@
              }
         });
 
-        function removeDeal(id)
-        {
-            $('#confirmation_modal' ).modal('show');
-            $('#confirm_btn' ).on('click',function(){
-                $.ajax({
-                    type:'delete',
-                    url: '{{url('deals')}}/'+id
-                } ).success(function(data){
-                    $('[data-id='+id+']' ).remove();
-                    $('#confirmation_modal' ).modal('hide');
-                });
-            })
-        }
     </script>
 @endsection

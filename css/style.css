@@ -2047,6 +2047,7 @@ h1.custom_heading_top{
 {
     max-width: 285px;
     margin:0 auto;
+    max-height: 165px;
 }
 .description
 {

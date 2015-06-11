@@ -352,7 +352,7 @@
                                                         <input type="hidden" name="rated_to" value="{{$oBabySitter->id}}">
                                                         <div class="row">
                                                         <div class="col-md-12">
-                                                            <div class="raty" data-score="2.5"></div>
+                                                            <div class="raty" data-score="0"></div>
                                                         </div>
                                                         <div class="col-md-12" style="margin-top: 10px;">
                                                             <button type="submit" class="btn btn-success">Submit</button>

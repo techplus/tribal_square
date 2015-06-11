@@ -43,6 +43,7 @@ class SavesearchController extends Controller {
 			$data['keyword'] = Request::input('keyword');
 			$data['location'] = Request::input('location');
 			$data['category_id'] = Request::input('category_id');
+			$data['type'] 		= Request::input('type');
 
 			Savesearch::create ( $data );
 		}
@@ -95,6 +96,29 @@ class SavesearchController extends Controller {
 	public function destroy($id)
 	{
 		//
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function getSearch()
+	{
+		$data = Request::all();
+		$aSearch = array();
+		$aSearch['term'] = $data['keyword'];
+		$aSearch['location'] = $data['location'];
+		$aSearch['cat'] = $data['cat'] == 0 ? '' : $data['cat'];
+		$aSearch['type'] = $data['type'];
+
+		session(['search'=>$aSearch]);
+
+		if( $data['type'] == "classified" )
+			return redirect()->route('search.classified.index');
+		else
+			return redirect()->route('search.deals.index');
 	}
 
 }

@@ -23,7 +23,6 @@ class DealsController extends Controller {
 	public function index()
 	{
 		$aSearch = session('search');
-		
 		$oDealsBuilder = Deal::approved()->future()->with(['DealImages'=>function($q){
 			$q->where('is_cover',1);
 		}]);

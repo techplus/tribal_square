@@ -239,6 +239,7 @@ class BabySittersController extends Controller {
 			
 			$aResp = $this->getBabysitters($iLimit,$iOffset,$aSearch);
 			//$aResponse['aBabySitters'] = $aResp['aBabySitters'];
+			
 			$aResponse['html'] = View::make('front.sub_babysitters')->with(array('aBabySitters'=>$aResp['aBabySitters']))->render();
 			$aResponse['iTotal'] = $aResp['iTotal'];
 

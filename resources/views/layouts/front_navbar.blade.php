@@ -57,23 +57,25 @@
                 @if( Auth::check() )
                 <input type="hidden" class="user_id" name="user_id" value="{{ Auth::user()->id }}">
                 @endif
-                <input type="text" name="term" class="form-control header_item_search" placeholder="What are you looking for ?" value="">
+                <input type="text" name="term" class="form-control header_item_search" placeholder="What are you looking for ?" value="{{ ( !empty($aSearch) ) ? $aSearch['term'] : '' }}">
                 <input type="text" name="location" id="autocomplete1" class="form-control header_location_search" placeholder="Enter your Location" value="{{ ( !empty($aSearch) ) ? $aSearch['location'] : '' }}">               
                 <input type="submit" name="search" class="btn red_btn" value="Go">
                 @if( Auth::check() )
                     <?php  $oUser = Auth::user()->UserTypes()->first(); $userType = $oUser->name; ?>
                     @if( $userType == 'Providers' )
-                        <a href="#" class="savesearch_btn" id="savesearch_btn" style="float:right;margin-right: 55px;"> Save Search </a>
+                        @if( Request::segment(2) != "babysitters" )
+                            <a href="#" class="savesearch_btn" id="savesearch_btn" style="float:right;margin-right: 55px;"> Save Search </a>
+                        @endif        
                     @endif
                 @endif
                 @if( !empty( $aSearch[ 'type' ] ) )
-                    <input type="hidden" name="type" value="{{ $aSearch[ 'type' ] }}">
+                    <input type="hidden" class="type" name="type" value="{{ $aSearch[ 'type' ] }}">
                 @elseif( Request::segment(2) == "deals" )
-                    <input type="hidden" name="type" value="deals">
+                    <input type="hidden" class="type" name="type" value="deals">
                 @elseif( Request::segment(2) == "classified" )
-                    <input type="hidden" name="type" value="classified">
+                    <input type="hidden" class="type" name="type" value="classified">
                 @elseif( Request::segment(2) == "babysitters" )
-                    <input type="hidden" name="type" value="baby_sitter">
+                    <input type="hidden" class="type" name="type" value="baby_sitter">
                 @else
                     <input type="hidden" class="type" name="type" value="">
                 @endif
@@ -124,7 +126,9 @@ $(document).ready(function(){
         var keyword     = $('.header_item_search').val();
         var location    = $('.header_location_search').val();
         var category_id = $('.category').val();
-        if($('.header_item_search').val() == "" || $('.header_location_search').val() == "")
+        var type       = $('.type').val();
+
+        if($('.header_item_search').val() == "" && $('.header_location_search').val() == "")
         {
             alert("Sorry, Please enter Keyword or Location.");
         }
@@ -133,7 +137,7 @@ $(document).ready(function(){
            $.ajax({
                 url : "{{ route('save-search.store') }}",
                 type:"POST",
-                data:{user_id:user_id,keyword:keyword,location:location,category_id:category_id}
+                data:{user_id:user_id,keyword:keyword,location:location,category_id:category_id,type:type}
                 }).success(function(data){
                     alert('Search Saved.');
             })

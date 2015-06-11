@@ -31,7 +31,7 @@
 
                         <p style="margin:0 0 16px">Hello {{ $firstname }} {{ $lastname }}</p>
                         <p style="margin:0 0 16px; text-align:justify;">
-                        &emsp;&emsp;&emsp;serving and providing you with an exquisite experience with a one stop website for everything uniquely African. Our site provides buyers with deals on items that are mostly uniquely African. Please ensure and follow our simple guideline of providing top notch customer service. We aim for TribalSquare to be a safe website to boost trade amongst Africans. We expect each customer to be professional, we look forward to a fruitful business relationship with you.
+                        &emsp;&emsp;&emsp;Thank you for adding your deal(s) with TribalSquare.com. We take pride in serving and providing you with an exquisite experience with a one stop website for everything uniquely African. Our site provides buyers with deals on items that are mostly uniquely African. Please ensure and follow our simple guideline of providing top notch customer service. We aim for TribalSquare to be a safe website to boost trade amongst Africans. We expect each customer to be professional, we look forward to a fruitful business relationship with you.
                         </p>
                         <p style="margin:0 0 16px; text-align:justify;">
                             Please let us know how else we can make your experience more rewarding.
