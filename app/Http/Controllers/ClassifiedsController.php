@@ -23,6 +23,8 @@ class ClassifiedsController extends Controller {
 	{		
 		$aSearch = session('search');
 
+		//dd($aSearch);
+
 		$oDealsBuilder = Classified::approved()->with(['ClassifiedImages'=>function($q){
 			$q->where('is_cover',1);
 		},'ListingCategory']);
@@ -47,28 +49,16 @@ class ClassifiedsController extends Controller {
 		}	
 
 		$classifieds = $oDealsBuilder->get();
-		
 		$aViewData = array();
+		
 		foreach( $classifieds AS $classified)
 		{
 			if( $classified->ListingCategory )
 				$aViewData[$classified->ListingCategory->name][] = $classified;
 		}
-
+		
 		$this->data['classifieds'] = $aViewData;
 
-		
-		//$this->data['subcategories'] = ListingCategory::classified()->get();
-		
-		//dd($this->data['subcategories']);
-
-		//$oLatestDealsBuilder = $oDealsBuilder;
-		//$this->data['$classifieds'] = $oDealsBuilder->get();
-		//$this->data['aLatestDeals'] = $oLatestDealsBuilder->with( [ 'CoverPic' ] )->orderBy('updated_at','DESC')->take(5)->get();
-		// $aSearch['cat'] = "";
-		// session( [ 'search' => $aSearch ] );
-				
-		//dd(session('search'));
 		return $this->renderView('front.search_classified');
 	}
 

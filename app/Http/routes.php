@@ -20,8 +20,15 @@ Route::controllers([
 ]);
 Route::resource('languages','LanguagesController');
 
+Route::group( [ 'middleware' => [ 'auth'] ] , function() {
+	Route::resource('save-search','Users\SavesearchController',['only'=>['index','update','destroy','show','edit','create','store']]);
+	Route::get('save-search','Users\SavesearchController@getSearch');
+});
+
 Route::group( [ 'middleware' => [ 'auth.admin'] ] , function() {
 
+	Route::resource('sales-agents','Users\SalesAgentController',['only'=>['index','update','edit']]);
+	
 	Route::get('admin/sales-agents/show-earnings/{id}/{year?}','Admin\AgentEarningsController@getShowEarnings');
 	Route::get('admin/sales-agents/show-earnings-monthly/{id}/{year?}/{month?}','Admin\AgentEarningsController@getShowEarningsMonthly');
 	Route::get('admin/sales-agents/update-earning/{id}/{year?}/{month?}','Admin\AgentEarningsController@getUpdateEarning');
@@ -59,6 +66,9 @@ Route::group( [ 'middleware' => [ 'auth.admin'] ] , function() {
 		return response()->json([]);
 	});
 	Route::resource('provider/billings','Users\BillingsController');
+
+	
+	
 });
 
 Route::group(['middleware'=>['auth.providers','payment']],function(){
@@ -74,22 +84,22 @@ Route::group(['middleware'=>['auth.providers','payment']],function(){
 		Session::put('success_deal','Your Deal details have been successfully posted to Admin. It will go live soon.');			
 		return response()->json([]);
 	});
-	Route::resource('save-search','Users\SavesearchController',['only'=>['index','update','destroy','show','edit','create','store']]);
 	Route::resource('provider/billings','Users\BillingsController');
-	Route::get('save-search','Users\SavesearchController@getSearch');
-});
 
+});
 
 Route::group(['middleware'=>['auth.babysitters','payment']],function(){
 	Route::controller('baby-sitters','Users\BabySittersController');
 	Route::resource('baby-sitter/billings','Users\BillingsController');
+	
 });
 
 Route::group(['middleware'=>['auth.salesagnet']],function(){
-	Route::resource('sales-agents','Users\SalesAgentController',['only'=>['index','update']]);
+	Route::resource('sales-agents','Users\SalesAgentController',['only'=>['index','update','edit']]);
 	Route::controller('sales-agents','Users\SalesAgentController');
 
 });
+
 Route::resource('ratings','Users\RatingsController',['only'=>'store']);
 Route::resource('search','SearchController',['only'=>'store']);
 Route::resource('search/classified','ClassifiedsController');

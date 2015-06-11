@@ -28,7 +28,11 @@
                         @if( $aSalesAgents->count() > 0 )
                             @foreach( $aSalesAgents AS $oSalesAgent )
                                 <tr data-id="{{ $oSalesAgent->id }}">
-                                    <td>{{ ucfirst($oSalesAgent->firstname)." ".ucfirst($oSalesAgent->lastname) }}</td>
+                                    <td>   
+                                        <a href="{{ route('admin.sales-agents.edit',[ $oSalesAgent->id ] ) }}" target="_blank"> 
+                                           {{ ucfirst($oSalesAgent->firstname)." ".ucfirst($oSalesAgent->lastname) }}
+                                        <a/>    
+                                    </td>
                                     <td>{{ $oSalesAgent->email }}</td>
                                     <td>{{ ($oSalesAgent->UserTypes()->first()) ? $oSalesAgent->UserTypes()->first()->pivot->refferal_code : "" }}</td>
                                     <td><a href="{{ action('Admin\AgentEarningsController@getShowEarnings',[$oSalesAgent->id,date('Y')]) }}">[Manage Payment]</a></td>

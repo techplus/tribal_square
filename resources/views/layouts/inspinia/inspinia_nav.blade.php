@@ -51,20 +51,29 @@
             @elseif( $oUser->type == "BabySitters" )      
                  @foreach( $aMenu as $key => $sMenu )
                      <li class="{{ ( $section == $sMenu ) ? 'active' : '' }}">
-                        <a href="{{ ( $key <= $last_step ) ? action('Users\BabySittersController@getIndex').'/index/'.$sMenu : '#' }}" >{{ $aMenuLables[ $key ] }}</span></a>
+                        <a href="{{ ( $key <= $last_step ) ? action('Users\BabySittersController@getIndex').'/index/'.$sMenu : action('Users\BabySittersController@getIndex').'/index/'.$sMenu }}" >{{ $aMenuLables[ $key ] }}</span></a>
                      </li>                       
                  @endforeach
                  <li class="{{Request::url() == route('baby-sitter.billings.index') ? 'active' : ''}}">
                      <a href="{{route('baby-sitter.billings.index')}}"><i class="fa fa-list-alt"></i> <span class="nav-label">Billing</span></a>
                  </li>
+                 <li {{ ( Request::segment(1) == "save-search" ) ? 'class=active' : '' }}>
+                    <a href="{{route('save-search.show',[Auth::user()->id])}}"><i class="fa fa-file"></i> <span class="nav-label">Saved Searches</span></a>               
+                 </li>
                 
-                @elseif( $oUser->type == "SalesAgent" )      
+                @elseif( $oUser->type == "SalesAgent")      
                 <li {{ ( Request::segment(1) == "sales-agents" ) ? 'class=active' : '' }}>
                     <a href="{{ route('sales-agents.index') }}"><i class="fa fa-cog"></i> <span class="nav-label">Settings</span></a>
                 </li>
+                <?php $activeU = Auth::user()->UserTypes()->first(); ?>
+                @if($activeU->name != 'SuperAdmin' AND $activeU->name != 'Admin')
                 <li {{ ( Request::segment(2) == "show-earnings" ) ? 'class=active' : '' }}>
                     <a href="{{ action('Users\SalesAgentController@getShowEarnings',[$oUser->id,date('Y')]) }}"><i class="fa fa-cog"></i> <span class="nav-label">Billing</span></a>
                 </li>
+                <li {{ ( Request::segment(1) == "save-search" ) ? 'class=active' : '' }}>
+                    <a href="{{route('save-search.show',[Auth::user()->id])}}"><i class="fa fa-file"></i> <span class="nav-label">Saved Searches</span></a>               
+                </li>
+                @endif
                                         
             @endif          
         </ul>

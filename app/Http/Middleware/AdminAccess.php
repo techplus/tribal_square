@@ -21,12 +21,12 @@ class AdminAccess
 	 * @return mixed
 	 */
 	public function handle($request, Closure $next)
-	{		
+	{	
 		if( $this->auth->check() )
 		{
 			$oUser = $this->auth->user()->UserTypes()->first();
 			if( $oUser->name == "SuperAdmin" OR $oUser->name == 'Admin' )
-			{
+			{				
 				return $next($request);
 			}			
 		}

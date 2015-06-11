@@ -102,4 +102,10 @@ class AgentEarningsController extends Controller
 
 		return redirect()->action( 'Admin\AgentEarningsController' , [ $id ] )->with('error','Some error occured , try again');
 	}
+
+	public function edit( $id )
+	{
+		Session::put( 'salesagent',$id );
+		return redirect()->to( 'sales-agents' );
+	}
 }

@@ -8,21 +8,37 @@ use App\Http\Requests\SalesagentRequest;
 use Request;
 use Auth;
 use DB;
+use Session;
+use Config;
 use App\Http\Requests\ProfileRequest;
-
-
-
 
 class SalesAgentController extends Controller
 {
+	public function __construct()
+	{
+		if( Auth::check() )
+		{
+			$oUser = Auth::user();
+			$oType = $oUser->UserTypes()->first();
+			$oUser->type = $oType ? $oType->name : null;
+			if( $oUser->type == "Admin" OR $oUser->type == "SuperAdmin" ) {
+				$id = Session::get('salesagent');
+				$oUser = User::find($id);
+				$oType = $oUser->UserTypes()->first();
+				$oUser->type = $oType ? $oType->name : null;
+			}
+			$this->data['oUser'] = $oUser;
+		}
+		$this->data['categories'] = Config::get('categories');
+	}
+
 	public function index()
 	{
-		$this->data[ 'oUser' ] = Auth::user();
-
-		$oUserType = Auth::user()->UserTypes()->where('user_usertypes.user_id' , '=' , $this->data['oUser']->id )->first();
+		
+		$oUserType = $this->data['oUser']->UserTypes()->where('user_usertypes.user_id' , '=' , $this->data['oUser']->id )->first();
 
 		if( $oUserType )
-		{
+		{			
 		 	$this->data[ 'oUserType' ] = $oUserType;
 		}	
 		return $this->renderView('agents.index');
@@ -30,7 +46,7 @@ class SalesAgentController extends Controller
 
 	public function update(SalesagentRequest $request, $id)
 	{
-		$id = Auth::user()->id;
+		$id = $this->data['oUser']->id;
 		if( $request->hasFile('profile') )
 		{
 			@unlink(base_path('profile_pictures/'.$id.".png"));
@@ -52,11 +68,22 @@ class SalesAgentController extends Controller
 		$paypal = $request->input('paypalid');
 		if( Request::has ( 'paypalid' ) )
 		{
-			$update = Auth::user()->find($id); 
+			$update = $this->data['oUser']->find($id); 
 			$update_imei = $update->UserTypes()->where('user_usertypes.user_id','=',$id)->first(); 
 			$update_imei->pivot->paypalid = $request->input('paypalid');
 			$update_imei->pivot->save();
 
+		}
+		$oUser = Auth::user();
+		$oType = $oUser->UserTypes()->first();
+		$oUser->type = $oType ? $oType->name : null;
+		if( $oUser->type == "Admin" OR $oUser->type == "SuperAdmin" ) {
+			$oBabysitter = $this->data['oUser'];
+			$oType = $oBabysitter->UserTypes()->first();
+			if( $oType )
+			{
+				return redirect()->to(route('admin.sales-agents.index'));
+			}
 		}
 		return redirect()->back()->with('success','Settings updated successfully');
 	}

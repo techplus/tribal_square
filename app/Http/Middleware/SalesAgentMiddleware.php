@@ -18,8 +18,8 @@ class SalesAgentMiddleware {
 			return response()->redirectToAction('HomeController@getIndex');
 
 		$oUser = Auth::user()->UserTypes()->first();
-		if( $oUser->name != 'SalesAgent' )
-			return response()->redirectToAction('HomeController@getIndex');
+		if( $oUser->name != 'SalesAgent' AND $oUser->name != "Admin" AND $oUser->name != "SuperAdmin" )
+				return response()->redirectToAction('HomeController@getIndex');
 
 		return $next($request);
 	}

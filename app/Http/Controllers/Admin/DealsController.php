@@ -54,6 +54,8 @@ Class DealsController extends Controller{
 			
 			$deal->is_approved_by_admin = Request::input('is_approved_by_admin');
 			$deal->save();
+
+			$DealID = $id;
 			$email = Request::input('email');
 			$firstname = Request::input('firstname');
 			$lastname = Request::input('lastname');
@@ -64,8 +66,9 @@ Class DealsController extends Controller{
 					array(
 						'email' => $email,
 						'firstname' => $firstname,
-						'lastname' => $lastname
-					), function($message) use ($email,$firstname,$lastname)
+						'lastname' => $lastname,
+						'DealID' => $DealID
+					), function($message) use ($email,$firstname,$lastname,$DealID)
 					{
 						// deals@tribalsquare.com
 						$message->from('deals@tribalsquare.com', 'TribalSquare Deals');

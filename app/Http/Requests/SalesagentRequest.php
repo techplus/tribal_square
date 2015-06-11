@@ -20,10 +20,12 @@ class SalesagentRequest extends Request {
 	 */
 	public function rules()
 	{
+		$user = $this->route()->getParameter('sales_agents') ? $this->route()->getParameter('sales_agents') : Auth::user()->id;
+
 		return [
 			'firstname' =>  'required',
 		    'lastname'  =>  'required',
-		    'email'     =>  'required|email|unique:users,email,'.Auth::user()->id,
+		    'email'     =>  'required|email|unique:users,email,'.$user,
 		    'profile'   =>  'image|mimes:jpg,png,jpeg',
 			'paypalid' =>  'required'
 		];

@@ -62,7 +62,7 @@
                 <input type="submit" name="search" class="btn red_btn" value="Go">
                 @if( Auth::check() )
                     <?php  $oUser = Auth::user()->UserTypes()->first(); $userType = $oUser->name; ?>
-                    @if( $userType == 'Providers' )
+                    @if( $userType != 'SuperAdmin' || $userType == 'Admin' )
                         @if( Request::segment(2) != "babysitters" )
                             <a href="#" class="savesearch_btn" id="savesearch_btn" style="float:right;margin-right: 55px;"> Save Search </a>
                         @endif        

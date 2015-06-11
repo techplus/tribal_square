@@ -66,18 +66,6 @@ class BabySittersController extends Controller {
 		//dd($aSearch['type']);
 		if( $aSearch['type'] == 'baby_sitter')
 		{	
-			// if(isset($aSearch['frate']))
-			// {
-			// 	//echo $aSearch['type'];
-			// 	$oQuery = User::approvedstate(1)
-			// 	->with( [ 'UserTypes' , 'Account' => function($q){
-			// 		$q->select( [ DB::raw('DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(accounts.birthdate)), "%Y") + 0 as age') , 'accounts.*' ] );
-			// 	}, 'Bio','Experience','Availability','Skill','Days']);
-
-			//  	$oQuery->filterrate($aSearch);
-			// }
-
-
 			if(isset($aSearch['ftype']))
 			{
 				//echo $aSearch['type'];
@@ -163,68 +151,6 @@ class BabySittersController extends Controller {
 		}
 
 		return $aResp;
-
-		//dd($oQuery);
-		// // $oQuery =  DB::table('users')
-		// // 				->leftJoin('user_usertypes','users.id','=','user_usertypes.user_id')
-		// // 				->leftJoin('user_types','user_usertypes.user_type_id','=','user_types.id')
-		// // 				->leftJoin('accounts','users.id','=','accounts.user_id')
-		// // 				->leftJoin('bios','users.id','=','bios.user_id')
-		// // 				->select( [ 'users.firstname' , 'users.lastname' , 'users.last_logged_in' , DB::raw('DATE_FORMAT(FROM_DAYS(TO_DAYS(now()) - TO_DAYS(accounts.birthdate)), "%Y") + 0 as age'), 'accounts.profile_pic' , 'users.id' , 'bios.miles_from_home' , 'bios.experience'] )
-		// // 				->where( 'users.last_step' , '>=' , 6 )
-		// // 				->where( 'user_types.name', '=' , 'BabySitters' );
-						
-
-		// if( !empty( $aSearch['term'] ) AND !empty( $aSearch['location'] ) )
-		// {
-		// 	$term = $aSearch['term'];
-		// 	$location = $aSearch['location'];
-			
-		// 	$oQuery->where(function($q)use($term){
-		// 				$q->where('bios.title','LIKE','%'.$term.'%')
-		// 				->orWhere('bios.experience','LIKE','%'.$term.'%');							
-		// 			})	
-		// 			->where(function($q)use($location){
-		// 				$q->where('accounts.address','LIKE','%'.$location.'%')
-		// 				->orWhere('accounts.state','LIKE','%'.$location.'%')
-		// 				->orWhere('accounts.city','LIKE','%'.$location.'%')
-		// 				->orWhere('accounts.pin','LIKE','%'.$location.'%')							
-		// 				->orWhere('accounts.country','LIKE','%'.$location.'%')							
-		// 				->orWhere('accounts.street','LIKE','%'.$location.'%');							
-		// 			});																	
-							
-		// }
-		// else if( !empty($aSearch['term']) )
-		// {
-		// 	$term = $aSearch['term'];			
-		// 	$oQuery->where(function($q)use($term){
-		// 					$q->where('bios.title','LIKE','%'.$term.'%')
-		// 					->orWhere('bios.experience','LIKE','%'.$term.'%');							
-		// 			});
-		// }
-		// else if( !empty($aSearch['location']) ){
-		// 	$term = $aSearch['term'];
-		// 	$location = $aSearch['location'];
-		// 	$oQuery->where(function($q)use($location){
-		// 					$q->where('accounts.address','LIKE','%'.$location.'%')
-		// 					->orWhere('accounts.state','LIKE','%'.$location.'%')
-		// 					->orWhere('accounts.city','LIKE','%'.$location.'%')
-		// 					->orWhere('accounts.pin','LIKE','%'.$location.'%')							
-		// 					->orWhere('accounts.country','LIKE','%'.$location.'%')							
-		// 					->orWhere('accounts.street','LIKE','%'.$location.'%');							
-		// 	});												
-		// }
-
-		// $iTotal = $oQuery->count();
-		
-		// $aBabySitters = $oQuery->groupBy('users.id')
-		// 				->take($limit)
-		// 	   			->skip($offset)
-		// 	   			->get();
-
-		// $aResp['iTotal'] = $iTotal;
-		// $aResp['aBabySitters'] = $aBabySitters;			
-		//return $aResp;						
 	}
 
 	public function postPaginatedBabySitters()
@@ -238,7 +164,10 @@ class BabySittersController extends Controller {
 			$iOffset = Request::get('offset');
 			
 			$aResp = $this->getBabysitters($iLimit,$iOffset,$aSearch);
-			//$aResponse['aBabySitters'] = $aResp['aBabySitters'];
+
+			$aResponse['aBabySitters'] = $aResp['aBabySitters']->each(function($q){
+				$q->rating = $q->MyRatings()->avg('score');
+			});
 			
 			$aResponse['html'] = View::make('front.sub_babysitters')->with(array('aBabySitters'=>$aResp['aBabySitters']))->render();
 			$aResponse['iTotal'] = $aResp['iTotal'];

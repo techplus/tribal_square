@@ -31,7 +31,8 @@
 
                         <p style="margin:0 0 16px">Hello {{ $firstname }} {{ $lastname }}</p>
                         <p style="margin:0 0 16px; text-align:justify;">
-                        &emsp;&emsp;&emsp;Your Deal is Approved.
+                        &emsp;&emsp;&emsp;Your Deal is Approved. <br>
+                        You can view it here : <a href="{{route('search.deals.show',[ $DealID ])}}" target="_blank" > {{ route('search.deals.show',[ $DealID ]) }} </a>
                         </p>
                         <br>
                         <p style="margin:0 0 16px">

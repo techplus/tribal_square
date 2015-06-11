@@ -13,9 +13,28 @@ class SavesearchController extends Controller {
 	 *
 	 * @return Response
 	 */
+
+	private $aMenu = array(		
+			'1' => 'account1',
+			'2' => 'account2',
+			'3' => 'bio',
+			'4' => 'experience',
+			'5' => 'availability',
+			'6' => 'skill'
+			
+	);	
+	private $aMenuLabels = array(		
+			'1' => 'Account Basics',
+			'2' => 'Account Info',
+			'3' => 'Bio & Preferences',
+			'4' => 'Experience',
+			'5' => 'Availability',
+			'6' => 'Skill and Abilities'
+	);
+
 	public function index()
 	{
-		//
+		
 	}
 
 	/**
@@ -57,6 +76,12 @@ class SavesearchController extends Controller {
 	 */
 	public function show($id)
 	{
+		$this->data['aMenu'] = $this->aMenu;
+		$this->data['aMenuLables'] = $this->aMenuLabels;
+
+		$this->data['section'] = '';
+		$this->data['last_step'] = false;
+		
 		$this->data['aSavesearch'] = Savesearch::with ( [ 'Listingcategory' ] )->where('user_id',$id)->get();
 
 		if( !$this->data['aSavesearch'] )

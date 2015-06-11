@@ -1,10 +1,10 @@
 @extends($layout)
 @section('content')
+	<link href="{{asset('/js/raty/jquery.raty.css')}}" rel="stylesheet">
+	<script type="text/javascript" src="{{asset("/js/raty/jquery.raty.js")}}"></script>
 	@if( Auth::check() )
 		<link href="{{asset('/css/style.css')}}" rel="stylesheet">
-        <link href="{{asset('/js/raty/jquery.raty.css')}}" rel="stylesheet">
-        <script type="text/javascript" src="{{asset("/js/raty/jquery.raty.js")}}"></script>
-		 @if(Request::segment(1) != "search")
+         @if(Request::segment(1) != "search")
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Baby Sitters

@@ -6,12 +6,14 @@
         <div class="row header_wrap new_header_wrap">
             @include('layouts.front_navbar')
             
-            <?php $search = session('search'); ?>
-            @if( $search['cat'] == '' )
+            <?php $search = session('search'); 
+            ?>
+            
+            @if( $search['cat'] == '' AND ( empty( $search['term'] ) AND empty( $search['location'] ) ) )
                 
             <div class="row all_service_wrap">
                 <h1 class="col-xs-12 custom_heading_top">Category</h1>
-                @if( isset( $subcategories ) AND $subcategories->count() > 0 )
+                @if( isset( $subcategories ) AND $subcategories->count() > 0 AND ( empty( $search['term'] ) AND empty( $search['location'] ) ) )
                     @foreach($subcategories as $category)
                     <?php
                         if($category->name == 'African Restaurants')
