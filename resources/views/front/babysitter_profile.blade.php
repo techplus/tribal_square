@@ -365,8 +365,11 @@
                                     </div>
                                 @endif
 
+                                @if( Auth::check() )
                                 <a href="mailto:{{ $oBabySitter->email }}" class="btn red_btn btn-lg btn-block">
-				                <span class="glyphicon glyphicon-envelope"></span> Contact {{ ucfirst($oBabySitter->firstname) }}</a>
+				                <span class="glyphicon glyphicon-envelope"></span> Contact {{ ucfirst($oBabySitter->firstname) }}
+				            	</a>
+				            	@endif
 
 				                @if( $oBabySitter->Availability )
 					                <a href="#" class="btn black_btn btn-lg btn-block" data-toggle="modal" data-target="#myModal">

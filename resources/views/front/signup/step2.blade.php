@@ -15,7 +15,7 @@
         <a href="{{url('/')}}">
           <img src="{{asset('/images/logo1.jpg')}}" alt="" class="img-responsive">
         </a>
-        <span>...Connecting Africans abroad to African goods and services</span>
+        <span>Connecting Africans abroad to African goods and services</span>
       </div>
       <div class="pull-right">
         @if( ! Auth::check() )
@@ -50,7 +50,7 @@
           </div> 
         @endif
       </div>    
-      <a href="#" class="col-sm-4 col-lg-3 col-xs-12 pull-right text-center questions_top_btn">
+      <a href="http://forum.tribalsquare.com/" target="_blank" class="col-sm-4 col-lg-3 col-xs-12 pull-right text-center questions_top_btn">
         <div>Discuss all things</div>
         <p>Africa in the Forum</p>
       </a>

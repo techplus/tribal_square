@@ -46,6 +46,13 @@ $app = require_once __DIR__.'/bootstrap/app.php';
 |
 */
 
+// Set Public path for tribalsquare.com
+
+// $app->bind('path.public', function() {
+//     return __DIR__;
+// });
+
+
 $kernel = $app->make('Illuminate\Contracts\Http\Kernel');
 
 $response = $kernel->handle(

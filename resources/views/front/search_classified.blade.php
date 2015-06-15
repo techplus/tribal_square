@@ -16,29 +16,30 @@
                 @if( isset( $subcategories ) AND $subcategories->count() > 0 AND ( empty( $search['term'] ) AND empty( $search['location'] ) ) )
                     @foreach($subcategories as $category)
                     <?php
+
                         if($category->name == 'African Restaurants')
                             $imgLink = url('images/restaurant.png');
-                        elseif($category->name == 'African Caterers')
+                        elseif($category->name == 'Caterers')
                             $imgLink = url('images/catering.png');
-                        elseif($category->name == 'African Entertainers/dj')
+                        elseif($category->name == 'Entertainers/DJ/Singers/Dancers/Drummers')
                             $imgLink = url('images/entertainers.png');
-                        elseif($category->name == 'African tailors')
+                        elseif($category->name == 'Tailors')
                             $imgLink = url('images/restaurant.png');
                         elseif($category->name == 'Hair Braiding')
                             $imgLink = url('images/img-5.png');
-                        elseif($category->name == 'Fashion Jewellery')
+                        elseif($category->name == 'Clothing Stores/Jewelries/Fashion')
                             $imgLink = url('images/img-6.png');
-                        elseif($category->name == 'African Store')
+                        elseif($category->name == 'African Stores')
                             $imgLink = url('images/img-7.png');
-                        elseif($category->name == 'Churches / Groups')
+                        elseif($category->name == 'Churches/Social Groups')
                             $imgLink = url('images/img-8.png');
-                        elseif($category->name == 'Upcoming African Events')
+                        elseif($category->name == 'African Events')
                             $imgLink = url('images/img-9.png');
-                        elseif($category->name == 'Import / Export Shipping')
+                        elseif($category->name == 'Import/Export/Courier/Shipping')
                             $imgLink = url('images/img-10.png');
                         elseif($category->name == 'Immigration Lawyers')
                             $imgLink = url('images/img-11.png');
-                        elseif($category->name == 'Arts & Crafts')
+                        elseif($category->name == 'Arts/Craftwork')
                             $imgLink = url('images/img-12.png');
                         else
                             $imgLink = url('images/restaurant.png');

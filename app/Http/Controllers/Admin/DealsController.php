@@ -86,8 +86,8 @@ Class DealsController extends Controller{
 		if( Request::has('is_deal_of_the_day') ) {
 			if( Request::input( 'is_deal_of_the_day' ) == 1 ) {
 				$aDeals = Deal::where( 'end_date' , '>=' , date( 'Y-m-d' ) )->where( 'is_approved_by_admin' , 1 )->where( 'is_deal_of_the_day' , 1 )->get();
-				if ( $aDeals->count() > 3 )
-					return response()->json( [ 'error' => '"4 deal of the day maximum".Please un-select one of the deal to select more "deal of the day"' ] , 500 );
+				if ( $aDeals->count() == 1 )
+					return response()->json( [ 'error' => '"Only 1 deal of the day maximum".Please un-select one of the deal to select more "deal of the day"' ] , 500 );
 			}
 			$deal->is_deal_of_the_day = Request::input( 'is_deal_of_the_day' );
 		}

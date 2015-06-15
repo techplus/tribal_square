@@ -9,6 +9,7 @@
                         <a href="{{url('/')}}">
                             <img src="{{asset('/images/logo1.jpg')}}" alt="" class="img-responsive">
                         </a>
+                        <span>Connecting Africans abroad to African goods and services</span>
                     </div>
 
                     <div class="header_btns_wrap">

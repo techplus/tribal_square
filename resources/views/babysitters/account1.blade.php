@@ -101,7 +101,7 @@
                                 		<label class="control-label">Country</label>                                       		
                                 	</div>
                                 	<div class="col-sm-6">
-                                		<label class="control-label">Pin</label>                                       		
+                                		<label class="control-label">Zipcode</label>                                       		
                                 	</div>
                                 </div>
                                 <div class="form-group">
@@ -109,7 +109,7 @@
                                 		<input type="text" name="country" class="form-control required" placeholder="Country" value="{{ $oAccountBasics->country }}">                                                            		
                                 	</div>
                                 	<div class="col-sm-6">                                		
-                                		<input type="text" name="pin" class="form-control required" placeholder="Pin" value="{{ $oAccountBasics->pin }}"> 
+                                		<input type="text" name="pin" class="form-control required" placeholder="Zipcode" value="{{ $oAccountBasics->pin }}"> 
                                 	</div>
                                 </div>
                                 <div class="form-group">

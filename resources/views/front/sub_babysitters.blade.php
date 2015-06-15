@@ -43,7 +43,7 @@ function time_elapsed_string($ptime)
 	            <div class="row coralbg white">
 	                <div class="col-sm-12 col-md-6 no-pad">
 	                    <div class="user-image" style="padding-bottom:0">
-                        	<div class="BabySitterImg" style="background-image: url('{{ Image::url(( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png'),275,275) }}');">
+                        	<div class="BabySitterImg" style="background-image: url('{{ Image::url(( $oBabySitter->Account ) ? ( ( $oBabySitter->Account->profile_pic ) ? url('profile_pictures/'.$oBabySitter->Account->profile_pic) :  url('images/no_image.png') ) : url('images/no_image.png'),500,350) }}');">
                         	</div>
                     	</div>
 	                </div>
@@ -53,8 +53,8 @@ function time_elapsed_string($ptime)
 	                        <?php echo ( $oBabySitter->Bio ) ? '<p style="clear:both">'.( ( strlen( $oBabySitter->Bio->title ) > 25 ) ? substr($oBabySitter->Bio->title,0,24)."...</p>"  : '<p style="clear:both">'.$oBabySitter->Bio->title.'</p>' ) : ''; ?>
 	                        <?php echo ( $oBabySitter->Account ) ? ' <h5 class="white"><i class="glyphicon glyphicon-heart"></i> Age : '.$oBabySitter->Account->age.'</h5>' : ''; ?>
 	                        <?php echo ( $oBabySitter->Bio ) ?  '<h5 class="white"><i class="glyphicon glyphicon-map-marker"></i> Less than  '.$oBabySitter->Bio->miles_from_home.' mile </h5>' : ''; ?>
-	                        <h5 class="white"><i class="glyphicon glyphicon-lock"></i> Last 
-	                        signed in: {{ time_elapsed_string(strtotime($oBabySitter->last_logged_in),true) }} <!-- date('m/d/Y h:i a' , strtotime($oBabySitter->last_logged_in))}} --></h5>
+	                        <h5 class="white"><i class="glyphicon glyphicon-lock"></i>
+	                        	Last signed in: {{  ( $oBabySitter->last_logged_in != "" ) ? time_elapsed_string(strtotime($oBabySitter->last_logged_in),true) : " Not yet login." }} <!-- date('m/d/Y h:i a' , strtotime($oBabySitter->last_logged_in))}} --></h5>
 	                        <?php 
 	                        	$addres = ucfirst($oBabySitter->Account->city).", ".$oBabySitter->Account->state." ".$oBabySitter->Account->pin;
 	                        	$lenAdd = strlen(preg_replace('/\s\s+/', ' ',$addres));
