@@ -3,6 +3,9 @@
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			{{ $sStatus }} Deals			
+            @if( $sStatus == 'Pending')
+                <a href="{{route('deals.create')}}" class="btn btn-success pull-right" style="margin-top:-7px;">+ Add Deal</a>
+            @endif
 		</div>
     
 		<div class="panel-body">

@@ -3,6 +3,9 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             {{ $sStatus }} Posts
+            @if( $sStatus == 'Pending')
+                <a href="{{route('posts.create')}}" class="btn btn-success pull-right" style="margin-top:-7px;">+ Add Post</a>
+            @endif
         </div>
         <div class="panel-body">
             <div class="row">
