@@ -1,9 +1,9 @@
 <?php namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Models\AgentEarning;
 use App\Models\User;
+use App\Models\SubscriptionPlan;
 use DB;
 use Session;
 use Illuminate\Http\Request;
@@ -20,7 +20,7 @@ class AgentEarningsController extends Controller
 	public function index()
 	{
 		$this->data[ 'aSalesAgents' ] = User::with('UserTypes')->IsAgent()->get();
-
+		$this->data['plan'] = SubscriptionPlan::where('name','Sales Agent Commission')->first();
 		return $this->renderView( 'admin.sales-agents.index' );
 	}
 
@@ -107,5 +107,23 @@ class AgentEarningsController extends Controller
 	{
 		Session::put( 'salesagent',$id );
 		return redirect()->to( 'sales-agents' );
+	}
+
+	public function update($id,Request $request)
+	{
+		$percentage = $request->input('commision');
+		$content = SubscriptionPlan::where('name','Sales Agent Commission')->first();
+		if( $content )
+		{
+			$content->amount = $percentage;
+		}
+		else
+		{
+			$content = new SubscriptionPlan;
+			$content->amount = $percentage;
+			$content->name = 'Sales Agent Commission';
+		}
+		$content->save();
+		return redirect()->back()->with('commision_updated','Commision for the sales agent updated to '.$percentage."%");
 	}
 }
