@@ -12,7 +12,7 @@
             <tr>
             <td>
                 <h3 style="color:#ffffff;display:block;font-family:&quot;Helvetica Neue&quot;,Helvetica,Roboto,Arial,sans-serif;font-size:15px;font-weight:300;line-height:150%;margin:0;padding:15px 15px;text-align:right">
-                    <img src="{{asset('/images/TSSittersLogo.jpg')}}" height="41" alt="" class="img-responsive"><br>
+                    <img src="{{asset('/images/TSListings_Logo.jpg')}}" height="41" alt="" class="img-responsive"><br>
                     Deals :: Sitters :: Listings <br>
                     Date : {{ date("d-m-Y") }}</h3>
             </td>
@@ -33,9 +33,9 @@
                         <p style="margin:0 0 16px; text-align:justify;">
                         &emsp;&emsp;&emsp;Thank you for signing up with TribalSquare.com. We take pride in serving and providing you with an exquisite experience with a one stop website for everything uniquely African. We aim to please each and every customer, and will work with our partners to provide you with great customer service. Our service is impeccable, and we look forward to a fruitful business relationship with you.
                         </p>
-                        <p style="margin:0 0 16px; text-align:justify;">
+                        <!-- <p style="margin:0 0 16px; text-align:justify;">
                         Our goal is to forge long term mutually beneficial business relationships with service providers, and we thank you for making that your objective by becoming a TribalSquare agent. With your partnership, we will provide invaluable services to Africans, help businesses grow, create savings for families, and also realize some financial benefits for our agents.
-                        </p>
+                        </p> -->
                         <p style="margin:0 0 16px">
                         Please let us know how else we can make your experience more rewarding.
                         </p> <br>
