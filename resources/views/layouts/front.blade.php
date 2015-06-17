@@ -8,10 +8,9 @@
     <title>Tribal Square :: Home</title>
     <link href="{{asset('/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- if(in_array(Request::url(), $oRoutesCheck)) -->
-    @if(Request::url() == url('advertisewithus') || Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') || Request::url() == url('/register/step2'))
+    @if(Request::route()->getActionName() == 'App\Http\Controllers\Auth\PasswordController@getReset' || Request::url() == url('advertisewithus') || Request::url() == url('/') || Request::url() == url('/auth') || Request::url() == url('/register') || Request::url() == url('/password') || Request::url() == url('/privacypolicy') || Request::url() == url('/terms') || Request::url() == url('/refundpolicy') || Request::url() == url('/register/step2'))
       <link href="{{asset('/css/style.css')}}" rel="stylesheet">
-      <link href="{{asset('/css/style_home.css')}}" rel="stylesheet"> 
-      
+      <link href="{{asset('/css/style_home.css')}}" rel="stylesheet"
     @else
       <link href="{{asset('/css/style.css')}}" rel="stylesheet">
     @endif
